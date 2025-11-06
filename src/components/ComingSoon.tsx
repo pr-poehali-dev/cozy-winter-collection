@@ -94,27 +94,19 @@ export default function ComingSoon() {
                 </button>
               </>
             ) : (
-              <div className="space-y-6 w-full relative">
-                <div className="fortune-sparkles">
-                  <span className="sparkle" style={{ top: '10%', left: '15%', animationDelay: '0s' }}>✨</span>
-                  <span className="sparkle" style={{ top: '20%', right: '20%', animationDelay: '0.3s' }}>⭐</span>
-                  <span className="sparkle" style={{ bottom: '30%', left: '10%', animationDelay: '0.6s' }}>💫</span>
-                  <span className="sparkle" style={{ top: '40%', right: '15%', animationDelay: '0.9s' }}>✨</span>
-                  <span className="sparkle" style={{ bottom: '20%', right: '25%', animationDelay: '1.2s' }}>⭐</span>
-                  <span className="sparkle" style={{ top: '60%', left: '20%', animationDelay: '1.5s' }}>💫</span>
-                </div>
+              <div className="space-y-6 animate-fade-in w-full">
                 <div className="flex items-center justify-center gap-3 text-4xl md:text-6xl">
                   <span className="animate-bounce" style={{ animationDelay: '0s' }}>🥠</span>
                   <span className="animate-bounce" style={{ animationDelay: '0.1s' }}>✨</span>
                 </div>
-                <div className="fortune-card-reveal bg-white/90 backdrop-blur-sm rounded-2xl p-6 md:p-8 shadow-lg border border-border">
+                <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 md:p-8 shadow-lg border border-border">
                   <p className="text-base md:text-lg text-primary font-medium mb-4 leading-relaxed">
                     {currentFortune?.text}
                   </p>
                   <div className="pt-4 border-t border-border">
                     <div className="flex items-center justify-center gap-4">
                       <p className="text-xs md:text-sm text-muted-foreground text-left">укажи при покупке<br />этот смайлик и получишь<br />подарок к заказу →</p>
-                      <p className="text-5xl md:text-6xl emoji-pop">
+                      <p className="text-5xl md:text-6xl">
                         {currentFortune?.emoji}
                       </p>
                     </div>
