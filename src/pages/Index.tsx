@@ -8,8 +8,12 @@ import ProductDetails from '@/components/shop/ProductDetails';
 import Reviews from '@/components/shop/Reviews';
 import Delivery from '@/components/shop/Delivery';
 import Footer from '@/components/shop/Footer';
+import ComingSoon from '@/components/ComingSoon';
 
 export default function Index() {
+  const launchDate = new Date('2025-12-01T12:00:00+03:00');
+  const [isLaunched, setIsLaunched] = useState(new Date() >= launchDate);
+  
   const [selectedCategory, setSelectedCategory] = useState<string>('все');
   const [cart, setCart] = useState<CartItem[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -17,10 +21,20 @@ export default function Index() {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
   useEffect(() => {
+    const checkLaunch = () => {
+      setIsLaunched(new Date() >= launchDate);
+    };
+    
+    const launchTimer = setInterval(checkLaunch, 1000);
+    
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
     }, 5000);
-    return () => clearInterval(interval);
+    
+    return () => {
+      clearInterval(interval);
+      clearInterval(launchTimer);
+    };
   }, []);
 
   const categories = ['все', 'для дома', 'для зимней прогулки', 'наборы и боксы'];
@@ -55,6 +69,10 @@ export default function Index() {
 
   const cartTotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
   const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+
+  if (!isLaunched) {
+    return <ComingSoon />;
+  }
 
   return (
     <div className="min-h-screen bg-background">
