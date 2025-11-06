@@ -9,9 +9,13 @@ interface TimeLeft {
 }
 
 export default function ComingSoon() {
+  const DEV_MODE = true;
   const launchDate = new Date('2025-12-01T12:00:00+03:00');
   
   const calculateTimeLeft = (): TimeLeft => {
+    if (DEV_MODE) {
+      return { days: 0, hours: 0, minutes: 0, seconds: 0 };
+    }
     const difference = launchDate.getTime() - new Date().getTime();
     
     if (difference <= 0) {
