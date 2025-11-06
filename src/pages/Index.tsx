@@ -7,6 +7,7 @@ import ProductCatalog from '@/components/shop/ProductCatalog';
 import ProductDetails from '@/components/shop/ProductDetails';
 import Reviews from '@/components/shop/Reviews';
 import Delivery from '@/components/shop/Delivery';
+import Story from '@/components/shop/Story';
 import Footer from '@/components/shop/Footer';
 
 export default function Index() {
@@ -82,6 +83,8 @@ export default function Index() {
         onProductClick={setSelectedProduct}
         addToCart={addToCart}
       />
+
+      <Story />
 
       <Reviews />
 
