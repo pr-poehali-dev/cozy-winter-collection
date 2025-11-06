@@ -51,7 +51,7 @@ export default function ComingSoon() {
           <div className="grid grid-cols-4 gap-3 md:gap-6 max-w-lg mx-auto">
             <div className="space-y-2">
               <div className="bg-white rounded-2xl shadow-sm border border-border p-4 md:p-6">
-                <div className="text-3xl md:text-5xl font-light text-primary tabular-nums">
+                <div className="text-3xl md:text-5xl font-light text-primary tabular-nums timer-glow">
                   {String(timeLeft.days).padStart(2, '0')}
                 </div>
               </div>
@@ -60,7 +60,7 @@ export default function ComingSoon() {
             
             <div className="space-y-2">
               <div className="bg-white rounded-2xl shadow-sm border border-border p-4 md:p-6">
-                <div className="text-3xl md:text-5xl font-light text-primary tabular-nums">
+                <div className="text-3xl md:text-5xl font-light text-primary tabular-nums timer-glow">
                   {String(timeLeft.hours).padStart(2, '0')}
                 </div>
               </div>
@@ -69,7 +69,7 @@ export default function ComingSoon() {
             
             <div className="space-y-2">
               <div className="bg-white rounded-2xl shadow-sm border border-border p-4 md:p-6">
-                <div className="text-3xl md:text-5xl font-light text-primary tabular-nums">
+                <div className="text-3xl md:text-5xl font-light text-primary tabular-nums timer-glow">
                   {String(timeLeft.minutes).padStart(2, '0')}
                 </div>
               </div>
@@ -78,7 +78,7 @@ export default function ComingSoon() {
             
             <div className="space-y-2">
               <div className="bg-white rounded-2xl shadow-sm border border-border p-4 md:p-6">
-                <div className="text-3xl md:text-5xl font-light text-primary tabular-nums">
+                <div className="text-3xl md:text-5xl font-light text-primary tabular-nums timer-glow">
                   {String(timeLeft.seconds).padStart(2, '0')}
                 </div>
               </div>

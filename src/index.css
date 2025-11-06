@@ -143,4 +143,22 @@
   .candle-glow {
     box-shadow: 0 0 20px rgba(138, 85, 56, 0.3);
   }
+
+  @keyframes gentle-glow {
+    0%,
+    100% {
+      text-shadow:
+        0 0 8px rgba(251, 146, 60, 0.3),
+        0 0 12px rgba(251, 146, 60, 0.2);
+    }
+    50% {
+      text-shadow:
+        0 0 12px rgba(251, 146, 60, 0.5),
+        0 0 18px rgba(251, 146, 60, 0.3);
+    }
+  }
+
+  .timer-glow {
+    animation: gentle-glow 3s ease-in-out infinite;
+  }
 }
