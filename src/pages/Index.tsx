@@ -197,28 +197,104 @@ export default function Index() {
         </div>
       </header>
 
-      <section className="pt-32 pb-20 px-4 animate-fade-in paper-texture">
-        <div className="container mx-auto max-w-4xl text-center">
-          <div className="mb-12 overflow-hidden rounded-2xl shadow-xl candle-glow">
-            <img 
-              src="https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/files/600d4767-07d5-44f9-a0e1-252c0957f2fe.jpg"
-              alt="вещи из моего мира"
-              className="w-full h-[500px] object-cover"
-            />
+      <section className="relative min-h-screen flex items-center px-4 paper-texture overflow-hidden">
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute top-20 left-10 text-6xl">✦</div>
+          <div className="absolute top-40 right-20 text-4xl">✿</div>
+          <div className="absolute bottom-32 left-1/4 text-5xl">✴</div>
+          <div className="absolute bottom-20 right-1/3 text-3xl">❉</div>
+        </div>
+        
+        <div className="container mx-auto max-w-7xl relative z-10">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div className="order-2 md:order-1 space-y-8 animate-fade-in">
+              <div className="space-y-4">
+                <div className="inline-block">
+                  <span className="text-sm tracking-[0.3em] text-muted-foreground border-b border-accent pb-2">
+                    мастерская ручных вещей
+                  </span>
+                </div>
+                <h2 className="text-6xl md:text-7xl lg:text-8xl font-light mystical-text leading-tight">
+                  вещи<br/>из моего<br/>мира
+                </h2>
+              </div>
+              
+              <div className="space-y-6">
+                <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-md">
+                  каждая вещь — это амулет,<br/>
+                  созданный с теплом и хранящий историю
+                </p>
+                
+                <div className="flex flex-wrap gap-4 items-center">
+                  <Button 
+                    size="lg" 
+                    className="rounded-full px-10 py-6 text-base candle-glow hover:scale-105 transition-transform"
+                    onClick={() => {
+                      document.getElementById('catalog')?.scrollIntoView({ behavior: 'smooth' });
+                    }}
+                  >
+                    войти в лавку
+                  </Button>
+                  
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <div className="w-12 h-px bg-border"></div>
+                    <span>ручная работа</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div className="order-1 md:order-2 animate-scale-in">
+              <div className="relative">
+                <div className="absolute -inset-4 bg-gradient-to-br from-accent/10 to-transparent rounded-3xl blur-2xl"></div>
+                <div className="relative overflow-hidden rounded-2xl shadow-2xl candle-glow">
+                  <img 
+                    src="https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/files/600d4767-07d5-44f9-a0e1-252c0957f2fe.jpg"
+                    alt="вещи из моего мира"
+                    className="w-full h-[600px] object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent"></div>
+                </div>
+                
+                <div className="absolute -bottom-6 -right-6 vintage-card p-6 rounded-xl candle-glow max-w-xs">
+                  <p className="text-sm text-muted-foreground mb-2">от автора</p>
+                  <p className="text-base leading-relaxed">
+                    создаю вещи, которые хочется хранить
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
-          <h2 className="text-5xl md:text-6xl mb-6 font-light mystical-text">вещи из моего мира</h2>
-          <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto leading-relaxed">
-            ручные предметы с теплом и историей
-          </p>
-          <Button 
-            size="lg" 
-            className="rounded-full px-8 candle-glow"
-            onClick={() => {
-              document.getElementById('catalog')?.scrollIntoView({ behavior: 'smooth' });
-            }}
-          >
-            войти в лавку
-          </Button>
+        </div>
+      </section>
+      
+      <section className="py-24 px-4 paper-texture border-t border-border">
+        <div className="container mx-auto max-w-6xl">
+          <div className="grid md:grid-cols-3 gap-12 text-center">
+            <div className="space-y-4 animate-fade-in">
+              <div className="text-4xl mb-4">🕯️</div>
+              <h3 className="text-xl mystical-text">сделано вручную</h3>
+              <p className="text-muted-foreground text-sm leading-relaxed">
+                каждая вещь создаётся с вниманием к деталям
+              </p>
+            </div>
+            
+            <div className="space-y-4 animate-fade-in" style={{ animationDelay: '0.1s' }}>
+              <div className="text-4xl mb-4">🌙</div>
+              <h3 className="text-xl mystical-text">с душой и магией</h3>
+              <p className="text-muted-foreground text-sm leading-relaxed">
+                вкладываю частичку своего мира в каждое изделие
+              </p>
+            </div>
+            
+            <div className="space-y-4 animate-fade-in" style={{ animationDelay: '0.2s' }}>
+              <div className="text-4xl mb-4">📜</div>
+              <h3 className="text-xl mystical-text">с историей</h3>
+              <p className="text-muted-foreground text-sm leading-relaxed">
+                каждая вещь — это страница из моего дневника
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
