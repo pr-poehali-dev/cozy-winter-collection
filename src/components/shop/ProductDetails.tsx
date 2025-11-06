@@ -13,74 +13,76 @@ interface ProductDetailsProps {
 export default function ProductDetails({ product, onClose, addToCart }: ProductDetailsProps) {
   return (
     <Sheet open={!!product} onOpenChange={(open) => !open && onClose()}>
-      <SheetContent side="right" className="w-full sm:max-w-2xl overflow-y-auto">
+      <SheetContent side="bottom" className="h-[85vh] overflow-y-auto">
         {product && (
-          <div className="py-6 space-y-6">
-            <div className="relative overflow-hidden rounded-lg aspect-square">
-              <img
-                src={product.image}
-                alt={product.name}
-                className="w-full h-full object-cover"
-              />
-            </div>
+          <div className="container mx-auto max-w-4xl py-8">
+            <SheetHeader>
+              <SheetTitle className="text-3xl mystical-text mb-6">{product.name}</SheetTitle>
+            </SheetHeader>
             
-            <div className="space-y-4">
-              <Badge variant="secondary" className="text-xs">
-                {product.category}
-              </Badge>
+            <div className="grid md:grid-cols-2 gap-8 mt-6">
+              <div className="relative overflow-hidden rounded-xl shadow-xl candle-glow">
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  className="w-full h-[500px] object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent"></div>
+              </div>
               
-              <SheetHeader>
-                <SheetTitle className="text-4xl mystical-text">{product.name}</SheetTitle>
-              </SheetHeader>
-              
-              <p className="text-muted-foreground leading-relaxed text-base">
-                {product.description}
-              </p>
-            </div>
-            
-            <div className="vintage-card p-6 rounded-lg space-y-4">
-              <div className="flex items-start gap-3">
-                <Icon name="Package" size={18} className="text-accent mt-1 flex-shrink-0" />
-                <div>
-                  <h4 className="font-medium text-sm mb-1">доставка</h4>
-                  <p className="text-xs text-muted-foreground">по россии и снг, 3–5 дней</p>
+              <div className="space-y-6">
+                <Badge variant="secondary" className="rounded-full text-sm">
+                  {product.category}
+                </Badge>
+                
+                <p className="text-lg text-muted-foreground leading-relaxed">
+                  {product.description}
+                </p>
+                
+                <div className="pt-6 border-t border-border">
+                  <div className="text-4xl font-light mystical-text mb-6">
+                    {product.price} ₽
+                  </div>
+                  
+                  <Button
+                    size="lg"
+                    className="w-full rounded-full candle-glow text-base py-6"
+                    onClick={() => {
+                      addToCart(product);
+                      onClose();
+                    }}
+                  >
+                    <Icon name="Plus" size={20} className="mr-2" />
+                    добавить в корзину
+                  </Button>
+                </div>
+                
+                <div className="vintage-card p-6 rounded-xl space-y-3">
+                  <div className="flex items-start gap-3">
+                    <Icon name="Package" size={20} className="text-accent mt-1" />
+                    <div>
+                      <h4 className="font-medium mb-1">доставка</h4>
+                      <p className="text-sm text-muted-foreground">по россии и снг, 3–5 дней</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start gap-3">
+                    <Icon name="Heart" size={20} className="text-accent mt-1" />
+                    <div>
+                      <h4 className="font-medium mb-1">ручная работа</h4>
+                      <p className="text-sm text-muted-foreground">создано с душой и вниманием</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start gap-3">
+                    <Icon name="Sparkles" size={20} className="text-accent mt-1" />
+                    <div>
+                      <h4 className="font-medium mb-1">упаковка</h4>
+                      <p className="text-sm text-muted-foreground">завёрнуто в бумагу и магию</p>
+                    </div>
+                  </div>
                 </div>
               </div>
-              
-              <div className="flex items-start gap-3">
-                <Icon name="Heart" size={18} className="text-accent mt-1 flex-shrink-0" />
-                <div>
-                  <h4 className="font-medium text-sm mb-1">ручная работа</h4>
-                  <p className="text-xs text-muted-foreground">создано с душой и вниманием</p>
-                </div>
-              </div>
-              
-              <div className="flex items-start gap-3">
-                <Icon name="Sparkles" size={18} className="text-accent mt-1 flex-shrink-0" />
-                <div>
-                  <h4 className="font-medium text-sm mb-1">упаковка</h4>
-                  <p className="text-xs text-muted-foreground">завёрнуто в бумагу и магию</p>
-                </div>
-              </div>
-            </div>
-            
-            <div className="sticky bottom-0 pt-6 pb-2 bg-white border-t border-border space-y-4">
-              <div className="flex items-center justify-between">
-                <span className="text-muted-foreground">цена</span>
-                <span className="text-3xl mystical-text">{product.price} ₽</span>
-              </div>
-              
-              <Button
-                size="lg"
-                className="w-full rounded-full text-base py-6 shadow-lg"
-                onClick={() => {
-                  addToCart(product);
-                  onClose();
-                }}
-              >
-                <Icon name="ShoppingBag" size={18} className="mr-2" />
-                добавить в корзину
-              </Button>
             </div>
           </div>
         )}

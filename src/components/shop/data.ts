@@ -3,59 +3,71 @@ import { Product, HeroSlide } from './types';
 export const heroSlides: HeroSlide[] = [
   {
     id: 1,
-    image: 'https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/files/f7599bef-7c3f-4dcc-acc9-dd2329e08c79.jpg',
-    title: 'вещи из моего мира',
-    subtitle: 'маленькая коллекция для тёплой зимы'
+    image: 'https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/files/600d4767-07d5-44f9-a0e1-252c0957f2fe.jpg',
+    title: 'с любовью упаковываем каждый заказ',
+    subtitle: 'и будем очень рады увидеть ваш отзыв'
+  },
+  {
+    id: 2,
+    image: 'https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/files/c94cf0e0-cf07-4176-8582-b130f2003e38.jpg',
+    title: 'всё переплетено',
+    subtitle: 'вы лучшие, люблю'
+  },
+  {
+    id: 3,
+    image: 'https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/files/52ca4309-37b3-4058-bccc-94a511e49fd2.jpg',
+    title: 'вещи с душой',
+    subtitle: 'мир тебя оберегает'
   }
 ];
 
 export const products: Product[] = [
   {
     id: 1,
-    name: 'вязаный чепчик',
+    name: 'косынка «туманное утро»',
+    description: 'согревает, как дыхание в мороз, и хранит покой',
     price: 2500,
-    image: 'https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/files/da916dc3-cde2-44fd-8d8e-29b9db578977.jpg',
     category: 'для зимней прогулки',
-    description: 'мягкий вязаный чепчик из шерсти мериноса. обнимает голову как облако. идеален для зимних прогулок и уютных вечеров дома.'
+    image: 'https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/files/c94cf0e0-cf07-4176-8582-b130f2003e38.jpg'
   },
   {
     id: 2,
-    name: 'шёлковая косынка',
+    name: 'вязаный чепчик «лунное сияние»',
+    description: 'укутывает теплом, как старая сказка перед сном',
     price: 3200,
-    image: 'https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/files/48a32b4a-0042-46b8-a825-ed3e4330abff.jpg',
-    category: 'для зимней прогулки',
-    description: 'нежная шёлковая косынка с ручной подшивкой краёв. создаёт образ из старых фильмов и защищает от ветра.'
+    category: 'для дома',
+    image: 'https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/files/c3883d55-8801-4fdc-aef9-82b39a393bf6.jpg'
   },
   {
     id: 3,
-    name: 'подвес для помады',
+    name: 'подвес «зеркальная пыль»',
+    description: 'крошечный амулет для тех, кто ищет свет в себе',
     price: 800,
-    image: 'https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/files/9c6edf13-da54-46bc-b242-38cc4d441e6d.jpg',
-    category: 'для зимней прогулки',
-    description: 'крошечный подвес из хлопка с латунной фурнитурой. помада всегда под рукой, а руки свободны.'
+    category: 'для дома',
+    image: 'https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/files/546e0ba9-0bc8-4a91-a941-a0540466f7db.jpg'
   },
   {
     id: 4,
-    name: 'бумажная гирлянда',
+    name: 'бумажная гирлянда «шёпот бумаги»',
+    description: 'шуршит, как страницы старого дневника',
     price: 1500,
-    image: 'https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/files/2abdcfcb-8ecb-492b-ae9f-7ecfdfe690eb.jpg',
     category: 'для дома',
-    description: 'воздушная гирлянда из бумаги с винтажными узорами. превращает любую комнату в место из сказки.'
+    image: 'https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/files/00ba75c0-9906-4158-be80-2ae3f819fdfe.jpg'
   },
   {
     id: 5,
-    name: 'световая гирлянда',
-    price: 2200,
-    image: 'https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/files/6938a7c9-efcc-49c4-81e8-11b7b3fa9e13.jpg',
+    name: 'световая гирлянда «золотое сияние»',
+    description: 'свет, который хочется обнимать и хранить',
+    price: 2800,
     category: 'для дома',
-    description: 'тёплый свет маленьких лампочек создаёт атмосферу зимнего вечера. работает от сети или батареек.'
+    image: 'https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/files/76e1bef3-65b2-446c-a55f-b98fbd010e7a.jpg'
   },
   {
     id: 6,
-    name: 'зимний набор',
-    price: 5500,
-    image: 'https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/files/42629c29-20aa-48aa-b378-05b6dbf562c3.jpg',
+    name: 'набор «сказочный сундук»',
+    description: 'косынка, чепчик и гирлянда — вся магия в одной коробке',
+    price: 6500,
     category: 'наборы и боксы',
-    description: 'чепчик + косынка + подвес в красивой коробке. готовый подарок для того, кто дорог.'
+    image: 'https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/files/52ca4309-37b3-4058-bccc-94a511e49fd2.jpg'
   }
 ];
