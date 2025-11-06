@@ -47,7 +47,7 @@ export default function ComingSoon() {
       <div className="max-w-2xl w-full text-center space-y-12 animate-fade-in">
         <div className="space-y-4">
           <h1 className="md:text-8xl font-sans text-primary tracking-tight text-4xl">вещи из мира azaluk</h1>
-          <p className="md:text-xl text-muted-foreground max-w-md mx-auto leading-relaxed text-lg">вещи из мира azaluk</p>
+          <p className="md:text-xl text-muted-foreground max-w-md mx-auto leading-relaxed text-2xl">волшебные вещицы из мира azaluk</p>
         </div>
 
         <div className="space-y-6">
