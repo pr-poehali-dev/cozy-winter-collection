@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import Icon from '@/components/ui/icon';
 
 interface TimeLeft {
   days: number;
@@ -73,6 +74,13 @@ export default function ComingSoon() {
     <div className="min-h-screen bg-gradient-to-br from-white via-orange-50/30 to-amber-50/40 flex items-center justify-center px-4 relative">
       {showFortune && (
         <div className="absolute inset-0 bg-gradient-to-br from-white via-orange-50/50 to-amber-50/60 backdrop-blur-sm z-50 flex items-center justify-center px-4">
+          <button
+            onClick={() => setShowFortune(false)}
+            className="absolute top-4 right-4 md:top-8 md:right-8 p-2 rounded-full hover:bg-white/50 transition-colors group"
+            aria-label="Закрыть"
+          >
+            <Icon name="X" size={24} className="text-muted-foreground group-hover:text-primary transition-colors" />
+          </button>
           <div className="max-w-md w-full flex flex-col items-center space-y-8">
             {!fortuneOpened ? (
               <>
@@ -170,7 +178,14 @@ export default function ComingSoon() {
 
         <div className="space-y-4">
           <p className="text-sm md:text-base text-muted-foreground">встретимся здесь в первый день зимы! ❄️</p>
-          <p className="text-xs md:text-sm text-muted-foreground/60 italic max-w-sm mx-auto">в зимней коллекции вещиц вас ждут... волшебные чепцы, задорные подвесы и домашний декор! 🍵✨☃️</p>
+          <div className="text-xs md:text-sm text-muted-foreground/60 italic max-w-sm mx-auto space-y-2">
+            <p>в зимней коллекции вещиц вас ждут:</p>
+            <div className="space-y-1">
+              <p>✨ волшебные чепцы</p>
+              <p>🌙 задорные подвесы</p>
+              <p>🕯️ домашний декор</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
