@@ -46,7 +46,7 @@ export default function ComingSoon() {
     <div className="min-h-screen bg-gradient-to-br from-white via-orange-50/30 to-amber-50/40 flex items-center justify-center px-4">
       <div className="max-w-2xl w-full text-center space-y-12 animate-fade-in">
         <div className="space-y-6">
-          <p className="text-base md:text-lg text-muted-foreground">магазинчик вещиц azaluk 
+          <p className="text-base md:text-lg text-muted-foreground">магазинчик вещиц azaluk<br />
 откроется через... 🔮✨</p>
           
           <div className="grid grid-cols-4 gap-3 md:gap-6 max-w-lg mx-auto">
