@@ -6,35 +6,35 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 17%;
+    --background: 320 50% 98%;
+    --foreground: 280 30% 25%;
 
-    --card: 40 20% 96%;
-    --card-foreground: 0 0% 17%;
+    --card: 0 0% 100%;
+    --card-foreground: 280 30% 25%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 17%;
+    --popover-foreground: 280 30% 25%;
 
-    --primary: 0 0% 17%;
+    --primary: 320 60% 65%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 40 20% 96%;
-    --secondary-foreground: 0 0% 17%;
+    --secondary: 280 50% 90%;
+    --secondary-foreground: 280 30% 25%;
 
-    --muted: 30 15% 90%;
-    --muted-foreground: 0 0% 40%;
+    --muted: 270 30% 95%;
+    --muted-foreground: 280 20% 50%;
 
-    --accent: 25 35% 85%;
-    --accent-foreground: 0 0% 17%;
+    --accent: 340 70% 85%;
+    --accent-foreground: 280 30% 25%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 30 15% 90%;
-    --input: 30 15% 90%;
-    --ring: 0 0% 17%;
+    --border: 280 30% 92%;
+    --input: 280 30% 92%;
+    --ring: 320 60% 65%;
 
-    --radius: 0.75rem;
+    --radius: 1rem;
 
     --sidebar-background: 0 0% 98%;
 
@@ -110,5 +110,24 @@
   h6 {
     font-family: "Cormorant Garamond", serif;
     font-weight: 400;
+  }
+}
+
+@layer utilities {
+  .sparkle-text {
+    background: linear-gradient(120deg, #d946ef 0%, #ec4899 50%, #f0abfc 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .pearlescent {
+    background: linear-gradient(135deg, #fef3f7 0%, #f3e8ff 50%, #fef3f7 100%);
+  }
+
+  .glass-card {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
   }
 }
