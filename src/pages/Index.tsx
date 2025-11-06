@@ -257,7 +257,7 @@ export default function Index() {
                 </div>
                 
                 <div className="absolute -bottom-6 -right-6 vintage-card p-6 rounded-xl candle-glow max-w-xs">
-                  <p className="text-sm text-muted-foreground mb-2">от автора</p>
+                  <p className="text-sm text-muted-foreground mb-2">💌 reminder</p>
                   <p className="text-base leading-relaxed">
                     создаю вещи, которые хочется хранить
                   </p>
