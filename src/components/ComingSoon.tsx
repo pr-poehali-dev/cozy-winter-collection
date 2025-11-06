@@ -28,6 +28,7 @@ export default function ComingSoon() {
   const [timeLeft, setTimeLeft] = useState<TimeLeft>(calculateTimeLeft());
   const [showFortune, setShowFortune] = useState(true);
   const [fortuneOpened, setFortuneOpened] = useState(false);
+  const [isShaking, setIsShaking] = useState(false);
   const [currentFortune, setCurrentFortune] = useState<{text: string, emoji: string} | null>(null);
 
   const fortunes = [
@@ -57,10 +58,14 @@ export default function ComingSoon() {
   }
 
   const handleFortuneCookieClick = () => {
-    if (!fortuneOpened) {
-      const randomFortune = fortunes[Math.floor(Math.random() * fortunes.length)];
-      setCurrentFortune(randomFortune);
-      setFortuneOpened(true);
+    if (!fortuneOpened && !isShaking) {
+      setIsShaking(true);
+      setTimeout(() => {
+        const randomFortune = fortunes[Math.floor(Math.random() * fortunes.length)];
+        setCurrentFortune(randomFortune);
+        setFortuneOpened(true);
+        setIsShaking(false);
+      }, 2000);
     }
   };
 
@@ -78,12 +83,13 @@ export default function ComingSoon() {
                 <button
                   onClick={handleFortuneCookieClick}
                   className="group relative cursor-pointer focus:outline-none"
+                  disabled={isShaking}
                 >
-                  <div className="text-8xl md:text-9xl transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6">
+                  <div className={`text-8xl md:text-9xl transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6 ${isShaking ? 'cookie-shake' : ''}`}>
                     🥠
                   </div>
                   <p className="mt-4 text-sm md:text-base text-muted-foreground/60 group-hover:text-muted-foreground transition-colors">
-                    нажми на печенье
+                    {isShaking ? 'печенье раскрывается...' : 'нажми на печенье'}
                   </p>
                 </button>
               </>
