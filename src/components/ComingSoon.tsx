@@ -49,9 +49,7 @@ export default function ComingSoon() {
           <h1 className="text-6xl md:text-8xl font-serif text-primary tracking-tight">
             azaluk
           </h1>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-md mx-auto leading-relaxed">
-            вещи из моего мира
-          </p>
+          <p className="md:text-xl text-muted-foreground max-w-md mx-auto leading-relaxed text-lg">вещи из мира azaluk</p>
         </div>
 
         <div className="space-y-6">
