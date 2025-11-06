@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 
 interface TimeLeft {
   days: number;
@@ -26,9 +26,16 @@ export default function ComingSoon() {
   };
 
   const [timeLeft, setTimeLeft] = useState<TimeLeft>(calculateTimeLeft());
-  const [clearedPixels, setClearedPixels] = useState<Set<string>>(new Set());
-  const [isDragging, setIsDragging] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
+  const [fortuneOpened, setFortuneOpened] = useState(false);
+  const [currentFortune, setCurrentFortune] = useState<{text: string, bonus: string} | null>(null);
+
+  const fortunes = [
+    { text: 'зима принесёт тебе уют и новые знакомства', bonus: 'промокод WINTER10 на скидку 10%' },
+    { text: 'в холодные дни тебя согреют тёплые мысли', bonus: 'промокод COZY15 на скидку 15%' },
+    { text: 'снег укроет старое, открывая путь новому', bonus: 'промокод SNOW20 на скидку 20%' },
+    { text: 'морозные узоры напомнят о красоте простых вещей', bonus: 'промокод FROST10 на скидку 10%' },
+    { text: 'зимнее солнце осветит твои самые смелые планы', bonus: 'промокод SUN15 на скидку 15%' }
+  ];
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -45,72 +52,17 @@ export default function ComingSoon() {
     return null;
   }
 
-  const handleClear = (clientX: number, clientY: number) => {
-    if (!containerRef.current) return;
-    
-    const rect = containerRef.current.getBoundingClientRect();
-    const x = Math.floor((clientX - rect.left) / 40);
-    const y = Math.floor((clientY - rect.top) / 40);
-    
-    const newCleared = new Set(clearedPixels);
-    for (let dx = -1; dx <= 1; dx++) {
-      for (let dy = -1; dy <= 1; dy++) {
-        newCleared.add(`${x + dx},${y + dy}`);
-      }
-    }
-    setClearedPixels(newCleared);
-  };
-
-  const handleMouseDown = (e: React.MouseEvent) => {
-    setIsDragging(true);
-    handleClear(e.clientX, e.clientY);
-  };
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (isDragging) {
-      handleClear(e.clientX, e.clientY);
+  const handleFortuneCookieClick = () => {
+    if (!fortuneOpened) {
+      const randomFortune = fortunes[Math.floor(Math.random() * fortunes.length)];
+      setCurrentFortune(randomFortune);
+      setFortuneOpened(true);
     }
   };
-
-  const handleMouseUp = () => {
-    setIsDragging(false);
-  };
-
-  const handleTouchStart = (e: React.TouchEvent) => {
-    setIsDragging(true);
-    const touch = e.touches[0];
-    handleClear(touch.clientX, touch.clientY);
-  };
-
-  const handleTouchMove = (e: React.TouchEvent) => {
-    if (isDragging) {
-      const touch = e.touches[0];
-      handleClear(touch.clientX, touch.clientY);
-    }
-  };
-
-  const handleTouchEnd = () => {
-    setIsDragging(false);
-  };
-
-  const totalPixels = Math.ceil(window.innerWidth / 40) * Math.ceil(window.innerHeight / 40);
-  const clearedPercentage = (clearedPixels.size / totalPixels) * 100;
-  const showContent = clearedPercentage > 15;
 
   return (
-    <div 
-      ref={containerRef}
-      className="min-h-screen bg-gradient-to-br from-white via-orange-50/30 to-amber-50/40 flex items-center justify-center px-4 relative overflow-hidden"
-      onMouseDown={handleMouseDown}
-      onMouseMove={handleMouseMove}
-      onMouseUp={handleMouseUp}
-      onMouseLeave={handleMouseUp}
-      onTouchStart={handleTouchStart}
-      onTouchMove={handleTouchMove}
-      onTouchEnd={handleTouchEnd}
-      style={{ touchAction: 'none', cursor: 'pointer' }}
-    >
-      <div className={`max-w-2xl w-full text-center space-y-12 transition-opacity duration-500 ${showContent ? 'opacity-100' : 'opacity-0'}`}>
+    <div className="min-h-screen bg-gradient-to-br from-white via-orange-50/30 to-amber-50/40 flex items-center justify-center px-4">
+      <div className="max-w-2xl w-full text-center space-y-12">
         <div className="space-y-6">
           <p className="text-base md:text-lg text-muted-foreground">магазинчик вещиц azaluk<br />откроется через... 🔮</p>
           
@@ -153,47 +105,45 @@ export default function ComingSoon() {
           </div>
         </div>
 
-        <div className="space-y-3 my-0 py-0">
+        <div className="space-y-6">
           <p className="text-sm md:text-base text-muted-foreground">встретимся здесь в первый день зимы! ❄️</p>
           <p className="text-xs md:text-sm text-muted-foreground/60 italic max-w-sm mx-auto">в зимней коллекции вещиц вас ждут... волшебные чепцы, задорные подвесы и домашний декор! 🍵✨☃️</p>
+          
+          <div className="mt-8 flex flex-col items-center">
+            {!fortuneOpened ? (
+              <button
+                onClick={handleFortuneCookieClick}
+                className="group relative cursor-pointer focus:outline-none"
+              >
+                <div className="text-6xl md:text-8xl transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6">
+                  🥠
+                </div>
+                <p className="mt-4 text-xs md:text-sm text-muted-foreground/60 group-hover:text-muted-foreground transition-colors">
+                  вытяни печенье-предсказание
+                </p>
+              </button>
+            ) : (
+              <div className="space-y-4 animate-fade-in">
+                <div className="flex items-center justify-center gap-3 text-4xl md:text-6xl">
+                  <span className="animate-bounce" style={{ animationDelay: '0s' }}>🥠</span>
+                  <span className="animate-bounce" style={{ animationDelay: '0.1s' }}>✨</span>
+                </div>
+                <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 md:p-8 shadow-lg border border-border max-w-md">
+                  <p className="text-sm md:text-base text-primary font-medium mb-4">
+                    {currentFortune?.text}
+                  </p>
+                  <div className="pt-4 border-t border-border">
+                    <p className="text-xs md:text-sm text-muted-foreground mb-2">твой бонус:</p>
+                    <p className="text-sm md:text-base text-accent font-medium">
+                      {currentFortune?.bonus}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </div>
-
-      <div 
-        className="frost-overlay"
-        style={{
-          position: 'absolute',
-          inset: 0,
-          pointerEvents: 'none',
-          opacity: showContent ? 0 : 1,
-          transition: 'opacity 0.5s'
-        }}
-      >
-        {Array.from({ length: Math.ceil(window.innerHeight / 40) }, (_, y) =>
-          Array.from({ length: Math.ceil(window.innerWidth / 40) }, (_, x) => {
-            const key = `${x},${y}`;
-            return clearedPixels.has(key) ? null : (
-              <div
-                key={key}
-                className="frost-pixel"
-                style={{
-                  position: 'absolute',
-                  left: x * 40,
-                  top: y * 40,
-                  width: 40,
-                  height: 40
-                }}
-              />
-            );
-          })
-        )}
-      </div>
-
-      {!showContent && (
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <p className="text-lg md:text-xl text-primary/60 animate-pulse">протри экран... ❄️</p>
-        </div>
-      )}
     </div>
   );
 }
