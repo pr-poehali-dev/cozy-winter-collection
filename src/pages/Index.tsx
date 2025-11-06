@@ -17,51 +17,51 @@ interface Product {
 const products: Product[] = [
   {
     id: 1,
-    name: 'Косынка «Розовая мечта»',
-    description: '✨ Мягкая, как облако из Hannah Montana',
+    name: 'косынка «туманное утро»',
+    description: 'согревает, как дыхание в мороз, и хранит покой',
     price: 2500,
     category: 'для зимней прогулки',
-    image: 'https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/files/47fe9bb6-4bd6-4ee2-97f5-e25957111ac4.jpg'
+    image: 'https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/files/c94cf0e0-cf07-4176-8582-b130f2003e38.jpg'
   },
   {
     id: 2,
-    name: 'Вязаный чепчик «Лавандовое утро»',
-    description: '💜 Укутывает теплом, как обнимашки с подружками',
+    name: 'вязаный чепчик «лунное сияние»',
+    description: 'укутывает теплом, как старая сказка перед сном',
     price: 3200,
     category: 'для дома',
-    image: 'https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/files/0bff4e57-cbc7-40e6-8799-b5b317c881b8.jpg'
+    image: 'https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/files/c3883d55-8801-4fdc-aef9-82b39a393bf6.jpg'
   },
   {
     id: 3,
-    name: 'Подвес для помады «Glitter Magic»',
-    description: '💕 Маленькая вещь с большой Y2K энергией',
+    name: 'подвес «зеркальная пыль»',
+    description: 'крошечный амулет для тех, кто ищет свет в себе',
     price: 800,
     category: 'для дома',
-    image: 'https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/files/e1719aad-9145-442b-b15e-c81de4da4a1a.jpg'
+    image: 'https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/files/546e0ba9-0bc8-4a91-a941-a0540466f7db.jpg'
   },
   {
     id: 4,
-    name: 'Бумажная гирлянда «Pastel Dreams»',
-    description: '🌸 Украшение из твоего Tumblr-настроения',
+    name: 'бумажная гирлянда «шёпот бумаги»',
+    description: 'шуршит, как страницы старого дневника',
     price: 1500,
     category: 'для дома',
-    image: 'https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/files/c077fe33-6b15-46da-99c7-2753f4ee0779.jpg'
+    image: 'https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/files/00ba75c0-9906-4158-be80-2ae3f819fdfe.jpg'
   },
   {
     id: 5,
-    name: 'Световая гирлянда «Fairy Lights»',
-    description: '✨ Свет, как в спальне из сериалов 2000-х',
+    name: 'световая гирлянда «золотое сияние»',
+    description: 'свет, который хочется обнимать и хранить',
     price: 2800,
     category: 'для дома',
-    image: 'https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/files/3577154b-cec7-4245-85c7-66373b923492.jpg'
+    image: 'https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/files/76e1bef3-65b2-446c-a55f-b98fbd010e7a.jpg'
   },
   {
     id: 6,
-    name: 'Набор «Сказочная шкатулка»',
-    description: '🎀 Вся магия нулевых в одном боксе',
+    name: 'набор «сказочный сундук»',
+    description: 'косынка, чепчик и гирлянда — вся магия в одной коробке',
     price: 6500,
     category: 'наборы и боксы',
-    image: 'https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/files/ed2740ec-f2b3-461f-967e-c5f3bd5479bf.jpg'
+    image: 'https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/files/52ca4309-37b3-4058-bccc-94a511e49fd2.jpg'
   }
 ];
 
@@ -113,9 +113,9 @@ export default function Index() {
 
   return (
     <div className="min-h-screen bg-background">
-      <header className="fixed top-0 left-0 right-0 z-50 glass-card border-b border-border">
+      <header className="fixed top-0 left-0 right-0 z-50 vintage-card border-b border-border">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <h1 className="text-2xl tracking-wide sparkle-text">azaluk ✨</h1>
+          <h1 className="text-2xl tracking-wide mystical-text">azaluk</h1>
           <Sheet open={isCartOpen} onOpenChange={setIsCartOpen}>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon" className="relative">
@@ -129,12 +129,12 @@ export default function Index() {
             </SheetTrigger>
             <SheetContent className="w-full sm:max-w-lg">
               <SheetHeader>
-                <SheetTitle className="text-2xl">Корзина</SheetTitle>
+                <SheetTitle className="text-2xl mystical-text">корзина</SheetTitle>
               </SheetHeader>
               <div className="mt-8 flex flex-col h-full">
                 {cart.length === 0 ? (
                   <div className="flex-1 flex items-center justify-center text-muted-foreground">
-                    <p>Корзина пуста</p>
+                    <p>корзина пуста</p>
                   </div>
                 ) : (
                   <>
@@ -182,11 +182,11 @@ export default function Index() {
                     </div>
                     <div className="pt-6 border-t border-border space-y-4">
                       <div className="flex justify-between items-center text-lg">
-                        <span>Итого:</span>
+                        <span>итого:</span>
                         <span className="font-medium">{cartTotal} ₽</span>
                       </div>
-                      <Button className="w-full" size="lg">
-                        Оформить заказ
+                      <Button className="w-full candle-glow" size="lg">
+                        завернуть и отправить
                       </Button>
                     </div>
                   </>
@@ -197,32 +197,32 @@ export default function Index() {
         </div>
       </header>
 
-      <section className="pt-32 pb-20 px-4 animate-fade-in pearlescent">
+      <section className="pt-32 pb-20 px-4 animate-fade-in paper-texture">
         <div className="container mx-auto max-w-4xl text-center">
-          <div className="mb-12 overflow-hidden rounded-2xl shadow-xl">
+          <div className="mb-12 overflow-hidden rounded-2xl shadow-xl candle-glow">
             <img 
-              src="https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/files/af6e04d3-6af4-45da-8e09-b57166de6ef9.jpg"
+              src="https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/files/600d4767-07d5-44f9-a0e1-252c0957f2fe.jpg"
               alt="вещи из моего мира"
               className="w-full h-[500px] object-cover"
             />
           </div>
-          <h2 className="text-5xl md:text-6xl mb-6 font-light sparkle-text">вещи из моего мира ✨</h2>
+          <h2 className="text-5xl md:text-6xl mb-6 font-light mystical-text">вещи из моего мира</h2>
           <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto leading-relaxed">
-            ручные предметы уюта с энергией 💕 2000-х 💕
+            ручные предметы с теплом и историей
           </p>
           <Button 
             size="lg" 
-            className="rounded-full px-8"
+            className="rounded-full px-8 candle-glow"
             onClick={() => {
               document.getElementById('catalog')?.scrollIntoView({ behavior: 'smooth' });
             }}
           >
-            Посмотреть коллекцию
+            войти в лавку
           </Button>
         </div>
       </section>
 
-      <section id="catalog" className="py-16 px-4">
+      <section id="catalog" className="py-16 px-4 paper-texture">
         <div className="container mx-auto">
           <div className="flex flex-wrap gap-2 justify-center mb-12 animate-fade-in">
             {categories.map(category => (
@@ -241,7 +241,7 @@ export default function Index() {
             {filteredProducts.map((product, index) => (
               <Card 
                 key={product.id} 
-                className="group overflow-hidden border-0 shadow-sm hover:shadow-xl transition-all duration-300 animate-scale-in"
+                className="group overflow-hidden border-0 vintage-card hover:candle-glow transition-all duration-300 animate-scale-in"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 <div className="overflow-hidden relative">
@@ -250,9 +250,9 @@ export default function Index() {
                     alt={product.name}
                     className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 </div>
-                <CardContent className="p-6 bg-white/50">
+                <CardContent className="p-6 bg-white/80">
                   <Badge variant="secondary" className="mb-3 rounded-full">
                     {product.category}
                   </Badge>
@@ -264,11 +264,11 @@ export default function Index() {
                     <span className="text-lg font-medium">{product.price} ₽</span>
                     <Button 
                       size="sm" 
-                      className="rounded-full"
+                      className="rounded-full hover:candle-glow"
                       onClick={() => addToCart(product)}
                     >
                       <Icon name="Plus" size={16} className="mr-1" />
-                      В корзину
+                      в корзину
                     </Button>
                   </div>
                 </CardContent>
@@ -278,36 +278,36 @@ export default function Index() {
         </div>
       </section>
 
-      <section className="py-20 px-4 pearlescent">
-        <div className="container mx-auto max-w-3xl text-center animate-fade-in">
-          <h2 className="text-4xl mb-8 sparkle-text">💌 О доставке и заказе</h2>
-          <div className="prose prose-lg mx-auto text-muted-foreground leading-relaxed space-y-4">
+      <section className="py-20 px-4 paper-texture">
+        <div className="container mx-auto max-w-3xl animate-fade-in">
+          <h2 className="text-4xl mb-8 mystical-text text-center">о доставке</h2>
+          <div className="prose prose-lg mx-auto text-muted-foreground leading-relaxed space-y-4 text-left">
             <p>
-              Все вещи сделаны вручную и отправляются с заботой.
+              каждая вещь создаётся вручную и отправляется из моей мастерской,
+              завёрнутая в бумагу и немного магии.
             </p>
             <p>
-              Доставка по России и СНГ. Упаковано в крафт и ленточку.
-            </p>
-            <p>
-              Срок отправки — 3–5 дней.
+              доставка по россии и снг. срок отправки — 3–5 дней.
             </p>
           </div>
-          <Button size="lg" className="mt-8 rounded-full px-8" onClick={() => setIsCartOpen(true)}>
-            Оформить заказ
-          </Button>
+          <div className="flex justify-center mt-8">
+            <Button size="lg" className="rounded-full px-8 candle-glow" onClick={() => setIsCartOpen(true)}>
+              завернуть и отправить
+            </Button>
+          </div>
         </div>
       </section>
 
-      <footer className="py-12 px-4 border-t border-border glass-card">
+      <footer className="py-12 px-4 border-t border-border vintage-card">
         <div className="container mx-auto max-w-4xl">
           <div className="flex flex-col items-center gap-6">
-            <h3 className="text-2xl tracking-wide sparkle-text">azaluk ✨</h3>
+            <h3 className="text-2xl tracking-wide mystical-text">azaluk</h3>
             <div className="flex gap-6">
               <a 
                 href="https://youtube.com" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-primary hover:text-accent transition-colors"
+                className="text-accent hover:text-primary transition-colors candle-glow"
               >
                 <Icon name="Youtube" size={20} />
               </a>
@@ -315,7 +315,7 @@ export default function Index() {
                 href="https://t.me" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-primary hover:text-accent transition-colors"
+                className="text-accent hover:text-primary transition-colors candle-glow"
               >
                 <Icon name="Send" size={20} />
               </a>
@@ -323,13 +323,13 @@ export default function Index() {
                 href="https://boosty.to" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-primary hover:text-accent transition-colors"
+                className="text-accent hover:text-primary transition-colors candle-glow"
               >
                 <Icon name="Heart" size={20} />
               </a>
             </div>
             <p className="text-sm text-muted-foreground">
-              создано с теплом и глиттерами 💕 azaluk, 2025
+              2025
             </p>
           </div>
         </div>
