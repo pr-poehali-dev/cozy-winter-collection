@@ -47,7 +47,7 @@ export default function ComingSoon() {
       <div className="max-w-2xl w-full text-center space-y-12 animate-fade-in">
         <div className="space-y-6">
           <p className="text-base md:text-lg text-muted-foreground">магазинчик вещиц azaluk<br />
-откроется через...</p>
+откроется через... 🔮✨</p>
           
           <div className="grid grid-cols-4 gap-3 md:gap-6 max-w-lg mx-auto">
             <div className="space-y-2">
