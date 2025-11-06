@@ -46,9 +46,7 @@ export default function ComingSoon() {
     <div className="min-h-screen bg-gradient-to-br from-white via-orange-50/30 to-amber-50/40 flex items-center justify-center px-4">
       <div className="max-w-2xl w-full text-center space-y-12 animate-fade-in">
         <div className="space-y-4">
-          <h1 className="text-6xl md:text-8xl font-serif text-primary tracking-tight">
-            azaluk
-          </h1>
+          <h1 className="md:text-8xl font-serif text-primary tracking-tight text-4xl">вещи из мира azaluk</h1>
           <p className="md:text-xl text-muted-foreground max-w-md mx-auto leading-relaxed text-lg">вещи из мира azaluk</p>
         </div>
 
