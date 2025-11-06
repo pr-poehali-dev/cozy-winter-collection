@@ -10,10 +10,12 @@ import Delivery from '@/components/shop/Delivery';
 import Footer from '@/components/shop/Footer';
 import ComingSoon from '@/components/ComingSoon';
 
+const DEV_MODE = true;
+
 export default function Index() {
   const launchDate = new Date('2025-12-01T12:00:00+03:00');
   const isPreviewMode = new URLSearchParams(window.location.search).has('preview');
-  const [isLaunched, setIsLaunched] = useState(isPreviewMode || new Date() >= launchDate);
+  const [isLaunched, setIsLaunched] = useState(DEV_MODE || isPreviewMode || new Date() >= launchDate);
   
   const [selectedCategory, setSelectedCategory] = useState<string>('все');
   const [cart, setCart] = useState<CartItem[]>([]);
@@ -23,7 +25,7 @@ export default function Index() {
 
   useEffect(() => {
     const checkLaunch = () => {
-      if (!isPreviewMode) {
+      if (!DEV_MODE && !isPreviewMode) {
         setIsLaunched(new Date() >= launchDate);
       }
     };
