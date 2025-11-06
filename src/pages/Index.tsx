@@ -95,6 +95,7 @@ export default function Index() {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -317,8 +318,9 @@ export default function Index() {
             {filteredProducts.map((product, index) => (
               <Card 
                 key={product.id} 
-                className="group overflow-hidden border-0 vintage-card hover:candle-glow transition-all duration-300 animate-scale-in"
+                className="group overflow-hidden border-0 vintage-card hover:candle-glow transition-all duration-300 animate-scale-in cursor-pointer"
                 style={{ animationDelay: `${index * 100}ms` }}
+                onClick={() => setSelectedProduct(product)}
               >
                 <div className="overflow-hidden relative">
                   <img 
@@ -341,7 +343,10 @@ export default function Index() {
                     <Button 
                       size="sm" 
                       className="rounded-full hover:candle-glow"
-                      onClick={() => addToCart(product)}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        addToCart(product);
+                      }}
                     >
                       <Icon name="Plus" size={16} className="mr-1" />
                       в корзину
@@ -373,6 +378,83 @@ export default function Index() {
           </div>
         </div>
       </section>
+
+      <Sheet open={!!selectedProduct} onOpenChange={(open) => !open && setSelectedProduct(null)}>
+        <SheetContent side="bottom" className="h-[85vh] overflow-y-auto">
+          {selectedProduct && (
+            <div className="container mx-auto max-w-4xl py-8">
+              <SheetHeader>
+                <SheetTitle className="text-3xl mystical-text mb-6">{selectedProduct.name}</SheetTitle>
+              </SheetHeader>
+              
+              <div className="grid md:grid-cols-2 gap-8 mt-6">
+                <div className="relative overflow-hidden rounded-xl shadow-xl candle-glow">
+                  <img
+                    src={selectedProduct.image}
+                    alt={selectedProduct.name}
+                    className="w-full h-[500px] object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent"></div>
+                </div>
+                
+                <div className="space-y-6">
+                  <Badge variant="secondary" className="rounded-full text-sm">
+                    {selectedProduct.category}
+                  </Badge>
+                  
+                  <p className="text-lg text-muted-foreground leading-relaxed">
+                    {selectedProduct.description}
+                  </p>
+                  
+                  <div className="pt-6 border-t border-border">
+                    <div className="text-4xl font-light mystical-text mb-6">
+                      {selectedProduct.price} ₽
+                    </div>
+                    
+                    <Button
+                      size="lg"
+                      className="w-full rounded-full candle-glow text-base py-6"
+                      onClick={() => {
+                        addToCart(selectedProduct);
+                        setSelectedProduct(null);
+                      }}
+                    >
+                      <Icon name="Plus" size={20} className="mr-2" />
+                      добавить в корзину
+                    </Button>
+                  </div>
+                  
+                  <div className="vintage-card p-6 rounded-xl space-y-3">
+                    <div className="flex items-start gap-3">
+                      <Icon name="Package" size={20} className="text-accent mt-1" />
+                      <div>
+                        <h4 className="font-medium mb-1">доставка</h4>
+                        <p className="text-sm text-muted-foreground">по россии и снг, 3–5 дней</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-start gap-3">
+                      <Icon name="Heart" size={20} className="text-accent mt-1" />
+                      <div>
+                        <h4 className="font-medium mb-1">ручная работа</h4>
+                        <p className="text-sm text-muted-foreground">создано с душой и вниманием</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-start gap-3">
+                      <Icon name="Sparkles" size={20} className="text-accent mt-1" />
+                      <div>
+                        <h4 className="font-medium mb-1">упаковка</h4>
+                        <p className="text-sm text-muted-foreground">завёрнуто в бумагу и магию</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+        </SheetContent>
+      </Sheet>
 
       <footer className="py-12 px-4 border-t border-border vintage-card">
         <div className="container mx-auto max-w-4xl">
