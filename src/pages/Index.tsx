@@ -12,7 +12,8 @@ import ComingSoon from '@/components/ComingSoon';
 
 export default function Index() {
   const launchDate = new Date('2025-12-01T12:00:00+03:00');
-  const [isLaunched, setIsLaunched] = useState(new Date() >= launchDate);
+  const isPreviewMode = new URLSearchParams(window.location.search).has('preview');
+  const [isLaunched, setIsLaunched] = useState(isPreviewMode || new Date() >= launchDate);
   
   const [selectedCategory, setSelectedCategory] = useState<string>('все');
   const [cart, setCart] = useState<CartItem[]>([]);
@@ -22,7 +23,9 @@ export default function Index() {
 
   useEffect(() => {
     const checkLaunch = () => {
-      setIsLaunched(new Date() >= launchDate);
+      if (!isPreviewMode) {
+        setIsLaunched(new Date() >= launchDate);
+      }
     };
     
     const launchTimer = setInterval(checkLaunch, 1000);
@@ -35,7 +38,7 @@ export default function Index() {
       clearInterval(interval);
       clearInterval(launchTimer);
     };
-  }, []);
+  }, [isPreviewMode]);
 
   const categories = ['все', 'для дома', 'для зимней прогулки', 'наборы и боксы'];
 
