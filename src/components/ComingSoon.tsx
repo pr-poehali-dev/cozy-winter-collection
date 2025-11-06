@@ -112,6 +112,7 @@ export default function ComingSoon() {
                     </div>
                   </div>
                 </div>
+                <p className="text-xs text-muted-foreground/70 italic">не забудь сделать скрин! 📸</p>
                 <button
                   onClick={() => setShowFortune(false)}
                   className="mt-6 w-full py-3 px-6 bg-white/80 hover:bg-white rounded-xl border border-border text-sm md:text-base text-muted-foreground hover:text-primary transition-colors"
