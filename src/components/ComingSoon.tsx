@@ -26,6 +26,7 @@ export default function ComingSoon() {
   };
 
   const [timeLeft, setTimeLeft] = useState<TimeLeft>(calculateTimeLeft());
+  const [showFortune, setShowFortune] = useState(true);
   const [fortuneOpened, setFortuneOpened] = useState(false);
   const [currentFortune, setCurrentFortune] = useState<{text: string, emoji: string} | null>(null);
 
@@ -64,7 +65,57 @@ export default function ComingSoon() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-white via-orange-50/30 to-amber-50/40 flex items-center justify-center px-4">
+    <div className="min-h-screen bg-gradient-to-br from-white via-orange-50/30 to-amber-50/40 flex items-center justify-center px-4 relative">
+      {showFortune && (
+        <div className="absolute inset-0 bg-gradient-to-br from-white via-orange-50/50 to-amber-50/60 backdrop-blur-sm z-50 flex items-center justify-center px-4">
+          <div className="max-w-md w-full flex flex-col items-center space-y-8">
+            {!fortuneOpened ? (
+              <>
+                <div className="space-y-4 text-center">
+                  <p className="text-lg md:text-xl text-primary">добро пожаловать! 🔮</p>
+                  <p className="text-sm md:text-base text-muted-foreground">прежде чем узнать о магазинчике,<br />вытяни своё зимнее предсказание</p>
+                </div>
+                <button
+                  onClick={handleFortuneCookieClick}
+                  className="group relative cursor-pointer focus:outline-none"
+                >
+                  <div className="text-8xl md:text-9xl transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6">
+                    🥠
+                  </div>
+                  <p className="mt-4 text-sm md:text-base text-muted-foreground/60 group-hover:text-muted-foreground transition-colors">
+                    нажми на печенье
+                  </p>
+                </button>
+              </>
+            ) : (
+              <div className="space-y-6 animate-fade-in w-full">
+                <div className="flex items-center justify-center gap-3 text-4xl md:text-6xl">
+                  <span className="animate-bounce" style={{ animationDelay: '0s' }}>🥠</span>
+                  <span className="animate-bounce" style={{ animationDelay: '0.1s' }}>✨</span>
+                </div>
+                <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 md:p-8 shadow-lg border border-border">
+                  <p className="text-base md:text-lg text-primary font-medium mb-4 leading-relaxed">
+                    {currentFortune?.text}
+                  </p>
+                  <div className="pt-4 border-t border-border space-y-3">
+                    <p className="text-xs md:text-sm text-muted-foreground">укажи при покупке этот смайлик<br />и получишь подарок к заказу</p>
+                    <p className="text-5xl md:text-6xl">
+                      {currentFortune?.emoji}
+                    </p>
+                  </div>
+                </div>
+                <button
+                  onClick={() => setShowFortune(false)}
+                  className="mt-6 w-full py-3 px-6 bg-white/80 hover:bg-white rounded-xl border border-border text-sm md:text-base text-muted-foreground hover:text-primary transition-colors"
+                >
+                  посмотреть, когда откроется магазин →
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
       <div className="max-w-2xl w-full text-center space-y-12">
         <div className="space-y-6">
           <p className="text-base md:text-lg text-muted-foreground">магазинчик вещиц azaluk<br />откроется через... 🔮</p>
@@ -108,43 +159,9 @@ export default function ComingSoon() {
           </div>
         </div>
 
-        <div className="space-y-6">
+        <div className="space-y-4">
           <p className="text-sm md:text-base text-muted-foreground">встретимся здесь в первый день зимы! ❄️</p>
           <p className="text-xs md:text-sm text-muted-foreground/60 italic max-w-sm mx-auto">в зимней коллекции вещиц вас ждут... волшебные чепцы, задорные подвесы и домашний декор! 🍵✨☃️</p>
-          
-          <div className="mt-8 flex flex-col items-center">
-            {!fortuneOpened ? (
-              <button
-                onClick={handleFortuneCookieClick}
-                className="group relative cursor-pointer focus:outline-none"
-              >
-                <div className="text-6xl md:text-8xl transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6">
-                  🥠
-                </div>
-                <p className="mt-4 text-xs md:text-sm text-muted-foreground/60 group-hover:text-muted-foreground transition-colors">
-                  вытяни печенье-предсказание
-                </p>
-              </button>
-            ) : (
-              <div className="space-y-4 animate-fade-in">
-                <div className="flex items-center justify-center gap-3 text-4xl md:text-6xl">
-                  <span className="animate-bounce" style={{ animationDelay: '0s' }}>🥠</span>
-                  <span className="animate-bounce" style={{ animationDelay: '0.1s' }}>✨</span>
-                </div>
-                <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 md:p-8 shadow-lg border border-border max-w-md">
-                  <p className="text-sm md:text-base text-primary font-medium mb-4">
-                    {currentFortune?.text}
-                  </p>
-                  <div className="pt-4 border-t border-border space-y-2">
-                    <p className="text-xs md:text-sm text-muted-foreground">укажи при покупке этот смайлик<br />и получишь подарок к заказу</p>
-                    <p className="text-4xl md:text-5xl">
-                      {currentFortune?.emoji}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
         </div>
       </div>
     </div>
