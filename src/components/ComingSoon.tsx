@@ -89,9 +89,7 @@ export default function ComingSoon() {
 
         <div className="space-y-3 my-0 py-0">
           <p className="text-sm md:text-base text-muted-foreground">встретимся здесь в первый день зимы! ❄️</p>
-          <p className="text-xs md:text-sm text-muted-foreground/60 italic max-w-sm mx-auto">
-            в зимней коллекции вещиц вас ждут... волшебные чепцы, задорные подвесы и домашний декор 🍵✨☃️
-          </p>
+          <p className="text-xs md:text-sm text-muted-foreground/60 italic max-w-sm mx-auto">в зимней коллекции вещиц вас ждут... волшебные чепцы, задорные подвесы и домашний декор! 🍵✨☃️</p>
         </div>
       </div>
     </div>
