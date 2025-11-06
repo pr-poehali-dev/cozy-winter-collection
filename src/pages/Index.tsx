@@ -297,38 +297,8 @@ export default function Index() {
           <Icon name="ChevronRight" size={24} />
         </button>
       </section>
-      
-      <section className="py-24 px-4 paper-texture border-t border-border">
-        <div className="container mx-auto max-w-6xl">
-          <div className="grid md:grid-cols-3 gap-12 text-center">
-            <div className="space-y-4 animate-fade-in">
-              <div className="text-4xl mb-4">🕯️</div>
-              <h3 className="text-xl mystical-text">сделано вручную</h3>
-              <p className="text-muted-foreground text-sm leading-relaxed">
-                каждая вещь создаётся с вниманием к деталям
-              </p>
-            </div>
-            
-            <div className="space-y-4 animate-fade-in" style={{ animationDelay: '0.1s' }}>
-              <div className="text-4xl mb-4">🌙</div>
-              <h3 className="text-xl mystical-text">с душой и магией</h3>
-              <p className="text-muted-foreground text-sm leading-relaxed">
-                вкладываю частичку своего мира в каждое изделие
-              </p>
-            </div>
-            
-            <div className="space-y-4 animate-fade-in" style={{ animationDelay: '0.2s' }}>
-              <div className="text-4xl mb-4">📜</div>
-              <h3 className="text-xl mystical-text">с историей</h3>
-              <p className="text-muted-foreground text-sm leading-relaxed">
-                каждая вещь — это страница из моего дневника
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
 
-      <section id="catalog" className="py-16 px-4 paper-texture">
+      <section id="catalog" className="py-16 px-4 paper-texture border-t border-border">
         <div className="container mx-auto">
           <div className="flex flex-wrap gap-2 justify-center mb-12 animate-fade-in">
             {categories.map(category => (
