@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -13,6 +13,27 @@ interface Product {
   category: string;
   image: string;
 }
+
+const heroSlides = [
+  {
+    id: 1,
+    image: 'https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/files/600d4767-07d5-44f9-a0e1-252c0957f2fe.jpg',
+    title: 'с любовью упаковываем каждый заказ',
+    subtitle: 'и будем очень рады увидеть ваш отзыв'
+  },
+  {
+    id: 2,
+    image: 'https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/files/c94cf0e0-cf07-4176-8582-b130f2003e38.jpg',
+    title: 'всё переплетено',
+    subtitle: 'вы лучшие, люблю'
+  },
+  {
+    id: 3,
+    image: 'https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/files/52ca4309-37b3-4058-bccc-94a511e49fd2.jpg',
+    title: 'вещи с душой',
+    subtitle: 'мир тебя оберегает'
+  }
+];
 
 const products: Product[] = [
   {
@@ -73,6 +94,14 @@ export default function Index() {
   const [selectedCategory, setSelectedCategory] = useState<string>('все');
   const [cart, setCart] = useState<CartItem[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
 
   const categories = ['все', 'для дома', 'для зимней прогулки', 'наборы и боксы'];
 
@@ -197,73 +226,76 @@ export default function Index() {
         </div>
       </header>
 
-      <section className="relative min-h-screen flex items-center px-4 paper-texture overflow-hidden">
-        <div className="absolute inset-0 opacity-5">
-          <div className="absolute top-20 left-10 text-6xl">✦</div>
-          <div className="absolute top-40 right-20 text-4xl">✿</div>
-          <div className="absolute bottom-32 left-1/4 text-5xl">✴</div>
-          <div className="absolute bottom-20 right-1/3 text-3xl">❉</div>
-        </div>
-        
-        <div className="container mx-auto max-w-7xl relative z-10">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="order-2 md:order-1 space-y-8 animate-fade-in">
-              <div className="space-y-4">
-                <div className="inline-block">
-                  <span className="text-sm tracking-[0.3em] text-muted-foreground border-b border-accent pb-2">
-                    мастерская ручных вещей
-                  </span>
-                </div>
-                <h2 className="text-6xl md:text-7xl lg:text-8xl font-light mystical-text leading-tight">
-                  вещи<br/>из моего<br/>мира
-                </h2>
-              </div>
+      <section className="relative min-h-screen overflow-hidden">
+        {heroSlides.map((slide, index) => (
+          <div
+            key={slide.id}
+            className={`absolute inset-0 transition-opacity duration-1000 ${
+              index === currentSlide ? 'opacity-100' : 'opacity-0'
+            }`}
+          >
+            <div className="relative w-full h-screen">
+              <img
+                src={slide.image}
+                alt={slide.title}
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/50"></div>
               
-              <div className="space-y-6">
-                <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-md">
-                  каждая вещь — это амулет,<br/>
-                  созданный с теплом и хранящий историю
-                </p>
-                
-                <div className="flex flex-wrap gap-4 items-center">
-                  <Button 
-                    size="lg" 
-                    className="rounded-full px-10 py-6 text-base candle-glow hover:scale-105 transition-transform"
+              <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 z-10">
+                <div className="max-w-4xl space-y-6 animate-fade-in">
+                  <h2 className="text-5xl md:text-7xl lg:text-8xl font-light text-white leading-tight">
+                    {slide.title}
+                  </h2>
+                  <p className="text-xl md:text-2xl text-white/90 leading-relaxed">
+                    {slide.subtitle}
+                  </p>
+                  
+                  <Button
+                    size="lg"
+                    className="mt-8 rounded-full px-10 py-6 text-base bg-white/90 text-primary hover:bg-white hover:scale-105 transition-transform"
                     onClick={() => {
                       document.getElementById('catalog')?.scrollIntoView({ behavior: 'smooth' });
                     }}
                   >
                     войти в лавку
                   </Button>
-                  
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <div className="w-12 h-px bg-border"></div>
-                    <span>ручная работа</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div className="order-1 md:order-2 animate-scale-in">
-              <div className="relative">
-                <div className="absolute -inset-4 bg-gradient-to-br from-accent/10 to-transparent rounded-3xl blur-2xl"></div>
-                <div className="relative overflow-hidden rounded-2xl shadow-2xl candle-glow">
-                  <img 
-                    src="https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/files/600d4767-07d5-44f9-a0e1-252c0957f2fe.jpg"
-                    alt="вещи из моего мира"
-                    className="w-full h-[600px] object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent"></div>
-                </div>
-                
-                <div className="absolute -bottom-6 -right-6 vintage-card p-6 rounded-xl candle-glow max-w-xs">
-                  <p className="text-sm text-muted-foreground mb-2">💌 reminder</p>
-                  <p className="text-base leading-relaxed">всё, что тебя окружает — имеет значение</p>
                 </div>
               </div>
             </div>
           </div>
+        ))}
+        
+        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 z-20 flex gap-3">
+          {heroSlides.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentSlide(index)}
+              className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
+                index === currentSlide
+                  ? 'bg-white w-8'
+                  : 'bg-white/50 hover:bg-white/70'
+              }`}
+              aria-label={`слайд ${index + 1}`}
+            />
+          ))}
         </div>
+        
+        <button
+          onClick={() => setCurrentSlide((prev) => (prev - 1 + heroSlides.length) % heroSlides.length)}
+          className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white/20 hover:bg-white/30 backdrop-blur-sm flex items-center justify-center text-white transition-all"
+          aria-label="предыдущий слайд"
+        >
+          <Icon name="ChevronLeft" size={24} />
+        </button>
+        
+        <button
+          onClick={() => setCurrentSlide((prev) => (prev + 1) % heroSlides.length)}
+          className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white/20 hover:bg-white/30 backdrop-blur-sm flex items-center justify-center text-white transition-all"
+          aria-label="следующий слайд"
+        >
+          <Icon name="ChevronRight" size={24} />
+        </button>
       </section>
       
       <section className="py-24 px-4 paper-texture border-t border-border">
