@@ -97,11 +97,13 @@ export default function ComingSoon() {
                   <p className="text-base md:text-lg text-primary font-medium mb-4 leading-relaxed">
                     {currentFortune?.text}
                   </p>
-                  <div className="pt-4 border-t border-border space-y-3">
-                    <p className="text-xs md:text-sm text-muted-foreground">укажи при покупке этот смайлик<br />и получишь подарок к заказу</p>
-                    <p className="text-5xl md:text-6xl">
-                      {currentFortune?.emoji}
-                    </p>
+                  <div className="pt-4 border-t border-border">
+                    <div className="flex items-center justify-center gap-4">
+                      <p className="text-xs md:text-sm text-muted-foreground text-left">укажи при покупке<br />этот смайлик и получишь<br />подарок к заказу</p>
+                      <p className="text-5xl md:text-6xl">
+                        {currentFortune?.emoji}
+                      </p>
+                    </div>
                   </div>
                 </div>
                 <button
