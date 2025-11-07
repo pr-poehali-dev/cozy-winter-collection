@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Lora:wght@400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400;500&family=Raleway:wght@300;400;500&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -6,35 +6,35 @@
 
 @layer base {
   :root {
-    --background: 35 25% 96%;
-    --foreground: 25 15% 20%;
+    --background: 0 0% 98%;
+    --foreground: 30 8% 45%;
 
     --card: 0 0% 100%;
-    --card-foreground: 25 15% 20%;
+    --card-foreground: 30 8% 45%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 25 15% 20%;
+    --popover-foreground: 30 8% 45%;
 
-    --primary: 25 30% 35%;
-    --primary-foreground: 35 25% 96%;
+    --primary: 30 10% 25%;
+    --primary-foreground: 0 0% 98%;
 
-    --secondary: 35 20% 88%;
-    --secondary-foreground: 25 15% 20%;
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 30 10% 25%;
 
-    --muted: 35 15% 90%;
-    --muted-foreground: 25 10% 45%;
+    --muted: 0 0% 93%;
+    --muted-foreground: 30 6% 55%;
 
-    --accent: 0 40% 50%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 30 10% 25%;
+    --accent-foreground: 0 0% 98%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 35 15% 88%;
-    --input: 35 15% 88%;
-    --ring: 25 30% 35%;
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    --ring: 30 10% 25%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
 
     --sidebar-background: 0 0% 98%;
 
@@ -99,8 +99,10 @@
 
   body {
     @apply bg-background text-foreground;
-    font-family: "Montserrat", sans-serif;
+    font-family: "Raleway", sans-serif;
+    font-weight: 300;
     text-transform: lowercase;
+    letter-spacing: 0.01em;
   }
 
   h1,
@@ -109,9 +111,10 @@
   h4,
   h5,
   h6 {
-    font-family: "Lora", serif;
-    font-weight: 400;
+    font-family: "Cormorant", serif;
+    font-weight: 300;
     text-transform: lowercase;
+    letter-spacing: 0.02em;
   }
 }
 
