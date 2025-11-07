@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import Icon from '@/components/ui/icon';
+import Shop from './Shop';
 
 interface TimeLeft {
   days: number;
@@ -9,7 +10,7 @@ interface TimeLeft {
 }
 
 export default function ComingSoon() {
-  const DEV_MODE = false;
+  const DEV_MODE = true;
   const launchDate = new Date('2025-12-01T12:00:00+03:00');
   
   const calculateTimeLeft = (): TimeLeft => {
@@ -59,7 +60,7 @@ export default function ComingSoon() {
                      timeLeft.minutes === 0 && timeLeft.seconds === 0;
 
   if (isLaunched) {
-    return null;
+    return <Shop />;
   }
 
   const handleFortuneCookieClick = () => {
