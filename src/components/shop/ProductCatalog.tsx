@@ -1,4 +1,5 @@
 import { Product } from './types';
+import Icon from '@/components/ui/icon';
 
 interface ProductCatalogProps {
   products: Product[];
@@ -65,10 +66,11 @@ export default function ProductCatalog({
                       e.stopPropagation();
                       addToCart(product);
                     }}
-                    className="w-7 h-7 rounded-full bg-primary/10 hover:bg-primary/20 flex items-center justify-center transition-all hover:scale-110 text-primary text-lg font-light"
+                    className="px-3 py-1.5 rounded-full bg-primary/10 hover:bg-primary/20 flex items-center gap-1 transition-all hover:scale-105 text-primary font-light"
                     aria-label="Добавить в корзину"
                   >
-                    +
+                    <Icon name="ShoppingBag" size={14} strokeWidth={1.5} />
+                    <span className="text-sm">+</span>
                   </button>
                 </div>
               </div>
