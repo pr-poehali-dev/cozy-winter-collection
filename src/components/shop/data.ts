@@ -68,7 +68,7 @@ export const products: Product[] = [
     description: 'подарочный набор с любимыми вещами',
     price: 3500,
     category: 'наборы',
-    image: 'https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/files/7e7dc726-eab3-4d52-bd5b-90a6ed922e91.jpg',
+    image: 'https://cdn.poehali.dev/files/031f61f1-ffb6-48da-889e-8ff29b154541.png',
     badge: 'limited'
   }
 ];
