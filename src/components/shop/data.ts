@@ -4,20 +4,20 @@ export const heroSlides: HeroSlide[] = [
   {
     id: 1,
     image: 'https://cdn.poehali.dev/files/14a74df9-0c9e-49aa-b649-04c064eb375a.png',
-    title: 'с любовью упаковываем каждый заказ',
-    subtitle: 'и будем очень рады увидеть ваш отзыв'
+    title: 'мягкие чепчики из мохера',
+    subtitle: 'тепло и нежность для твоих самых уютных моментов'
   },
   {
     id: 2,
     image: 'https://cdn.poehali.dev/files/031f61f1-ffb6-48da-889e-8ff29b154541.png',
-    title: 'всё переплетено',
-    subtitle: 'вы лучшие, люблю'
+    title: 'подарочные боксы с душой',
+    subtitle: 'каждый заказ упаковываю с любовью и маленькой магией'
   },
   {
     id: 3,
     image: 'https://cdn.poehali.dev/files/d036e4b3-8f61-430e-8dbd-ced3ec4b5dee.png',
-    title: 'вещи с душой',
-    subtitle: 'мир тебя оберегает'
+    title: 'грибочки-подвесы ручной работы',
+    subtitle: 'уютные детали для твоего пространства'
   }
 ];
 
