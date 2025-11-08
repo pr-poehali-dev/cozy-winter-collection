@@ -88,7 +88,7 @@ export default function Header({
                 )}
               </button>
             </SheetTrigger>
-          <SheetContent className="w-full sm:max-w-lg">
+            <SheetContent className="w-full sm:max-w-lg">
             <SheetHeader>
               <SheetTitle className="text-2xl font-light text-primary">корзина</SheetTitle>
             </SheetHeader>
@@ -147,8 +147,8 @@ export default function Header({
                 </>
               )}
             </div>
-          </SheetContent>
-        </Sheet>
+            </SheetContent>
+          </Sheet>
         </div>
       </div>
     </header>
