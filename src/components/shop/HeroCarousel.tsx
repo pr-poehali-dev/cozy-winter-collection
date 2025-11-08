@@ -9,7 +9,7 @@ interface HeroCarouselProps {
 
 export default function HeroCarousel({ slides, currentSlide, setCurrentSlide }: HeroCarouselProps) {
   return (
-    <section className="relative min-h-screen overflow-hidden bg-gradient-to-br from-white via-orange-50/30 to-amber-50/40">
+    <section className="relative h-[70vh] md:h-[75vh] overflow-hidden bg-gradient-to-br from-white via-orange-50/30 to-amber-50/40">
       {slides.map((slide, index) => (
         <div
           key={slide.id}
@@ -17,7 +17,7 @@ export default function HeroCarousel({ slides, currentSlide, setCurrentSlide }: 
             index === currentSlide ? 'opacity-100' : 'opacity-0'
           }`}
         >
-          <div className="relative w-full h-screen">
+          <div className="relative w-full h-full">
             <img
               src={slide.image}
               alt={slide.title}
