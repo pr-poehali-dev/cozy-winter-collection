@@ -3,7 +3,7 @@ import { Product, HeroSlide } from './types';
 export const heroSlides: HeroSlide[] = [
   {
     id: 1,
-    image: 'https://cdn.poehali.dev/files/14a74df9-0c9e-49aa-b649-04c064eb375a.png',
+    image: 'https://cdn.poehali.dev/files/f9fe8956-e4b2-4d08-b2fc-0195aa240b23.png',
     title: 'вещи с душой и теплом',
     subtitle: 'каждая создана вручную, чтобы стать частью твоей истории',
     buttonText: 'посмотреть коллекцию',
