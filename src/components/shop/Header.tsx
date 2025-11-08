@@ -149,6 +149,7 @@ export default function Header({
             </div>
           </SheetContent>
         </Sheet>
+        </div>
       </div>
     </header>
   );
