@@ -4,7 +4,7 @@ interface DeliveryProps {
 
 export default function Delivery({ onCheckoutClick }: DeliveryProps) {
   return (
-    <section className="py-16 px-6 md:px-8 bg-gradient-to-br from-orange-50/30 to-amber-50/30">
+    <section id="delivery" className="py-16 px-6 md:px-8 bg-gradient-to-br from-orange-50/30 to-amber-50/30">
       <div className="max-w-3xl mx-auto text-center">
         <h2 className="text-3xl md:text-4xl font-light text-primary mb-8">о доставке</h2>
         <div className="space-y-4 text-muted-foreground leading-relaxed font-light text-base">

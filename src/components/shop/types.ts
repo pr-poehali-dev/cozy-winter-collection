@@ -17,4 +17,6 @@ export interface HeroSlide {
   image: string;
   title: string;
   subtitle: string;
+  buttonText: string;
+  buttonAction: 'catalog' | 'delivery' | 'reviews';
 }

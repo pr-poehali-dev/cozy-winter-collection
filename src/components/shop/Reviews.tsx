@@ -2,7 +2,7 @@ import Icon from '@/components/ui/icon';
 
 export default function Reviews() {
   return (
-    <section className="py-16 px-6 md:px-8 bg-white">
+    <section id="reviews" className="py-16 px-6 md:px-8 bg-white">
       <div className="max-w-6xl mx-auto">
         <h2 className="text-3xl md:text-4xl font-light text-primary text-center mb-3">отзывы</h2>
         <p className="text-center text-muted-foreground mb-12 font-light">что говорят те, кто уже хранит мои вещи</p>
