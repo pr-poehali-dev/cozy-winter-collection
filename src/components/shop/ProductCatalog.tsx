@@ -65,10 +65,10 @@ export default function ProductCatalog({
                       e.stopPropagation();
                       addToCart(product);
                     }}
-                    className="text-xl hover:scale-110 transition-transform"
+                    className="w-7 h-7 rounded-full bg-primary/10 hover:bg-primary/20 flex items-center justify-center transition-all hover:scale-110 text-primary text-lg font-light"
                     aria-label="Добавить в корзину"
                   >
-                    🛒
+                    +
                   </button>
                 </div>
               </div>
