@@ -26,21 +26,21 @@ export default function HeroCarousel({ slides, currentSlide, setCurrentSlide }: 
             <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/10 to-black/30"></div>
             
             <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 z-10">
-              <div className="max-w-4xl space-y-6">
-                <h2 className="text-4xl md:text-6xl lg:text-7xl font-light text-white leading-tight">
+              <div className="max-w-xl space-y-4">
+                <h2 className="text-2xl md:text-3xl lg:text-4xl font-light text-white leading-relaxed tracking-wide">
                   {slide.title}
                 </h2>
-                <p className="text-lg md:text-xl text-white/90 leading-relaxed font-light">
+                <p className="text-sm md:text-base text-white/90 leading-relaxed font-light tracking-wide">
                   {slide.subtitle}
                 </p>
                 
                 <button
-                  className="mt-8 rounded-full px-10 py-3 text-sm bg-white/90 text-primary hover:bg-white transition-all font-light"
+                  className="mt-6 rounded-full px-8 py-2.5 text-xs md:text-sm bg-white/90 text-primary hover:bg-white transition-all font-light tracking-wide"
                   onClick={() => {
                     document.getElementById('catalog')?.scrollIntoView({ behavior: 'smooth' });
                   }}
                 >
-                  посмотреть коллекцию
+                  к подборке
                 </button>
               </div>
             </div>
