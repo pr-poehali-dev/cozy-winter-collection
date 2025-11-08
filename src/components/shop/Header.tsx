@@ -25,6 +25,19 @@ export default function Header({
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-border">
       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
         <h1 className="text-2xl font-light text-primary tracking-wide">azaluk</h1>
+        
+        <nav className="hidden md:flex items-center gap-8">
+          <a href="#about" className="text-sm font-light text-primary hover:text-muted-foreground transition-colors">
+            о нас
+          </a>
+          <a href="#delivery" className="text-sm font-light text-primary hover:text-muted-foreground transition-colors">
+            оплата и доставка
+          </a>
+          <a href="#contacts" className="text-sm font-light text-primary hover:text-muted-foreground transition-colors">
+            контакты
+          </a>
+        </nav>
+        
         <Sheet open={isCartOpen} onOpenChange={setIsCartOpen}>
           <SheetTrigger asChild>
             <button className="relative p-2 hover:bg-secondary rounded-lg transition-colors">
