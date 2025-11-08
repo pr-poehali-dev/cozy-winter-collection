@@ -61,5 +61,14 @@ export const products: Product[] = [
     price: 1200,
     category: 'украшения',
     image: 'https://cdn.poehali.dev/files/09835741-0a46-4a66-a784-75b67bd230fa.png'
+  },
+  {
+    id: 6,
+    name: 'б о к с . . . 🎁 { сюрприз от azaluk }',
+    description: 'подарочный набор с любимыми вещами',
+    price: 3500,
+    category: 'наборы',
+    image: 'https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/files/7e7dc726-eab3-4d52-bd5b-90a6ed922e91.jpg',
+    badge: 'limited'
   }
 ];
