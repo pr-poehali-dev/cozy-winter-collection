@@ -37,10 +37,12 @@ export default function HeroCarousel({ slides, currentSlide, setCurrentSlide }: 
                 <button
                   className="mt-6 rounded-full px-8 py-2.5 text-xs md:text-sm bg-white/90 text-primary hover:bg-white transition-all font-light tracking-wide"
                   onClick={() => {
-                    document.getElementById('catalog')?.scrollIntoView({ behavior: 'smooth' });
+                    const targetId = slide.buttonAction === 'catalog' ? 'catalog' : 
+                                    slide.buttonAction === 'delivery' ? 'delivery' : 'reviews';
+                    document.getElementById(targetId)?.scrollIntoView({ behavior: 'smooth' });
                   }}
                 >
-                  к подборке
+                  {slide.buttonText}
                 </button>
               </div>
             </div>
