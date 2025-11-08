@@ -1,4 +1,3 @@
-import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
 import { HeroSlide } from './types';
 
@@ -10,7 +9,7 @@ interface HeroCarouselProps {
 
 export default function HeroCarousel({ slides, currentSlide, setCurrentSlide }: HeroCarouselProps) {
   return (
-    <section className="relative min-h-screen overflow-hidden">
+    <section className="relative min-h-screen overflow-hidden bg-gradient-to-br from-white via-orange-50/30 to-amber-50/40">
       {slides.map((slide, index) => (
         <div
           key={slide.id}
@@ -24,26 +23,25 @@ export default function HeroCarousel({ slides, currentSlide, setCurrentSlide }: 
               alt={slide.title}
               className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/50"></div>
+            <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/10 to-black/30"></div>
             
             <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 z-10">
-              <div className="max-w-4xl space-y-6 animate-fade-in">
-                <h2 className="text-5xl md:text-7xl lg:text-8xl font-light text-white leading-tight">
+              <div className="max-w-4xl space-y-6">
+                <h2 className="text-4xl md:text-6xl lg:text-7xl font-light text-white leading-tight">
                   {slide.title}
                 </h2>
-                <p className="text-xl md:text-2xl text-white/90 leading-relaxed">
+                <p className="text-lg md:text-xl text-white/90 leading-relaxed font-light">
                   {slide.subtitle}
                 </p>
                 
-                <Button
-                  size="lg"
-                  className="mt-8 rounded-full px-10 py-6 text-base bg-white/90 text-primary hover:bg-white hover:scale-105 transition-transform"
+                <button
+                  className="mt-8 rounded-full px-10 py-3 text-sm bg-white/90 text-primary hover:bg-white transition-all font-light"
                   onClick={() => {
                     document.getElementById('catalog')?.scrollIntoView({ behavior: 'smooth' });
                   }}
                 >
-                  войти в лавку
-                </Button>
+                  посмотреть коллекцию
+                </button>
               </div>
             </div>
           </div>

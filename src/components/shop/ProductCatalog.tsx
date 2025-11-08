@@ -1,7 +1,3 @@
-import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import Icon from '@/components/ui/icon';
 import { Product } from './types';
 
 interface ProductCatalogProps {
@@ -18,7 +14,6 @@ export default function ProductCatalog({
   categories,
   selectedCategory,
   setSelectedCategory,
-  onProductClick,
   addToCart
 }: ProductCatalogProps) {
   const filteredProducts = selectedCategory === 'все' 
@@ -26,61 +21,58 @@ export default function ProductCatalog({
     : products.filter(p => p.category === selectedCategory);
 
   return (
-    <section id="catalog" className="py-16 px-4 paper-texture border-t border-border">
-      <div className="container mx-auto">
-        <div className="flex flex-wrap gap-2 justify-center mb-12 animate-fade-in">
+    <section id="catalog" className="py-16 px-6 md:px-8 bg-gradient-to-br from-white via-orange-50/30 to-amber-50/40">
+      <div className="max-w-7xl mx-auto">
+        <div className="flex flex-wrap gap-3 justify-center mb-12">
           {categories.map(category => (
-            <Button
+            <button
               key={category}
-              variant={selectedCategory === category ? 'default' : 'outline'}
               onClick={() => setSelectedCategory(category)}
-              className="rounded-full"
+              className={`px-8 py-2.5 rounded-full text-sm font-light transition-all ${
+                selectedCategory === category
+                  ? 'bg-primary text-white'
+                  : 'bg-white text-primary hover:bg-secondary border border-border'
+              }`}
             >
               {category}
-            </Button>
+            </button>
           ))}
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-          {filteredProducts.map((product, index) => (
-            <Card 
-              key={product.id} 
-              className="group overflow-hidden border-0 vintage-card hover:candle-glow transition-all duration-300 animate-scale-in cursor-pointer"
-              style={{ animationDelay: `${index * 100}ms` }}
-              onClick={() => onProductClick(product)}
-            >
-              <div className="overflow-hidden relative">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {filteredProducts.map((product) => (
+            <div key={product.id} className="group">
+              <div className="aspect-square overflow-hidden rounded-2xl mb-4 bg-white shadow-sm border border-border">
                 <img 
                   src={product.image} 
                   alt={product.name}
-                  className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               </div>
-              <CardContent className="p-6 bg-white/80">
-                <Badge variant="secondary" className="mb-3 rounded-full">
-                  {product.category}
-                </Badge>
-                <h3 className="text-xl mb-2">{product.name}</h3>
-                <p className="text-muted-foreground text-sm mb-4 leading-relaxed">
-                  {product.description}
-                </p>
-                <div className="flex items-center justify-between">
-                  <span className="text-lg font-medium">{product.price} ₽</span>
-                  <Button 
-                    size="sm" 
-                    className="rounded-full hover:candle-glow"
+              <div className="text-center space-y-2">
+                <h3 className="text-base font-light text-primary leading-relaxed px-4">
+                  {product.name}
+                </h3>
+                {product.badge && (
+                  <p className="text-xs text-muted-foreground italic">{product.badge}</p>
+                )}
+                <div className="flex items-center justify-center gap-3">
+                  <p className="text-base font-light text-primary">
+                    {product.price.toLocaleString('ru-RU')} р.
+                  </p>
+                  <button
                     onClick={(e) => {
                       e.stopPropagation();
                       addToCart(product);
                     }}
+                    className="text-xl hover:scale-110 transition-transform"
+                    aria-label="Добавить в корзину"
                   >
-                    <Icon name="Plus" size={16} className="mr-1" />
-                    в корзину
-                  </Button>
+                    🛒
+                  </button>
                 </div>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
           ))}
         </div>
       </div>

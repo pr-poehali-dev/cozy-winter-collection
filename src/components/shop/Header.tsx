@@ -1,4 +1,3 @@
-import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import Icon from '@/components/ui/icon';
 import { CartItem } from './types';
@@ -23,27 +22,27 @@ export default function Header({
   cartCount
 }: HeaderProps) {
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 vintage-card border-b border-border">
-      <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-        <h1 className="text-2xl tracking-wide mystical-text">azaluk</h1>
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-border">
+      <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+        <h1 className="text-2xl font-light text-primary tracking-wide">azaluk</h1>
         <Sheet open={isCartOpen} onOpenChange={setIsCartOpen}>
           <SheetTrigger asChild>
-            <Button variant="ghost" size="icon" className="relative">
-              <Icon name="ShoppingBag" size={20} />
+            <button className="relative p-2 hover:bg-secondary rounded-lg transition-colors">
+              <Icon name="ShoppingBag" size={20} className="text-primary" strokeWidth={1.5} />
               {cartCount > 0 && (
-                <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-xs w-5 h-5 rounded-full flex items-center justify-center">
+                <span className="absolute -top-1 -right-1 bg-primary text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-light">
                   {cartCount}
                 </span>
               )}
-            </Button>
+            </button>
           </SheetTrigger>
           <SheetContent className="w-full sm:max-w-lg">
             <SheetHeader>
-              <SheetTitle className="text-2xl mystical-text">корзина</SheetTitle>
+              <SheetTitle className="text-2xl font-light text-primary">корзина</SheetTitle>
             </SheetHeader>
             <div className="mt-8 flex flex-col h-full">
               {cart.length === 0 ? (
-                <div className="flex-1 flex items-center justify-center text-muted-foreground">
+                <div className="flex-1 flex items-center justify-center text-muted-foreground font-light">
                   <p>корзина пуста</p>
                 </div>
               ) : (
@@ -57,47 +56,41 @@ export default function Header({
                           className="w-20 h-20 object-cover rounded-lg"
                         />
                         <div className="flex-1">
-                          <h3 className="font-medium text-sm">{item.name}</h3>
-                          <p className="text-sm text-muted-foreground mt-1">{item.price} ₽</p>
+                          <h3 className="font-light text-sm text-primary">{item.name}</h3>
+                          <p className="text-sm text-muted-foreground mt-1 font-light">{item.price.toLocaleString('ru-RU')} р.</p>
                           <div className="flex items-center gap-2 mt-2">
-                            <Button 
-                              variant="outline" 
-                              size="icon"
-                              className="h-7 w-7"
+                            <button 
+                              className="h-7 w-7 border border-border rounded hover:bg-secondary transition-colors flex items-center justify-center"
                               onClick={() => updateQuantity(item.id, -1)}
                             >
                               <Icon name="Minus" size={12} />
-                            </Button>
-                            <span className="text-sm w-8 text-center">{item.quantity}</span>
-                            <Button 
-                              variant="outline" 
-                              size="icon"
-                              className="h-7 w-7"
+                            </button>
+                            <span className="text-sm w-8 text-center font-light">{item.quantity}</span>
+                            <button 
+                              className="h-7 w-7 border border-border rounded hover:bg-secondary transition-colors flex items-center justify-center"
                               onClick={() => updateQuantity(item.id, 1)}
                             >
                               <Icon name="Plus" size={12} />
-                            </Button>
-                            <Button 
-                              variant="ghost" 
-                              size="icon"
-                              className="h-7 w-7 ml-auto"
+                            </button>
+                            <button 
+                              className="h-7 w-7 ml-auto hover:bg-secondary rounded transition-colors flex items-center justify-center"
                               onClick={() => removeFromCart(item.id)}
                             >
                               <Icon name="Trash2" size={14} />
-                            </Button>
+                            </button>
                           </div>
                         </div>
                       </div>
                     ))}
                   </div>
                   <div className="pt-6 border-t border-border space-y-4">
-                    <div className="flex justify-between items-center text-lg">
-                      <span>итого:</span>
-                      <span className="font-medium">{cartTotal} ₽</span>
+                    <div className="flex justify-between items-center text-lg font-light">
+                      <span className="text-muted-foreground">итого:</span>
+                      <span className="text-primary">{cartTotal.toLocaleString('ru-RU')} р.</span>
                     </div>
-                    <Button className="w-full candle-glow" size="lg">
-                      завернуть и отправить
-                    </Button>
+                    <button className="w-full py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors text-sm font-light">
+                      оформить заказ
+                    </button>
                   </div>
                 </>
               )}
