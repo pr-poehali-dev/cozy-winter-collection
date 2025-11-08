@@ -46,7 +46,7 @@ export default function Reviews() {
             className="inline-flex items-center gap-2 text-primary hover:text-muted-foreground transition-colors font-light text-sm"
           >
             <Icon name="Send" size={16} strokeWidth={1.5} />
-            <span>читать все отзывы в телеграме</span>
+            <span>читать все отзывы в телеграме 💗</span>
           </a>
         </div>
       </div>
