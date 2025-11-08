@@ -13,55 +13,55 @@ interface Product {
 const products: Product[] = [
   {
     id: 1,
-    name: 'вязаный чепчик',
-    category: 'для зимней прогулки',
-    price: 2500,
+    name: 'гномские 🌸 ,, просто начни',
+    category: 'стикеры',
+    price: 250,
     image: 'https://images.unsplash.com/photo-1544816155-12df9643f363?w=800&q=80',
-    description: 'мягкий вязаный чепчик из шерсти мериноса. обнимает голову как облако. идеален для морозных прогулок и создаёт тот самый уютный образ.'
+    description: ''
   },
   {
     id: 2,
-    name: 'шёлковая косынка',
-    category: 'для зимней прогулки',
-    price: 3200,
+    name: 'стикер на карту 🍵 ;; ˚слушай своё сердце',
+    category: 'стикеры',
+    price: 200,
     image: 'https://images.unsplash.com/photo-1601924994987-69e26d50dc26?w=800&q=80',
-    description: 'нежная шёлковая косынка с ручной подшивкой краёв. создаёт образ из старых фотографий. каждая нить хранит тепло рук мастера.'
+    description: ''
   },
   {
     id: 3,
-    name: 'подвес для помады',
-    category: 'для зимней прогулки',
-    price: 800,
+    name: 'стикер на карту ::🍀🐸 ты моя умница!',
+    category: 'стикеры',
+    price: 200,
     image: 'https://images.unsplash.com/photo-1513885535751-8b9238bd345a?w=800&q=80',
-    description: 'крошечный подвес из хлопка с латунной фурнитурой. помада всегда под рукой, а руки свободны для чашки глинтвейна.'
+    description: ''
   },
   {
     id: 4,
-    name: 'бумажная гирлянда',
-    category: 'для дома',
-    price: 1500,
+    name: 'с т и к е р ы 💖 { 🌿 } micro aura',
+    category: 'наборы',
+    price: 60,
     image: 'https://images.unsplash.com/photo-1512389142860-9c449e58a543?w=800&q=80',
-    description: 'воздушная гирлянда из бумаги с винтажными узорами. превращает любую комнату в место из рождественских историй.'
+    description: ''
   },
   {
     id: 5,
-    name: 'световая гирлянда',
-    category: 'для дома',
-    price: 2200,
+    name: 'с т и к е р ы 🖤::💗 smile',
+    category: 'наборы',
+    price: 120,
     image: 'https://images.unsplash.com/photo-1482575832494-771f74bf6857?w=800&q=80',
-    description: 'тёплый свет маленьких лампочек создаёт атмосферу зимнего вечера. работает от сети и согревает не только светом.'
+    description: ''
   },
   {
     id: 6,
-    name: 'зимний набор',
-    category: 'наборы и боксы',
-    price: 5500,
+    name: 'с т и к е р ы 🐸 ::💕 жаби',
+    category: 'наборы',
+    price: 150,
     image: 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=800&q=80',
-    description: 'чепчик + косынка + подвес в красивой коробке. готовый подарок для того, кто дорог. каждый элемент упакован с любовью.'
+    description: ''
   }
 ];
 
-const categories = ['все', 'для дома', 'для зимней прогулки', 'наборы и боксы'];
+const categories = ['все', 'стикеры', 'наборы'];
 
 export default function Shop() {
   const [selectedCategory, setSelectedCategory] = useState('все');
@@ -129,38 +129,26 @@ export default function Shop() {
               ))}
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
               {filteredProducts.map((product) => (
                 <div 
                   key={product.id} 
-                  className="bg-white rounded-xl overflow-hidden border border-border hover:shadow-lg transition-all duration-300 group"
+                  className="group"
                 >
-                  <div className="aspect-[4/5] overflow-hidden bg-secondary">
+                  <div className="aspect-[3/4] overflow-hidden bg-secondary mb-4">
                     <img 
                       src={product.image}
                       alt={product.name}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                      className="w-full h-full object-cover"
                     />
                   </div>
-                  <div className="p-6 md:p-7 space-y-3">
-                    <p className="text-xs md:text-sm text-muted-foreground tracking-wider uppercase font-light">
-                      {product.category}
-                    </p>
-                    <h4 className="text-2xl md:text-3xl font-serif text-primary tracking-wide">
+                  <div className="space-y-2 text-center">
+                    <h4 className="text-base md:text-lg font-light text-primary leading-relaxed">
                       {product.name}
                     </h4>
-                    <p className="text-sm md:text-base text-muted-foreground leading-relaxed font-light line-clamp-3">
-                      {product.description}
+                    <p className="text-base md:text-lg font-light text-primary">
+                      {product.price} р.
                     </p>
-                    <div className="flex items-center justify-between pt-5">
-                      <span className="text-2xl md:text-3xl font-light text-primary tracking-wide">
-                        {product.price} ₽
-                      </span>
-                      <button className="flex items-center gap-2.5 px-6 py-2.5 bg-primary text-white rounded-full hover:bg-primary/90 transition-colors">
-                        <Icon name="ShoppingBag" size={16} strokeWidth={1.5} />
-                        <span className="text-sm font-light tracking-wide">купить</span>
-                      </button>
-                    </div>
                   </div>
                 </div>
               ))}
