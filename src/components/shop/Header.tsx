@@ -1,6 +1,7 @@
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import Icon from '@/components/ui/icon';
 import { CartItem } from './types';
+import { useState } from 'react';
 
 interface HeaderProps {
   cart: CartItem[];
@@ -21,34 +22,72 @@ export default function Header({
   cartTotal,
   cartCount
 }: HeaderProps) {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-border">
       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
         <h1 className="text-2xl font-light text-primary tracking-wide">azaluk</h1>
         
-        <nav className="hidden md:flex items-center gap-8">
-          <a href="#about" className="text-sm font-light text-primary hover:text-muted-foreground transition-colors">
-            о нас
-          </a>
-          <a href="#delivery" className="text-sm font-light text-primary hover:text-muted-foreground transition-colors">
-            оплата и доставка
-          </a>
-          <a href="#contacts" className="text-sm font-light text-primary hover:text-muted-foreground transition-colors">
-            контакты
-          </a>
-        </nav>
-        
-        <Sheet open={isCartOpen} onOpenChange={setIsCartOpen}>
-          <SheetTrigger asChild>
-            <button className="relative p-2 hover:bg-secondary rounded-lg transition-colors">
-              <Icon name="ShoppingBag" size={20} className="text-primary" strokeWidth={1.5} />
-              {cartCount > 0 && (
-                <span className="absolute -top-1 -right-1 bg-primary text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-light">
-                  {cartCount}
-                </span>
-              )}
-            </button>
-          </SheetTrigger>
+        <div className="flex items-center gap-6">
+          <nav className="hidden md:flex items-center gap-6">
+            <a href="#about" className="text-sm font-light text-primary hover:text-muted-foreground transition-colors">
+              о нас
+            </a>
+            <a href="#delivery" className="text-sm font-light text-primary hover:text-muted-foreground transition-colors">
+              оплата и доставка
+            </a>
+            <a href="#contacts" className="text-sm font-light text-primary hover:text-muted-foreground transition-colors">
+              контакты
+            </a>
+          </nav>
+          
+          <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
+            <SheetTrigger asChild>
+              <button className="md:hidden p-2 hover:bg-secondary rounded-lg transition-colors">
+                <Icon name="Menu" size={20} className="text-primary" strokeWidth={1.5} />
+              </button>
+            </SheetTrigger>
+            <SheetContent side="left" className="w-64">
+              <SheetHeader>
+                <SheetTitle className="text-xl font-light text-primary">меню</SheetTitle>
+              </SheetHeader>
+              <nav className="mt-8 flex flex-col gap-6">
+                <a 
+                  href="#about" 
+                  className="text-sm font-light text-primary hover:text-muted-foreground transition-colors"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  о нас
+                </a>
+                <a 
+                  href="#delivery" 
+                  className="text-sm font-light text-primary hover:text-muted-foreground transition-colors"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  оплата и доставка
+                </a>
+                <a 
+                  href="#contacts" 
+                  className="text-sm font-light text-primary hover:text-muted-foreground transition-colors"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  контакты
+                </a>
+              </nav>
+            </SheetContent>
+          </Sheet>
+          
+          <Sheet open={isCartOpen} onOpenChange={setIsCartOpen}>
+            <SheetTrigger asChild>
+              <button className="relative p-2 hover:bg-secondary rounded-lg transition-colors">
+                <Icon name="ShoppingBag" size={20} className="text-primary" strokeWidth={1.5} />
+                {cartCount > 0 && (
+                  <span className="absolute -top-1 -right-1 bg-primary text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-light">
+                    {cartCount}
+                  </span>
+                )}
+              </button>
+            </SheetTrigger>
           <SheetContent className="w-full sm:max-w-lg">
             <SheetHeader>
               <SheetTitle className="text-2xl font-light text-primary">корзина</SheetTitle>
