@@ -24,52 +24,42 @@ export const heroSlides: HeroSlide[] = [
 export const products: Product[] = [
   {
     id: 1,
-    name: 'знакомство с лесом \' 💗 + 🎄 \'',
-    description: 'набор стикеров с зимней тематикой',
-    price: 2780,
-    category: 'наборы и боксы',
-    image: 'https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/files/c94cf0e0-cf07-4176-8582-b130f2003e38.jpg'
+    name: 'п о д в е с ы . . . 🍄 { чёрные }',
+    description: 'вязаные грибочки-подвесы ручной работы',
+    price: 1200,
+    category: 'украшения',
+    image: 'https://cdn.poehali.dev/files/d036e4b3-8f61-430e-8dbd-ced3ec4b5dee.png'
   },
   {
     id: 2,
-    name: 'gacha box 💗🌿🔑',
-    description: 'загадочный бокс с сюрпризом',
-    price: 777,
-    category: 'наборы и боксы',
-    image: 'https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/files/c3883d55-8801-4fdc-aef9-82b39a393bf6.jpg',
-    badge: 'limited'
+    name: 'ч е п ч и к 🤍 :: молочный',
+    description: 'мягкий вязаный чепчик из мохера',
+    price: 2400,
+    category: 'для тебя',
+    image: 'https://cdn.poehali.dev/files/14a74df9-0c9e-49aa-b649-04c064eb375a.png'
   },
   {
     id: 3,
-    name: 'с в е ч а { 🫧🍡 } pink matcha',
-    description: 'ароматная свеча с нотами матча',
-    price: 3777,
-    category: 'для дома',
-    image: 'https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/files/546e0ba9-0bc8-4a91-a941-a0540466f7db.jpg',
-    badge: 'limited'
+    name: 'ч е п ч и к 💗 :: белоснежный',
+    description: 'нежный чепчик с завязками',
+    price: 2400,
+    category: 'для тебя',
+    image: 'https://cdn.poehali.dev/files/6e5ab0ac-85f9-4eeb-828a-5d17c7181d15.png'
   },
   {
     id: 4,
-    name: 'стикеры 💗 { 🌸 } micro hearts',
-    description: 'маленькие сердечки для украшения',
-    price: 60,
-    category: 'для дома',
-    image: 'https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/files/00ba75c0-9906-4158-be80-2ae3f819fdfe.jpg'
+    name: 'ч е п ч и к 🍷 :: марсала',
+    description: 'тёплый чепчик винного оттенка',
+    price: 2400,
+    category: 'для тебя',
+    image: 'https://cdn.poehali.dev/files/f9fe8956-e4b2-4d08-b2fc-0195aa240b23.png'
   },
   {
     id: 5,
-    name: 'стикеры 🖤::💗 gradient vibes',
-    description: 'градиентные наклейки для настроения',
-    price: 120,
-    category: 'для дома',
-    image: 'https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/files/76e1bef3-65b2-446c-a55f-b98fbd010e7a.jpg'
-  },
-  {
-    id: 6,
-    name: 'мечтай 💫 :: дневник желаний',
-    description: 'блокнот для самых сокровенных мыслей',
-    price: 890,
-    category: 'для дома',
-    image: 'https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/files/52ca4309-37b3-4058-bccc-94a511e49fd2.jpg'
+    name: 'п о д в е с . . . 🍄 { красный мухомор }',
+    description: 'яркий мухомор-подвес с белыми точками',
+    price: 1200,
+    category: 'украшения',
+    image: 'https://cdn.poehali.dev/files/09835741-0a46-4a66-a784-75b67bd230fa.png'
   }
 ];
