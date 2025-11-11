@@ -44,14 +44,7 @@ export const products: Product[] = [
     category: 'для тебя',
     image: 'https://cdn.poehali.dev/files/14a74df9-0c9e-49aa-b649-04c064eb375a.png'
   },
-  {
-    id: 3,
-    name: 'г р и б о ч е к 🍄 :: лесной дар',
-    description: 'вязаный грибочек-подвес ручной работы',
-    price: 1200,
-    category: 'украшения',
-    image: 'https://cdn.poehali.dev/files/09835741-0a46-4a66-a784-75b67bd230fa.png'
-  },
+
   {
     id: 4,
     name: 'г р и б о ч е к 🌑 :: сладкая тьма',
