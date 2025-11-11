@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Icon from "@/components/ui/icon";
 import Shop from "./Shop";
 import { Button } from "@/components/ui/button";
+import Footer from "./shop/Footer";
 
 interface TimeLeft {
   days: number;
@@ -310,17 +311,9 @@ export default function ComingSoon() {
           </a>
           <p className="text-xs text-muted-foreground/60">анонсы, закулисье создания и немного волшебства</p>
         </div>
-
-        <div className="space-y-4">
-          <p className="text-sm md:text-base text-muted-foreground">
-            встретимся здесь в первый день зимы! ❄️
-          </p>
-          <p className="text-sm md:text-base text-muted-foreground/70 max-w-md mx-auto leading-relaxed">
-            создаём вручную, с любовью и заботой. каждая вещь хранит тепло наших
-            рук и немного волшебства ✨
-          </p>
-        </div>
       </div>
+      
+      <Footer />
     </div>
   );
 }
