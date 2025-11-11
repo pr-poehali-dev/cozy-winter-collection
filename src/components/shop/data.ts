@@ -33,7 +33,7 @@ export const products: Product[] = [
     name: 'ч е п ч и к 🍷 :: брусника',
     description: 'тёплый чепчик брусничного оттенка',
     price: 2400,
-    category: 'для тебя',
+    category: 'для зимней прогулки',
     image: 'https://cdn.poehali.dev/files/f9fe8956-e4b2-4d08-b2fc-0195aa240b23.png'
   },
   {
@@ -41,7 +41,7 @@ export const products: Product[] = [
     name: 'ч е п ч и к 🤍 :: молочный',
     description: 'мягкий вязаный чепчик из мохера',
     price: 2400,
-    category: 'для тебя',
+    category: 'для зимней прогулки',
     image: 'https://cdn.poehali.dev/files/14a74df9-0c9e-49aa-b649-04c064eb375a.png'
   },
   {
@@ -49,7 +49,7 @@ export const products: Product[] = [
     name: 'г р и б о ч е к 🍄 :: лесной дар',
     description: 'вязаный грибочек-подвес ручной работы',
     price: 1200,
-    category: 'украшения',
+    category: 'аксессуары',
     image: 'https://cdn.poehali.dev/files/09835741-0a46-4a66-a784-75b67bd230fa.png'
   },
   {
@@ -57,7 +57,7 @@ export const products: Product[] = [
     name: 'г р и б о ч е к 🌑 :: сладкая тьма',
     description: 'таинственный грибочек тёмного оттенка',
     price: 1200,
-    category: 'украшения',
+    category: 'аксессуары',
     image: 'https://cdn.poehali.dev/files/d036e4b3-8f61-430e-8dbd-ced3ec4b5dee.png'
   },
   {
@@ -65,7 +65,7 @@ export const products: Product[] = [
     name: 'г и р л я н д а 📜 :: тепло дома',
     description: 'бумажная гирлянда для уютной атмосферы',
     price: 800,
-    category: 'декор',
+    category: 'для дома',
     image: 'https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/files/1794d9f6-ef8b-4496-aa0c-4efe25447d5f.jpg'
   },
   {
@@ -73,7 +73,7 @@ export const products: Product[] = [
     name: 'п о д в е с 🌙 :: северная ночь',
     description: 'лунный подвес с волшебным сиянием',
     price: 1000,
-    category: 'украшения',
+    category: 'аксессуары',
     image: 'https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/files/86390635-81cf-43b7-9b09-7593637476e0.jpg'
   },
   {
@@ -81,7 +81,7 @@ export const products: Product[] = [
     name: 'п о д в е с ☀️ :: сияние солнца',
     description: 'солнечный подвес, дарящий тепло',
     price: 1000,
-    category: 'украшения',
+    category: 'аксессуары',
     image: 'https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/files/e7e2da0a-dc78-44e1-bf2b-7e64af6accfe.jpg'
   },
   {
@@ -89,7 +89,7 @@ export const products: Product[] = [
     name: 'б о к с . . . ✨ { сказочное чудо }',
     description: 'подарочный набор с волшебными вещами',
     price: 3500,
-    category: 'наборы',
+    category: 'наборы и боксы',
     image: 'https://cdn.poehali.dev/files/031f61f1-ffb6-48da-889e-8ff29b154541.png',
     badge: 'limited'
   }
