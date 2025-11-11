@@ -223,7 +223,7 @@ export default function ComingSoon() {
           <h1 className="text-3xl md:text-5xl lg:text-6xl font-light text-primary leading-relaxed">
             тропинка
           </h1>
-          <p className="text-base md:text-lg text-muted-foreground my-[3px]">откроется через... 🔮</p>
+          <p className="text-base md:text-lg text-muted-foreground my-[1px]">откроется через... 🔮</p>
 
           <div className="grid grid-cols-4 gap-3 md:gap-6 max-w-lg mx-auto">
             <div className="space-y-2">
