@@ -87,9 +87,9 @@ export default function About() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-12 md:gap-16">
-            <div className="space-y-6">
-              <div className="aspect-[3/4] bg-moss/10 rounded-2xl overflow-hidden">
+          <div className="grid md:grid-cols-2 gap-8 md:gap-12 max-w-3xl mx-auto">
+            <div className="space-y-4">
+              <div className="aspect-[4/3] bg-moss/10 rounded-2xl overflow-hidden">
                 <img 
                   src="https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/files/7f5ea581-628c-4d98-a69f-d7a58fe3ab8d.jpg" 
                   alt="Азалия с ноутбуком и камерой"
@@ -116,8 +116,8 @@ export default function About() {
               </div>
             </div>
 
-            <div className="space-y-6 md:mt-24">
-              <div className="aspect-[3/4] bg-moss/10 rounded-2xl overflow-hidden">
+            <div className="space-y-4 md:mt-16">
+              <div className="aspect-[4/3] bg-moss/10 rounded-2xl overflow-hidden">
                 <img 
                   src="https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/files/98640360-9e4d-42d3-b9f5-808904dfc6e0.jpg" 
                   alt="Вика создает изделия"
