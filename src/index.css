@@ -99,7 +99,7 @@
 
   body {
     @apply text-foreground;
-    background-color: #f5f3f0;
+    background: linear-gradient(to bottom right, white, #fff7ed, #fef3c7);
     font-family: "Raleway", sans-serif;
     font-weight: 300;
     text-transform: lowercase;
