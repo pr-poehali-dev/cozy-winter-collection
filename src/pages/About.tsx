@@ -97,12 +97,12 @@ export default function About() {
                 />
               </div>
               
-              <div className="space-y-4">
+              <div className="space-y-4 relative">
+                <div className="absolute -top-4 -left-4 text-2xl opacity-20">✨</div>
+                <div className="absolute -top-2 -right-6 text-xl opacity-15">📸</div>
                 <h2 className="text-2xl font-light text-moss">привет, я азалия!</h2>
                 <div className="space-y-3 text-moss/70 leading-relaxed">
                   <p>
-                    привет, я азалия!
-                    <br />
                     я придумала этот проект и отвечаю за то, какие изделия будут продаваться в тропинке.
                   </p>
                   <p>
@@ -127,7 +127,7 @@ export default function About() {
                     >
                       телеграм
                     </a>
-                    {' '}каналы, в них делюсь <em>своим</em> мировоззрением, привношу волшебство в повседневность и показываю наши внутренние процессы.
+                    {' '}каналы, в них делюсь своим мировоззрением, привношу волшебство в повседневность и показываю наши внутренние процессы.
                   </p>
                 </div>
               </div>
@@ -142,7 +142,9 @@ export default function About() {
                 />
               </div>
               
-              <div className="space-y-4">
+              <div className="space-y-4 relative">
+                <div className="absolute -top-4 -left-4 text-2xl opacity-20">🧵</div>
+                <div className="absolute -top-2 -right-6 text-xl opacity-15">✂️</div>
                 <h2 className="text-2xl font-light text-moss">а это вика!</h2>
                 <div className="space-y-3 text-moss/70 leading-relaxed">
                   <p>
