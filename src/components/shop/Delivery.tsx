@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 interface DeliveryProps {
   onCheckoutClick: () => void;
 }
@@ -16,7 +18,13 @@ export default function Delivery({ onCheckoutClick }: DeliveryProps) {
             доставка по россии и снг. срок отправки — 3–5 дней.
           </p>
         </div>
-        <div className="flex justify-center mt-8">
+        <div className="flex justify-center gap-4 mt-8 flex-wrap">
+          <Link 
+            to="/delivery"
+            className="rounded-full px-10 py-3 bg-white text-primary border border-primary hover:bg-primary/5 transition-colors text-sm font-light"
+          >
+            подробнее об оплате
+          </Link>
           <button 
             className="rounded-full px-10 py-3 bg-primary text-white hover:bg-primary/90 transition-colors text-sm font-light"
             onClick={onCheckoutClick}

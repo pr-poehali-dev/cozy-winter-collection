@@ -37,9 +37,9 @@ export default function Header({
             <Link to="/about" className="text-sm font-light text-primary hover:text-muted-foreground transition-colors">
               о нас
             </Link>
-            <a href="#delivery" className="text-sm font-light text-primary hover:text-muted-foreground transition-colors">
+            <Link to="/delivery" className="text-sm font-light text-primary hover:text-muted-foreground transition-colors">
               оплата и доставка
-            </a>
+            </Link>
             <a href="#contacts" className="text-sm font-light text-primary hover:text-muted-foreground transition-colors">
               контакты
             </a>
@@ -70,13 +70,13 @@ export default function Header({
                 >
                   о нас
                 </Link>
-                <a 
-                  href="#delivery" 
+                <Link 
+                  to="/delivery" 
                   className="text-sm font-light text-primary hover:text-muted-foreground transition-colors"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   оплата и доставка
-                </a>
+                </Link>
                 <a 
                   href="#contacts" 
                   className="text-sm font-light text-primary hover:text-muted-foreground transition-colors"
