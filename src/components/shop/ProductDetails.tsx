@@ -1,4 +1,4 @@
-import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet';
+import { Sheet, SheetContent } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import Icon from '@/components/ui/icon';
@@ -22,21 +22,34 @@ export default function ProductDetails({ product, onClose, addToCart }: ProductD
   return (
     <Sheet open={!!product} onOpenChange={(open) => !open && onClose()}>
       <SheetContent 
-        side="bottom" 
-        className="h-[90vh] overflow-y-auto bg-gradient-to-br from-orange-50/30 to-amber-50/30 backdrop-blur-sm"
+        side="right" 
+        className="w-full h-full max-w-none overflow-y-auto bg-white p-0"
       >
-        <div className="container mx-auto max-w-5xl py-8">
-          <SheetHeader>
-            <SheetTitle className="text-3xl md:text-4xl font-light text-primary mb-6">{product.name}</SheetTitle>
-          </SheetHeader>
-          
-          <div className="grid md:grid-cols-2 gap-8 mt-6">
-            <div className="space-y-4">
-              <div className="relative overflow-hidden rounded-2xl shadow-lg bg-white/80">
+        <button
+          onClick={onClose}
+          className="fixed top-6 left-6 z-50 p-2 hover:bg-secondary rounded-lg transition-colors"
+          aria-label="Закрыть"
+        >
+          <Icon name="ArrowLeft" size={24} className="text-primary" strokeWidth={1.5} />
+        </button>
+
+        <button
+          onClick={onClose}
+          className="fixed top-6 right-6 z-50 p-2 hover:bg-secondary rounded-lg transition-colors"
+          aria-label="Закрыть"
+        >
+          <Icon name="X" size={24} className="text-primary" strokeWidth={1.5} />
+        </button>
+        
+        <div className="grid lg:grid-cols-2 min-h-screen">
+          {/* Left side - Image */}
+          <div className="relative bg-cream flex items-center justify-center p-8 lg:p-12">
+            <div className="w-full max-w-2xl space-y-6">
+              <div className="relative overflow-hidden rounded-2xl shadow-lg bg-white">
                 <img
                   src={images[currentImageIndex]}
                   alt={product.name}
-                  className="w-full h-[400px] md:h-[500px] object-cover"
+                  className="w-full aspect-square object-cover"
                 />
                 {images.length > 1 && (
                   <>
@@ -57,79 +70,63 @@ export default function ProductDetails({ product, onClose, addToCart }: ProductD
               </div>
               
               {images.length > 1 && (
-                <div className="flex gap-2 justify-center">
-                  {images.map((_, index) => (
+                <div className="flex gap-3 flex-wrap">
+                  {images.map((img, index) => (
                     <button
                       key={index}
                       onClick={() => setCurrentImageIndex(index)}
-                      className={`w-2 h-2 rounded-full transition-all ${
+                      className={`w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden border-2 transition-all ${
                         index === currentImageIndex 
-                          ? 'bg-primary w-8' 
-                          : 'bg-primary/30 hover:bg-primary/50'
+                          ? 'border-primary' 
+                          : 'border-transparent opacity-60 hover:opacity-100'
                       }`}
-                    />
+                    >
+                      <img src={img} alt={`${product.name} ${index + 1}`} className="w-full h-full object-cover" />
+                    </button>
                   ))}
                 </div>
               )}
             </div>
-            
+          </div>
+          
+          {/* Right side - Info */}
+          <div className="p-8 lg:p-12 space-y-8 flex flex-col">
             <div className="space-y-6">
-              <Badge variant="secondary" className="rounded-full text-sm font-light">
-                {product.category}
-              </Badge>
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-light text-primary leading-relaxed">
+                {product.name}
+              </h1>
               
-              <div className="vintage-card p-6 rounded-2xl space-y-4 relative overflow-hidden">
-                <div className="absolute top-4 right-4 text-2xl opacity-20">✨</div>
-                <div className="absolute bottom-4 left-4 text-xl opacity-15">💫</div>
-                
-                <p className="text-base md:text-lg text-muted-foreground leading-relaxed relative z-10">
+              <div className="text-3xl md:text-4xl font-light text-primary">
+                {product.price.toLocaleString('ru-RU')} ₽
+              </div>
+              
+              <Button
+                size="lg"
+                className="w-full md:w-auto px-12 rounded-full text-base py-6 bg-primary hover:bg-primary/90 transition-colors"
+                onClick={() => {
+                  addToCart(product);
+                  onClose();
+                }}
+              >
+                добавить в корзину
+              </Button>
+            </div>
+            
+            <div className="space-y-6 flex-1">
+              <div className="space-y-3">
+                <p className="text-base md:text-lg text-moss/70 leading-relaxed">
                   {storyText}
                 </p>
               </div>
               
-              <div className="pt-6 border-t border-border">
-                <div className="text-3xl md:text-4xl font-light text-primary mb-6">
-                  {product.price.toLocaleString('ru-RU')} ₽
+              {product.composition && (
+                <div className="space-y-3 pt-6 border-t border-border">
+                  <h3 className="text-xl font-light text-primary">состав</h3>
+                  <p className="text-base text-moss/70 leading-relaxed whitespace-pre-line">
+                    {product.composition}
+                  </p>
                 </div>
-                
-                <Button
-                  size="lg"
-                  className="w-full rounded-full text-base py-6 bg-primary hover:bg-primary/90 transition-colors"
-                  onClick={() => {
-                    addToCart(product);
-                    onClose();
-                  }}
-                >
-                  <Icon name="ShoppingBag" size={20} className="mr-2" />
-                  добавить в корзину
-                </Button>
-              </div>
-              
-              <div className="vintage-card p-6 rounded-2xl space-y-4">
-                <div className="flex items-start gap-3">
-                  <div className="text-xl">🎁</div>
-                  <div>
-                    <h4 className="font-light text-primary mb-1">доставка</h4>
-                    <p className="text-sm text-muted-foreground font-light">по россии и снг, 3–5 дней</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-start gap-3">
-                  <div className="text-xl">💗</div>
-                  <div>
-                    <h4 className="font-light text-primary mb-1">ручная работа</h4>
-                    <p className="text-sm text-muted-foreground font-light">создано с душой и вниманием</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-start gap-3">
-                  <div className="text-xl">🌟</div>
-                  <div>
-                    <h4 className="font-light text-primary mb-1">упаковка</h4>
-                    <p className="text-sm text-muted-foreground font-light">завёрнуто в бумагу и магию</p>
-                  </div>
-                </div>
-              </div>
+              )}
             </div>
           </div>
         </div>
