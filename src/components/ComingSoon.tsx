@@ -275,9 +275,9 @@ export default function ComingSoon() {
         </div>
 
         {/* What awaits you block */}
-        <div className="max-w-2xl mx-auto space-y-6">
+        <div className="flex flex-col items-center space-y-6">
           <h2 className="text-2xl md:text-3xl font-light text-primary">что вас ждёт?</h2>
-          <div className="space-y-4 text-left text-muted-foreground leading-relaxed">
+          <div className="space-y-4 text-left text-muted-foreground leading-relaxed max-w-xl">
             <div className="flex gap-3">
               <span className="text-2xl flex-shrink-0">🧦</span>
               <p><strong className="text-primary font-medium">вязаные чепчики</strong> — мягкие, как облако, согревают в морозы</p>
