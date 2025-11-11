@@ -92,14 +92,5 @@ export const products: Product[] = [
     category: 'наборы',
     image: 'https://cdn.poehali.dev/files/031f61f1-ffb6-48da-889e-8ff29b154541.png',
     badge: 'limited'
-  },
-  {
-    id: 9,
-    name: 'б о к с . . . 🌙 { когда хочется тепла }',
-    description: 'уютный набор для холодных вечеров',
-    price: 3500,
-    category: 'наборы',
-    image: 'https://cdn.poehali.dev/files/f9fe8956-e4b2-4d08-b2fc-0195aa240b23.png',
-    badge: 'limited'
   }
 ];
