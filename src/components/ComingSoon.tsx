@@ -108,7 +108,7 @@ export default function ComingSoon() {
   };
 
   return (
-    <div className="min-h-screen bg-[#f5f3f0] flex items-center justify-center px-4 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-white via-orange-50 to-amber-50 flex items-center justify-center px-4 relative overflow-hidden">
       {showFortune && (
         <div className="fixed inset-0 bg-gradient-to-br from-white via-orange-50 to-amber-50 z-50 flex items-center justify-center px-4">
           <button
