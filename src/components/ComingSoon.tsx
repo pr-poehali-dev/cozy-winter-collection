@@ -291,35 +291,26 @@ export default function ComingSoon() {
           </div>
         </div>
 
-        {/* Email subscribe */}
+        {/* Telegram subscribe */}
         <div className="bg-gradient-to-br from-white/80 to-orange-50/40 backdrop-blur-sm rounded-2xl p-8 md:p-10 shadow-lg border border-border max-w-xl mx-auto space-y-6">
           <div className="space-y-3">
-            <h3 className="text-xl md:text-2xl font-light text-primary">узнай первым об открытии 💌</h3>
+            <h3 className="text-xl md:text-2xl font-light text-primary">следи за новостями 💌</h3>
             <p className="text-sm md:text-base text-muted-foreground">
-              пришлём письмо, когда магазин откроется + подарок к первому заказу
+              подпишись на мой телеграм-канал, чтобы узнать первым об открытии + получить подарок
             </p>
           </div>
-          <form className="flex flex-col sm:flex-row gap-3" onSubmit={(e) => {
-            e.preventDefault();
-            const email = (e.target as HTMLFormElement).email.value;
-            console.log('Email submitted:', email);
-            alert('Спасибо! Мы пришлём вам письмо, когда откроемся ✨');
-          }}>
-            <input 
-              type="email" 
-              name="email"
-              placeholder="ваша почта"
-              required
-              className="flex-1 px-4 py-3 rounded-xl border border-border bg-white/80 focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all text-primary placeholder:text-muted-foreground/50"
-            />
+          <a 
+            href="https://t.me/azalukk"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <Button 
-              type="submit"
-              className="px-6 py-3 bg-primary hover:bg-primary/90 text-white rounded-xl transition-colors whitespace-nowrap"
+              className="w-full px-6 py-3 bg-primary hover:bg-primary/90 text-white rounded-xl transition-colors"
             >
-              подписаться ✨
+              подписаться на телеграм ✨
             </Button>
-          </form>
-          <p className="text-xs text-muted-foreground/60">никакого спама, только новости о магазине</p>
+          </a>
+          <p className="text-xs text-muted-foreground/60">анонсы, закулисье создания и немного волшебства</p>
         </div>
 
         <div className="space-y-4">
