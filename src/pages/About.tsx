@@ -91,8 +91,8 @@ export default function About() {
             <div className="space-y-4">
               <div className="aspect-[4/3] bg-moss/10 rounded-2xl overflow-hidden">
                 <img 
-                  src="https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/files/7f5ea581-628c-4d98-a69f-d7a58fe3ab8d.jpg" 
-                  alt="Азалия с ноутбуком и камерой"
+                  src="https://cdn.poehali.dev/files/36358c56-fbd3-4e96-8bba-c134ce00ab3e.jpg" 
+                  alt="Азалия с камерой"
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -119,8 +119,8 @@ export default function About() {
             <div className="space-y-4 md:mt-16">
               <div className="aspect-[4/3] bg-moss/10 rounded-2xl overflow-hidden">
                 <img 
-                  src="https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/files/98640360-9e4d-42d3-b9f5-808904dfc6e0.jpg" 
-                  alt="Вика создает изделия"
+                  src="https://cdn.poehali.dev/files/bf310f2c-13fe-4e0c-87e8-02da9d338017.png" 
+                  alt="Вика с изделиями"
                   className="w-full h-full object-cover"
                 />
               </div>
