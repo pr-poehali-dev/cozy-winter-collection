@@ -98,7 +98,7 @@ export default function About() {
               </div>
               
               <div className="space-y-4">
-                <h2 className="text-2xl font-light text-moss">Азалия</h2>
+                <h2 className="text-2xl font-light text-moss">привет, я азалия!</h2>
                 <div className="space-y-3 text-moss/70 leading-relaxed">
                   <p>
                     привет, я азалия!
