@@ -10,7 +10,7 @@ export default function Reviews() {
       
       <div className="max-w-4xl mx-auto relative">
         <h2 className="text-3xl md:text-4xl font-light text-primary text-center mb-8">отзывы 💗</h2>
-        <p className="text-center text-muted-foreground mb-8 font-light text-sm">что говорят те, кто уже хранит мои вещи</p>
+        <p className="text-center text-muted-foreground mb-8 font-light text-sm">что говорят те, кто уже хранит наши вещи</p>
         
         <div className="grid md:grid-cols-3 gap-6 mb-8">
           <div className="p-4 rounded-2xl space-y-2 bg-gradient-to-br from-orange-50/20 to-amber-50/20">
