@@ -9,7 +9,7 @@ import Reviews from "@/components/shop/Reviews";
 import Footer from "@/components/shop/Footer";
 import ComingSoon from "@/components/ComingSoon";
 
-const DEV_MODE = true;
+const DEV_MODE = false;
 
 export default function Index() {
   const launchDate = new Date("2025-12-01T12:00:00+03:00");
