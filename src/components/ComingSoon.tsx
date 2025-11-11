@@ -199,11 +199,7 @@ export default function ComingSoon() {
 
       <div className="max-w-2xl w-full text-center space-y-12">
         <div className="space-y-6">
-          <p className="text-base md:text-lg text-muted-foreground">
-            магазинчик вещиц тропинка
-            <br />
-            откроется через... 🔮
-          </p>
+          <p className="text-base md:text-lg text-muted-foreground">тропинка откроется через... 🔮</p>
 
           <div className="grid grid-cols-4 gap-3 md:gap-6 max-w-lg mx-auto">
             <div className="space-y-2">
@@ -260,7 +256,7 @@ export default function ComingSoon() {
             <p>в новогодней коллекции вас ждут:</p>
             <div className="space-y-1">
               <p>✨ волшебные чепцы</p>
-              <p>🌙 задорные подвесы</p>
+              <p>🍄 задорные подвесы</p>
               <p>🕯️ домашний декор</p>
             </div>
           </div>
