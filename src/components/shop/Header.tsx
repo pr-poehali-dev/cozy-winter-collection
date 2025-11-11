@@ -2,7 +2,6 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/co
 import Icon from '@/components/ui/icon';
 import { CartItem } from './types';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 
 interface HeaderProps {
   cart: CartItem[];
@@ -31,12 +30,9 @@ export default function Header({
         
         <div className="flex items-center gap-6">
           <nav className="hidden md:flex items-center gap-6">
-            <Link to="/" className="text-sm font-light text-primary hover:text-muted-foreground transition-colors">
-              главная
-            </Link>
-            <Link to="/about" className="text-sm font-light text-primary hover:text-muted-foreground transition-colors">
+            <a href="#about" className="text-sm font-light text-primary hover:text-muted-foreground transition-colors">
               о нас
-            </Link>
+            </a>
             <a href="#delivery" className="text-sm font-light text-primary hover:text-muted-foreground transition-colors">
               оплата и доставка
             </a>
@@ -56,20 +52,13 @@ export default function Header({
                 <SheetTitle className="text-xl font-light text-primary">меню</SheetTitle>
               </SheetHeader>
               <nav className="mt-8 flex flex-col gap-6">
-                <Link 
-                  to="/" 
-                  className="text-sm font-light text-primary hover:text-muted-foreground transition-colors"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  главная
-                </Link>
-                <Link 
-                  to="/about" 
+                <a 
+                  href="#about" 
                   className="text-sm font-light text-primary hover:text-muted-foreground transition-colors"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   о нас
-                </Link>
+                </a>
                 <a 
                   href="#delivery" 
                   className="text-sm font-light text-primary hover:text-muted-foreground transition-colors"
