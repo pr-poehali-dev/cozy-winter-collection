@@ -15,6 +15,7 @@ export default function ProductCatalog({
   categories,
   selectedCategory,
   setSelectedCategory,
+  onProductClick,
   addToCart
 }: ProductCatalogProps) {
   const filteredProducts = selectedCategory === 'все' 
@@ -42,8 +43,8 @@ export default function ProductCatalog({
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredProducts.map((product) => (
-            <div key={product.id} className="group">
-              <div className="aspect-square overflow-hidden rounded-2xl mb-4 bg-white shadow-sm border border-border">
+            <div key={product.id} className="group cursor-pointer" onClick={() => onProductClick(product)}>
+              <div className="aspect-square overflow-hidden rounded-2xl mb-4 bg-white shadow-sm border border-border transition-transform group-hover:scale-[1.02]">
                 <img 
                   src={product.image} 
                   alt={product.name}
