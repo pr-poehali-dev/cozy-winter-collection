@@ -6,7 +6,6 @@ import HeroCarousel from "@/components/shop/HeroCarousel";
 import ProductCatalog from "@/components/shop/ProductCatalog";
 import ProductDetails from "@/components/shop/ProductDetails";
 import Reviews from "@/components/shop/Reviews";
-import Delivery from "@/components/shop/Delivery";
 import Footer from "@/components/shop/Footer";
 import ComingSoon from "@/components/ComingSoon";
 
@@ -124,8 +123,6 @@ export default function Index() {
       />
 
       <Reviews />
-
-      <Delivery onCheckoutClick={() => setIsCartOpen(true)} />
 
       <ProductDetails
         product={selectedProduct}
