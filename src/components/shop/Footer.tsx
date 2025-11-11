@@ -5,7 +5,7 @@ export default function Footer() {
     <footer className="py-8 px-4 bg-primary">
       <div className="container mx-auto max-w-2xl">
         <div className="flex items-center justify-between">
-          <h3 className="text-xl font-light tracking-wide text-[#F5F1E8]">azaluk</h3>
+          <h3 className="text-xl font-light tracking-wide text-[#F5F1E8]">тропинка</h3>
           <div className="flex items-center gap-6">
             <a 
               href="https://youtube.com" 

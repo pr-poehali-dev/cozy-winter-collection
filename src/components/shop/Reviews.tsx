@@ -40,7 +40,7 @@ export default function Reviews() {
         
         <div className="text-center">
           <a 
-            href="https://t.me/azaluk_reviews" 
+            href="https://t.me/tropinka_reviews" 
             target="_blank" 
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 text-primary hover:text-muted-foreground transition-colors font-light text-sm"
