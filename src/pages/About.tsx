@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import Icon from "@/components/ui/icon";
 
@@ -14,12 +13,7 @@ export default function About() {
           <span>вернуться в магазин</span>
         </Link>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="space-y-16"
-        >
+        <div className="space-y-16 animate-in fade-in duration-700">
           <div className="text-center space-y-6">
             <h1 className="font-serif text-4xl md:text-5xl text-moss">
               о нас
@@ -32,12 +26,7 @@ export default function About() {
           </div>
 
           <div className="grid md:grid-cols-2 gap-12 md:gap-16">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="space-y-6"
-            >
+            <div className="space-y-6">
               <div className="aspect-[3/4] bg-moss/10 rounded-2xl overflow-hidden">
                 <div className="w-full h-full flex items-center justify-center text-moss/30">
                   <Icon name="User" size={64} />
@@ -61,14 +50,9 @@ export default function About() {
                   </p>
                 </div>
               </div>
-            </motion.div>
+            </div>
 
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="space-y-6 md:mt-24"
-            >
+            <div className="space-y-6 md:mt-24">
               <div className="aspect-[3/4] bg-moss/10 rounded-2xl overflow-hidden">
                 <div className="w-full h-full flex items-center justify-center text-moss/30">
                   <Icon name="User" size={64} />
@@ -87,22 +71,17 @@ export default function About() {
                   </p>
                 </div>
               </div>
-            </motion.div>
+            </div>
           </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-            className="text-center py-12"
-          >
+          <div className="text-center py-12">
             <p className="text-lg text-moss/70 leading-relaxed italic">
               вместе мы делаем вещи, которыми приятно любоваться,
               <br />
               их хочется держать в руках и носить с собой
             </p>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       </div>
     </div>
   );
