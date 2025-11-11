@@ -295,9 +295,7 @@ export default function ComingSoon() {
         <div className="bg-gradient-to-br from-white/80 to-orange-50/40 backdrop-blur-sm rounded-2xl p-8 md:p-10 shadow-lg border border-border max-w-xl mx-auto space-y-6">
           <div className="space-y-3">
             <h3 className="text-xl md:text-2xl font-light text-primary">следи за новостями 💌</h3>
-            <p className="text-sm md:text-base text-muted-foreground">
-              подпишись на мой телеграм-канал, чтобы узнать первым об открытии + получить подарок
-            </p>
+            <p className="text-sm md:text-base text-muted-foreground my-2">подпишитесь на мой телеграм-канал, чтобы узнать об открытии первыми!</p>
           </div>
           <a 
             href="https://t.me/azalukk"
