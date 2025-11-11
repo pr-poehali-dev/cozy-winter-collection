@@ -273,7 +273,7 @@ export default function ComingSoon() {
         </div>
 
         {/* What awaits you block */}
-        <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-8 md:p-10 shadow-lg border border-border max-w-2xl mx-auto space-y-6">
+        <div className="max-w-2xl mx-auto space-y-6">
           <h2 className="text-2xl md:text-3xl font-light text-primary">что вас ждёт?</h2>
           <div className="space-y-4 text-left text-muted-foreground leading-relaxed">
             <div className="flex gap-3">
