@@ -114,7 +114,7 @@ export default function About() {
                       href="https://www.youtube.com/@azaluk" 
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="underline hover:text-moss transition-colors"
+                      className="link-red transition-colors"
                     >
                       ютуб
                     </a>
@@ -123,7 +123,7 @@ export default function About() {
                       href="https://t.me/azalukk" 
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="underline hover:text-moss transition-colors"
+                      className="link-red transition-colors"
                     >
                       телеграм
                     </a>

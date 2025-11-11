@@ -199,4 +199,13 @@
   .cookie-shake {
     animation: cookie-shake 0.5s ease-in-out infinite;
   }
+
+  .link-red {
+    color: #8b1d1d;
+    text-decoration: underline;
+  }
+
+  .link-red:hover {
+    color: #6b1515;
+  }
 }
