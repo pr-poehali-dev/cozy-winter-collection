@@ -109,7 +109,7 @@ export default function ComingSoon() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-white via-orange-50 to-amber-50 flex items-center justify-center px-4 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-white via-orange-50 to-amber-50 flex flex-col">
       {showFortune && (
         <div className="fixed inset-0 bg-gradient-to-br from-white via-orange-50 to-amber-50 z-50 flex items-center justify-center px-4">
           <button
@@ -199,7 +199,8 @@ export default function ComingSoon() {
         </div>
       )}
 
-      <div className="max-w-4xl w-full text-center space-y-12">
+      <div className="flex-1 flex items-center justify-center px-4 py-12">
+        <div className="max-w-4xl w-full text-center space-y-12">
         {/* Photo carousel */}
         <div className="relative overflow-hidden rounded-2xl shadow-2xl">
           <div className="grid md:grid-cols-3 gap-2">
@@ -310,6 +311,7 @@ export default function ComingSoon() {
             </Button>
           </a>
           <p className="text-xs text-muted-foreground/60">анонсы, закулисье создания и немного волшебства</p>
+        </div>
         </div>
       </div>
       
