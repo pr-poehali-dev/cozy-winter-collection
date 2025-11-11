@@ -125,9 +125,7 @@ export default function ComingSoon() {
             {!fortuneOpened ? (
               <>
                 <div className="space-y-4 text-center">
-                  <p className="text-lg md:text-xl text-primary">
-                    добро пожаловать! 🔮
-                  </p>
+                  <p className="text-lg md:text-xl text-primary">добро пожаловать! 🔮</p>
                   <p className="text-sm md:text-base text-muted-foreground">
                     прежде чем узнать о магазинчике,
                     <br />
