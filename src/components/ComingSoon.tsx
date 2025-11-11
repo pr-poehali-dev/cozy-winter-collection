@@ -285,7 +285,7 @@ export default function ComingSoon() {
               <p><strong className="text-primary font-medium">лесные грибочки</strong> — подвески, которые приносят уют в дом</p>
             </div>
             <div className="flex gap-3">
-              <span className="text-2xl flex-shrink-0">🎁</span>
+              <span className="text-2xl flex-shrink-0">🪄</span>
               <p><strong className="text-primary font-medium">сказочные боксы</strong> — готовые подарки с волшебством внутри</p>
             </div>
           </div>
