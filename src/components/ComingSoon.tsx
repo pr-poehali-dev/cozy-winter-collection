@@ -110,7 +110,7 @@ export default function ComingSoon() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-white via-orange-50/30 to-amber-50/40 flex items-center justify-center px-4 relative">
       {showFortune && (
-        <div className="absolute inset-0 bg-gradient-to-br from-white via-orange-50/50 to-amber-50/60 backdrop-blur-sm z-50 flex items-start justify-center px-4 pt-12 md:pt-20 overflow-y-auto">
+        <div className="absolute inset-0 bg-gradient-to-br from-white via-orange-50 to-amber-50 z-50 flex items-start justify-center px-4 pt-24 md:pt-32 overflow-y-auto">
           <button
             onClick={() => setShowFortune(false)}
             className="absolute top-4 right-4 md:top-8 md:right-8 p-2 rounded-full hover:bg-white/50 transition-colors group"
