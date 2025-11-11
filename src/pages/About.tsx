@@ -80,7 +80,7 @@ export default function About() {
             <h1 className="text-3xl md:text-4xl font-light text-moss">
               о нас
             </h1>
-            <p className="md:text-xl text-moss/80 leading-relaxed max-w-2xl mx-auto text-right text-xl">
+            <p className="text-moss/70 leading-relaxed max-w-2xl mx-auto">
               тропинка — это маленький магазин из мира двух подруг, Азалии и Вики.
               <br />
               мы вместе разрабатываем и создаём вещи, в которых живут уют и немного сказки.
