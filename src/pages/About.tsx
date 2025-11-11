@@ -77,7 +77,7 @@ export default function About() {
       <div className="container mx-auto px-4 pt-24 pb-16 max-w-4xl">
         <div className="space-y-16 animate-in fade-in duration-700">
           <div className="text-center space-y-6">
-            <h1 className="font-serif text-4xl md:text-5xl text-moss">
+            <h1 className="text-3xl md:text-4xl font-light text-moss">
               о нас
             </h1>
             <p className="text-lg md:text-xl text-moss/80 leading-relaxed max-w-2xl mx-auto">
@@ -96,7 +96,7 @@ export default function About() {
               </div>
               
               <div className="space-y-4">
-                <h2 className="font-serif text-2xl text-moss">Азалия</h2>
+                <h2 className="text-2xl font-light text-moss">Азалия</h2>
                 <div className="space-y-3 text-moss/70 leading-relaxed">
                   <p>
                     привет! я Азалия и я ответственна за жизнь магазина и за то, 
@@ -122,7 +122,7 @@ export default function About() {
               </div>
               
               <div className="space-y-4">
-                <h2 className="font-serif text-2xl text-moss">Вика</h2>
+                <h2 className="text-2xl font-light text-moss">Вика</h2>
                 <div className="space-y-3 text-moss/70 leading-relaxed">
                   <p>
                     это Вика! она — волшебные руки наших тропинок.
