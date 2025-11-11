@@ -1,18 +1,72 @@
 import { Link } from "react-router-dom";
 import Icon from "@/components/ui/icon";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
+import { useState } from 'react';
 
 export default function About() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  
   return (
     <div className="min-h-screen bg-cream">
-      <div className="container mx-auto px-4 py-8 md:py-16 max-w-4xl">
-        <Link
-          to="/"
-          className="inline-flex items-center gap-2 text-moss hover:text-moss/70 transition-colors mb-12"
-        >
-          <Icon name="ArrowLeft" size={20} />
-          <span>вернуться в магазин</span>
-        </Link>
+      <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-border">
+        <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+          <Link to="/" className="text-2xl font-light text-primary tracking-wide hover:text-muted-foreground transition-colors">
+            тропинка
+          </Link>
+          
+          <div className="flex items-center gap-6">
+            <nav className="hidden md:flex items-center gap-6">
+              <Link to="/about" className="text-sm font-light text-primary hover:text-muted-foreground transition-colors">
+                о нас
+              </Link>
+              <a href="/#delivery" className="text-sm font-light text-primary hover:text-muted-foreground transition-colors">
+                оплата и доставка
+              </a>
+              <a href="/#contacts" className="text-sm font-light text-primary hover:text-muted-foreground transition-colors">
+                контакты
+              </a>
+            </nav>
+            
+            <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
+              <SheetTrigger asChild>
+                <button className="md:hidden p-2 hover:bg-secondary rounded-lg transition-colors">
+                  <Icon name="Menu" size={20} className="text-primary" strokeWidth={1.5} />
+                </button>
+              </SheetTrigger>
+              <SheetContent side="left" className="w-64">
+                <SheetHeader>
+                  <SheetTitle className="text-xl font-light text-primary">меню</SheetTitle>
+                </SheetHeader>
+                <nav className="mt-8 flex flex-col gap-6">
+                  <Link 
+                    to="/about" 
+                    className="text-sm font-light text-primary hover:text-muted-foreground transition-colors"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    о нас
+                  </Link>
+                  <a 
+                    href="/#delivery" 
+                    className="text-sm font-light text-primary hover:text-muted-foreground transition-colors"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    оплата и доставка
+                  </a>
+                  <a 
+                    href="/#contacts" 
+                    className="text-sm font-light text-primary hover:text-muted-foreground transition-colors"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    контакты
+                  </a>
+                </nav>
+              </SheetContent>
+            </Sheet>
+          </div>
+        </div>
+      </header>
 
+      <div className="container mx-auto px-4 pt-24 pb-16 max-w-4xl">
         <div className="space-y-16 animate-in fade-in duration-700">
           <div className="text-center space-y-6">
             <h1 className="font-serif text-4xl md:text-5xl text-moss">
