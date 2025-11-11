@@ -10,7 +10,7 @@ export default function About() {
     <div className="min-h-screen bg-cream">
       <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-border">
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-          <Link to="/" className="text-2xl font-light text-primary tracking-wide hover:text-muted-foreground transition-colors">
+          <Link to="/" className="text-2xl font-light text-primary tracking-wide">
             тропинка
           </Link>
           
