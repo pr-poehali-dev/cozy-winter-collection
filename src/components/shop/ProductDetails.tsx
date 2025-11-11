@@ -23,7 +23,8 @@ export default function ProductDetails({ product, onClose, addToCart }: ProductD
     <Sheet open={!!product} onOpenChange={(open) => !open && onClose()}>
       <SheetContent 
         side="right" 
-        className="w-full h-full max-w-none overflow-y-auto bg-white p-0"
+        className="w-screen h-screen max-w-none overflow-y-auto bg-white p-0 sm:max-w-none border-0"
+        onOpenAutoFocus={(e) => e.preventDefault()}
       >
         <button
           onClick={onClose}
