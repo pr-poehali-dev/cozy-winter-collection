@@ -301,6 +301,7 @@ export default function ComingSoon() {
             href="https://t.me/azalukk"
             target="_blank"
             rel="noopener noreferrer"
+            className="block mt-8"
           >
             <Button 
               className="w-full px-6 py-3 bg-primary hover:bg-primary/90 text-white rounded-xl transition-colors"
