@@ -131,7 +131,7 @@ export default function ComingSoon() {
                   <p className="text-sm md:text-base text-muted-foreground">
                     прежде чем узнать о магазинчике,
                     <br />
-                    вытяни своё зимнее предсказание
+                    вытяни своё зимнее предсказание:
                   </p>
                 </div>
                 <button
