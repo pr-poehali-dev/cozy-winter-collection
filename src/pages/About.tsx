@@ -10,12 +10,15 @@ export default function About() {
     <div className="min-h-screen bg-cream">
       <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-border">
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-          <Link to="/" className="text-2xl font-light text-primary tracking-wide hover:text-muted-foreground transition-colors">
+          <Link to="/" className="text-2xl font-light text-primary tracking-wide">
             тропинка
           </Link>
           
           <div className="flex items-center gap-6">
             <nav className="hidden md:flex items-center gap-6">
+              <Link to="/" className="text-sm font-light text-primary hover:text-muted-foreground transition-colors">
+                главная
+              </Link>
               <Link to="/about" className="text-sm font-light text-primary hover:text-muted-foreground transition-colors">
                 о нас
               </Link>
@@ -38,6 +41,13 @@ export default function About() {
                   <SheetTitle className="text-xl font-light text-primary">меню</SheetTitle>
                 </SheetHeader>
                 <nav className="mt-8 flex flex-col gap-6">
+                  <Link 
+                    to="/" 
+                    className="text-sm font-light text-primary hover:text-muted-foreground transition-colors"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    главная
+                  </Link>
                   <Link 
                     to="/about" 
                     className="text-sm font-light text-primary hover:text-muted-foreground transition-colors"
