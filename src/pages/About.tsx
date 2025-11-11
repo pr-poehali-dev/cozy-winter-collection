@@ -16,6 +16,9 @@ export default function About() {
           
           <div className="flex items-center gap-6">
             <nav className="hidden md:flex items-center gap-6">
+              <Link to="/" className="text-sm font-light text-primary hover:text-muted-foreground transition-colors">
+                главная
+              </Link>
               <Link to="/about" className="text-sm font-light text-primary hover:text-muted-foreground transition-colors">
                 о нас
               </Link>
@@ -38,6 +41,13 @@ export default function About() {
                   <SheetTitle className="text-xl font-light text-primary">меню</SheetTitle>
                 </SheetHeader>
                 <nav className="mt-8 flex flex-col gap-6">
+                  <Link 
+                    to="/" 
+                    className="text-sm font-light text-primary hover:text-muted-foreground transition-colors"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    главная
+                  </Link>
                   <Link 
                     to="/about" 
                     className="text-sm font-light text-primary hover:text-muted-foreground transition-colors"
