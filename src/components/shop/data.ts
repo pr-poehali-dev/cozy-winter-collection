@@ -66,7 +66,7 @@ export const products: Product[] = [
     description: 'бумажная гирлянда для уютной атмосферы',
     price: 800,
     category: 'декор',
-    image: 'https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/files/88272661-d9ba-4e54-b9cf-c467ea2e8154.jpg'
+    image: 'https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/files/1794d9f6-ef8b-4496-aa0c-4efe25447d5f.jpg'
   },
   {
     id: 6,
@@ -74,7 +74,7 @@ export const products: Product[] = [
     description: 'лунный подвес с волшебным сиянием',
     price: 1000,
     category: 'украшения',
-    image: 'https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/files/30824918-4b6a-4d5c-9971-0176e6e672e4.jpg'
+    image: 'https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/files/86390635-81cf-43b7-9b09-7593637476e0.jpg'
   },
   {
     id: 7,
@@ -82,7 +82,7 @@ export const products: Product[] = [
     description: 'солнечный подвес, дарящий тепло',
     price: 1000,
     category: 'украшения',
-    image: 'https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/files/7102c59d-862e-46ba-b55b-29c2493a3642.jpg'
+    image: 'https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/files/e7e2da0a-dc78-44e1-bf2b-7e64af6accfe.jpg'
   },
   {
     id: 8,
