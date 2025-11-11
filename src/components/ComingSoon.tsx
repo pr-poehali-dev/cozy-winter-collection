@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Icon from "@/components/ui/icon";
 import Shop from "./Shop";
+import { Button } from "@/components/ui/button";
 
 interface TimeLeft {
   days: number;
@@ -197,9 +198,35 @@ export default function ComingSoon() {
         </div>
       )}
 
-      <div className="max-w-2xl w-full text-center space-y-12">
+      <div className="max-w-4xl w-full text-center space-y-12">
+        {/* Photo carousel */}
+        <div className="relative overflow-hidden rounded-2xl shadow-2xl">
+          <div className="grid md:grid-cols-3 gap-2">
+            <img 
+              src="https://cdn.poehali.dev/files/f9fe8956-e4b2-4d08-b2fc-0195aa240b23.png" 
+              alt="Чепчик брусничный"
+              className="w-full h-64 md:h-80 object-cover rounded-xl hover:scale-105 transition-transform duration-500"
+            />
+            <img 
+              src="https://cdn.poehali.dev/files/14a74df9-0c9e-49aa-b649-04c064eb375a.png" 
+              alt="Чепчик молочный"
+              className="w-full h-64 md:h-80 object-cover rounded-xl hover:scale-105 transition-transform duration-500"
+            />
+            <img 
+              src="https://cdn.poehali.dev/files/031f61f1-ffb6-48da-889e-8ff29b154541.png" 
+              alt="Сказочный бокс"
+              className="w-full h-64 md:h-80 object-cover rounded-xl hover:scale-105 transition-transform duration-500"
+            />
+          </div>
+        </div>
         <div className="space-y-6">
-          <p className="text-base md:text-lg text-muted-foreground">тропинка откроется через... 🔮</p>
+          <h1 className="text-3xl md:text-5xl lg:text-6xl font-light text-primary leading-relaxed">
+            тропинка
+          </h1>
+          <p className="text-lg md:text-xl text-muted-foreground/80 max-w-2xl mx-auto leading-relaxed">
+            маленький магазин вязаных вещей с душой и сказкой ✨
+          </p>
+          <p className="text-base md:text-lg text-muted-foreground">откроется через... 🔮</p>
 
           <div className="grid grid-cols-4 gap-3 md:gap-6 max-w-lg mx-auto">
             <div className="space-y-2">
@@ -248,18 +275,64 @@ export default function ComingSoon() {
           </div>
         </div>
 
+        {/* What awaits you block */}
+        <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-8 md:p-10 shadow-lg border border-border max-w-2xl mx-auto space-y-6">
+          <h2 className="text-2xl md:text-3xl font-light text-primary">что вас ждёт?</h2>
+          <div className="space-y-4 text-left text-muted-foreground leading-relaxed">
+            <div className="flex gap-3">
+              <span className="text-2xl flex-shrink-0">🧦</span>
+              <p><strong className="text-primary font-medium">вязаные чепчики</strong> — мягкие, как облако, согревают в морозы</p>
+            </div>
+            <div className="flex gap-3">
+              <span className="text-2xl flex-shrink-0">🍄</span>
+              <p><strong className="text-primary font-medium">лесные грибочки</strong> — подвески, которые приносят уют в дом</p>
+            </div>
+            <div className="flex gap-3">
+              <span className="text-2xl flex-shrink-0">🎁</span>
+              <p><strong className="text-primary font-medium">сказочные боксы</strong> — готовые подарки с волшебством внутри</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Email subscribe */}
+        <div className="bg-gradient-to-br from-white/80 to-orange-50/40 backdrop-blur-sm rounded-2xl p-8 md:p-10 shadow-lg border border-border max-w-xl mx-auto space-y-6">
+          <div className="space-y-3">
+            <h3 className="text-xl md:text-2xl font-light text-primary">узнай первым об открытии 💌</h3>
+            <p className="text-sm md:text-base text-muted-foreground">
+              пришлём письмо, когда магазин откроется + подарок к первому заказу
+            </p>
+          </div>
+          <form className="flex flex-col sm:flex-row gap-3" onSubmit={(e) => {
+            e.preventDefault();
+            const email = (e.target as HTMLFormElement).email.value;
+            console.log('Email submitted:', email);
+            alert('Спасибо! Мы пришлём вам письмо, когда откроемся ✨');
+          }}>
+            <input 
+              type="email" 
+              name="email"
+              placeholder="ваша почта"
+              required
+              className="flex-1 px-4 py-3 rounded-xl border border-border bg-white/80 focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all text-primary placeholder:text-muted-foreground/50"
+            />
+            <Button 
+              type="submit"
+              className="px-6 py-3 bg-primary hover:bg-primary/90 text-white rounded-xl transition-colors whitespace-nowrap"
+            >
+              подписаться ✨
+            </Button>
+          </form>
+          <p className="text-xs text-muted-foreground/60">никакого спама, только новости о магазине</p>
+        </div>
+
         <div className="space-y-4">
           <p className="text-sm md:text-base text-muted-foreground">
             встретимся здесь в первый день зимы! ❄️
           </p>
-          <div className="text-xs md:text-sm text-muted-foreground/60 italic max-w-sm mx-auto space-y-2">
-            <p>в новогодней коллекции вас ждут:</p>
-            <div className="space-y-1">
-              <p>✨ волшебные чепцы</p>
-              <p>🍄 задорные подвесы</p>
-              <p>🕯️ домашний декор</p>
-            </div>
-          </div>
+          <p className="text-sm md:text-base text-muted-foreground/70 max-w-md mx-auto leading-relaxed">
+            создаём вручную, с любовью и заботой. каждая вещь хранит тепло наших
+            рук и немного волшебства ✨
+          </p>
         </div>
       </div>
     </div>
