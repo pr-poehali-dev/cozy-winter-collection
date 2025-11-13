@@ -278,10 +278,6 @@ export default function ComingSoon() {
               </div>
             </div>
           </div>
-          
-          <div className="inline-block bg-orange-100/60 border border-orange-200/60 rounded-full px-4 py-2 mt-4">
-            <p className="text-xs md:text-sm text-orange-900/80 font-medium">⚡️ все изделия будут в ограниченных экземплярах</p>
-          </div>
         </div>
 
         {/* What awaits you block - compact mobile version */}
