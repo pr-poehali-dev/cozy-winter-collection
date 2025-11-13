@@ -203,33 +203,44 @@ export default function ComingSoon() {
         <div className="max-w-4xl w-full text-center space-y-12">
         
         {/* Compact photo preview on mobile, full gallery on desktop */}
-        <div className="relative overflow-hidden rounded-2xl">
+        <div className="relative overflow-hidden">
           <div className="grid grid-cols-3 gap-2 md:gap-3">
-            <img 
-              src="https://cdn.poehali.dev/files/f9fe8956-e4b2-4d08-b2fc-0195aa240b23.png" 
-              alt="Чепчик брусничный"
-              className="w-full h-32 md:h-64 object-cover rounded-lg hover:scale-105 transition-transform duration-500"
-            />
-            <img 
-              src="https://cdn.poehali.dev/files/14a74df9-0c9e-49aa-b649-04c064eb375a.png" 
-              alt="Чепчик молочный"
-              className="w-full h-32 md:h-64 object-cover rounded-lg hover:scale-105 transition-transform duration-500"
-            />
-            <img 
-              src="https://cdn.poehali.dev/files/031f61f1-ffb6-48da-889e-8ff29b154541.png" 
-              alt="Сказочный бокс"
-              className="w-full h-32 md:h-64 object-cover rounded-lg hover:scale-105 transition-transform duration-500"
-            />
+            <div className="overflow-hidden rounded-lg shadow-md">
+              <img 
+                src="https://cdn.poehali.dev/files/f9fe8956-e4b2-4d08-b2fc-0195aa240b23.png" 
+                alt="Чепчик брусничный"
+                className="w-full h-32 md:h-64 object-cover hover:scale-110 transition-transform duration-700"
+              />
+            </div>
+            <div className="overflow-hidden rounded-lg shadow-md">
+              <img 
+                src="https://cdn.poehali.dev/files/14a74df9-0c9e-49aa-b649-04c064eb375a.png" 
+                alt="Чепчик молочный"
+                className="w-full h-32 md:h-64 object-cover hover:scale-110 transition-transform duration-700"
+              />
+            </div>
+            <div className="overflow-hidden rounded-lg shadow-md">
+              <img 
+                src="https://cdn.poehali.dev/files/031f61f1-ffb6-48da-889e-8ff29b154541.png" 
+                alt="Сказочный бокс"
+                className="w-full h-32 md:h-64 object-cover hover:scale-110 transition-transform duration-700"
+              />
+            </div>
           </div>
         </div>
         
         {/* Hero section with compact layout on mobile */}
         <div className="space-y-6">
-          <p className="text-lg md:text-xl text-[#71685d] my-0 mx-[1px] py-0 px-0">магазинчик рукотворных вещиц azaluk откроется через... 🔮</p>
+          <div className="space-y-3">
+            <p className="text-lg md:text-xl text-[#71685d] my-0 mx-[1px] py-0 px-0">магазинчик рукотворных вещиц azaluk откроется через... 🔮</p>
+            <div className="inline-block bg-orange-100/60 border border-orange-200/60 rounded-full px-4 py-2">
+              <p className="text-xs md:text-sm text-orange-900/80 font-medium">⚡️ каждое изделие в единственном экземпляре — успей первой!</p>
+            </div>
+          </div>
 
           <div className="grid grid-cols-4 gap-3 md:gap-6 max-w-lg mx-auto">
             <div className="space-y-2">
-              <div className="bg-white rounded-2xl shadow-sm border border-border p-4 md:p-6">
+              <div className="bg-white rounded-2xl shadow-sm border border-border p-4 md:p-6 animate-pulse-subtle">
                 <div className="text-3xl md:text-5xl font-light text-primary tabular-nums">
                   {String(timeLeft.days).padStart(2, "0")}
                 </div>
@@ -295,7 +306,10 @@ export default function ComingSoon() {
 
         {/* Telegram subscribe - simplified mobile CTA */}
         <div className="bg-gradient-to-br from-white/80 to-orange-50/40 backdrop-blur-sm rounded-2xl p-5 md:p-8 shadow-lg border border-border max-w-xl mx-auto space-y-3 md:space-y-4">
-          <h3 className="text-lg md:text-2xl font-light text-primary">следите за новостями 💌</h3>
+          <div className="space-y-2">
+            <h3 className="text-lg md:text-2xl font-light text-primary">следите за новостями 💌</h3>
+            <p className="text-xs md:text-sm text-muted-foreground">✨ первым подписчикам — эксклюзивная скидка 15%</p>
+          </div>
           <a 
             href="https://t.me/azalukk"
             target="_blank"
@@ -303,7 +317,7 @@ export default function ComingSoon() {
             className="block"
           >
             <Button 
-              className="w-full px-6 py-3 bg-primary hover:bg-primary/90 text-white rounded-xl transition-colors text-sm md:text-base"
+              className="w-full px-6 py-3 bg-primary hover:bg-primary/90 text-white rounded-xl transition-colors text-sm md:text-base shadow-md hover:shadow-lg transition-all"
             >подписаться на телеграм ✨</Button>
           </a>
           <p className="text-xs text-muted-foreground/60">анонсы, закулисье создания и немного волшебства</p>
