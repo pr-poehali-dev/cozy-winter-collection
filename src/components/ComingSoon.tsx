@@ -222,9 +222,6 @@ export default function ComingSoon() {
           </div>
         </div>
         <div className="space-y-6">
-          <h1 className="text-3xl md:text-5xl lg:text-6xl font-light text-primary leading-relaxed">
-            тропинка
-          </h1>
           <p className="text-base md:text-lg text-muted-foreground my-3">магазинчик рукотворных вещиц откроется через... 🔮</p>
 
           <div className="grid grid-cols-4 gap-3 md:gap-6 max-w-lg mx-auto">
