@@ -10,7 +10,7 @@ export default function About() {
     <div className="min-h-screen bg-[#f5f3f0]">
       <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-border">
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-          <h1 className="text-2xl font-light text-primary tracking-wide">тропинка</h1>
+          <h1 className="text-2xl font-light text-primary tracking-wide">azaluk</h1>
           
           <div className="flex items-center gap-6">
             <nav className="hidden md:flex items-center gap-6">
@@ -78,7 +78,7 @@ export default function About() {
         <div className="space-y-16 animate-in fade-in duration-700">
           <div className="text-center">
             <p className="text-moss/70 leading-relaxed max-w-2xl mx-auto text-lg">
-              тропинка — это маленький магазин из мира двух подруг, Азалии и Вики.
+              azaluk — это маленький магазин из мира двух подруг, Азалии и Вики.
               <br />
               мы вместе разрабатываем и создаём вещи, в которых живут уют и немного сказки.
             </p>
@@ -100,7 +100,7 @@ export default function About() {
                 <h2 className="text-2xl font-light text-moss">привет, я азалия!</h2>
                 <div className="space-y-3 text-moss/70 leading-relaxed">
                   <p>
-                    я придумала этот проект и отвечаю за то, какие изделия будут продаваться в тропинке.
+                    я придумала этот проект и отвечаю за то, какие изделия будут продаваться в azaluk.
                   </p>
                   <p>
                     снимаю наши фото и видео, оформляю сайт и блоги, продумываю стратегии роста, собираю заказы и общаюсь с вами в поддержке тоже я
@@ -145,7 +145,7 @@ export default function About() {
                 <h2 className="text-2xl font-light text-moss">а это вика!</h2>
                 <div className="space-y-3 text-moss/70 leading-relaxed">
                   <p>
-                    она — волшебные руки тропинок.
+                    она — волшебные руки azaluk.
                   </p>
                   <p>
                     именно Вика воплощает наши идеи в реальность — в тканях, нитях и деталях: подбирает материалы, создаёт образцы, тестирует идеи
