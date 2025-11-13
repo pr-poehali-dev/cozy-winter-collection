@@ -303,9 +303,7 @@ export default function ComingSoon() {
           >
             <Button 
               className="w-full px-6 py-3 bg-primary hover:bg-primary/90 text-white rounded-xl transition-colors"
-            >
-              подписаться на телеграм ✨
-            </Button>
+            >подписаться на телеграм</Button>
           </a>
           <p className="text-xs text-muted-foreground/60">анонсы, закулисье создания и немного волшебства</p>
         </div>
