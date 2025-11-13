@@ -201,26 +201,7 @@ export default function ComingSoon() {
 
       <div className="flex-1 flex items-center justify-center px-4 py-12">
         <div className="max-w-4xl w-full text-center space-y-12">
-        {/* Photo carousel */}
-        <div className="relative overflow-hidden rounded-2xl shadow-2xl">
-          <div className="grid md:grid-cols-3 gap-2">
-            <img 
-              src="https://cdn.poehali.dev/files/f9fe8956-e4b2-4d08-b2fc-0195aa240b23.png" 
-              alt="Чепчик брусничный"
-              className="w-full h-64 md:h-80 object-cover rounded-xl hover:scale-105 transition-transform duration-500"
-            />
-            <img 
-              src="https://cdn.poehali.dev/files/14a74df9-0c9e-49aa-b649-04c064eb375a.png" 
-              alt="Чепчик молочный"
-              className="w-full h-64 md:h-80 object-cover rounded-xl hover:scale-105 transition-transform duration-500"
-            />
-            <img 
-              src="https://cdn.poehali.dev/files/031f61f1-ffb6-48da-889e-8ff29b154541.png" 
-              alt="Сказочный бокс"
-              className="w-full h-64 md:h-80 object-cover rounded-xl hover:scale-105 transition-transform duration-500"
-            />
-          </div>
-        </div>
+        {/* Hero section with compact layout on mobile */}
         <div className="space-y-6">
           <p className="text-lg md:text-xl text-[#71685d] my-0 mx-[1px] py-0 px-0">магазинчик рукотворных вещиц azaluk откроется через... 🔮</p>
 
@@ -267,6 +248,27 @@ export default function ComingSoon() {
               <div className="text-xs md:text-sm text-muted-foreground">
                 секунд
               </div>
+            </div>
+          </div>
+
+          {/* Compact photo preview on mobile, full gallery on desktop */}
+          <div className="relative overflow-hidden rounded-2xl">
+            <div className="grid grid-cols-3 gap-2 md:gap-3">
+              <img 
+                src="https://cdn.poehali.dev/files/f9fe8956-e4b2-4d08-b2fc-0195aa240b23.png" 
+                alt="Чепчик брусничный"
+                className="w-full h-32 md:h-64 object-cover rounded-lg hover:scale-105 transition-transform duration-500"
+              />
+              <img 
+                src="https://cdn.poehali.dev/files/14a74df9-0c9e-49aa-b649-04c064eb375a.png" 
+                alt="Чепчик молочный"
+                className="w-full h-32 md:h-64 object-cover rounded-lg hover:scale-105 transition-transform duration-500"
+              />
+              <img 
+                src="https://cdn.poehali.dev/files/031f61f1-ffb6-48da-889e-8ff29b154541.png" 
+                alt="Сказочный бокс"
+                className="w-full h-32 md:h-64 object-cover rounded-lg hover:scale-105 transition-transform duration-500"
+              />
             </div>
           </div>
         </div>
