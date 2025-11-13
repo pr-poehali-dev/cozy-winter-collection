@@ -274,39 +274,37 @@ export default function ComingSoon() {
           </div>
         </div>
 
-        {/* What awaits you block */}
-        <div className="flex flex-col items-center space-y-6">
-          <h2 className="text-2xl md:text-3xl font-light text-primary">что вас ждёт?</h2>
-          <div className="space-y-4 text-left text-muted-foreground leading-relaxed max-w-xl">
-            <div className="flex gap-3">
-              <span className="text-2xl flex-shrink-0">🧦</span>
+        {/* What awaits you block - compact mobile version */}
+        <div className="flex flex-col items-center space-y-4 md:space-y-6">
+          <h2 className="text-xl md:text-3xl font-light text-primary">что вас ждёт?</h2>
+          <div className="space-y-2 md:space-y-4 text-left text-muted-foreground leading-relaxed max-w-xl text-sm md:text-base">
+            <div className="flex gap-2 md:gap-3 items-start">
+              <span className="text-xl md:text-2xl flex-shrink-0">🧦</span>
               <p><strong className="text-primary font-medium">вязаные чепчики</strong> — мягкие, как облако, согревают в морозы</p>
             </div>
-            <div className="flex gap-3">
-              <span className="text-2xl flex-shrink-0">🍄</span>
+            <div className="flex gap-2 md:gap-3 items-start">
+              <span className="text-xl md:text-2xl flex-shrink-0">🍄</span>
               <p><strong className="text-primary font-medium">задорные подвесы</strong> — приносящие магию в повседневность</p>
             </div>
-            <div className="flex gap-3">
-              <span className="text-2xl flex-shrink-0">🪄</span>
+            <div className="flex gap-2 md:gap-3 items-start">
+              <span className="text-xl md:text-2xl flex-shrink-0">🪄</span>
               <p><strong className="text-primary font-medium">сказочные боксы</strong> — готовые подарки с волшебством внутри</p>
             </div>
           </div>
         </div>
 
-        {/* Telegram subscribe */}
-        <div className="bg-gradient-to-br from-white/80 to-orange-50/40 backdrop-blur-sm rounded-2xl p-6 md:p-8 shadow-lg border border-border max-w-xl mx-auto space-y-4">
-          <div className="space-y-3">
-            <h3 className="text-xl md:text-2xl font-light text-primary">следите за новостями 💌</h3>
-          </div>
+        {/* Telegram subscribe - simplified mobile CTA */}
+        <div className="bg-gradient-to-br from-white/80 to-orange-50/40 backdrop-blur-sm rounded-2xl p-5 md:p-8 shadow-lg border border-border max-w-xl mx-auto space-y-3 md:space-y-4">
+          <h3 className="text-lg md:text-2xl font-light text-primary">следите за новостями 💌</h3>
           <a 
             href="https://t.me/azalukk"
             target="_blank"
             rel="noopener noreferrer"
-            className="block mt-8"
+            className="block"
           >
             <Button 
-              className="w-full px-6 py-3 bg-primary hover:bg-primary/90 text-white rounded-xl transition-colors"
-            >подписаться на телеграм</Button>
+              className="w-full px-6 py-3 bg-primary hover:bg-primary/90 text-white rounded-xl transition-colors text-sm md:text-base"
+            >подписаться на телеграм ✨</Button>
           </a>
           <p className="text-xs text-muted-foreground/60">анонсы, закулисье создания и немного волшебства</p>
         </div>
