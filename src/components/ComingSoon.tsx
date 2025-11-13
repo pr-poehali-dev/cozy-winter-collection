@@ -281,7 +281,7 @@ export default function ComingSoon() {
             </div>
             <div className="flex gap-3">
               <span className="text-2xl flex-shrink-0">🍄</span>
-              <p><strong className="text-primary font-medium">лесные грибочки</strong> — подвески, которые приносят уют в дом</p>
+              <p><strong className="text-primary font-medium">задорные подвесы</strong> — подвески, которые приносят уют в дом</p>
             </div>
             <div className="flex gap-3">
               <span className="text-2xl flex-shrink-0">🪄</span>
