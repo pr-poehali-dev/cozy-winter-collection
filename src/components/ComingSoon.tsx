@@ -222,7 +222,7 @@ export default function ComingSoon() {
           </div>
         </div>
         <div className="space-y-6">
-          <p className="text-lg md:text-xl text-primary my-3">магазинчик рукотворных вещиц azaluk откроется через... 🔮</p>
+          <p className="text-lg md:text-xl text-[#71685d] my-0 mx-[1px] py-0 px-0">магазинчик рукотворных вещиц azaluk откроется через... 🔮</p>
 
           <div className="grid grid-cols-4 gap-3 md:gap-6 max-w-lg mx-auto">
             <div className="space-y-2">
