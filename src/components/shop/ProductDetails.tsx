@@ -42,86 +42,75 @@ export default function ProductDetails({ product, onClose, addToCart }: ProductD
           <Icon name="X" size={24} className="text-primary" strokeWidth={1.5} />
         </button>
         
-        <div className="grid lg:grid-cols-2 min-h-screen bg-gradient-to-br from-card via-secondary/30 to-card">
-          {/* Left side - Image */}
-          <div className="relative flex items-center justify-center p-8 lg:p-12">
-            <div className="w-full max-w-2xl space-y-6">
+        <div className="flex flex-col lg:flex-row min-h-screen bg-gradient-to-br from-card via-secondary/30 to-card lg:items-start">
+          {/* Left side - Carousel */}
+          <div className="lg:w-1/2 p-6 lg:p-12 flex items-start justify-center lg:sticky lg:top-0 lg:h-screen">
+            <div className="w-full max-w-xl">
               <div className="relative overflow-hidden rounded-2xl shadow-lg bg-card">
                 <img
                   src={images[currentImageIndex]}
                   alt={product.name}
                   className="w-full aspect-square object-cover"
                 />
-                {images.length > 1 && (
-                  <>
-                    <button
-                      onClick={() => setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length)}
-                      className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white rounded-full p-3 shadow-lg transition-all"
-                    >
-                      <Icon name="ChevronLeft" size={20} className="text-primary" />
-                    </button>
-                    <button
-                      onClick={() => setCurrentImageIndex((prev) => (prev + 1) % images.length)}
-                      className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white rounded-full p-3 shadow-lg transition-all"
-                    >
-                      <Icon name="ChevronRight" size={20} className="text-primary" />
-                    </button>
-                  </>
-                )}
+                <button
+                  onClick={() => setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length)}
+                  className="absolute left-4 top-1/2 -translate-y-1/2 bg-card/90 hover:bg-card rounded-full p-2 shadow-lg transition-all"
+                >
+                  <Icon name="ChevronLeft" size={20} className="text-primary" />
+                </button>
+                <button
+                  onClick={() => setCurrentImageIndex((prev) => (prev + 1) % images.length)}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 bg-card/90 hover:bg-card rounded-full p-2 shadow-lg transition-all"
+                >
+                  <Icon name="ChevronRight" size={20} className="text-primary" />
+                </button>
               </div>
               
-              {images.length > 1 && (
-                <div className="flex gap-3 flex-wrap">
-                  {images.map((img, index) => (
-                    <button
-                      key={index}
-                      onClick={() => setCurrentImageIndex(index)}
-                      className={`w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden border-2 transition-all ${
-                        index === currentImageIndex 
-                          ? 'border-primary' 
-                          : 'border-transparent opacity-60 hover:opacity-100'
-                      }`}
-                    >
-                      <img src={img} alt={`${product.name} ${index + 1}`} className="w-full h-full object-cover" />
-                    </button>
-                  ))}
-                </div>
-              )}
+              <div className="flex gap-2 mt-4 justify-center">
+                {images.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentImageIndex(index)}
+                    className={`w-2 h-2 rounded-full transition-all ${
+                      index === currentImageIndex 
+                        ? 'bg-primary w-6' 
+                        : 'bg-primary/30'
+                    }`}
+                    aria-label={`Фото ${index + 1}`}
+                  />
+                ))}
+              </div>
             </div>
           </div>
           
           {/* Right side - Info */}
-          <div className="p-6 lg:p-10 space-y-6 flex flex-col">
-            <div className="space-y-5">
-              <div className="space-y-2">
-                <h1 className="text-2xl md:text-3xl lg:text-4xl font-light text-primary leading-[1.2] tracking-tight">
-                  {product.name}
-                </h1>
-                <div className="h-px w-12 bg-primary/20"></div>
-              </div>
-              
-              <div className="text-2xl md:text-3xl font-light text-primary tracking-tight">
-                {product.price.toLocaleString('ru-RU')} ₽
-              </div>
-              
-              <Button
-                size="lg"
-                className="w-full px-12 rounded-full text-sm py-5 bg-primary hover:bg-primary/90 transition-all hover:scale-[1.02] shadow-lg hover:shadow-xl"
-                onClick={() => {
-                  addToCart(product);
-                  onClose();
-                }}
-              >
-                добавить в корзину
-              </Button>
+          <div className="lg:w-1/2 p-6 lg:p-12 lg:pt-12 space-y-5">
+            <div className="space-y-2">
+              <h1 className="text-2xl md:text-3xl font-light text-primary leading-[1.2] tracking-tight">
+                {product.name}
+              </h1>
+              <div className="h-px w-12 bg-primary/20"></div>
             </div>
             
-            <div className="space-y-5 flex-1">
-              <div className="space-y-3">
-                <p className="text-base md:text-lg text-moss/80 leading-[1.7] font-light">
-                  {storyText}
-                </p>
-              </div>
+            <div className="text-2xl md:text-3xl font-light text-primary tracking-tight">
+              {product.price.toLocaleString('ru-RU')} ₽
+            </div>
+            
+            <Button
+              size="lg"
+              className="w-full max-w-xs px-8 rounded-full text-sm py-4 bg-primary hover:bg-primary/90 transition-all hover:scale-[1.02] shadow-lg hover:shadow-xl"
+              onClick={() => {
+                addToCart(product);
+                onClose();
+              }}
+            >
+              добавить в корзину
+            </Button>
+            
+            <div className="space-y-5 pt-4">
+              <p className="text-base md:text-lg text-moss/80 leading-[1.7] font-light">
+                {storyText}
+              </p>
               
               {product.composition && (
                 <div className="space-y-3 pt-5 border-t border-primary/10">
