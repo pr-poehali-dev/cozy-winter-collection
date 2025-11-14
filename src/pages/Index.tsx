@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import { Product, CartItem } from "@/components/shop/types";
 import { heroSlides, products } from "@/components/shop/data";
 import Header from "@/components/shop/Header";
@@ -12,10 +13,10 @@ import ComingSoon from "@/components/ComingSoon";
 const DEV_MODE = false;
 
 export default function Index() {
+  const [searchParams] = useSearchParams();
   const launchDate = new Date("2025-12-01T12:00:00+03:00");
-  const urlParams = new URLSearchParams(window.location.search);
-  const isPreviewMode = urlParams.has("preview");
-  const secretKeyValue = urlParams.get("key");
+  const isPreviewMode = searchParams.has("preview");
+  const secretKeyValue = searchParams.get("key");
   const hasSecretKey = secretKeyValue === "azaluk2025";
   
   console.log('Secret key check:', { secretKeyValue, hasSecretKey, isPreviewMode, DEV_MODE });
