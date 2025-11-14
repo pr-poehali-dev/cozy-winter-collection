@@ -70,8 +70,7 @@ export default function Reviews() {
                       index === 1 ? 'md:min-w-[240px] md:max-w-[280px]' : 'md:min-w-[180px] md:max-w-[200px]'
                     }`}>
                       <p className="text-sm text-primary/80 leading-relaxed font-light mb-3">
-                        {review.text}{' '}
-                        <a 
+                        {review.text}<a 
                           href="https://t.me/azalukk" 
                           target="_blank" 
                           rel="noopener noreferrer"
