@@ -60,7 +60,7 @@ export default function Reviews() {
                       <img 
                         src={review.image} 
                         alt={review.author}
-                        className="w-full max-w-xs object-cover"
+                        className="w-full max-w-[200px] md:max-w-xs object-cover"
                       />
                     </button>
                   ) : (
@@ -108,12 +108,12 @@ export default function Reviews() {
         )}
         
         {/* CTA to Telegram */}
-        <div className="text-center mt-12 pt-8 border-t border-primary/10">
+        <div className="text-center mt-8">
           <a 
             href="https://t.me/azalukk" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-white/80 hover:bg-white rounded-full shadow-sm hover:shadow-md transition-all font-light text-sm text-primary group"
+            className="inline-flex items-center gap-2 text-[#8B4513] hover:text-[#6B3410] transition-colors font-light text-sm group"
           >
             <Icon name="Send" size={16} strokeWidth={1.5} className="group-hover:translate-x-1 transition-transform" />
             <span>читать все отзывы в телеграме</span>
