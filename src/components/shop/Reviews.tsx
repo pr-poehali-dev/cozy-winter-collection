@@ -29,24 +29,24 @@ export default function Reviews() {
   const [expandedImage, setExpandedImage] = useState(false);
 
   return (
-    <section id="reviews" className="py-16 px-6 md:px-8 bg-gradient-to-br from-card via-secondary/20 to-card relative overflow-hidden">
+    <section id="reviews" className="py-12 md:py-16 px-6 md:px-8 bg-gradient-to-br from-card via-secondary/20 to-card relative overflow-hidden">
       <div className="absolute top-6 left-8 text-2xl opacity-10 animate-pulse">✨</div>
       <div className="absolute top-10 right-12 text-xl opacity-10">💫</div>
       <div className="absolute bottom-8 left-16 text-xl opacity-10">🤍</div>
       <div className="absolute bottom-6 right-8 text-2xl opacity-10 animate-pulse">💗</div>
       
-      <div className="max-w-2xl mx-auto relative">
+      <div className="max-w-5xl mx-auto relative">
         <h2 className="text-3xl md:text-4xl font-light text-primary text-center mb-3">отзывы 💗</h2>
-        <p className="text-center text-muted-foreground mb-12 font-light text-sm">
+        <p className="text-center text-muted-foreground mb-8 md:mb-10 font-light text-sm">
           что говорят те, кто уже хранит наши вещи
         </p>
         
         {/* Chat Messages */}
-        <div className="space-y-1 mb-8">
-          {reviews.map((review) => (
+        <div className="flex flex-col md:flex-row md:items-start md:gap-6 md:justify-center space-y-1 md:space-y-0 mb-6 md:mb-8">
+          {reviews.map((review, index) => (
             <div key={review.id} className="animate-in fade-in slide-in-from-left duration-500">
               {/* Message Bubble */}
-              <div className="max-w-md">
+              <div className={`max-w-md ${index === 0 ? 'md:max-w-[240px]' : 'md:max-w-sm'}`}>
                 <div className="relative">
                   {/* Tail at bottom left */}
                   <div className={`absolute -left-2 bottom-4 w-0 h-0 border-t-[8px] border-t-transparent border-r-[12px] border-b-[8px] border-b-transparent ${
@@ -62,7 +62,7 @@ export default function Reviews() {
                       <img 
                         src={review.image} 
                         alt={review.author}
-                        className="w-full max-w-[200px] md:max-w-xs object-cover rounded-2xl rounded-bl-sm"
+                        className="w-full max-w-[200px] md:max-w-[240px] object-cover rounded-2xl rounded-bl-sm"
                       />
                     </button>
                   ) : (
