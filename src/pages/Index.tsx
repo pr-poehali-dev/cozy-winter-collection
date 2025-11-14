@@ -15,7 +15,10 @@ export default function Index() {
   const launchDate = new Date("2025-12-01T12:00:00+03:00");
   const urlParams = new URLSearchParams(window.location.search);
   const isPreviewMode = urlParams.has("preview");
-  const hasSecretKey = urlParams.get("key") === "azaluk2025";
+  const secretKeyValue = urlParams.get("key");
+  const hasSecretKey = secretKeyValue === "azaluk2025";
+  
+  console.log('Secret key check:', { secretKeyValue, hasSecretKey, isPreviewMode, DEV_MODE });
   
   const [isLaunched, setIsLaunched] = useState(
     DEV_MODE || isPreviewMode || hasSecretKey || new Date() >= launchDate,
