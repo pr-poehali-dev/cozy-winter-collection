@@ -55,12 +55,12 @@ export default function Reviews() {
                   {review.type === 'image' ? (
                     <button
                       onClick={() => setExpandedImage(!expandedImage)}
-                      className="relative group overflow-hidden rounded-2xl rounded-bl-sm shadow-sm"
+                      className="relative group overflow-hidden rounded-2xl shadow-sm"
                     >
                       <img 
                         src={review.image} 
                         alt={review.author}
-                        className="w-full max-w-[200px] md:max-w-xs object-cover"
+                        className="w-full max-w-[200px] md:max-w-xs object-cover rounded-2xl rounded-bl-sm"
                       />
                     </button>
                   ) : (
