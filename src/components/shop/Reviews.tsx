@@ -2,7 +2,7 @@ import Icon from '@/components/ui/icon';
 
 export default function Reviews() {
   return (
-    <section id="reviews" className="py-10 px-6 md:px-8 bg-white relative overflow-hidden">
+    <section id="reviews" className="py-10 px-6 md:px-8 bg-card relative overflow-hidden">
       <div className="absolute top-6 left-8 text-xl opacity-15">✨</div>
       <div className="absolute top-10 right-12 text-lg opacity-10">💫</div>
       <div className="absolute bottom-8 left-16 text-lg opacity-10">🤍</div>
