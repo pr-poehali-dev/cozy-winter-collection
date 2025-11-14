@@ -91,19 +91,24 @@ export default function ProductDetails({ product, onClose, addToCart }: ProductD
           </div>
           
           {/* Right side - Info */}
-          <div className="p-8 lg:p-12 space-y-8 flex flex-col">
-            <div className="space-y-6">
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-light text-primary leading-relaxed">
-                {product.name}
-              </h1>
+          <div className="p-8 lg:p-16 space-y-10 flex flex-col bg-gradient-to-b from-white to-cream/20">
+            <div className="space-y-8">
+              <div className="space-y-4">
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-light text-primary leading-[1.2] tracking-tight">
+                  {product.name}
+                </h1>
+                <div className="h-px w-16 bg-primary/20"></div>
+              </div>
               
-              <div className="text-3xl md:text-4xl font-light text-primary">
-                {product.price.toLocaleString('ru-RU')} ₽
+              <div className="inline-block">
+                <div className="text-4xl md:text-5xl font-light text-primary tracking-tight">
+                  {product.price.toLocaleString('ru-RU')} ₽
+                </div>
               </div>
               
               <Button
                 size="lg"
-                className="w-full md:w-auto px-12 rounded-full text-base py-6 bg-primary hover:bg-primary/90 transition-colors"
+                className="w-full sm:w-auto px-16 rounded-full text-base py-7 bg-primary hover:bg-primary/90 transition-all hover:scale-[1.02] shadow-lg hover:shadow-xl"
                 onClick={() => {
                   addToCart(product);
                   onClose();
@@ -113,17 +118,17 @@ export default function ProductDetails({ product, onClose, addToCart }: ProductD
               </Button>
             </div>
             
-            <div className="space-y-6 flex-1">
-              <div className="space-y-3">
-                <p className="text-base md:text-lg text-moss/70 leading-relaxed">
+            <div className="space-y-8 flex-1 pt-4">
+              <div className="space-y-4">
+                <p className="text-lg md:text-xl text-moss/80 leading-[1.8] font-light">
                   {storyText}
                 </p>
               </div>
               
               {product.composition && (
-                <div className="space-y-3 pt-6 border-t border-border">
-                  <h3 className="text-xl font-light text-primary">состав</h3>
-                  <p className="text-base text-moss/70 leading-relaxed whitespace-pre-line">
+                <div className="space-y-4 pt-8 border-t border-primary/10">
+                  <h3 className="text-2xl font-light text-primary tracking-wide">состав</h3>
+                  <p className="text-base md:text-lg text-moss/70 leading-[1.8] whitespace-pre-line font-light">
                     {product.composition}
                   </p>
                 </div>
