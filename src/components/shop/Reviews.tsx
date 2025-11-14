@@ -46,7 +46,7 @@ export default function Reviews() {
           {reviews.map((review, index) => (
             <div key={review.id} className="animate-in fade-in slide-in-from-left duration-500">
               {/* Message Bubble */}
-              <div className={`max-w-md ${index === 0 ? 'md:max-w-[240px]' : 'md:max-w-sm'}`}>
+              <div className="max-w-md md:max-w-none">
                 <div className="relative">
                   {/* Tail at bottom left */}
                   <div className={`absolute -left-2 bottom-4 w-0 h-0 border-t-[8px] border-t-transparent border-r-[12px] border-b-[8px] border-b-transparent ${
@@ -66,19 +66,19 @@ export default function Reviews() {
                       />
                     </button>
                   ) : (
-                    <div className="bg-white rounded-2xl rounded-bl-sm p-4 shadow-sm">
-                      <p className="text-sm text-primary/80 leading-relaxed font-light mb-2">
+                    <div className="bg-white rounded-2xl rounded-bl-sm p-4 md:p-5 shadow-sm md:h-[320px] md:w-fit md:min-w-[200px] md:max-w-[280px] flex flex-col justify-between">
+                      <p className="text-sm text-primary/80 leading-relaxed font-light">
                         {review.text}{' '}
                         <a 
                           href="https://t.me/azalukk" 
                           target="_blank" 
                           rel="noopener noreferrer"
-                          className="text-[#C41E3A] hover:text-[#A01628] transition-colors text-xs"
+                          className="text-[#C41E3A] hover:text-[#A01628] transition-colors text-xs whitespace-nowrap"
                         >
                           ...далее
                         </a>
                       </p>
-                      <div className="flex items-center justify-between">
+                      <div className="flex items-center justify-between mt-3">
                         <p className="text-xs text-primary/50 font-light">
                           {review.author}
                         </p>
