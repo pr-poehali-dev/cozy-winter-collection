@@ -30,7 +30,7 @@ const reviews = [
 ];
 
 export default function Reviews() {
-  const [expandedImage, setExpandedImage] = useState<number | null>(null);
+  const [expandedImage, setExpandedImage] = useState(false);
 
   return (
     <section id="reviews" className="py-16 px-6 md:px-8 bg-gradient-to-br from-card via-secondary/20 to-card relative overflow-hidden">
@@ -48,74 +48,78 @@ export default function Reviews() {
         {/* Chat Messages */}
         <div className="space-y-4 mb-8">
           {reviews.map((review) => (
-            <div key={review.id} className="flex gap-3 items-start animate-in fade-in slide-in-from-left duration-500">
-              {/* Avatar */}
-              <div className="flex-shrink-0">
-                {review.avatar ? (
-                  <button
-                    onClick={() => setExpandedImage(expandedImage === review.id ? null : review.id)}
-                    className="relative group"
-                  >
-                    <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-white shadow-md hover:scale-110 transition-transform">
-                      <img 
-                        src={review.avatar} 
-                        alt={review.author}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                    {expandedImage === review.id && (
-                      <div className="absolute left-0 top-12 z-10 animate-in fade-in zoom-in duration-200">
-                        <div className="relative">
-                          <img 
-                            src={review.avatar} 
-                            alt={review.author}
-                            className="w-64 h-80 object-cover rounded-2xl shadow-2xl border-4 border-white"
-                          />
-                          <button
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              setExpandedImage(null);
-                            }}
-                            className="absolute -top-2 -right-2 w-8 h-8 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-100"
-                          >
-                            <Icon name="X" size={16} />
-                          </button>
-                        </div>
-                      </div>
-                    )}
-                  </button>
-                ) : (
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center text-primary font-light text-sm border-2 border-white shadow-md">
-                    {review.author[0]}
-                  </div>
-                )}
-              </div>
-              
+            <div key={review.id} className="animate-in fade-in slide-in-from-left duration-500">
               {/* Message Bubble */}
-              <div className="flex-1 max-w-md">
+              <div className="max-w-md">
                 <div className="relative">
-                  {/* Tail */}
-                  <div className="absolute -left-2 top-3 w-0 h-0 border-t-[8px] border-t-transparent border-r-[12px] border-r-white border-b-[8px] border-b-transparent"></div>
+                  {/* Tail at bottom left */}
+                  <div className="absolute -left-2 bottom-3 w-0 h-0 border-t-[8px] border-t-transparent border-r-[12px] border-r-white border-b-[8px] border-b-transparent"></div>
                   
                   {/* Bubble */}
-                  <div className="bg-white rounded-2xl rounded-tl-sm p-4 shadow-sm">
-                    <p className="text-sm text-primary/80 leading-relaxed font-light mb-2">
-                      {review.text}
-                    </p>
-                    <div className="flex items-center justify-between">
-                      <p className="text-xs text-primary/50 font-light">
-                        {review.author}
-                      </p>
-                      <p className="text-xs text-primary/30 font-light">
-                        {review.time}
-                      </p>
+                  {review.avatar ? (
+                    <div className="bg-white rounded-2xl rounded-bl-sm p-2 shadow-sm">
+                      <button
+                        onClick={() => setExpandedImage(!expandedImage)}
+                        className="relative group w-full"
+                      >
+                        <img 
+                          src={review.avatar} 
+                          alt={review.author}
+                          className="w-full max-w-xs rounded-xl object-cover"
+                        />
+                      </button>
+                      <div className="px-2 py-2 flex items-center justify-between">
+                        <p className="text-xs text-primary/50 font-light">
+                          {review.author}
+                        </p>
+                        <p className="text-xs text-primary/30 font-light">
+                          {review.time}
+                        </p>
+                      </div>
                     </div>
-                  </div>
+                  ) : (
+                    <div className="bg-white rounded-2xl rounded-bl-sm p-4 shadow-sm">
+                      <p className="text-sm text-primary/80 leading-relaxed font-light mb-2">
+                        {review.text}
+                      </p>
+                      <div className="flex items-center justify-between">
+                        <p className="text-xs text-primary/50 font-light">
+                          {review.author}
+                        </p>
+                        <p className="text-xs text-primary/30 font-light">
+                          {review.time}
+                        </p>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
           ))}
         </div>
+        
+        {/* Fullscreen Image */}
+        {expandedImage && (
+          <div 
+            className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4"
+            onClick={() => setExpandedImage(false)}
+          >
+            <div className="relative max-w-2xl w-full">
+              <img 
+                src={reviews[0].avatar} 
+                alt={reviews[0].author}
+                className="w-full h-auto rounded-2xl"
+                onClick={(e) => e.stopPropagation()}
+              />
+              <button
+                onClick={() => setExpandedImage(false)}
+                className="absolute -top-4 -right-4 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-100"
+              >
+                <Icon name="X" size={20} />
+              </button>
+            </div>
+          </div>
+        )}
         
         {/* CTA to Telegram */}
         <div className="text-center mt-12 pt-8 border-t border-primary/10">
