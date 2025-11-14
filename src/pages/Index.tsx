@@ -13,11 +13,12 @@ const DEV_MODE = true;
 
 export default function Index() {
   const launchDate = new Date("2025-12-01T12:00:00+03:00");
-  const isPreviewMode = new URLSearchParams(window.location.search).has(
-    "preview",
-  );
+  const urlParams = new URLSearchParams(window.location.search);
+  const isPreviewMode = urlParams.has("preview");
+  const hasSecretKey = urlParams.get("key") === "azaluk2025";
+  
   const [isLaunched, setIsLaunched] = useState(
-    DEV_MODE || isPreviewMode || new Date() >= launchDate,
+    DEV_MODE || isPreviewMode || hasSecretKey || new Date() >= launchDate,
   );
 
   const [selectedCategory, setSelectedCategory] = useState<string>("все");
@@ -28,7 +29,7 @@ export default function Index() {
 
   useEffect(() => {
     const checkLaunch = () => {
-      if (!DEV_MODE && !isPreviewMode) {
+      if (!DEV_MODE && !isPreviewMode && !hasSecretKey) {
         setIsLaunched(new Date() >= launchDate);
       }
     };
@@ -43,7 +44,7 @@ export default function Index() {
       clearInterval(interval);
       clearInterval(launchTimer);
     };
-  }, [isPreviewMode]);
+  }, [isPreviewMode, hasSecretKey]);
 
   const categories = [
     "все",
