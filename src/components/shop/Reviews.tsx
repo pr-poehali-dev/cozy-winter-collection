@@ -66,8 +66,8 @@ export default function Reviews() {
                       />
                     </button>
                   ) : (
-                    <div className="bg-white rounded-2xl rounded-bl-sm p-4 shadow-sm h-[240px] md:h-[320px] flex flex-col justify-between">
-                      <p className="text-sm text-primary/80 leading-relaxed font-light">
+                    <div className="bg-white rounded-2xl rounded-bl-sm p-4 shadow-sm">
+                      <p className="text-sm text-primary/80 leading-relaxed font-light mb-2">
                         {review.text}{' '}
                         <a 
                           href="https://t.me/azalukk" 
