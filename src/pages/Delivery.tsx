@@ -32,7 +32,7 @@ export default function DeliveryPage() {
   const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
-    <div className="min-h-screen bg-[#f5f3f0] flex flex-col">
+    <div className="min-h-screen flex flex-col">
       <Header
         cart={cart}
         isCartOpen={isCartOpen}
