@@ -2,28 +2,29 @@ import Icon from '@/components/ui/icon';
 
 export default function Footer() {
   return (
-    <footer className="py-8 px-4 bg-primary">
+    <footer className="py-4 px-4 bg-primary">
       <div className="container mx-auto max-w-6xl">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-          <h3 className="text-xl font-light tracking-wide text-[#F5F1E8]">azaluk</h3>
-          
-          <div className="flex items-center gap-6">
-            <a 
-              href="https://youtube.com" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-[#F5F1E8] hover:text-[#F5F1E8]/70 transition-colors"
-            >
-              <Icon name="Youtube" size={18} strokeWidth={1.5} />
-            </a>
-            <a 
-              href="https://t.me" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-[#F5F1E8] hover:text-[#F5F1E8]/70 transition-colors"
-            >
-              <Icon name="Send" size={18} strokeWidth={1.5} />
-            </a>
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-4">
+            <h3 className="text-xl font-light tracking-wide text-[#F5F1E8]">azaluk</h3>
+            <div className="flex items-center gap-3">
+              <a 
+                href="https://youtube.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-[#F5F1E8] hover:text-[#F5F1E8]/70 transition-colors"
+              >
+                <Icon name="Youtube" size={18} strokeWidth={1.5} />
+              </a>
+              <a 
+                href="https://t.me" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-[#F5F1E8] hover:text-[#F5F1E8]/70 transition-colors"
+              >
+                <Icon name="Send" size={18} strokeWidth={1.5} />
+              </a>
+            </div>
           </div>
           
           <div className="flex items-center gap-6 text-xs font-light text-[#F5F1E8]/80">
@@ -37,11 +38,9 @@ export default function Footer() {
               Обработка ПД
             </a>
           </div>
-        </div>
-        
-        <div className="mt-6 text-center">
+          
           <p className="text-xs font-light text-[#F5F1E8]/70">
-            ИП Яроцкая Азалия Наильевна
+            ФЛ Яроцкая Азалия Наильевна
           </p>
         </div>
       </div>
