@@ -34,7 +34,7 @@ export default function About() {
                   <Icon name="Menu" size={20} className="text-primary" strokeWidth={1.5} />
                 </button>
               </SheetTrigger>
-              <SheetContent side="left" className="w-64">
+              <SheetContent side="right" className="w-64">
                 <SheetHeader>
                   <SheetTitle className="text-xl font-light text-primary">меню</SheetTitle>
                 </SheetHeader>
