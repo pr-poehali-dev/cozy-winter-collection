@@ -12,7 +12,7 @@ interface TimeLeft {
 }
 
 export default function ComingSoon() {
-  const DEV_MODE = true;
+  const DEV_MODE = false;
   const launchDate = new Date("2025-12-01T12:00:00+03:00");
 
   const calculateTimeLeft = (): TimeLeft => {
