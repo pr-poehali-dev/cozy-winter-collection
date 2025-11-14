@@ -4,28 +4,24 @@ import Icon from '@/components/ui/icon';
 const reviews = [
   {
     id: 1,
-    text: "Спасибо большое!!! Это лучшее приобретение этой осени. Ношу его не снимая. Очень тепло и уютно ❤️ Наконец-то решена проблема с укладкой и челкой 😍 Все у меня спрашивают, где я заказывала, только и успеваю отбиваться 😂",
+    type: "image",
+    image: "https://cdn.poehali.dev/files/73260439-3326-4728-bed2-076f231d3fdc.jpg",
     author: "Анастасия",
-    avatar: "https://cdn.poehali.dev/files/73260439-3326-4728-bed2-076f231d3fdc.jpg",
     time: "14:23"
   },
   {
     id: 2,
-    text: "Косынка пришла в самой красивой упаковке, которую я когда-либо видела. Носить её — как обнять что-то тёплое и родное 🤍",
-    author: "Мария",
-    time: "11:45"
+    type: "text",
+    text: "Спасибо большое!!! Это лучшее приобретение этой осени. Ношу его не снимая. Очень тепло и уютно ❤️ Наконец-то решена проблема с укладкой и челкой 😍 Все у меня спрашивают, где я заказывала, только и успеваю отбиваться 😂",
+    author: "Анастасия",
+    time: "14:24"
   },
   {
     id: 3,
-    text: "Чепчик идеален! Мягкий, уютный, прям душевная вещь. Ношу каждый день, и каждый раз чувствую тепло и заботу ✨",
-    author: "Даша",
-    time: "16:12"
-  },
-  {
-    id: 4,
-    text: "Получила заказ — не могу нарадоваться! Качество невероятное, видно что каждая деталь сделана с любовью 💗",
-    author: "Ксения",
-    time: "09:30"
+    type: "text",
+    text: "Косынка пришла в самой красивой упаковке, которую я когда-либо видела. Носить её — как обнять что-то тёплое и родное 🤍",
+    author: "Мария",
+    time: "11:45"
   }
 ];
 
@@ -46,37 +42,27 @@ export default function Reviews() {
         </p>
         
         {/* Chat Messages */}
-        <div className="space-y-4 mb-8">
+        <div className="space-y-3 mb-8">
           {reviews.map((review) => (
             <div key={review.id} className="animate-in fade-in slide-in-from-left duration-500">
               {/* Message Bubble */}
               <div className="max-w-md">
                 <div className="relative">
                   {/* Tail at bottom left */}
-                  <div className="absolute -left-2 bottom-3 w-0 h-0 border-t-[8px] border-t-transparent border-r-[12px] border-r-white border-b-[8px] border-b-transparent"></div>
+                  <div className="absolute -left-2 bottom-2 w-0 h-0 border-t-[8px] border-t-transparent border-r-[12px] border-r-white border-b-[8px] border-b-transparent"></div>
                   
                   {/* Bubble */}
-                  {review.avatar ? (
-                    <div className="bg-white rounded-2xl rounded-bl-sm p-2 shadow-sm">
-                      <button
-                        onClick={() => setExpandedImage(!expandedImage)}
-                        className="relative group w-full"
-                      >
-                        <img 
-                          src={review.avatar} 
-                          alt={review.author}
-                          className="w-full max-w-xs rounded-xl object-cover"
-                        />
-                      </button>
-                      <div className="px-2 py-2 flex items-center justify-between">
-                        <p className="text-xs text-primary/50 font-light">
-                          {review.author}
-                        </p>
-                        <p className="text-xs text-primary/30 font-light">
-                          {review.time}
-                        </p>
-                      </div>
-                    </div>
+                  {review.type === 'image' ? (
+                    <button
+                      onClick={() => setExpandedImage(!expandedImage)}
+                      className="relative group overflow-hidden rounded-2xl rounded-bl-sm shadow-sm"
+                    >
+                      <img 
+                        src={review.image} 
+                        alt={review.author}
+                        className="w-full max-w-xs object-cover"
+                      />
+                    </button>
                   ) : (
                     <div className="bg-white rounded-2xl rounded-bl-sm p-4 shadow-sm">
                       <p className="text-sm text-primary/80 leading-relaxed font-light mb-2">
@@ -106,7 +92,7 @@ export default function Reviews() {
           >
             <div className="relative max-w-2xl w-full">
               <img 
-                src={reviews[0].avatar} 
+                src={reviews[0].image} 
                 alt={reviews[0].author}
                 className="w-full h-auto rounded-2xl"
                 onClick={(e) => e.stopPropagation()}
