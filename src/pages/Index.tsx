@@ -10,7 +10,7 @@ import Reviews from "@/components/shop/Reviews";
 import Footer from "@/components/shop/Footer";
 import ComingSoon from "@/components/ComingSoon";
 
-const DEV_MODE = false;
+const DEV_MODE = true;
 
 export default function Index() {
   const [searchParams] = useSearchParams();
@@ -18,9 +18,14 @@ export default function Index() {
   const isPreviewMode = searchParams.has("preview");
   const secretKeyValue = searchParams.get("key");
   const hasSecretKey = secretKeyValue === "azaluk2025";
-  
-  console.log('Secret key check:', { secretKeyValue, hasSecretKey, isPreviewMode, DEV_MODE });
-  
+
+  console.log("Secret key check:", {
+    secretKeyValue,
+    hasSecretKey,
+    isPreviewMode,
+    DEV_MODE,
+  });
+
   const [isLaunched, setIsLaunched] = useState(
     DEV_MODE || isPreviewMode || hasSecretKey || new Date() >= launchDate,
   );
