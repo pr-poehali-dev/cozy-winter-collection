@@ -42,9 +42,9 @@ export default function ProductDetails({ product, onClose, addToCart }: ProductD
           <Icon name="X" size={24} className="text-primary" strokeWidth={1.5} />
         </button>
         
-        <div className="grid lg:grid-cols-2 min-h-screen">
+        <div className="grid lg:grid-cols-2 min-h-screen bg-gradient-to-br from-card via-secondary/30 to-card">
           {/* Left side - Image */}
-          <div className="relative bg-secondary/40 flex items-center justify-center p-8 lg:p-12">
+          <div className="relative flex items-center justify-center p-8 lg:p-12">
             <div className="w-full max-w-2xl space-y-6">
               <div className="relative overflow-hidden rounded-2xl shadow-lg bg-card">
                 <img
@@ -91,7 +91,7 @@ export default function ProductDetails({ product, onClose, addToCart }: ProductD
           </div>
           
           {/* Right side - Info */}
-          <div className="p-6 lg:p-10 space-y-6 flex flex-col bg-gradient-to-b from-card to-secondary/30">
+          <div className="p-6 lg:p-10 space-y-6 flex flex-col">
             <div className="space-y-5">
               <div className="space-y-2">
                 <h1 className="text-2xl md:text-3xl lg:text-4xl font-light text-primary leading-[1.2] tracking-tight">
@@ -100,15 +100,13 @@ export default function ProductDetails({ product, onClose, addToCart }: ProductD
                 <div className="h-px w-12 bg-primary/20"></div>
               </div>
               
-              <div className="inline-block">
-                <div className="text-2xl md:text-3xl font-light text-primary tracking-tight">
-                  {product.price.toLocaleString('ru-RU')} ₽
-                </div>
+              <div className="text-2xl md:text-3xl font-light text-primary tracking-tight">
+                {product.price.toLocaleString('ru-RU')} ₽
               </div>
               
               <Button
                 size="lg"
-                className="w-full sm:w-auto px-12 rounded-full text-sm py-5 bg-primary hover:bg-primary/90 transition-all hover:scale-[1.02] shadow-lg hover:shadow-xl"
+                className="w-full px-12 rounded-full text-sm py-5 bg-primary hover:bg-primary/90 transition-all hover:scale-[1.02] shadow-lg hover:shadow-xl"
                 onClick={() => {
                   addToCart(product);
                   onClose();
