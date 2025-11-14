@@ -66,10 +66,10 @@ export default function Reviews() {
                       />
                     </button>
                   ) : (
-                    <div className={`bg-white rounded-2xl rounded-bl-sm p-4 md:p-5 shadow-sm md:h-[320px] md:w-fit flex flex-col justify-between ${
+                    <div className={`bg-white rounded-2xl rounded-bl-sm p-4 md:p-5 shadow-sm md:h-[320px] md:w-fit flex flex-col justify-end ${
                       index === 1 ? 'md:min-w-[240px] md:max-w-[280px]' : 'md:min-w-[180px] md:max-w-[200px]'
                     }`}>
-                      <p className="text-sm text-primary/80 leading-relaxed font-light">
+                      <p className="text-sm text-primary/80 leading-relaxed font-light mb-3">
                         {review.text}{' '}
                         <a 
                           href="https://t.me/azalukk" 
@@ -80,7 +80,7 @@ export default function Reviews() {
                           ...далее
                         </a>
                       </p>
-                      <div className="flex items-center justify-between mt-3">
+                      <div className="flex items-center justify-between">
                         <p className="text-xs text-primary/50 font-light">
                           {review.author}
                         </p>
