@@ -32,15 +32,15 @@ export default function Personal() {
         cartCount={0}
       />
       
-      <main className="flex-1 py-16 px-4">
-        <div className="container mx-auto max-w-3xl">
-          <h1 className="text-3xl md:text-4xl font-light tracking-wide text-primary mb-8">
+      <main className="flex-1 pt-24 pb-20 px-4">
+        <div className="container mx-auto max-w-4xl">
+          <h1 className="text-4xl md:text-5xl text-primary mb-12" style={{ fontFamily: 'Cormorant, serif', fontWeight: 300, letterSpacing: '0.02em' }}>
             Обработка персональных данных
           </h1>
           
-          <div className="prose prose-sm md:prose-base max-w-none text-gray-700 font-light leading-relaxed">
+          <div className="prose prose-lg max-w-none prose-headings:font-serif prose-headings:text-primary prose-h1:text-4xl prose-h1:mb-6 prose-h1:mt-10 prose-h2:text-3xl prose-h2:mb-5 prose-h2:mt-10 prose-h3:text-2xl prose-h3:mb-4 prose-h3:mt-8 prose-h4:text-xl prose-h4:mb-3 prose-h4:mt-6 prose-p:text-gray-700 prose-p:text-base prose-p:leading-7 prose-p:mb-4 prose-ul:my-4 prose-ul:ml-6 prose-li:text-gray-700 prose-li:leading-7 prose-li:mb-2 prose-strong:text-primary prose-strong:font-medium prose-a:text-primary prose-a:underline hover:prose-a:text-primary/80" style={{ fontFamily: 'Raleway, sans-serif', fontWeight: 300 }}>
             {loading ? (
-              <p>Загрузка...</p>
+              <p className="text-center text-gray-500">Загрузка...</p>
             ) : (
               <ReactMarkdown>{content}</ReactMarkdown>
             )}
