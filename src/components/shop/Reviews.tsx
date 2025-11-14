@@ -49,7 +49,9 @@ export default function Reviews() {
               <div className="max-w-md">
                 <div className="relative">
                   {/* Tail at bottom left */}
-                  <div className="absolute -left-2 bottom-4 w-0 h-0 border-t-[8px] border-t-transparent border-r-[12px] border-r-[#8B7355] border-b-[8px] border-b-transparent"></div>
+                  <div className={`absolute -left-2 bottom-4 w-0 h-0 border-t-[8px] border-t-transparent border-r-[12px] border-b-[8px] border-b-transparent ${
+                    review.type === 'image' ? 'border-r-[#8B7355]' : 'border-r-white'
+                  }`}></div>
                   
                   {/* Bubble */}
                   {review.type === 'image' ? (
