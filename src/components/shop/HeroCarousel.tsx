@@ -67,7 +67,7 @@ export default function HeroCarousel({ slides, currentSlide, setCurrentSlide }: 
       
       <button
         onClick={() => setCurrentSlide((currentSlide - 1 + slides.length) % slides.length)}
-        className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white/20 hover:bg-white/30 backdrop-blur-sm flex items-center justify-center text-white transition-all"
+        className="absolute left-4 bottom-12 md:top-1/2 md:-translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white/20 hover:bg-white/30 backdrop-blur-sm flex items-center justify-center text-white transition-all"
         aria-label="предыдущий слайд"
       >
         <Icon name="ChevronLeft" size={24} />
@@ -75,7 +75,7 @@ export default function HeroCarousel({ slides, currentSlide, setCurrentSlide }: 
       
       <button
         onClick={() => setCurrentSlide((currentSlide + 1) % slides.length)}
-        className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white/20 hover:bg-white/30 backdrop-blur-sm flex items-center justify-center text-white transition-all"
+        className="absolute right-4 bottom-12 md:top-1/2 md:-translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white/20 hover:bg-white/30 backdrop-blur-sm flex items-center justify-center text-white transition-all"
         aria-label="следующий слайд"
       >
         <Icon name="ChevronRight" size={24} />
