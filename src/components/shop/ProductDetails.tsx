@@ -46,7 +46,7 @@ export default function ProductDetails({ product, onClose, addToCart }: ProductD
           
           <div className="flex flex-col lg:flex-row min-h-screen bg-gradient-to-br from-card via-secondary/30 to-card">
             {/* Left side - Carousel */}
-            <div className="lg:w-1/2 p-6 lg:p-12 flex items-center justify-center lg:min-h-screen">
+            <div className="lg:w-1/2 p-6 lg:p-12 pt-20 lg:pt-12 flex items-center justify-center lg:min-h-screen">
               <div className="w-full max-w-xl">
                 <div 
                   className="relative overflow-hidden rounded-2xl shadow-lg bg-card cursor-pointer"
