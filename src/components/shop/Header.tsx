@@ -99,65 +99,63 @@ export default function Header({
                 )}
               </button>
             </SheetTrigger>
-            <SheetContent className="w-full sm:max-w-lg">
-            <SheetHeader>
+            <SheetContent className="w-full sm:max-w-lg flex flex-col">
+            <SheetHeader className="flex-shrink-0">
               <SheetTitle className="text-2xl font-light text-primary">корзина</SheetTitle>
             </SheetHeader>
-            <div className="mt-8 flex flex-col h-full">
-              {cart.length === 0 ? (
-                <div className="flex-1 flex items-center justify-center text-muted-foreground font-light">
-                  <p>корзина пуста</p>
-                </div>
-              ) : (
-                <>
-                  <div className="flex-1 overflow-auto space-y-4">
-                    {cart.map(item => (
-                      <div key={item.id} className="flex gap-4 pb-4 border-b border-border">
-                        <img 
-                          src={item.image} 
-                          alt={item.name}
-                          className="w-20 h-20 object-cover rounded-lg"
-                        />
-                        <div className="flex-1">
-                          <h3 className="font-light text-sm text-primary">{item.name}</h3>
-                          <p className="text-sm text-muted-foreground mt-1 font-light">{item.price.toLocaleString('ru-RU')} р.</p>
-                          <div className="flex items-center gap-2 mt-2">
-                            <button 
-                              className="h-7 w-7 border border-border rounded hover:bg-secondary transition-colors flex items-center justify-center"
-                              onClick={() => updateQuantity(item.id, -1)}
-                            >
-                              <Icon name="Minus" size={12} />
-                            </button>
-                            <span className="text-sm w-8 text-center font-light">{item.quantity}</span>
-                            <button 
-                              className="h-7 w-7 border border-border rounded hover:bg-secondary transition-colors flex items-center justify-center"
-                              onClick={() => updateQuantity(item.id, 1)}
-                            >
-                              <Icon name="Plus" size={12} />
-                            </button>
-                            <button 
-                              className="h-7 w-7 ml-auto hover:bg-secondary rounded transition-colors flex items-center justify-center"
-                              onClick={() => removeFromCart(item.id)}
-                            >
-                              <Icon name="Trash2" size={14} />
-                            </button>
-                          </div>
+            {cart.length === 0 ? (
+              <div className="flex-1 flex items-center justify-center text-muted-foreground font-light">
+                <p>корзина пуста</p>
+              </div>
+            ) : (
+              <>
+                <div className="flex-1 overflow-auto mt-8 space-y-4 pb-4">
+                  {cart.map(item => (
+                    <div key={item.id} className="flex gap-4 pb-4 border-b border-border">
+                      <img 
+                        src={item.image} 
+                        alt={item.name}
+                        className="w-20 h-20 object-cover rounded-lg"
+                      />
+                      <div className="flex-1">
+                        <h3 className="font-light text-sm text-primary">{item.name}</h3>
+                        <p className="text-sm text-muted-foreground mt-1 font-light">{item.price.toLocaleString('ru-RU')} р.</p>
+                        <div className="flex items-center gap-2 mt-2">
+                          <button 
+                            className="h-7 w-7 border border-border rounded hover:bg-secondary transition-colors flex items-center justify-center"
+                            onClick={() => updateQuantity(item.id, -1)}
+                          >
+                            <Icon name="Minus" size={12} />
+                          </button>
+                          <span className="text-sm w-8 text-center font-light">{item.quantity}</span>
+                          <button 
+                            className="h-7 w-7 border border-border rounded hover:bg-secondary transition-colors flex items-center justify-center"
+                            onClick={() => updateQuantity(item.id, 1)}
+                          >
+                            <Icon name="Plus" size={12} />
+                          </button>
+                          <button 
+                            className="h-7 w-7 ml-auto hover:bg-secondary rounded transition-colors flex items-center justify-center"
+                            onClick={() => removeFromCart(item.id)}
+                          >
+                            <Icon name="Trash2" size={14} />
+                          </button>
                         </div>
                       </div>
-                    ))}
-                  </div>
-                  <div className="pt-6 border-t border-border space-y-4">
-                    <div className="flex justify-between items-center text-lg font-light">
-                      <span className="text-muted-foreground">итого:</span>
-                      <span className="text-primary">{cartTotal.toLocaleString('ru-RU')} р.</span>
                     </div>
-                    <button className="w-full py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors text-sm font-light">
-                      оформить заказ
-                    </button>
+                  ))}
+                </div>
+                <div className="flex-shrink-0 pt-6 border-t border-border space-y-4 bg-card">
+                  <div className="flex justify-between items-center text-lg font-light">
+                    <span className="text-muted-foreground">итого:</span>
+                    <span className="text-primary">{cartTotal.toLocaleString('ru-RU')} р.</span>
                   </div>
-                </>
-              )}
-            </div>
+                  <button className="w-full py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors text-sm font-light">
+                    оформить заказ
+                  </button>
+                </div>
+              </>
+            )}
             </SheetContent>
           </Sheet>
         </div>
