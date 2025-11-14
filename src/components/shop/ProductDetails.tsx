@@ -44,7 +44,7 @@ export default function ProductDetails({ product, onClose, addToCart }: ProductD
             <Icon name="X" size={24} className="text-primary" strokeWidth={1.5} />
           </button>
           
-          <div className="flex flex-col lg:flex-row min-h-screen bg-gradient-to-br from-card via-secondary/30 to-card lg:items-start">
+          <div className="flex flex-col lg:flex-row min-h-screen bg-gradient-to-br from-card via-secondary/30 to-card">
             {/* Left side - Carousel */}
             <div className="lg:w-1/2 p-6 lg:p-12 flex items-center justify-center lg:min-h-screen">
               <div className="w-full max-w-xl">
@@ -95,7 +95,7 @@ export default function ProductDetails({ product, onClose, addToCart }: ProductD
             </div>
             
             {/* Right side - Info */}
-            <div className="lg:w-1/2 p-6 lg:p-12 flex items-center">
+            <div className="lg:w-1/2 p-6 lg:p-12 flex items-center lg:items-start lg:pt-[calc(50vh-320px)]">
               <div className="w-full space-y-5">
                 <div className="space-y-2">
                   <h1 className="text-2xl md:text-3xl font-light text-primary leading-[1.2] tracking-tight">
