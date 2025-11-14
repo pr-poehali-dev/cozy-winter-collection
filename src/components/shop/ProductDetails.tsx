@@ -95,8 +95,8 @@ export default function ProductDetails({ product, onClose, addToCart }: ProductD
             </div>
             
             {/* Right side - Info */}
-            <div className="lg:w-1/2 p-6 lg:p-12 flex items-center lg:items-start lg:pt-[calc(50vh-320px)]">
-              <div className="w-full space-y-5">
+            <div className="lg:w-1/2 p-6 lg:p-12 flex items-center lg:items-start lg:pt-[calc(50vh-200px)]">
+              <div className="w-full max-w-md space-y-5">
                 <div className="space-y-2">
                   <h1 className="text-2xl md:text-3xl font-light text-primary leading-[1.2] tracking-tight">
                     {product.name}
