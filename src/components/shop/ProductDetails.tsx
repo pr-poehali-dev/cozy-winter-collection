@@ -91,24 +91,24 @@ export default function ProductDetails({ product, onClose, addToCart }: ProductD
           </div>
           
           {/* Right side - Info */}
-          <div className="p-8 lg:p-16 space-y-10 flex flex-col bg-gradient-to-b from-card to-secondary/30">
-            <div className="space-y-8">
-              <div className="space-y-4">
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-light text-primary leading-[1.2] tracking-tight">
+          <div className="p-6 lg:p-10 space-y-6 flex flex-col bg-gradient-to-b from-card to-secondary/30">
+            <div className="space-y-5">
+              <div className="space-y-2">
+                <h1 className="text-2xl md:text-3xl lg:text-4xl font-light text-primary leading-[1.2] tracking-tight">
                   {product.name}
                 </h1>
-                <div className="h-px w-16 bg-primary/20"></div>
+                <div className="h-px w-12 bg-primary/20"></div>
               </div>
               
               <div className="inline-block">
-                <div className="text-4xl md:text-5xl font-light text-primary tracking-tight">
+                <div className="text-2xl md:text-3xl font-light text-primary tracking-tight">
                   {product.price.toLocaleString('ru-RU')} ₽
                 </div>
               </div>
               
               <Button
                 size="lg"
-                className="w-full sm:w-auto px-16 rounded-full text-base py-7 bg-primary hover:bg-primary/90 transition-all hover:scale-[1.02] shadow-lg hover:shadow-xl"
+                className="w-full sm:w-auto px-12 rounded-full text-sm py-5 bg-primary hover:bg-primary/90 transition-all hover:scale-[1.02] shadow-lg hover:shadow-xl"
                 onClick={() => {
                   addToCart(product);
                   onClose();
@@ -118,17 +118,17 @@ export default function ProductDetails({ product, onClose, addToCart }: ProductD
               </Button>
             </div>
             
-            <div className="space-y-8 flex-1 pt-4">
-              <div className="space-y-4">
-                <p className="text-lg md:text-xl text-moss/80 leading-[1.8] font-light">
+            <div className="space-y-5 flex-1">
+              <div className="space-y-3">
+                <p className="text-base md:text-lg text-moss/80 leading-[1.7] font-light">
                   {storyText}
                 </p>
               </div>
               
               {product.composition && (
-                <div className="space-y-4 pt-8 border-t border-primary/10">
-                  <h3 className="text-2xl font-light text-primary tracking-wide">состав</h3>
-                  <p className="text-base md:text-lg text-moss/70 leading-[1.8] whitespace-pre-line font-light">
+                <div className="space-y-3 pt-5 border-t border-primary/10">
+                  <h3 className="text-lg font-light text-primary tracking-wide">состав</h3>
+                  <p className="text-sm md:text-base text-moss/70 leading-[1.7] whitespace-pre-line font-light">
                     {product.composition}
                   </p>
                 </div>
