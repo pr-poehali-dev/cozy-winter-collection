@@ -1,78 +1,47 @@
-import { Link } from "react-router-dom";
-import Icon from "@/components/ui/icon";
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { useState } from 'react';
+import { CartItem } from "@/components/shop/types";
+import Header from "@/components/shop/Header";
+import Footer from "@/components/shop/Footer";
 
 export default function About() {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [cart, setCart] = useState<CartItem[]>([]);
+  const [isCartOpen, setIsCartOpen] = useState(false);
+
+  const updateQuantity = (productId: number, delta: number) => {
+    setCart((prev) =>
+      prev
+        .map((item) => {
+          if (item.id === productId) {
+            const newQuantity = item.quantity + delta;
+            return newQuantity > 0 ? { ...item, quantity: newQuantity } : item;
+          }
+          return item;
+        })
+        .filter((item) => item.quantity > 0),
+    );
+  };
+
+  const removeFromCart = (productId: number) => {
+    setCart((prev) => prev.filter((item) => item.id !== productId));
+  };
+
+  const cartTotal = cart.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0,
+  );
+  const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
   
   return (
     <div className="min-h-screen">
-      <header className="fixed top-0 left-0 right-0 z-50 bg-card/95 backdrop-blur-sm border-b border-border">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-          <h1 className="text-2xl font-light text-primary tracking-wide">azaluk</h1>
-          
-          <div className="flex items-center gap-6">
-            <nav className="hidden md:flex items-center gap-6">
-              <Link to="/" className="text-sm font-light text-primary hover:text-muted-foreground transition-colors">
-                главная
-              </Link>
-              <Link to="/about" className="text-sm font-light text-primary hover:text-muted-foreground transition-colors">
-                о нас
-              </Link>
-              <a href="/#delivery" className="text-sm font-light text-primary hover:text-muted-foreground transition-colors">
-                оплата и доставка
-              </a>
-              <a href="/#contacts" className="text-sm font-light text-primary hover:text-muted-foreground transition-colors">
-                контакты
-              </a>
-            </nav>
-            
-            <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
-              <SheetTrigger asChild>
-                <button className="md:hidden p-2 hover:bg-secondary rounded-lg transition-colors">
-                  <Icon name="Menu" size={20} className="text-primary" strokeWidth={1.5} />
-                </button>
-              </SheetTrigger>
-              <SheetContent side="right" className="w-64">
-                <SheetHeader>
-                  <SheetTitle className="text-xl font-light text-primary">меню</SheetTitle>
-                </SheetHeader>
-                <nav className="mt-8 flex flex-col gap-6">
-                  <Link 
-                    to="/" 
-                    className="text-sm font-light text-primary hover:text-muted-foreground transition-colors"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    главная
-                  </Link>
-                  <Link 
-                    to="/about" 
-                    className="text-sm font-light text-primary hover:text-muted-foreground transition-colors"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    о нас
-                  </Link>
-                  <a 
-                    href="/#delivery" 
-                    className="text-sm font-light text-primary hover:text-muted-foreground transition-colors"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    оплата и доставка
-                  </a>
-                  <a 
-                    href="/#contacts" 
-                    className="text-sm font-light text-primary hover:text-muted-foreground transition-colors"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    контакты
-                  </a>
-                </nav>
-              </SheetContent>
-            </Sheet>
-          </div>
-        </div>
-      </header>
+      <Header
+        cart={cart}
+        isCartOpen={isCartOpen}
+        setIsCartOpen={setIsCartOpen}
+        updateQuantity={updateQuantity}
+        removeFromCart={removeFromCart}
+        cartTotal={cartTotal}
+        cartCount={cartCount}
+      />
 
       <div className="container mx-auto px-4 pt-24 pb-16 max-w-4xl">
         <div className="space-y-16 animate-in fade-in duration-700">
@@ -167,6 +136,8 @@ export default function About() {
           </div>
         </div>
       </div>
+
+      <Footer />
     </div>
   );
 }
