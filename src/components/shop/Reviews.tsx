@@ -42,7 +42,7 @@ export default function Reviews() {
         </p>
         
         {/* Chat Messages */}
-        <div className="space-y-3 mb-8">
+        <div className="space-y-1 mb-8">
           {reviews.map((review) => (
             <div key={review.id} className="animate-in fade-in slide-in-from-left duration-500">
               {/* Message Bubble */}
@@ -113,7 +113,7 @@ export default function Reviews() {
             href="https://t.me/azalukk" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-[#8B4513] hover:text-[#6B3410] transition-colors font-light text-sm group"
+            className="inline-flex items-center gap-2 text-[#C41E3A] hover:text-[#A01628] underline transition-colors font-light text-sm group"
           >
             <Icon name="Send" size={16} strokeWidth={1.5} className="group-hover:translate-x-1 transition-transform" />
             <span>читать все отзывы в телеграме</span>
