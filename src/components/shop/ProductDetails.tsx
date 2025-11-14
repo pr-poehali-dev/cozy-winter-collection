@@ -23,7 +23,7 @@ export default function ProductDetails({ product, onClose, addToCart }: ProductD
     <Sheet open={!!product} onOpenChange={(open) => !open && onClose()}>
       <SheetContent 
         side="right" 
-        className="w-screen h-screen max-w-none overflow-y-auto bg-white p-0 sm:max-w-none border-0"
+        className="w-screen h-screen max-w-none overflow-y-auto p-0 sm:max-w-none border-0"
         onOpenAutoFocus={(e) => e.preventDefault()}
       >
         <button
@@ -44,9 +44,9 @@ export default function ProductDetails({ product, onClose, addToCart }: ProductD
         
         <div className="grid lg:grid-cols-2 min-h-screen">
           {/* Left side - Image */}
-          <div className="relative bg-cream flex items-center justify-center p-8 lg:p-12">
+          <div className="relative bg-secondary/40 flex items-center justify-center p-8 lg:p-12">
             <div className="w-full max-w-2xl space-y-6">
-              <div className="relative overflow-hidden rounded-2xl shadow-lg bg-white">
+              <div className="relative overflow-hidden rounded-2xl shadow-lg bg-card">
                 <img
                   src={images[currentImageIndex]}
                   alt={product.name}
@@ -91,7 +91,7 @@ export default function ProductDetails({ product, onClose, addToCart }: ProductD
           </div>
           
           {/* Right side - Info */}
-          <div className="p-8 lg:p-16 space-y-10 flex flex-col bg-gradient-to-b from-white to-cream/20">
+          <div className="p-8 lg:p-16 space-y-10 flex flex-col bg-gradient-to-b from-card to-secondary/30">
             <div className="space-y-8">
               <div className="space-y-4">
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-light text-primary leading-[1.2] tracking-tight">

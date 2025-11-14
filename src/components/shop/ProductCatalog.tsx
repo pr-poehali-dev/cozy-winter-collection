@@ -23,7 +23,7 @@ export default function ProductCatalog({
     : products.filter(p => p.category === selectedCategory);
 
   return (
-    <section id="catalog" className="py-16 px-6 md:px-8 bg-gradient-to-br from-white via-orange-50/30 to-amber-50/40">
+    <section id="catalog" className="py-16 px-6 md:px-8">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-wrap gap-3 justify-center mb-12">
           {categories.map(category => (
@@ -44,7 +44,7 @@ export default function ProductCatalog({
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredProducts.map((product) => (
             <div key={product.id} className="group cursor-pointer" onClick={() => onProductClick(product)}>
-              <div className="aspect-square overflow-hidden rounded-2xl mb-4 bg-white shadow-sm border border-border transition-transform group-hover:scale-[1.02]">
+              <div className="aspect-square overflow-hidden rounded-2xl mb-4 bg-card shadow-sm border border-border transition-transform group-hover:scale-[1.02]">
                 <img 
                   src={product.image} 
                   alt={product.name}

@@ -66,12 +66,12 @@ export default function Shop() {
     : products.filter(p => p.category === selectedCategory);
 
   return (
-    <div className="min-h-screen bg-[#f5f3f0]">
-      <header className="bg-[#e8e4df] py-4 px-6">
+    <div className="min-h-screen">
+      <header className="bg-secondary py-4 px-6">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <h1 className="text-2xl font-light text-[#4a4440] tracking-wide">azaluk</h1>
+          <h1 className="text-2xl font-light text-primary tracking-wide">azaluk</h1>
           <button className="p-2">
-            <Icon name="ShoppingBag" size={20} className="text-[#4a4440]" strokeWidth={1.5} />
+            <Icon name="ShoppingBag" size={20} className="text-primary" strokeWidth={1.5} />
           </button>
         </div>
       </header>
@@ -84,8 +84,8 @@ export default function Shop() {
               onClick={() => setSelectedCategory(cat)}
               className={`px-8 py-2.5 rounded-full text-sm font-light transition-all ${
                 selectedCategory === cat
-                  ? 'bg-[#4a4440] text-white'
-                  : 'bg-white text-[#4a4440] hover:bg-[#e8e4df]'
+                  ? 'bg-primary text-white'
+                  : 'bg-card text-primary hover:bg-secondary'
               }`}
             >
               {cat}
@@ -104,11 +104,11 @@ export default function Shop() {
                 />
               </div>
               <div className="text-center space-y-1">
-                <h3 className="text-base font-light text-[#4a4440] leading-relaxed">
+                <h3 className="text-base font-light text-primary leading-relaxed">
                   {product.name}
                 </h3>
                 <div className="flex items-center justify-center gap-2">
-                  <p className="text-base font-light text-[#4a4440]">
+                  <p className="text-base font-light text-primary">
                     {product.price} р.
                   </p>
                   {product.oldPrice && (

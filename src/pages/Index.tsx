@@ -96,7 +96,7 @@ export default function Index() {
   }
 
   return (
-    <div className="min-h-screen bg-[#f5f3f0]">
+    <div className="min-h-screen">
       <Header
         cart={cart}
         isCartOpen={isCartOpen}
