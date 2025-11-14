@@ -40,11 +40,11 @@ export default function Personal() {
           
           <div className="prose prose-lg max-w-none" style={{ fontFamily: 'Raleway, sans-serif', fontWeight: 300 }}>
             <style>{`
-              .prose h2 { font-family: 'Raleway', sans-serif; font-weight: 500; font-size: 1.875rem; color: hsl(30, 10%, 25%); margin-top: 2.5rem; margin-bottom: 1.25rem; text-transform: lowercase; letter-spacing: 0.01em; }
-              .prose h3 { font-family: 'Raleway', sans-serif; font-weight: 500; font-size: 1.5rem; color: hsl(30, 10%, 25%); margin-top: 2rem; margin-bottom: 1rem; text-transform: lowercase; letter-spacing: 0.01em; }
-              .prose p { color: #374151; font-size: 1rem; line-height: 1.75; margin-bottom: 1rem; }
+              .prose h2 { font-family: 'Raleway', sans-serif; font-weight: 500; font-size: 1.5rem; color: hsl(30, 10%, 25%); margin-top: 2rem; margin-bottom: 1rem; text-transform: lowercase; letter-spacing: 0.01em; }
+              .prose h3 { font-family: 'Raleway', sans-serif; font-weight: 500; font-size: 1.25rem; color: hsl(30, 10%, 25%); margin-top: 1.5rem; margin-bottom: 0.75rem; text-transform: lowercase; letter-spacing: 0.01em; }
+              .prose p { color: #374151; font-size: 1rem; line-height: 1.6; margin-bottom: 1rem; }
               .prose ul { margin: 1rem 0; margin-left: 1.5rem; }
-              .prose li { color: #374151; line-height: 1.75; margin-bottom: 0.5rem; }
+              .prose li { color: #374151; line-height: 1.6; margin-bottom: 0.5rem; }
               .prose strong { color: hsl(30, 10%, 25%); font-weight: 500; }
               .prose a { color: hsl(30, 10%, 25%); text-decoration: underline; }
               .prose a:hover { opacity: 0.8; }
