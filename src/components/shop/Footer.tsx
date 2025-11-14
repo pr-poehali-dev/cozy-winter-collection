@@ -9,13 +9,13 @@ export default function Footer() {
           
           <div className="flex items-center gap-6 text-xs font-light text-[#F5F1E8]/80">
             <a href="/privacy" className="hover:text-[#F5F1E8] transition-colors">
-              Политика конфиденциальности
+              Конфиденциальность
             </a>
             <a href="/offer" className="hover:text-[#F5F1E8] transition-colors">
-              Договор оферты
+              Оферта
             </a>
             <a href="/personal" className="hover:text-[#F5F1E8] transition-colors">
-              Обработка персональных данных
+              Обработка ПД
             </a>
           </div>
           
@@ -44,9 +44,6 @@ export default function Footer() {
             >
               <Icon name="Heart" size={18} strokeWidth={1.5} />
             </a>
-            <p className="text-sm font-light text-[#F5F1E8]">
-              2025
-            </p>
           </div>
         </div>
       </div>

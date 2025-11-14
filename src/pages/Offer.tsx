@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import ReactMarkdown from "react-markdown";
 import Header from "@/components/shop/Header";
 import Footer from "@/components/shop/Footer";
 
@@ -37,11 +38,11 @@ export default function Offer() {
             Договор оферты
           </h1>
           
-          <div className="prose prose-sm md:prose-base max-w-none space-y-6 text-gray-700 font-light leading-relaxed">
+          <div className="prose prose-sm md:prose-base max-w-none text-gray-700 font-light leading-relaxed">
             {loading ? (
               <p>Загрузка...</p>
             ) : (
-              <pre className="whitespace-pre-wrap font-light">{content}</pre>
+              <ReactMarkdown>{content}</ReactMarkdown>
             )}
           </div>
         </div>

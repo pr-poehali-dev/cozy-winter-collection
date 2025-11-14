@@ -27,7 +27,7 @@ export default function Header({
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-card/95 backdrop-blur-sm border-b border-border">
       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-        <h1 className="text-2xl font-light text-primary tracking-wide">azaluk</h1>
+        <Link to="/" className="text-2xl font-light text-primary tracking-wide hover:opacity-70 transition-opacity">azaluk</Link>
         
         <div className="flex items-center gap-6">
           <nav className="hidden md:flex items-center gap-6">
