@@ -1,7 +1,24 @@
+import { useState, useEffect } from "react";
 import Header from "@/components/shop/Header";
 import Footer from "@/components/shop/Footer";
 
 export default function Privacy() {
+  const [content, setContent] = useState<string>('');
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch('/docs/conf.md')
+      .then(res => res.text())
+      .then(text => {
+        setContent(text);
+        setLoading(false);
+      })
+      .catch(() => {
+        setContent('Не удалось загрузить содержимое.');
+        setLoading(false);
+      });
+  }, []);
+
   return (
     <div className="min-h-screen flex flex-col">
       <Header
@@ -21,7 +38,11 @@ export default function Privacy() {
           </h1>
           
           <div className="prose prose-sm md:prose-base max-w-none space-y-6 text-gray-700 font-light leading-relaxed">
-            <p>Содержимое политики конфиденциальности будет добавлено позже.</p>
+            {loading ? (
+              <p>Загрузка...</p>
+            ) : (
+              <pre className="whitespace-pre-wrap font-light">{content}</pre>
+            )}
           </div>
         </div>
       </main>
