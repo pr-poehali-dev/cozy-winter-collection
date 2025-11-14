@@ -38,7 +38,17 @@ export default function Personal() {
             Обработка персональных данных
           </h1>
           
-          <div className="prose prose-lg max-w-none prose-headings:font-sans prose-headings:font-medium prose-headings:text-primary prose-h1:text-4xl prose-h1:mb-6 prose-h1:mt-10 prose-h2:text-3xl prose-h2:mb-5 prose-h2:mt-10 prose-h3:text-2xl prose-h3:mb-4 prose-h3:mt-8 prose-h4:text-xl prose-h4:mb-3 prose-h4:mt-6 prose-p:text-gray-700 prose-p:text-base prose-p:leading-7 prose-p:mb-4 prose-ul:my-4 prose-ul:ml-6 prose-li:text-gray-700 prose-li:leading-7 prose-li:mb-2 prose-strong:text-primary prose-strong:font-medium prose-a:text-primary prose-a:underline hover:prose-a:text-primary/80" style={{ fontFamily: 'Raleway, sans-serif', fontWeight: 300 }}>
+          <div className="prose prose-lg max-w-none" style={{ fontFamily: 'Raleway, sans-serif', fontWeight: 300 }}>
+            <style>{`
+              .prose h2 { font-family: 'Raleway', sans-serif; font-weight: 500; font-size: 1.875rem; color: hsl(30, 10%, 25%); margin-top: 2.5rem; margin-bottom: 1.25rem; text-transform: lowercase; letter-spacing: 0.01em; }
+              .prose h3 { font-family: 'Raleway', sans-serif; font-weight: 500; font-size: 1.5rem; color: hsl(30, 10%, 25%); margin-top: 2rem; margin-bottom: 1rem; text-transform: lowercase; letter-spacing: 0.01em; }
+              .prose p { color: #374151; font-size: 1rem; line-height: 1.75; margin-bottom: 1rem; }
+              .prose ul { margin: 1rem 0; margin-left: 1.5rem; }
+              .prose li { color: #374151; line-height: 1.75; margin-bottom: 0.5rem; }
+              .prose strong { color: hsl(30, 10%, 25%); font-weight: 500; }
+              .prose a { color: hsl(30, 10%, 25%); text-decoration: underline; }
+              .prose a:hover { opacity: 0.8; }
+            `}</style>
             {loading ? (
               <p className="text-center text-gray-500">Загрузка...</p>
             ) : (
