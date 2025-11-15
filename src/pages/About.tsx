@@ -118,6 +118,16 @@ export default function About() {
                   <p>
                     благодаря ей вы получаете изделия в таком виде, в котором они приходят
                   </p>
+                  <p>
+                    <a 
+                      href="https://t.me/viktoria_sivolobova" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="link-red transition-colors"
+                    >
+                      подглядеть за каналом вики
+                    </a>
+                  </p>
                 </div>
               </div>
             </div>
