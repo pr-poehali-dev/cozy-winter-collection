@@ -216,9 +216,9 @@ export default function ComingSoon() {
                           // Вычисляем размер текста для адаптивной высоты
                           const text = `${currentFortune?.text || ''} ${currentFortune?.emoji || ''}`;
                           const maxWidth = 800;
-                          const fontSize = 48;
-                          const lineHeight = 68;
-                          ctx.font = `300 ${fontSize}px -apple-system, BlinkMacSystemFont, "SF Pro Display", system-ui, sans-serif`;
+                          const fontSize = 46;
+                          const lineHeight = 66;
+                          ctx.font = `400 ${fontSize}px system-ui, -apple-system, sans-serif`;
                           
                           // Разбиваем текст на строки
                           const words = text.split(' ');
@@ -281,7 +281,7 @@ export default function ComingSoon() {
                           
                           // Текст предсказания (улучшенная типографика)
                           ctx.fillStyle = '#4a423a';
-                          ctx.font = `300 ${fontSize}px -apple-system, BlinkMacSystemFont, "SF Pro Display", system-ui, sans-serif`;
+                          ctx.font = `400 ${fontSize}px system-ui, -apple-system, sans-serif`;
                           ctx.textAlign = 'left';
                           
                           let y = boxY + padding + fontSize + 10;
