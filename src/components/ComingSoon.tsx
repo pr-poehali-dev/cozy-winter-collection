@@ -318,7 +318,7 @@ export default function ComingSoon() {
                 <span className="text-xl md:text-2xl flex-shrink-0">🪄</span>
                 <p>
                   <strong className="text-primary font-medium">уютная упаковка</strong>{" "}
-                  — с волшебством в каждом заказе
+                  — с волшебством в каждом заказе для вас и ваших близких!
                 </p>
               </div>
             </div>
