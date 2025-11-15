@@ -217,14 +217,14 @@ export default function ComingSoon() {
                 <img
                   src="https://cdn.poehali.dev/files/8dd80cb3-4746-404a-90ed-e8576192fe76.jpg"
                   alt="Вязаные изделия красные и белые"
-                  className="w-full h-32 md:h-64 object-cover hover:scale-110 transition-transform duration-700"
+                  className="w-full h-32 md:h-64 object-cover hover:scale-110 transition-transform duration-700 brightness-125"
                 />
               </div>
               <div className="overflow-hidden rounded-lg shadow-md">
                 <img
                   src="https://cdn.poehali.dev/files/8afa7fbb-da62-40f9-b59e-9b2f634a89f6.jpg"
                   alt="Вышивка знаков зодиака"
-                  className="w-full h-32 md:h-64 object-cover hover:scale-110 transition-transform duration-700"
+                  className="w-full h-32 md:h-64 object-cover hover:scale-110 transition-transform duration-700 brightness-110"
                 />
               </div>
             </div>
