@@ -319,9 +319,7 @@ export default function ComingSoon() {
               <div className="flex gap-2 md:gap-3 items-start">
                 <span className="text-xl md:text-2xl flex-shrink-0">🪄</span>
                 <p>
-                  <strong className="text-primary font-medium">
-                    праздничная упаковка
-                  </strong>{" "}
+                  <strong className="text-primary font-medium">волшебная упаковка</strong>{" "}
                   — упакуем с любовью каждый заказ
                 </p>
               </div>
