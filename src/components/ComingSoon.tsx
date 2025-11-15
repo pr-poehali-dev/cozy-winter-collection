@@ -315,6 +315,7 @@ export default function ComingSoon() {
                     делись в соцсетях, отмечай @azalukk
                   </p>
                 </div>
+                </div>
                 <button
                   onClick={() => setShowFortune(false)}
                   className="w-full py-3 px-6 bg-primary hover:bg-primary/90 text-white rounded-xl transition-colors text-sm font-light shadow-md hover:shadow-lg"
