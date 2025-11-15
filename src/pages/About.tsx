@@ -47,7 +47,7 @@ export default function About() {
         <div className="space-y-16 animate-in fade-in duration-700">
           <div className="text-center">
             <p className="text-moss/70 leading-relaxed max-w-2xl mx-auto text-lg">
-              azaluk — это маленький магазин из мира двух подруг, Азалии и Вики.
+              azaluk shop — это маленький магазин из мира двух подруг, Азалии и Вики.
               <br />
               мы вместе разрабатываем и создаём вещи, в которых живут уют и немного сказки.
             </p>
