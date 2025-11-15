@@ -113,7 +113,7 @@ export default function ComingSoon() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-white via-orange-50 to-amber-50 flex flex-col">
       {showFortune && (
-        <div className="fixed inset-0 bg-gradient-to-br from-white via-orange-50 to-amber-50 z-50 flex items-center justify-center px-4">
+        <div className="fixed inset-0 bg-gradient-to-br from-white via-orange-50 to-amber-50 z-50 flex flex-col items-center justify-between px-4 py-8">
           <button
             onClick={() => setShowFortune(false)}
             className="absolute top-4 right-4 md:top-8 md:right-8 p-2 rounded-full hover:bg-white/50 transition-colors group"
@@ -125,7 +125,7 @@ export default function ComingSoon() {
               className="text-muted-foreground group-hover:text-primary transition-colors"
             />
           </button>
-          <div className="max-w-md w-full flex flex-col items-center space-y-8">
+          <div className="max-w-md w-full flex flex-col items-center space-y-8 flex-1 justify-center">
             {!fortuneOpened ? (
               <>
                 <div className="space-y-4 text-center">
@@ -313,7 +313,7 @@ export default function ComingSoon() {
                 >
                   📸 сохрани предсказание
                 </button>
-                <p className="text-xs text-muted-foreground/70 italic text-center -mt-3">
+                <p className="text-xs text-muted-foreground/70 italic text-center -mt-4">
                   делись в соцсетях, отмечай @azalukk ✨
                 </p>
                 <button
@@ -325,6 +325,7 @@ export default function ComingSoon() {
               </div>
             )}
           </div>
+          <p className="text-xl md:text-2xl text-muted-foreground/40 tracking-wide" style={{ fontFamily: 'Cormorant, serif', fontWeight: 300 }}>azaluk.shop</p>
         </div>
       )}
 
