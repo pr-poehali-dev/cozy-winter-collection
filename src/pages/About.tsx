@@ -128,12 +128,12 @@ export default function About() {
           </div>
 
           <div className="text-center py-12 relative">
-            <div className="absolute top-4 left-1/4 text-2xl opacity-15">🧶</div>
-            <div className="absolute top-6 right-1/4 text-2xl opacity-15">✨</div>
-            <div className="absolute bottom-8 left-1/3 text-xl opacity-10">🪄</div>
-            <div className="absolute bottom-6 right-1/3 text-xl opacity-10">🍵</div>
+            <div className="absolute -top-2 left-[10%] text-3xl">🧶</div>
+            <div className="absolute top-8 right-[15%] text-3xl">✨</div>
+            <div className="absolute bottom-4 left-[20%] text-2xl">🪄</div>
+            <div className="absolute bottom-12 right-[12%] text-2xl">🍵</div>
             
-            <div className="max-w-md mx-auto bg-moss/5 rounded-3xl p-8 md:p-10 border border-moss/10">
+            <div className="max-w-md mx-auto bg-moss/5 rounded-3xl p-8 md:p-10 border border-moss/10 relative z-10">
               <p className="text-base md:text-lg text-moss/70 leading-relaxed italic">
                 вместе мы делаем вещи, которыми приятно любоваться, их хочется держать в руках и носить с собой
               </p>

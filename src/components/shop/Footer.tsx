@@ -40,7 +40,7 @@ export default function Footer() {
           </div>
           
           <p className="text-xs font-light text-[#F5F1E8]/70">
-            ФЛ Яроцкая Азалия Наильевна
+            фл яроцкая а.н.
           </p>
         </div>
       </div>
