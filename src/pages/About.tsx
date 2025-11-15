@@ -43,7 +43,7 @@ export default function About() {
         cartCount={cartCount}
       />
 
-      <div className="container mx-auto px-4 pt-24 pb-16 max-w-4xl">
+      <div className="container mx-auto px-6 md:px-4 pt-24 pb-16 max-w-4xl">
         <div className="space-y-16 animate-in fade-in duration-700">
           <div className="text-center">
             <p className="text-moss/70 leading-relaxed max-w-2xl mx-auto text-base md:text-lg">
@@ -53,7 +53,7 @@ export default function About() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8 md:gap-12 max-w-3xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-8 md:gap-12 max-w-3xl mx-auto px-2 md:px-0">
             <div className="space-y-4">
               <div className="aspect-[4/3] bg-moss/10 rounded-2xl overflow-hidden">
                 <img 
@@ -64,8 +64,8 @@ export default function About() {
               </div>
               
               <div className="space-y-4 relative">
-                <div className="absolute -top-4 -left-4 text-2xl">✨</div>
-                <div className="absolute -top-2 -right-6 text-xl">📸</div>
+                <div className="absolute -top-1 left-0 text-xl">✨</div>
+                <div className="absolute top-12 -right-2 text-lg">📸</div>
                 <h2 className="text-xl md:text-2xl font-medium text-wine">привет, я азалия!</h2>
                 <div className="space-y-3 text-moss/70 leading-relaxed text-sm md:text-base">
                   <p>
@@ -109,8 +109,8 @@ export default function About() {
               </div>
               
               <div className="space-y-4 relative">
-                <div className="absolute -top-4 -left-4 text-2xl">🧵</div>
-                <div className="absolute -top-2 -right-6 text-xl">✂️</div>
+                <div className="absolute -top-1 left-0 text-xl">🧵</div>
+                <div className="absolute top-12 -right-2 text-lg">✂️</div>
                 <h2 className="text-xl md:text-2xl font-medium text-wine">а это вика!</h2>
                 <div className="space-y-3 text-moss/70 leading-relaxed text-sm md:text-base">
                   <p>
