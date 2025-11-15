@@ -204,21 +204,46 @@ export default function ComingSoon() {
                         ctx.fillStyle = '#f5f1e8';
                         ctx.fillRect(0, 0, 1080, 1920);
                         
-                        const cookieSize = 180;
+                        const cookieSize = 120;
                         ctx.font = `${cookieSize}px serif`;
                         ctx.textAlign = 'center';
-                        ctx.fillText('🥠', 540, 350);
+                        ctx.fillText('🥠', 490, 750);
+                        
+                        const starSize = 80;
+                        ctx.font = `${starSize}px serif`;
+                        ctx.fillText('✨', 600, 730);
+                        
+                        const boxX = 90;
+                        const boxY = 800;
+                        const boxWidth = 900;
+                        const boxHeight = 500;
+                        const radius = 40;
+                        
+                        ctx.strokeStyle = '#71685d';
+                        ctx.lineWidth = 3;
+                        ctx.beginPath();
+                        ctx.moveTo(boxX + radius, boxY);
+                        ctx.lineTo(boxX + boxWidth - radius, boxY);
+                        ctx.quadraticCurveTo(boxX + boxWidth, boxY, boxX + boxWidth, boxY + radius);
+                        ctx.lineTo(boxX + boxWidth, boxY + boxHeight - radius);
+                        ctx.quadraticCurveTo(boxX + boxWidth, boxY + boxHeight, boxX + boxWidth - radius, boxY + boxHeight);
+                        ctx.lineTo(boxX + radius, boxY + boxHeight);
+                        ctx.quadraticCurveTo(boxX, boxY + boxHeight, boxX, boxY + boxHeight - radius);
+                        ctx.lineTo(boxX, boxY + radius);
+                        ctx.quadraticCurveTo(boxX, boxY, boxX + radius, boxY);
+                        ctx.closePath();
+                        ctx.stroke();
                         
                         ctx.fillStyle = '#71685d';
-                        ctx.font = '400 52px system-ui, -apple-system, sans-serif';
+                        ctx.font = '400 50px system-ui, -apple-system, sans-serif';
                         ctx.textAlign = 'center';
                         
                         const text = currentFortune?.text || '';
-                        const maxWidth = 880;
-                        const lineHeight = 75;
+                        const maxWidth = 800;
+                        const lineHeight = 72;
                         const words = text.split(' ');
                         let line = '';
-                        let y = 850;
+                        let y = 920;
                         
                         for (let i = 0; i < words.length; i++) {
                           const testLine = line + words[i] + ' ';
@@ -236,7 +261,7 @@ export default function ComingSoon() {
                         ctx.fillStyle = '#71685d';
                         ctx.font = '300 56px Cormorant, serif';
                         ctx.textAlign = 'center';
-                        ctx.fillText('azaluk.shop', 540, 1750);
+                        ctx.fillText('azaluk.shop', 540, 1450);
                         
                         const dataUrl = canvas.toDataURL('image/png', 1.0);
                         const link = document.createElement('a');
