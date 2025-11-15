@@ -154,8 +154,8 @@ export default function ComingSoon() {
                 </button>
               </>
             ) : (
-              <div className="space-y-8 animate-fade-in w-full">
-                <div className="flex items-center justify-center gap-3 text-5xl md:text-6xl">
+              <div className="space-y-6 animate-fade-in w-full">
+                <div className="flex items-center justify-center gap-3 text-5xl">
                   <span
                     className="animate-bounce"
                     style={{ animationDelay: "0s" }}
@@ -169,22 +169,22 @@ export default function ComingSoon() {
                     ✨
                   </span>
                 </div>
-                <div ref={fortuneCardRef} className="bg-white/90 backdrop-blur-sm rounded-2xl p-8 md:p-10 shadow-lg border border-border">
-                  <p className="text-lg md:text-xl text-primary font-normal leading-relaxed">
+                <div ref={fortuneCardRef} className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 md:p-8 shadow-lg border border-border">
+                  <p className="text-base md:text-lg text-primary font-normal leading-relaxed">
                     {currentFortune?.text}
                   </p>
-                  <div className="pt-6 mt-6 border-t border-border/50">
-                    <div className="flex items-center gap-4">
-                      <p className="text-sm text-muted-foreground/80 flex-1">
+                  <div className="pt-4 mt-4 border-t border-border/50">
+                    <div className="flex items-center gap-3">
+                      <p className="text-xs md:text-sm text-muted-foreground/80 flex-1">
                         укажи при покупке этот смайлик и получишь подарок к заказу
                       </p>
-                      <p className="text-5xl md:text-6xl">
+                      <p className="text-4xl md:text-5xl">
                         {currentFortune?.emoji}
                       </p>
                     </div>
                   </div>
                 </div>
-                <div className="space-y-2">
+                <div className="space-y-1">
                   <button
                     onClick={async () => {
                       try {
@@ -306,7 +306,7 @@ export default function ComingSoon() {
                         console.error('Ошибка при сохранении:', err);
                       }
                     }}
-                    className="text-sm text-primary/60 hover:text-primary transition-colors underline underline-offset-4 text-center w-full"
+                    className="text-sm text-primary/60 hover:text-primary transition-colors underline underline-offset-4 text-center w-full py-1"
                   >
                     📸 сохрани предсказание
                   </button>
@@ -316,7 +316,7 @@ export default function ComingSoon() {
                 </div>
                 <button
                   onClick={() => setShowFortune(false)}
-                  className="w-full py-3 px-6 bg-primary hover:bg-primary/90 text-white rounded-xl transition-colors text-sm md:text-base font-light shadow-md hover:shadow-lg"
+                  className="w-full py-3 px-6 bg-primary hover:bg-primary/90 text-white rounded-xl transition-colors text-sm font-light shadow-md hover:shadow-lg"
                 >
                   посмотреть, когда откроется магазин →
                 </button>
