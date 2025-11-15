@@ -201,8 +201,8 @@ export default function ComingSoon() {
                       const ctx = canvas.getContext('2d');
                       
                       if (ctx) {
-                        // Фон
-                        ctx.fillStyle = '#f5f1e8';
+                        // Фон (более тёплый оттенок)
+                        ctx.fillStyle = '#fcecd6';
                         ctx.fillRect(0, 0, 1080, 1920);
                         
                         // Печенька и звездочки вверху
