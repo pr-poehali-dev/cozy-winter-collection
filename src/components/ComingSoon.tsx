@@ -299,7 +299,7 @@ export default function ComingSoon() {
                 </p>
               </div>
               <div className="flex gap-2 md:gap-3 items-start">
-                <span className="text-xl md:text-2xl flex-shrink-0">✨</span>
+                <span className="text-xl md:text-2xl flex-shrink-0">📿</span>
                 <p>
                   <strong className="text-primary font-medium">подвесы</strong>{" "}
                   — задорные грибочки и изящные ленты для вашего образа
