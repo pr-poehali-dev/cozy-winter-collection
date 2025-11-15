@@ -121,7 +121,9 @@ export default function Reviews() {
         {/* CTA to Telegram */}
         <div className="text-center mt-8">
           <a 
-            href="/about" 
+            href="https://t.me/azalukk" 
+            target="_blank" 
+            rel="noopener noreferrer"
             className="inline-flex items-center gap-2 text-[#C41E3A] hover:text-[#A01628] underline transition-colors font-light text-sm group"
           >
             <Icon name="Send" size={16} strokeWidth={1.5} className="group-hover:translate-x-1 transition-transform" />
