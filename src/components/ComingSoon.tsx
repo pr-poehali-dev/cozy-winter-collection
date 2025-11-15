@@ -169,22 +169,23 @@ export default function ComingSoon() {
                     ✨
                   </span>
                 </div>
-                <div ref={fortuneCardRef} className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 md:p-8 shadow-lg border border-border">
-                  <p className="text-base md:text-lg text-primary font-normal leading-relaxed">
-                    {currentFortune?.text}
-                  </p>
-                  <div className="pt-4 mt-4 border-t border-border/50">
-                    <div className="flex items-center gap-3">
-                      <p className="text-xs md:text-sm text-muted-foreground/80 flex-1">
-                        укажи при покупке этот смайлик и получишь подарок к заказу
-                      </p>
-                      <p className="text-4xl md:text-5xl">
-                        {currentFortune?.emoji}
-                      </p>
+                <div className="space-y-3">
+                  <div ref={fortuneCardRef} className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 md:p-8 shadow-lg border border-border">
+                    <p className="text-base md:text-lg text-primary font-normal leading-relaxed">
+                      {currentFortune?.text}
+                    </p>
+                    <div className="pt-4 mt-4 border-t border-border/50">
+                      <div className="flex items-center gap-3">
+                        <p className="text-xs md:text-sm text-muted-foreground/80 flex-1">
+                          укажи при покупке этот смайлик и получишь подарок к заказу
+                        </p>
+                        <p className="text-4xl md:text-5xl">
+                          {currentFortune?.emoji}
+                        </p>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div className="space-y-1">
+                  <div className="space-y-1">
                   <button
                     onClick={async () => {
                       try {
@@ -318,7 +319,7 @@ export default function ComingSoon() {
                   onClick={() => setShowFortune(false)}
                   className="w-full py-3 px-6 bg-primary hover:bg-primary/90 text-white rounded-xl transition-colors text-sm font-light shadow-md hover:shadow-lg"
                 >
-                  посмотреть, когда откроется магазин →
+                  перейти к магазину →
                 </button>
               </div>
             )}
