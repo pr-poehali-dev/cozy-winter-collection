@@ -209,14 +209,14 @@ export default function ComingSoon() {
                         const cookieSize = 120;
                         ctx.font = `${cookieSize}px serif`;
                         ctx.textAlign = 'center';
-                        ctx.fillText('🥠', 490, 700);
+                        ctx.fillText('🥠', 490, 600);
                         
                         const starSize = 80;
                         ctx.font = `${starSize}px serif`;
-                        ctx.fillText('✨', 600, 680);
+                        ctx.fillText('✨', 600, 580);
                         
                         // Вычисляем размер текста для адаптивной высоты
-                        const text = `${currentFortune?.emoji || ''} ${currentFortune?.text || ''}`;
+                        const text = `${currentFortune?.text || ''} ${currentFortune?.emoji || ''}`;
                         const maxWidth = 760;
                         const fontSize = 48;
                         const lineHeight = 68;
@@ -244,7 +244,7 @@ export default function ComingSoon() {
                         const boxHeight = lines.length * lineHeight + padding * 2;
                         const boxWidth = 900;
                         const boxX = 90;
-                        const boxY = 800;
+                        const boxY = 700;
                         const radius = 24;
                         
                         // Рисуем тень
