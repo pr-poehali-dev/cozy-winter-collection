@@ -300,17 +300,12 @@ export default function ComingSoon() {
                           y += lineHeight;
                         }
                         
-                        // CTA текст над azaluk.shop
+                        // CTA текст (как в "прежде чем узнать о магазинчике")
                         ctx.fillStyle = '#71685d';
-                        ctx.font = '400 38px -apple-system, BlinkMacSystemFont, system-ui, sans-serif';
+                        ctx.font = '400 42px system-ui, -apple-system, sans-serif';
                         ctx.textAlign = 'center';
-                        ctx.fillText('вытяни своё печенье с предсказанием:', 540, boxY + boxHeight + 100);
-                        
-                        // azaluk.shop с элегантным интервалом
-                        ctx.fillStyle = '#4a423a';
-                        ctx.font = '400 56px Cormorant, serif';
-                        ctx.textAlign = 'center';
-                        ctx.fillText('azaluk.shop', 540, boxY + boxHeight + 165);
+                        ctx.fillText('вытяни своё предсказание', 540, boxY + boxHeight + 100);
+                        ctx.fillText('на зиму на azaluk.shop 🥠', 540, boxY + boxHeight + 160);
                         
                         const dataUrl = canvas.toDataURL('image/png', 1.0);
                         const link = document.createElement('a');
