@@ -295,25 +295,34 @@ export default function ComingSoon() {
                   <strong className="text-primary font-medium">
                     вязаные чепчики
                   </strong>{" "}
-                  — мягкие, как облако, согревают в морозы
+                  — мягкие и тёплые для зимы
                 </p>
               </div>
               <div className="flex gap-2 md:gap-3 items-start">
                 <span className="text-xl md:text-2xl flex-shrink-0">🍄</span>
                 <p>
                   <strong className="text-primary font-medium">
-                    задорные подвесы
+                    подвесы-грибочки
                   </strong>{" "}
-                  — приносящие магию в повседневность
+                  — уютные аксессуары ручной работы
                 </p>
               </div>
               <div className="flex gap-2 md:gap-3 items-start">
-                <span className="text-xl md:text-2xl flex-shrink-0">🪄</span>
+                <span className="text-xl md:text-2xl flex-shrink-0">🧶</span>
                 <p>
                   <strong className="text-primary font-medium">
-                    сказочные боксы
+                    мохеровые свитера
                   </strong>{" "}
-                  — готовые подарки с волшебством внутри
+                  — воздушные и согревающие
+                </p>
+              </div>
+              <div className="flex gap-2 md:gap-3 items-start">
+                <span className="text-xl md:text-2xl flex-shrink-0">🎁</span>
+                <p>
+                  <strong className="text-primary font-medium">
+                    праздничная упаковка
+                  </strong>{" "}
+                  — упакуем с любовью каждый заказ
                 </p>
               </div>
             </div>
