@@ -64,7 +64,7 @@ export default function About() {
               </div>
               
               <div className="space-y-4 relative">
-                <div className="absolute -top-1 left-0 text-xl">✨</div>
+                <div className="absolute top-1 right-2 text-lg">✨</div>
                 <div className="absolute top-12 -right-2 text-lg">📸</div>
                 <h2 className="text-xl md:text-2xl font-medium text-wine">привет, я азалия!</h2>
                 <div className="space-y-3 text-moss/70 leading-relaxed text-sm md:text-base">
@@ -109,8 +109,8 @@ export default function About() {
               </div>
               
               <div className="space-y-4 relative">
-                <div className="absolute -top-1 left-0 text-xl">🧵</div>
-                <div className="absolute top-12 -right-2 text-lg">✂️</div>
+                <div className="absolute top-1 right-2 text-lg">🧵</div>
+                <div className="absolute top-16 right-4 text-lg">✂️</div>
                 <h2 className="text-xl md:text-2xl font-medium text-wine">а это вика!</h2>
                 <div className="space-y-3 text-moss/70 leading-relaxed text-sm md:text-base">
                   <p>
