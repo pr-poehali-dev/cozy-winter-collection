@@ -47,7 +47,7 @@ export default function About() {
         <div className="space-y-16 animate-in fade-in duration-700">
           <div className="text-center">
             <p className="text-moss/70 leading-relaxed max-w-2xl mx-auto text-lg">
-              azaluk shop — это маленький магазин из мира двух подруг, Азалии и Вики.
+              <span className="text-wine font-medium">azaluk shop</span> — это маленький магазин из мира двух подруг, Азалии и Вики.
               <br />
               мы вместе разрабатываем и создаём вещи, в которых живут уют и немного сказки.
             </p>
@@ -66,7 +66,7 @@ export default function About() {
               <div className="space-y-4 relative">
                 <div className="absolute -top-4 -left-4 text-2xl opacity-20">✨</div>
                 <div className="absolute -top-2 -right-6 text-xl opacity-15">📸</div>
-                <h2 className="text-2xl font-light text-moss">привет, я азалия!</h2>
+                <h2 className="text-2xl font-medium text-wine">привет, я азалия!</h2>
                 <div className="space-y-3 text-moss/70 leading-relaxed">
                   <p>
                     я придумала этот проект и отвечаю за то, какие изделия будут продаваться в azaluk.
@@ -111,7 +111,7 @@ export default function About() {
               <div className="space-y-4 relative">
                 <div className="absolute -top-4 -left-4 text-2xl opacity-20">🧵</div>
                 <div className="absolute -top-2 -right-6 text-xl opacity-15">✂️</div>
-                <h2 className="text-2xl font-light text-moss">а это вика!</h2>
+                <h2 className="text-2xl font-medium text-wine">а это вика!</h2>
                 <div className="space-y-3 text-moss/70 leading-relaxed">
                   <p>
                     она — волшебные руки azaluk.
