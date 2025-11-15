@@ -129,9 +129,7 @@ export default function About() {
 
           <div className="text-center py-12">
             <p className="text-base md:text-lg text-moss/70 leading-relaxed italic">
-              вместе мы делаем вещи, которыми приятно любоваться,
-              <br />
-              их хочется держать в руках и носить с собой
+              вместе мы делаем вещи, которыми приятно любоваться, их хочется держать в руках и носить с собой
             </p>
           </div>
         </div>
