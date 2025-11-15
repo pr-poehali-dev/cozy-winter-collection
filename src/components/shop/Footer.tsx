@@ -17,7 +17,7 @@ export default function Footer() {
                 <Icon name="Youtube" size={16} strokeWidth={1.5} />
               </a>
               <a 
-                href="https://t.me" 
+                href="https://t.me/azalukk" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-[#F5F1E8] hover:text-[#F5F1E8]/70 transition-colors"
