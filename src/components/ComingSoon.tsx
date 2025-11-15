@@ -222,8 +222,8 @@ export default function ComingSoon() {
               </div>
               <div className="overflow-hidden rounded-lg shadow-md">
                 <img
-                  src="https://cdn.poehali.dev/files/7423d7fa-aede-4faf-b2e2-542ba9d0adc1.png"
-                  alt="Декоративная гирлянда на ветке"
+                  src="https://cdn.poehali.dev/files/8afa7fbb-da62-40f9-b59e-9b2f634a89f6.jpg"
+                  alt="Вышивка знаков зодиака"
                   className="w-full h-32 md:h-64 object-cover hover:scale-110 transition-transform duration-700"
                 />
               </div>
