@@ -194,20 +194,57 @@ export default function ComingSoon() {
                 </div>
                 <button
                   onClick={async () => {
-                    if (fortuneCardRef.current) {
-                      try {
-                        const dataUrl = await toPng(fortuneCardRef.current, {
-                          quality: 1,
-                          pixelRatio: 2,
-                          backgroundColor: '#fffbf5'
-                        });
+                    try {
+                      const canvas = document.createElement('canvas');
+                      canvas.width = 1080;
+                      canvas.height = 1920;
+                      const ctx = canvas.getContext('2d');
+                      
+                      if (ctx) {
+                        const gradient = ctx.createLinearGradient(0, 0, 0, 1920);
+                        gradient.addColorStop(0, '#ffffff');
+                        gradient.addColorStop(0.5, '#fff7ed');
+                        gradient.addColorStop(1, '#ffedd5');
+                        ctx.fillStyle = gradient;
+                        ctx.fillRect(0, 0, 1080, 1920);
+                        
+                        ctx.fillStyle = '#71685d';
+                        ctx.font = '300 72px Cormorant, serif';
+                        ctx.textAlign = 'center';
+                        ctx.fillText('azaluk.shop', 540, 200);
+                        
+                        ctx.fillStyle = '#71685d';
+                        ctx.font = '500 56px system-ui, -apple-system, sans-serif';
+                        ctx.textAlign = 'center';
+                        
+                        const text = currentFortune?.text || '';
+                        const maxWidth = 900;
+                        const lineHeight = 80;
+                        const words = text.split(' ');
+                        let line = '';
+                        let y = 800;
+                        
+                        for (let i = 0; i < words.length; i++) {
+                          const testLine = line + words[i] + ' ';
+                          const metrics = ctx.measureText(testLine);
+                          if (metrics.width > maxWidth && i > 0) {
+                            ctx.fillText(line, 540, y);
+                            line = words[i] + ' ';
+                            y += lineHeight;
+                          } else {
+                            line = testLine;
+                          }
+                        }
+                        ctx.fillText(line, 540, y);
+                        
+                        const dataUrl = canvas.toDataURL('image/png', 1.0);
                         const link = document.createElement('a');
-                        link.download = `azaluk-предсказание-${currentFortune?.emoji}.png`;
+                        link.download = `azaluk-предсказание.png`;
                         link.href = dataUrl;
                         link.click();
-                      } catch (err) {
-                        console.error('Ошибка при сохранении:', err);
                       }
+                    } catch (err) {
+                      console.error('Ошибка при сохранении:', err);
                     }
                   }}
                   className="w-full py-3 px-6 bg-primary hover:bg-primary/90 text-white rounded-xl transition-colors text-sm md:text-base font-medium shadow-md hover:shadow-lg flex items-center justify-center gap-2"
