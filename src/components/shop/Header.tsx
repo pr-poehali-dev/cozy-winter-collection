@@ -101,7 +101,23 @@ export default function Header({
             </SheetTrigger>
             <SheetContent className="w-full sm:max-w-lg flex flex-col">
             <SheetHeader className="flex-shrink-0">
-              <SheetTitle className="text-2xl font-light text-primary">корзина</SheetTitle>
+              <div className="flex items-center justify-between">
+                <button 
+                  onClick={() => setIsCartOpen(false)}
+                  className="p-2 hover:bg-secondary rounded-lg transition-colors"
+                  aria-label="Назад"
+                >
+                  <Icon name="ArrowLeft" size={20} className="text-primary" strokeWidth={1.5} />
+                </button>
+                <SheetTitle className="text-2xl font-light text-primary">корзина</SheetTitle>
+                <button 
+                  onClick={() => setIsCartOpen(false)}
+                  className="p-2 hover:bg-secondary rounded-lg transition-colors"
+                  aria-label="Закрыть"
+                >
+                  <Icon name="X" size={20} className="text-primary" strokeWidth={1.5} />
+                </button>
+              </div>
             </SheetHeader>
             {cart.length === 0 ? (
               <div className="flex-1 flex items-center justify-center text-muted-foreground font-light">
