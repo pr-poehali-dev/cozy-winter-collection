@@ -208,22 +208,22 @@ export default function ComingSoon() {
             <div className="grid grid-cols-3 gap-2 md:gap-3">
               <div className="overflow-hidden rounded-lg shadow-md">
                 <img
-                  src="https://cdn.poehali.dev/files/f9fe8956-e4b2-4d08-b2fc-0195aa240b23.png"
-                  alt="Чепчик брусничный"
+                  src="https://cdn.poehali.dev/files/083d7325-455d-4b91-8450-ba1b8764a096.jpg"
+                  alt="Вязаные игрушки на ветке"
                   className="w-full h-32 md:h-64 object-cover hover:scale-110 transition-transform duration-700"
                 />
               </div>
               <div className="overflow-hidden rounded-lg shadow-md">
                 <img
-                  src="https://cdn.poehali.dev/files/14a74df9-0c9e-49aa-b649-04c064eb375a.png"
-                  alt="Чепчик молочный"
+                  src="https://cdn.poehali.dev/files/8dd80cb3-4746-404a-90ed-e8576192fe76.jpg"
+                  alt="Вязаные изделия красные и белые"
                   className="w-full h-32 md:h-64 object-cover hover:scale-110 transition-transform duration-700"
                 />
               </div>
               <div className="overflow-hidden rounded-lg shadow-md">
                 <img
-                  src="https://cdn.poehali.dev/files/031f61f1-ffb6-48da-889e-8ff29b154541.png"
-                  alt="Сказочный бокс"
+                  src="https://cdn.poehali.dev/files/8afa7fbb-da62-40f9-b59e-9b2f634a89f6.jpg"
+                  alt="Вышивка знаков зодиака"
                   className="w-full h-32 md:h-64 object-cover hover:scale-110 transition-transform duration-700"
                 />
               </div>
