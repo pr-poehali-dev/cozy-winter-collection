@@ -311,9 +311,7 @@ export default function ComingSoon() {
                   >
                     📸 сохрани предсказание
                   </button>
-                  <p className="text-xs text-muted-foreground/50 text-center">
-                    делись в соцсетях, отмечай @azalukk
-                  </p>
+                  <p className="text-xs text-muted-foreground/50 text-center">делись в соцсетях, отмечай тгк @azalukk</p>
                 </div>
                 </div>
                 <button
