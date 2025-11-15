@@ -208,10 +208,9 @@ export default function ComingSoon() {
             <div className="grid grid-cols-3 gap-2 md:gap-3">
               <div className="overflow-hidden rounded-lg shadow-md">
                 <img
-                  src="https://cdn.poehali.dev/files/083d7325-455d-4b91-8450-ba1b8764a096.jpg"
-                  alt="Вязаные игрушки на ветке"
-                  className="w-full h-32 md:h-64 object-cover object-center hover:scale-110 transition-transform duration-700"
-                  style={{ objectPosition: 'center 35%' }}
+                  src="https://cdn.poehali.dev/files/57107aad-784f-4d91-8dce-e3cf50d5bc00.png"
+                  alt="Вязаный грибочек на ветке"
+                  className="w-full h-32 md:h-64 object-cover hover:scale-110 transition-transform duration-700"
                 />
               </div>
               <div className="overflow-hidden rounded-lg shadow-md">
