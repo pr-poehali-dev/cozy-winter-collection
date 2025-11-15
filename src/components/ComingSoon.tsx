@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Icon from "@/components/ui/icon";
 import Shop from "./Shop";
 import { Button } from "@/components/ui/button";
 import Footer from "./shop/Footer";
+import { toPng } from 'html-to-image';
 
 interface TimeLeft {
   days: number;
@@ -41,6 +42,7 @@ export default function ComingSoon() {
     text: string;
     emoji: string;
   } | null>(null);
+  const fortuneCardRef = useRef<HTMLDivElement>(null);
 
   const fortunes = [
     {
@@ -167,7 +169,11 @@ export default function ComingSoon() {
                     ✨
                   </span>
                 </div>
-                <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 md:p-8 shadow-lg border border-border">
+                <div ref={fortuneCardRef} className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 md:p-8 shadow-lg border border-border">
+                  <div className="flex items-center justify-between mb-4">
+                    <p className="text-xl md:text-2xl text-primary tracking-wide" style={{ fontFamily: 'Cormorant, serif', fontWeight: 300 }}>azaluk</p>
+                    <span className="text-2xl">🔮</span>
+                  </div>
                   <p className="text-base md:text-lg text-primary font-medium mb-4 leading-relaxed">
                     {currentFortune?.text}
                   </p>
@@ -186,12 +192,35 @@ export default function ComingSoon() {
                     </div>
                   </div>
                 </div>
+                <button
+                  onClick={async () => {
+                    if (fortuneCardRef.current) {
+                      try {
+                        const dataUrl = await toPng(fortuneCardRef.current, {
+                          quality: 1,
+                          pixelRatio: 2,
+                          backgroundColor: '#fffbf5'
+                        });
+                        const link = document.createElement('a');
+                        link.download = `azaluk-предсказание-${currentFortune?.emoji}.png`;
+                        link.href = dataUrl;
+                        link.click();
+                      } catch (err) {
+                        console.error('Ошибка при сохранении:', err);
+                      }
+                    }
+                  }}
+                  className="w-full py-3 px-6 bg-primary hover:bg-primary/90 text-white rounded-xl transition-colors text-sm md:text-base font-medium shadow-md hover:shadow-lg flex items-center justify-center gap-2"
+                >
+                  <span>📸</span>
+                  <span>Скачать предсказание</span>
+                </button>
                 <p className="text-xs text-muted-foreground/70 italic text-center">
-                  не забудь сделать скрин! 📸
+                  поделись в соцсетях и отметь @azalukk ✨
                 </p>
                 <button
                   onClick={() => setShowFortune(false)}
-                  className="mt-6 w-full py-3 px-6 bg-white/80 hover:bg-white rounded-xl border border-border text-sm md:text-base text-muted-foreground hover:text-primary transition-colors"
+                  className="w-full py-3 px-6 bg-white/80 hover:bg-white rounded-xl border border-border text-sm md:text-base text-muted-foreground hover:text-primary transition-colors"
                 >
                   посмотреть, когда откроется магазин →
                 </button>
