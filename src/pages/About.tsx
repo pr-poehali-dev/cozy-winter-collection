@@ -111,9 +111,7 @@ export default function About() {
                 <div className="absolute top-16 right-4 text-lg">✂️</div>
                 <h2 className="text-xl md:text-2xl font-medium text-wine">а это вика! 🧵</h2>
                 <div className="space-y-3 text-moss/70 leading-relaxed text-sm md:text-base">
-                  <p>
-                    она — волшебные руки azaluk.
-                  </p>
+                  <p>она — волшебные руки azaluk shop.</p>
                   <p>
                     именно Вика воплощает наши идеи в реальность — в тканях, нитях и деталях: подбирает материалы, создаёт образцы, тестирует идеи
                   </p>
