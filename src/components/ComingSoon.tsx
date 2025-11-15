@@ -201,28 +201,24 @@ export default function ComingSoon() {
                       const ctx = canvas.getContext('2d');
                       
                       if (ctx) {
-                        const gradient = ctx.createLinearGradient(0, 0, 0, 1920);
-                        gradient.addColorStop(0, '#ffffff');
-                        gradient.addColorStop(0.5, '#fff7ed');
-                        gradient.addColorStop(1, '#ffedd5');
-                        ctx.fillStyle = gradient;
+                        ctx.fillStyle = '#f5f1e8';
                         ctx.fillRect(0, 0, 1080, 1920);
                         
-                        ctx.fillStyle = '#71685d';
-                        ctx.font = '300 72px Cormorant, serif';
+                        const cookieSize = 180;
+                        ctx.font = `${cookieSize}px serif`;
                         ctx.textAlign = 'center';
-                        ctx.fillText('azaluk.shop', 540, 200);
+                        ctx.fillText('🥠', 540, 350);
                         
                         ctx.fillStyle = '#71685d';
-                        ctx.font = '500 56px system-ui, -apple-system, sans-serif';
+                        ctx.font = '400 52px system-ui, -apple-system, sans-serif';
                         ctx.textAlign = 'center';
                         
                         const text = currentFortune?.text || '';
-                        const maxWidth = 900;
-                        const lineHeight = 80;
+                        const maxWidth = 880;
+                        const lineHeight = 75;
                         const words = text.split(' ');
                         let line = '';
-                        let y = 800;
+                        let y = 850;
                         
                         for (let i = 0; i < words.length; i++) {
                           const testLine = line + words[i] + ' ';
@@ -236,6 +232,11 @@ export default function ComingSoon() {
                           }
                         }
                         ctx.fillText(line, 540, y);
+                        
+                        ctx.fillStyle = '#71685d';
+                        ctx.font = '300 56px Cormorant, serif';
+                        ctx.textAlign = 'center';
+                        ctx.fillText('azaluk.shop', 540, 1750);
                         
                         const dataUrl = canvas.toDataURL('image/png', 1.0);
                         const link = document.createElement('a');
