@@ -210,7 +210,8 @@ export default function ComingSoon() {
                 <img
                   src="https://cdn.poehali.dev/files/083d7325-455d-4b91-8450-ba1b8764a096.jpg"
                   alt="Вязаные игрушки на ветке"
-                  className="w-full h-32 md:h-64 object-cover hover:scale-110 transition-transform duration-700"
+                  className="w-full h-32 md:h-64 object-cover object-center hover:scale-110 transition-transform duration-700"
+                  style={{ objectPosition: 'center 35%' }}
                 />
               </div>
               <div className="overflow-hidden rounded-lg shadow-md">
