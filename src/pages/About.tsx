@@ -64,8 +64,8 @@ export default function About() {
               </div>
               
               <div className="space-y-4 relative">
-                <div className="absolute -top-4 -left-4 text-2xl opacity-20">✨</div>
-                <div className="absolute -top-2 -right-6 text-xl opacity-15">📸</div>
+                <div className="absolute -top-4 -left-4 text-2xl">✨</div>
+                <div className="absolute -top-2 -right-6 text-xl">📸</div>
                 <h2 className="text-xl md:text-2xl font-medium text-wine">привет, я азалия!</h2>
                 <div className="space-y-3 text-moss/70 leading-relaxed text-sm md:text-base">
                   <p>
@@ -109,8 +109,8 @@ export default function About() {
               </div>
               
               <div className="space-y-4 relative">
-                <div className="absolute -top-4 -left-4 text-2xl opacity-20">🧵</div>
-                <div className="absolute -top-2 -right-6 text-xl opacity-15">✂️</div>
+                <div className="absolute -top-4 -left-4 text-2xl">🧵</div>
+                <div className="absolute -top-2 -right-6 text-xl">✂️</div>
                 <h2 className="text-xl md:text-2xl font-medium text-wine">а это вика!</h2>
                 <div className="space-y-3 text-moss/70 leading-relaxed text-sm md:text-base">
                   <p>
