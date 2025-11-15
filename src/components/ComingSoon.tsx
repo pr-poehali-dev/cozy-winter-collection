@@ -205,18 +205,18 @@ export default function ComingSoon() {
                         ctx.fillStyle = '#f5f1e8';
                         ctx.fillRect(0, 0, 1080, 1920);
                         
-                        // azaluk logo вверху
-                        ctx.fillStyle = '#71685d';
-                        ctx.font = '300 72px Cormorant, serif';
-                        ctx.textAlign = 'left';
-                        ctx.fillText('azaluk', 90, 150);
+                        // Печенька и звездочки вверху
+                        const cookieSize = 120;
+                        ctx.font = `${cookieSize}px serif`;
+                        ctx.textAlign = 'center';
+                        ctx.fillText('🥠', 490, 700);
                         
-                        // Эмодзи шар справа от azaluk
-                        ctx.font = '64px serif';
-                        ctx.fillText('🔮', 950, 150);
+                        const starSize = 80;
+                        ctx.font = `${starSize}px serif`;
+                        ctx.fillText('✨', 600, 680);
                         
                         // Вычисляем размер текста для адаптивной высоты
-                        const text = currentFortune?.text || '';
+                        const text = `${currentFortune?.emoji || ''} ${currentFortune?.text || ''}`;
                         const maxWidth = 760;
                         const fontSize = 48;
                         const lineHeight = 68;
@@ -285,11 +285,11 @@ export default function ComingSoon() {
                           y += lineHeight;
                         }
                         
-                        // azaluk.shop внизу
+                        // azaluk.shop сразу под контейнером
                         ctx.fillStyle = '#71685d';
                         ctx.font = '300 56px Cormorant, serif';
                         ctx.textAlign = 'center';
-                        ctx.fillText('azaluk.shop', 540, 1700);
+                        ctx.fillText('azaluk.shop', 540, boxY + boxHeight + 100);
                         
                         const dataUrl = canvas.toDataURL('image/png', 1.0);
                         const link = document.createElement('a');
