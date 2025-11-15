@@ -208,20 +208,16 @@ export default function ComingSoon() {
                         ctx.fillStyle = gradient;
                         ctx.fillRect(0, 0, 1080, 1920);
                         
-                        // Печенька и звездочки вверху (с мягкой тенью)
+                        // Печенька вверху (с мягкой тенью)
                         ctx.shadowColor = 'rgba(113, 104, 93, 0.15)';
                         ctx.shadowBlur = 30;
                         ctx.shadowOffsetX = 0;
                         ctx.shadowOffsetY = 10;
                         
-                        const cookieSize = 140;
+                        const cookieSize = 180;
                         ctx.font = `${cookieSize}px serif`;
                         ctx.textAlign = 'center';
-                        ctx.fillText('🥠', 490, 580);
-                        
-                        const starSize = 90;
-                        ctx.font = `${starSize}px serif`;
-                        ctx.fillText('✨', 620, 560);
+                        ctx.fillText('🥠', 540, 580);
                         
                         // Вычисляем размер текста для адаптивной высоты
                         const text = `${currentFortune?.text || ''} ${currentFortune?.emoji || ''}`;
@@ -305,7 +301,7 @@ export default function ComingSoon() {
                         ctx.font = '300 38px Cormorant, serif';
                         ctx.textAlign = 'center';
                         ctx.fillText('вытяни своё предсказание', 540, boxY + boxHeight + 95);
-                        ctx.fillText('на зиму на azaluk.shop 🥠', 540, boxY + boxHeight + 140);
+                        ctx.fillText('на зиму на azaluk.shop ✨', 540, boxY + boxHeight + 140);
                         
                         const dataUrl = canvas.toDataURL('image/png', 1.0);
                         const link = document.createElement('a');
