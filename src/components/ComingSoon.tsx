@@ -201,26 +201,60 @@ export default function ComingSoon() {
                       const ctx = canvas.getContext('2d');
                       
                       if (ctx) {
+                        // Фон
                         ctx.fillStyle = '#f5f1e8';
                         ctx.fillRect(0, 0, 1080, 1920);
                         
-                        const cookieSize = 120;
-                        ctx.font = `${cookieSize}px serif`;
-                        ctx.textAlign = 'center';
-                        ctx.fillText('🥠', 490, 750);
+                        // azaluk logo вверху
+                        ctx.fillStyle = '#71685d';
+                        ctx.font = '300 72px Cormorant, serif';
+                        ctx.textAlign = 'left';
+                        ctx.fillText('azaluk', 90, 150);
                         
-                        const starSize = 80;
-                        ctx.font = `${starSize}px serif`;
-                        ctx.fillText('✨', 600, 730);
+                        // Эмодзи шар справа от azaluk
+                        ctx.font = '64px serif';
+                        ctx.fillText('🔮', 950, 150);
                         
+                        // Вычисляем размер текста для адаптивной высоты
+                        const text = currentFortune?.text || '';
+                        const maxWidth = 760;
+                        const fontSize = 48;
+                        const lineHeight = 68;
+                        ctx.font = `500 ${fontSize}px system-ui, -apple-system, sans-serif`;
+                        
+                        // Разбиваем текст на строки
+                        const words = text.split(' ');
+                        const lines: string[] = [];
+                        let line = '';
+                        
+                        for (let i = 0; i < words.length; i++) {
+                          const testLine = line + words[i] + ' ';
+                          const metrics = ctx.measureText(testLine);
+                          if (metrics.width > maxWidth && i > 0) {
+                            lines.push(line.trim());
+                            line = words[i] + ' ';
+                          } else {
+                            line = testLine;
+                          }
+                        }
+                        lines.push(line.trim());
+                        
+                        // Вычисляем адаптивную высоту подложки
+                        const padding = 60;
+                        const boxHeight = lines.length * lineHeight + padding * 2;
+                        const boxWidth = 900;
                         const boxX = 90;
                         const boxY = 800;
-                        const boxWidth = 900;
-                        const boxHeight = 500;
-                        const radius = 40;
+                        const radius = 24;
                         
-                        ctx.strokeStyle = '#71685d';
-                        ctx.lineWidth = 3;
+                        // Рисуем тень
+                        ctx.shadowColor = 'rgba(0, 0, 0, 0.1)';
+                        ctx.shadowBlur = 20;
+                        ctx.shadowOffsetX = 0;
+                        ctx.shadowOffsetY = 8;
+                        
+                        // Белая подложка с закругленными углами
+                        ctx.fillStyle = '#ffffff';
                         ctx.beginPath();
                         ctx.moveTo(boxX + radius, boxY);
                         ctx.lineTo(boxX + boxWidth - radius, boxY);
@@ -232,36 +266,30 @@ export default function ComingSoon() {
                         ctx.lineTo(boxX, boxY + radius);
                         ctx.quadraticCurveTo(boxX, boxY, boxX + radius, boxY);
                         ctx.closePath();
-                        ctx.stroke();
+                        ctx.fill();
                         
+                        // Убираем тень для текста
+                        ctx.shadowColor = 'transparent';
+                        ctx.shadowBlur = 0;
+                        ctx.shadowOffsetX = 0;
+                        ctx.shadowOffsetY = 0;
+                        
+                        // Текст предсказания
                         ctx.fillStyle = '#71685d';
-                        ctx.font = '400 50px system-ui, -apple-system, sans-serif';
-                        ctx.textAlign = 'center';
+                        ctx.font = `500 ${fontSize}px system-ui, -apple-system, sans-serif`;
+                        ctx.textAlign = 'left';
                         
-                        const text = currentFortune?.text || '';
-                        const maxWidth = 800;
-                        const lineHeight = 72;
-                        const words = text.split(' ');
-                        let line = '';
-                        let y = 920;
-                        
-                        for (let i = 0; i < words.length; i++) {
-                          const testLine = line + words[i] + ' ';
-                          const metrics = ctx.measureText(testLine);
-                          if (metrics.width > maxWidth && i > 0) {
-                            ctx.fillText(line, 540, y);
-                            line = words[i] + ' ';
-                            y += lineHeight;
-                          } else {
-                            line = testLine;
-                          }
+                        let y = boxY + padding + fontSize;
+                        for (const textLine of lines) {
+                          ctx.fillText(textLine, boxX + padding, y);
+                          y += lineHeight;
                         }
-                        ctx.fillText(line, 540, y);
                         
+                        // azaluk.shop внизу
                         ctx.fillStyle = '#71685d';
                         ctx.font = '300 56px Cormorant, serif';
                         ctx.textAlign = 'center';
-                        ctx.fillText('azaluk.shop', 540, 1450);
+                        ctx.fillText('azaluk.shop', 540, 1700);
                         
                         const dataUrl = canvas.toDataURL('image/png', 1.0);
                         const link = document.createElement('a');
