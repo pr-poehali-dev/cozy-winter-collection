@@ -300,11 +300,17 @@ export default function ComingSoon() {
                           y += lineHeight;
                         }
                         
-                        // azaluk.shop с элегантным интервалом
-                        ctx.fillStyle = '#9b8f82';
-                        ctx.font = '300 48px Cormorant, serif';
+                        // CTA текст над azaluk.shop
+                        ctx.fillStyle = '#71685d';
+                        ctx.font = '400 38px -apple-system, BlinkMacSystemFont, system-ui, sans-serif';
                         ctx.textAlign = 'center';
-                        ctx.fillText('azaluk.shop', 540, boxY + boxHeight + 110);
+                        ctx.fillText('вытяни своё печенье с предсказанием:', 540, boxY + boxHeight + 100);
+                        
+                        // azaluk.shop с элегантным интервалом
+                        ctx.fillStyle = '#4a423a';
+                        ctx.font = '400 56px Cormorant, serif';
+                        ctx.textAlign = 'center';
+                        ctx.fillText('azaluk.shop', 540, boxY + boxHeight + 165);
                         
                         const dataUrl = canvas.toDataURL('image/png', 1.0);
                         const link = document.createElement('a');
