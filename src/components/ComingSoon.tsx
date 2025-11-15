@@ -309,12 +309,12 @@ export default function ComingSoon() {
                       console.error('Ошибка при сохранении:', err);
                     }
                   }}
-                  className="text-sm md:text-base text-primary hover:text-primary/70 transition-colors underline underline-offset-4 text-center"
+                  className="text-sm md:text-base text-primary hover:text-primary/70 transition-colors underline underline-offset-4 text-center w-full"
                 >
-                  📸 сохранить предсказание
+                  📸 сохрани предсказание
                 </button>
-                <p className="text-xs text-muted-foreground/70 italic text-center">
-                  поделись в соцсетях и отметь @azalukk ✨
+                <p className="text-xs text-muted-foreground/70 italic text-center -mt-3">
+                  делись в соцсетях, отмечай @azalukk ✨
                 </p>
                 <button
                   onClick={() => setShowFortune(false)}
