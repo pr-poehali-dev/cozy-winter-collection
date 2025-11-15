@@ -201,26 +201,34 @@ export default function ComingSoon() {
                       const ctx = canvas.getContext('2d');
                       
                       if (ctx) {
-                        // Фон (более тёплый оттенок)
-                        ctx.fillStyle = '#fcecd6';
+                        // Градиентный фон (тёплый, элегантный)
+                        const gradient = ctx.createLinearGradient(0, 0, 0, 1920);
+                        gradient.addColorStop(0, '#fef7f0');
+                        gradient.addColorStop(1, '#fcebd4');
+                        ctx.fillStyle = gradient;
                         ctx.fillRect(0, 0, 1080, 1920);
                         
-                        // Печенька и звездочки вверху
-                        const cookieSize = 120;
+                        // Печенька и звездочки вверху (с мягкой тенью)
+                        ctx.shadowColor = 'rgba(113, 104, 93, 0.15)';
+                        ctx.shadowBlur = 30;
+                        ctx.shadowOffsetX = 0;
+                        ctx.shadowOffsetY = 10;
+                        
+                        const cookieSize = 140;
                         ctx.font = `${cookieSize}px serif`;
                         ctx.textAlign = 'center';
-                        ctx.fillText('🥠', 490, 600);
+                        ctx.fillText('🥠', 490, 580);
                         
-                        const starSize = 80;
+                        const starSize = 90;
                         ctx.font = `${starSize}px serif`;
-                        ctx.fillText('✨', 600, 580);
+                        ctx.fillText('✨', 620, 560);
                         
                         // Вычисляем размер текста для адаптивной высоты
                         const text = `${currentFortune?.text || ''} ${currentFortune?.emoji || ''}`;
-                        const maxWidth = 760;
-                        const fontSize = 48;
-                        const lineHeight = 68;
-                        ctx.font = `500 ${fontSize}px system-ui, -apple-system, sans-serif`;
+                        const maxWidth = 800;
+                        const fontSize = 52;
+                        const lineHeight = 76;
+                        ctx.font = `400 ${fontSize}px -apple-system, BlinkMacSystemFont, "SF Pro Display", system-ui, sans-serif`;
                         
                         // Разбиваем текст на строки
                         const words = text.split(' ');
@@ -240,18 +248,18 @@ export default function ComingSoon() {
                         lines.push(line.trim());
                         
                         // Вычисляем адаптивную высоту подложки
-                        const padding = 60;
+                        const padding = 70;
                         const boxHeight = lines.length * lineHeight + padding * 2;
-                        const boxWidth = 900;
-                        const boxX = 90;
-                        const boxY = 700;
-                        const radius = 24;
+                        const boxWidth = 940;
+                        const boxX = 70;
+                        const boxY = 720;
+                        const radius = 32;
                         
-                        // Рисуем тень
-                        ctx.shadowColor = 'rgba(0, 0, 0, 0.1)';
-                        ctx.shadowBlur = 20;
+                        // Многослойная тень (глубина и объём)
+                        ctx.shadowColor = 'rgba(113, 104, 93, 0.08)';
+                        ctx.shadowBlur = 60;
                         ctx.shadowOffsetX = 0;
-                        ctx.shadowOffsetY = 8;
+                        ctx.shadowOffsetY = 20;
                         
                         // Белая подложка с закругленными углами
                         ctx.fillStyle = '#ffffff';
@@ -268,28 +276,35 @@ export default function ComingSoon() {
                         ctx.closePath();
                         ctx.fill();
                         
+                        // Вторая тень для глубины
+                        ctx.shadowColor = 'rgba(113, 104, 93, 0.04)';
+                        ctx.shadowBlur = 30;
+                        ctx.shadowOffsetX = 0;
+                        ctx.shadowOffsetY = 10;
+                        ctx.fill();
+                        
                         // Убираем тень для текста
                         ctx.shadowColor = 'transparent';
                         ctx.shadowBlur = 0;
                         ctx.shadowOffsetX = 0;
                         ctx.shadowOffsetY = 0;
                         
-                        // Текст предсказания
-                        ctx.fillStyle = '#71685d';
-                        ctx.font = `500 ${fontSize}px system-ui, -apple-system, sans-serif`;
+                        // Текст предсказания (улучшенная типографика)
+                        ctx.fillStyle = '#4a423a';
+                        ctx.font = `400 ${fontSize}px -apple-system, BlinkMacSystemFont, "SF Pro Display", system-ui, sans-serif`;
                         ctx.textAlign = 'left';
                         
-                        let y = boxY + padding + fontSize;
+                        let y = boxY + padding + fontSize + 10;
                         for (const textLine of lines) {
                           ctx.fillText(textLine, boxX + padding, y);
                           y += lineHeight;
                         }
                         
-                        // azaluk.shop сразу под контейнером
-                        ctx.fillStyle = '#71685d';
-                        ctx.font = '300 56px Cormorant, serif';
+                        // azaluk.shop с элегантным интервалом
+                        ctx.fillStyle = '#9b8f82';
+                        ctx.font = '300 48px Cormorant, serif';
                         ctx.textAlign = 'center';
-                        ctx.fillText('azaluk.shop', 540, boxY + boxHeight + 100);
+                        ctx.fillText('azaluk.shop', 540, boxY + boxHeight + 110);
                         
                         const dataUrl = canvas.toDataURL('image/png', 1.0);
                         const link = document.createElement('a');
