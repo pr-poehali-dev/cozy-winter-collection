@@ -170,10 +170,6 @@ export default function ComingSoon() {
                   </span>
                 </div>
                 <div ref={fortuneCardRef} className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 md:p-8 shadow-lg border border-border">
-                  <div className="flex items-center justify-between mb-4">
-                    <p className="text-xl md:text-2xl text-primary tracking-wide" style={{ fontFamily: 'Cormorant, serif', fontWeight: 300 }}>azaluk</p>
-                    <span className="text-2xl">🔮</span>
-                  </div>
                   <p className="text-base md:text-lg text-primary font-medium mb-4 leading-relaxed">
                     {currentFortune?.text}
                   </p>
@@ -313,17 +309,16 @@ export default function ComingSoon() {
                       console.error('Ошибка при сохранении:', err);
                     }
                   }}
-                  className="w-full py-3 px-6 bg-primary hover:bg-primary/90 text-white rounded-xl transition-colors text-sm md:text-base font-medium shadow-md hover:shadow-lg flex items-center justify-center gap-2"
+                  className="text-sm md:text-base text-primary hover:text-primary/70 transition-colors underline underline-offset-4 text-center"
                 >
-                  <span>📸</span>
-                  <span>Скачать предсказание</span>
+                  📸 сохранить предсказание
                 </button>
                 <p className="text-xs text-muted-foreground/70 italic text-center">
                   поделись в соцсетях и отметь @azalukk ✨
                 </p>
                 <button
                   onClick={() => setShowFortune(false)}
-                  className="w-full py-3 px-6 bg-white/80 hover:bg-white rounded-xl border border-border text-sm md:text-base text-muted-foreground hover:text-primary transition-colors"
+                  className="w-full py-3 px-6 bg-primary hover:bg-primary/90 text-white rounded-xl transition-colors text-sm md:text-base font-light shadow-md hover:shadow-lg"
                 >
                   посмотреть, когда откроется магазин →
                 </button>
