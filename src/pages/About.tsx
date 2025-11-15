@@ -46,7 +46,7 @@ export default function About() {
       <div className="container mx-auto px-4 pt-24 pb-16 max-w-4xl">
         <div className="space-y-16 animate-in fade-in duration-700">
           <div className="text-center">
-            <p className="text-moss/70 leading-relaxed max-w-2xl mx-auto text-lg">
+            <p className="text-moss/70 leading-relaxed max-w-2xl mx-auto text-base md:text-lg">
               <span className="text-wine font-medium">azaluk shop</span> — это маленький магазин из мира двух подруг, Азалии и Вики.
               <br />
               мы вместе разрабатываем и создаём вещи, в которых живут уют и немного сказки.
@@ -66,8 +66,8 @@ export default function About() {
               <div className="space-y-4 relative">
                 <div className="absolute -top-4 -left-4 text-2xl opacity-20">✨</div>
                 <div className="absolute -top-2 -right-6 text-xl opacity-15">📸</div>
-                <h2 className="text-2xl font-medium text-wine">привет, я азалия!</h2>
-                <div className="space-y-3 text-moss/70 leading-relaxed">
+                <h2 className="text-xl md:text-2xl font-medium text-wine">привет, я азалия!</h2>
+                <div className="space-y-3 text-moss/70 leading-relaxed text-sm md:text-base">
                   <p>
                     я придумала этот проект и отвечаю за то, какие изделия будут продаваться в azaluk.
                   </p>
@@ -111,8 +111,8 @@ export default function About() {
               <div className="space-y-4 relative">
                 <div className="absolute -top-4 -left-4 text-2xl opacity-20">🧵</div>
                 <div className="absolute -top-2 -right-6 text-xl opacity-15">✂️</div>
-                <h2 className="text-2xl font-medium text-wine">а это вика!</h2>
-                <div className="space-y-3 text-moss/70 leading-relaxed">
+                <h2 className="text-xl md:text-2xl font-medium text-wine">а это вика!</h2>
+                <div className="space-y-3 text-moss/70 leading-relaxed text-sm md:text-base">
                   <p>
                     она — волшебные руки azaluk.
                   </p>
@@ -128,7 +128,7 @@ export default function About() {
           </div>
 
           <div className="text-center py-12">
-            <p className="text-lg text-moss/70 leading-relaxed italic">
+            <p className="text-base md:text-lg text-moss/70 leading-relaxed italic">
               вместе мы делаем вещи, которыми приятно любоваться,
               <br />
               их хочется держать в руках и носить с собой
