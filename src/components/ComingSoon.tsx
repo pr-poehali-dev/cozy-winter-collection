@@ -3,7 +3,7 @@ import Icon from "@/components/ui/icon";
 import Shop from "./Shop";
 import { Button } from "@/components/ui/button";
 import Footer from "./shop/Footer";
-import { toPng } from 'html-to-image';
+import { toPng } from "html-to-image";
 
 interface TimeLeft {
   days: number;
@@ -13,7 +13,7 @@ interface TimeLeft {
 }
 
 export default function ComingSoon() {
-  const DEV_MODE = false;
+  const DEV_MODE = true;
   const launchDate = new Date("2025-12-01T12:00:00+03:00");
 
   const calculateTimeLeft = (): TimeLeft => {
@@ -170,14 +170,18 @@ export default function ComingSoon() {
                   </span>
                 </div>
                 <div className="space-y-3">
-                  <div ref={fortuneCardRef} className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 md:p-8 shadow-lg border border-border">
+                  <div
+                    ref={fortuneCardRef}
+                    className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 md:p-8 shadow-lg border border-border"
+                  >
                     <p className="text-base md:text-lg text-primary font-normal leading-relaxed">
                       {currentFortune?.text}
                     </p>
                     <div className="pt-4 mt-4 border-t border-border/50">
                       <div className="flex items-center gap-3">
                         <p className="text-xs md:text-sm text-muted-foreground/80 flex-1">
-                          укажи при покупке этот смайлик и получишь подарок к заказу
+                          укажи при покупке этот смайлик и получишь подарок к
+                          заказу
                         </p>
                         <p className="text-4xl md:text-5xl">
                           {currentFortune?.emoji}
@@ -186,133 +190,172 @@ export default function ComingSoon() {
                     </div>
                   </div>
                   <div className="space-y-1">
-                  <button
-                    onClick={async () => {
-                      try {
-                        const canvas = document.createElement('canvas');
-                        canvas.width = 1080;
-                        canvas.height = 1920;
-                        const ctx = canvas.getContext('2d');
-                        
-                        if (ctx) {
-                          // Градиентный фон (тёплый, элегантный)
-                          const gradient = ctx.createLinearGradient(0, 0, 0, 1920);
-                          gradient.addColorStop(0, '#fef7f0');
-                          gradient.addColorStop(1, '#fcebd4');
-                          ctx.fillStyle = gradient;
-                          ctx.fillRect(0, 0, 1080, 1920);
-                          
-                          // Печенька вверху (с мягкой тенью)
-                          ctx.shadowColor = 'rgba(113, 104, 93, 0.15)';
-                          ctx.shadowBlur = 30;
-                          ctx.shadowOffsetX = 0;
-                          ctx.shadowOffsetY = 10;
-                          
-                          const cookieSize = 180;
-                          ctx.font = `${cookieSize}px serif`;
-                          ctx.textAlign = 'center';
-                          ctx.fillText('🥠', 540, 580);
-                          
-                          // Вычисляем размер текста для адаптивной высоты
-                          const text = `${currentFortune?.text || ''} ${currentFortune?.emoji || ''}`;
-                          const maxWidth = 800;
-                          const fontSize = 46;
-                          const lineHeight = 66;
-                          ctx.font = `400 ${fontSize}px system-ui, -apple-system, sans-serif`;
-                          
-                          // Разбиваем текст на строки
-                          const words = text.split(' ');
-                          const lines: string[] = [];
-                          let line = '';
-                          
-                          for (let i = 0; i < words.length; i++) {
-                            const testLine = line + words[i] + ' ';
-                            const metrics = ctx.measureText(testLine);
-                            if (metrics.width > maxWidth && i > 0) {
-                              lines.push(line.trim());
-                              line = words[i] + ' ';
-                            } else {
-                              line = testLine;
+                    <button
+                      onClick={async () => {
+                        try {
+                          const canvas = document.createElement("canvas");
+                          canvas.width = 1080;
+                          canvas.height = 1920;
+                          const ctx = canvas.getContext("2d");
+
+                          if (ctx) {
+                            // Градиентный фон (тёплый, элегантный)
+                            const gradient = ctx.createLinearGradient(
+                              0,
+                              0,
+                              0,
+                              1920,
+                            );
+                            gradient.addColorStop(0, "#fef7f0");
+                            gradient.addColorStop(1, "#fcebd4");
+                            ctx.fillStyle = gradient;
+                            ctx.fillRect(0, 0, 1080, 1920);
+
+                            // Печенька вверху (с мягкой тенью)
+                            ctx.shadowColor = "rgba(113, 104, 93, 0.15)";
+                            ctx.shadowBlur = 30;
+                            ctx.shadowOffsetX = 0;
+                            ctx.shadowOffsetY = 10;
+
+                            const cookieSize = 180;
+                            ctx.font = `${cookieSize}px serif`;
+                            ctx.textAlign = "center";
+                            ctx.fillText("🥠", 540, 580);
+
+                            // Вычисляем размер текста для адаптивной высоты
+                            const text = `${currentFortune?.text || ""} ${currentFortune?.emoji || ""}`;
+                            const maxWidth = 800;
+                            const fontSize = 46;
+                            const lineHeight = 66;
+                            ctx.font = `400 ${fontSize}px system-ui, -apple-system, sans-serif`;
+
+                            // Разбиваем текст на строки
+                            const words = text.split(" ");
+                            const lines: string[] = [];
+                            let line = "";
+
+                            for (let i = 0; i < words.length; i++) {
+                              const testLine = line + words[i] + " ";
+                              const metrics = ctx.measureText(testLine);
+                              if (metrics.width > maxWidth && i > 0) {
+                                lines.push(line.trim());
+                                line = words[i] + " ";
+                              } else {
+                                line = testLine;
+                              }
                             }
+                            lines.push(line.trim());
+
+                            // Вычисляем адаптивную высоту подложки
+                            const padding = 70;
+                            const boxHeight =
+                              lines.length * lineHeight + padding * 2;
+                            const boxWidth = 940;
+                            const boxX = 70;
+                            const boxY = 720;
+                            const radius = 32;
+
+                            // Многослойная тень (глубина и объём)
+                            ctx.shadowColor = "rgba(113, 104, 93, 0.08)";
+                            ctx.shadowBlur = 60;
+                            ctx.shadowOffsetX = 0;
+                            ctx.shadowOffsetY = 20;
+
+                            // Белая подложка с закругленными углами
+                            ctx.fillStyle = "#ffffff";
+                            ctx.beginPath();
+                            ctx.moveTo(boxX + radius, boxY);
+                            ctx.lineTo(boxX + boxWidth - radius, boxY);
+                            ctx.quadraticCurveTo(
+                              boxX + boxWidth,
+                              boxY,
+                              boxX + boxWidth,
+                              boxY + radius,
+                            );
+                            ctx.lineTo(
+                              boxX + boxWidth,
+                              boxY + boxHeight - radius,
+                            );
+                            ctx.quadraticCurveTo(
+                              boxX + boxWidth,
+                              boxY + boxHeight,
+                              boxX + boxWidth - radius,
+                              boxY + boxHeight,
+                            );
+                            ctx.lineTo(boxX + radius, boxY + boxHeight);
+                            ctx.quadraticCurveTo(
+                              boxX,
+                              boxY + boxHeight,
+                              boxX,
+                              boxY + boxHeight - radius,
+                            );
+                            ctx.lineTo(boxX, boxY + radius);
+                            ctx.quadraticCurveTo(
+                              boxX,
+                              boxY,
+                              boxX + radius,
+                              boxY,
+                            );
+                            ctx.closePath();
+                            ctx.fill();
+
+                            // Вторая тень для глубины
+                            ctx.shadowColor = "rgba(113, 104, 93, 0.04)";
+                            ctx.shadowBlur = 30;
+                            ctx.shadowOffsetX = 0;
+                            ctx.shadowOffsetY = 10;
+                            ctx.fill();
+
+                            // Убираем тень для текста
+                            ctx.shadowColor = "transparent";
+                            ctx.shadowBlur = 0;
+                            ctx.shadowOffsetX = 0;
+                            ctx.shadowOffsetY = 0;
+
+                            // Текст предсказания (улучшенная типографика)
+                            ctx.fillStyle = "#4a423a";
+                            ctx.font = `400 ${fontSize}px system-ui, -apple-system, sans-serif`;
+                            ctx.textAlign = "left";
+
+                            let y = boxY + padding + fontSize + 10;
+                            for (const textLine of lines) {
+                              ctx.fillText(textLine, boxX + padding, y);
+                              y += lineHeight;
+                            }
+
+                            // CTA текст (шрифт Cormorant, мелкий)
+                            ctx.fillStyle = "#71685d";
+                            ctx.font = "300 38px Cormorant, serif";
+                            ctx.textAlign = "center";
+                            ctx.fillText(
+                              "вытяни своё предсказание",
+                              540,
+                              boxY + boxHeight + 95,
+                            );
+                            ctx.fillText(
+                              "на зиму на azaluk.shop ✨",
+                              540,
+                              boxY + boxHeight + 140,
+                            );
+
+                            const dataUrl = canvas.toDataURL("image/png", 1.0);
+                            const link = document.createElement("a");
+                            link.download = `azaluk-предсказание.png`;
+                            link.href = dataUrl;
+                            link.click();
                           }
-                          lines.push(line.trim());
-                          
-                          // Вычисляем адаптивную высоту подложки
-                          const padding = 70;
-                          const boxHeight = lines.length * lineHeight + padding * 2;
-                          const boxWidth = 940;
-                          const boxX = 70;
-                          const boxY = 720;
-                          const radius = 32;
-                          
-                          // Многослойная тень (глубина и объём)
-                          ctx.shadowColor = 'rgba(113, 104, 93, 0.08)';
-                          ctx.shadowBlur = 60;
-                          ctx.shadowOffsetX = 0;
-                          ctx.shadowOffsetY = 20;
-                          
-                          // Белая подложка с закругленными углами
-                          ctx.fillStyle = '#ffffff';
-                          ctx.beginPath();
-                          ctx.moveTo(boxX + radius, boxY);
-                          ctx.lineTo(boxX + boxWidth - radius, boxY);
-                          ctx.quadraticCurveTo(boxX + boxWidth, boxY, boxX + boxWidth, boxY + radius);
-                          ctx.lineTo(boxX + boxWidth, boxY + boxHeight - radius);
-                          ctx.quadraticCurveTo(boxX + boxWidth, boxY + boxHeight, boxX + boxWidth - radius, boxY + boxHeight);
-                          ctx.lineTo(boxX + radius, boxY + boxHeight);
-                          ctx.quadraticCurveTo(boxX, boxY + boxHeight, boxX, boxY + boxHeight - radius);
-                          ctx.lineTo(boxX, boxY + radius);
-                          ctx.quadraticCurveTo(boxX, boxY, boxX + radius, boxY);
-                          ctx.closePath();
-                          ctx.fill();
-                          
-                          // Вторая тень для глубины
-                          ctx.shadowColor = 'rgba(113, 104, 93, 0.04)';
-                          ctx.shadowBlur = 30;
-                          ctx.shadowOffsetX = 0;
-                          ctx.shadowOffsetY = 10;
-                          ctx.fill();
-                          
-                          // Убираем тень для текста
-                          ctx.shadowColor = 'transparent';
-                          ctx.shadowBlur = 0;
-                          ctx.shadowOffsetX = 0;
-                          ctx.shadowOffsetY = 0;
-                          
-                          // Текст предсказания (улучшенная типографика)
-                          ctx.fillStyle = '#4a423a';
-                          ctx.font = `400 ${fontSize}px system-ui, -apple-system, sans-serif`;
-                          ctx.textAlign = 'left';
-                          
-                          let y = boxY + padding + fontSize + 10;
-                          for (const textLine of lines) {
-                            ctx.fillText(textLine, boxX + padding, y);
-                            y += lineHeight;
-                          }
-                          
-                          // CTA текст (шрифт Cormorant, мелкий)
-                          ctx.fillStyle = '#71685d';
-                          ctx.font = '300 38px Cormorant, serif';
-                          ctx.textAlign = 'center';
-                          ctx.fillText('вытяни своё предсказание', 540, boxY + boxHeight + 95);
-                          ctx.fillText('на зиму на azaluk.shop ✨', 540, boxY + boxHeight + 140);
-                          
-                          const dataUrl = canvas.toDataURL('image/png', 1.0);
-                          const link = document.createElement('a');
-                          link.download = `azaluk-предсказание.png`;
-                          link.href = dataUrl;
-                          link.click();
+                        } catch (err) {
+                          console.error("Ошибка при сохранении:", err);
                         }
-                      } catch (err) {
-                        console.error('Ошибка при сохранении:', err);
-                      }
-                    }}
-                    className="text-sm text-primary/60 hover:text-primary transition-colors underline underline-offset-4 text-center w-full py-1"
-                  >
-                    📸 сохрани предсказание
-                  </button>
-                  <p className="text-xs text-muted-foreground/50 text-center">делись в соцсетях, отмечай тгк @azalukk</p>
-                </div>
+                      }}
+                      className="text-sm text-primary/60 hover:text-primary transition-colors underline underline-offset-4 text-center w-full py-1"
+                    >
+                      📸 сохрани предсказание
+                    </button>
+                    <p className="text-xs text-muted-foreground/50 text-center">
+                      делись в соцсетях, отмечай тгк @azalukk
+                    </p>
+                  </div>
                 </div>
                 <button
                   onClick={() => setShowFortune(false)}
@@ -323,7 +366,12 @@ export default function ComingSoon() {
               </div>
             )}
           </div>
-          <p className="text-xl md:text-2xl text-muted-foreground/40 tracking-wide" style={{ fontFamily: 'Cormorant, serif', fontWeight: 300 }}>azaluk.shop</p>
+          <p
+            className="text-xl md:text-2xl text-muted-foreground/40 tracking-wide"
+            style={{ fontFamily: "Cormorant, serif", fontWeight: 300 }}
+          >
+            azaluk.shop
+          </p>
         </div>
       )}
 
@@ -443,7 +491,9 @@ export default function ComingSoon() {
               <div className="flex gap-2 md:gap-3 items-start">
                 <span className="text-xl md:text-2xl flex-shrink-0">🪄</span>
                 <p>
-                  <strong className="text-primary font-medium">уютная упаковка</strong>{" "}
+                  <strong className="text-primary font-medium">
+                    уютная упаковка
+                  </strong>{" "}
                   — с волшебством в каждом заказе для вас и ваших близких!
                 </p>
               </div>
