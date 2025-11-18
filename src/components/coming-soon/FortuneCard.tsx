@@ -119,15 +119,15 @@ export default function FortuneCard({ fortune }: FortuneCardProps) {
           y += lineHeight;
         }
 
-        ctx.fillStyle = "#8b7a6a";
+        ctx.fillStyle = "#6b5a4a";
         ctx.font = "300 40px Cormorant, serif";
         ctx.textAlign = "center";
-        ctx.fillText("вытяни своё предсказание", 540, boxY + boxHeight + 100);
-        ctx.fillText(
-          "на зиму на azaluk.shop ✨",
-          540,
-          boxY + boxHeight + 150
-        );
+        ctx.fillText("вытяни своё предсказание", 540, boxY + boxHeight + 95);
+        
+        ctx.fillText("на зиму на azaluk.shop", 540, boxY + boxHeight + 140);
+        
+        ctx.font = "400 44px serif";
+        ctx.fillText("✨", 730, boxY + boxHeight + 140);
 
         const dataUrl = canvas.toDataURL("image/png", 1.0);
         const link = document.createElement("a");
