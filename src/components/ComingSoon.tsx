@@ -178,11 +178,12 @@ export default function ComingSoon() {
                       {currentFortune?.text}
                     </p>
                     <div className="pt-4 mt-4 border-t border-border/50">
-                      <div className="flex items-center gap-3">
+                      <div className="flex items-center gap-2">
                         <p className="text-xs md:text-sm text-muted-foreground/80 flex-1">
                           укажи при покупке этот смайлик и получишь подарок к
                           заказу
                         </p>
+                        <span className="text-muted-foreground/60 text-2xl">→</span>
                         <p className="text-4xl md:text-5xl">
                           {currentFortune?.emoji}
                         </p>
