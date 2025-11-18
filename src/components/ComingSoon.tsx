@@ -180,8 +180,7 @@ export default function ComingSoon() {
                     <div className="pt-4 mt-4 border-t border-border/50">
                       <div className="flex items-center gap-2">
                         <p className="text-xs md:text-sm text-muted-foreground/80 flex-1">
-                          укажи при покупке этот смайлик и получишь подарок к
-                          заказу
+                          сохрани этот смайлик до первой покупки, чтобы получить подарок!
                         </p>
                         <span className="text-muted-foreground/60 text-2xl">→</span>
                         <p className="text-4xl md:text-5xl">
