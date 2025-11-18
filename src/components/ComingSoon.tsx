@@ -43,6 +43,14 @@ export default function ComingSoon() {
     emoji: string;
   } | null>(null);
   const fortuneCardRef = useRef<HTMLDivElement>(null);
+  const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
+
+  const photos = [
+    "https://cdn.poehali.dev/files/57107aad-784f-4d91-8dce-e3cf50d5bc00.png",
+    "https://cdn.poehali.dev/files/8867a9f7-cd4f-480d-aabc-0c4f42ff119f.png",
+    "https://cdn.poehali.dev/files/f8445542-17af-4f89-8a9e-f292c0b1de9a.png",
+    "https://cdn.poehali.dev/files/655b86f9-f74c-4457-b2a5-b64dc57811cd.png",
+  ];
 
   const fortunes = [
     {
@@ -108,6 +116,14 @@ export default function ComingSoon() {
         setIsShaking(false);
       }, 2000);
     }
+  };
+
+  const handlePrevPhoto = () => {
+    setCurrentPhotoIndex((prev) => (prev === 0 ? photos.length - 1 : prev - 1));
+  };
+
+  const handleNextPhoto = () => {
+    setCurrentPhotoIndex((prev) => (prev === photos.length - 1 ? 0 : prev + 1));
   };
 
   return (
@@ -378,30 +394,55 @@ export default function ComingSoon() {
 
       <div className="flex-1 flex items-center justify-center px-4 py-12">
         <div className="max-w-4xl w-full text-center space-y-12">
-          {/* Compact photo preview on mobile, full gallery on desktop */}
-          <div className="relative overflow-hidden">
-            <div className="grid grid-cols-3 gap-2 md:gap-3">
-              <div className="overflow-hidden rounded-lg shadow-md">
-                <img
-                  src="https://cdn.poehali.dev/files/57107aad-784f-4d91-8dce-e3cf50d5bc00.png"
-                  alt="Вязаный грибочек на ветке"
-                  className="w-full h-32 md:h-64 object-cover hover:scale-110 transition-transform duration-700"
+          {/* Photo Carousel */}
+          <div className="relative">
+            <div className="aspect-[16/10] md:aspect-[21/9] rounded-3xl overflow-hidden shadow-2xl border-8 border-white">
+              <img
+                src={photos[currentPhotoIndex]}
+                alt={`Slide ${currentPhotoIndex + 1}`}
+                className="w-full h-full object-cover"
+              />
+            </div>
+
+            {/* Navigation Buttons */}
+            <button
+              onClick={handlePrevPhoto}
+              className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white p-3 md:p-4 rounded-full shadow-lg transition-all group"
+              aria-label="Предыдущее фото"
+            >
+              <Icon
+                name="ChevronLeft"
+                size={24}
+                className="text-primary group-hover:text-primary/80"
+              />
+            </button>
+
+            <button
+              onClick={handleNextPhoto}
+              className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white p-3 md:p-4 rounded-full shadow-lg transition-all group"
+              aria-label="Следующее фото"
+            >
+              <Icon
+                name="ChevronRight"
+                size={24}
+                className="text-primary group-hover:text-primary/80"
+              />
+            </button>
+
+            {/* Dots Indicator */}
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+              {photos.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentPhotoIndex(index)}
+                  className={`w-2.5 h-2.5 rounded-full transition-all ${
+                    index === currentPhotoIndex
+                      ? "bg-white w-8"
+                      : "bg-white/50 hover:bg-white/75"
+                  }`}
+                  aria-label={`Перейти к фото ${index + 1}`}
                 />
-              </div>
-              <div className="overflow-hidden rounded-lg shadow-md">
-                <img
-                  src="https://cdn.poehali.dev/files/8dd80cb3-4746-404a-90ed-e8576192fe76.jpg"
-                  alt="Вязаные изделия красные и белые"
-                  className="w-full h-32 md:h-64 object-cover hover:scale-110 transition-transform duration-700 brightness-125"
-                />
-              </div>
-              <div className="overflow-hidden rounded-lg shadow-md">
-                <img
-                  src="https://cdn.poehali.dev/files/8afa7fbb-da62-40f9-b59e-9b2f634a89f6.jpg"
-                  alt="Вышивка знаков зодиака"
-                  className="w-full h-32 md:h-64 object-cover hover:scale-110 transition-transform duration-700 brightness-110"
-                />
-              </div>
+              ))}
             </div>
           </div>
 
