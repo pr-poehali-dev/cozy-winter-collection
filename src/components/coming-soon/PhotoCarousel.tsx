@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Icon from "@/components/ui/icon";
 
 interface PhotoCarouselProps {
@@ -7,6 +7,8 @@ interface PhotoCarouselProps {
 
 export default function PhotoCarousel({ photos }: PhotoCarouselProps) {
   const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const autoScrollInterval = useRef<NodeJS.Timeout | null>(null);
 
   const handlePrevPhoto = () => {
     setCurrentPhotoIndex((prev) => (prev === 0 ? photos.length - 1 : prev - 1));
@@ -16,13 +18,56 @@ export default function PhotoCarousel({ photos }: PhotoCarouselProps) {
     setCurrentPhotoIndex((prev) => (prev === photos.length - 1 ? 0 : prev + 1));
   };
 
+  const scrollToIndex = (index: number) => {
+    if (scrollContainerRef.current) {
+      const container = scrollContainerRef.current;
+      const photoWidth = container.scrollWidth / photos.length;
+      container.scrollTo({
+        left: photoWidth * index,
+        behavior: "smooth",
+      });
+    }
+  };
+
+  useEffect(() => {
+    scrollToIndex(currentPhotoIndex);
+  }, [currentPhotoIndex]);
+
+  useEffect(() => {
+    autoScrollInterval.current = setInterval(() => {
+      setCurrentPhotoIndex((prev) => (prev === photos.length - 1 ? 0 : prev + 1));
+    }, 4000);
+
+    return () => {
+      if (autoScrollInterval.current) {
+        clearInterval(autoScrollInterval.current);
+      }
+    };
+  }, [photos.length]);
+
+  const handleScroll = () => {
+    if (scrollContainerRef.current) {
+      const container = scrollContainerRef.current;
+      const photoWidth = container.scrollWidth / photos.length;
+      const newIndex = Math.round(container.scrollLeft / photoWidth);
+      if (newIndex !== currentPhotoIndex) {
+        setCurrentPhotoIndex(newIndex);
+      }
+    }
+  };
+
   return (
     <div className="relative max-w-5xl mx-auto">
-      <div className="flex gap-3 md:gap-4 overflow-hidden">
+      <div
+        ref={scrollContainerRef}
+        onScroll={handleScroll}
+        className="flex gap-3 md:gap-4 overflow-x-auto overflow-y-hidden snap-x snap-mandatory scrollbar-hide"
+        style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+      >
         {photos.map((photo, index) => (
           <div
             key={index}
-            className="flex-none w-[45%] md:w-[30%] aspect-square rounded-2xl md:rounded-3xl overflow-hidden shadow-lg border-2 md:border-4 border-white"
+            className="flex-none w-[45%] md:w-[30%] aspect-square rounded-2xl md:rounded-3xl overflow-hidden shadow-lg border-2 md:border-4 border-white snap-start"
           >
             <img
               src={photo}
