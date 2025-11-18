@@ -19,9 +19,9 @@ export default function FortuneCard({ fortune }: FortuneCardProps) {
 
       if (ctx) {
         const gradient = ctx.createLinearGradient(0, 0, 0, 1920);
-        gradient.addColorStop(0, "#f8f3ed");
-        gradient.addColorStop(0.5, "#f5ede3");
-        gradient.addColorStop(1, "#f0e4d7");
+        gradient.addColorStop(0, "#fdf5ec");
+        gradient.addColorStop(0.5, "#f9ead5");
+        gradient.addColorStop(1, "#f5ddc0");
         ctx.fillStyle = gradient;
         ctx.fillRect(0, 0, 1080, 1920);
 
