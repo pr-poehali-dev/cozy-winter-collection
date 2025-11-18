@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import Shop from "./Shop";
 import Footer from "./shop/Footer";
-import FortuneModal from "./coming-soon/FortuneModal";
 
 interface TimeLeft {
   days: number;
@@ -33,42 +32,6 @@ export default function ComingSoon() {
   };
 
   const [timeLeft, setTimeLeft] = useState<TimeLeft>(calculateTimeLeft());
-  const [showFortune, setShowFortune] = useState(true);
-
-  const fortunes = [
-    {
-      text: "этой зимой ты окружишь себя вещами, которые приносят радость. каждая мелочь будет иметь значение!",
-      emoji: "❄️",
-    },
-    {
-      text: "тебя ждёт сезон тёплых встреч и уютных вечеров. создавай моменты, которые останутся в памяти!",
-      emoji: "🔮",
-    },
-    {
-      text: "холодные дни напомнят о ценности простых удовольствий. позволь себе наслаждаться каждым из них!",
-      emoji: "✨",
-    },
-    {
-      text: "зима станет временем для творчества и самовыражения. не бойся пробовать новое!",
-      emoji: "❄️",
-    },
-    {
-      text: "впереди сезон, когда дом станет твоим любимым местом. создай в нём атмосферу волшебства!",
-      emoji: "🔮",
-    },
-    {
-      text: "этой зимой ты откроешь для себя красоту в деталях. обрати внимание на то, что раньше не замечал!",
-      emoji: "✨",
-    },
-    {
-      text: "морозные дни принесут вдохновение и ясность мыслей. доверяй своей интуиции!",
-      emoji: "❄️",
-    },
-    {
-      text: "тебя ждёт зима новых привычек и маленьких ритуалов, которые сделают жизнь уютнее!",
-      emoji: "🔮",
-    },
-  ];
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -88,44 +51,43 @@ export default function ComingSoon() {
     return <Shop />;
   }
 
+  const photos = [
+    "https://cdn.poehali.dev/files/eb1ef2b3-95d0-46fb-8e21-7b64ca75743b.png",
+    "https://cdn.poehali.dev/files/eb1ef2b3-95d0-46fb-8e21-7b64ca75743b.png",
+    "https://cdn.poehali.dev/files/eb1ef2b3-95d0-46fb-8e21-7b64ca75743b.png",
+  ];
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-white via-orange-50 to-amber-50 flex flex-col">
-      {showFortune && (
-        <FortuneModal
-          fortunes={fortunes}
-          onClose={() => setShowFortune(false)}
-        />
-      )}
-      <div className="flex-1 flex flex-col items-center justify-center px-4 py-16 relative">
-        <div className="text-center space-y-12 max-w-3xl w-full">
-          <div className="space-y-6">
-            <div className="text-7xl mb-6">🥠</div>
-            <h1
-              className="text-4xl md:text-6xl lg:text-7xl text-primary mb-4"
-              style={{ fontFamily: "Cormorant, serif", fontWeight: 600 }}
-            >
-              azaluk
-            </h1>
-            <p
-              className="text-2xl md:text-3xl text-muted-foreground"
-              style={{ fontFamily: "Cormorant, serif", fontWeight: 300 }}
-            >
-              уютный магазинчик хороших вещей
-            </p>
+    <div className="min-h-screen bg-gradient-to-br from-stone-50 via-amber-50 to-orange-50 flex flex-col">
+      <div className="flex-1 flex flex-col items-center justify-start px-4 py-8 md:py-16">
+        <div className="max-w-6xl w-full space-y-12">
+          {/* Photo Gallery */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+            {photos.map((photo, index) => (
+              <div
+                key={index}
+                className="aspect-square rounded-3xl overflow-hidden shadow-2xl border-8 border-white"
+              >
+                <img
+                  src={photo}
+                  alt={`Preview ${index + 1}`}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            ))}
           </div>
 
-          <div className="space-y-6 bg-white/40 backdrop-blur-sm rounded-3xl p-8 md:p-12 shadow-xl border border-white/50">
-            <p className="text-xl md:text-2xl text-primary/80 mb-4 font-light">
-              скоро открытие! ⏳
-            </p>
+          {/* Main Content */}
+          <div className="text-center space-y-8">
             <p
-              className="text-lg md:text-xl text-muted-foreground/70 mb-8"
-              style={{ fontFamily: "Cormorant, serif", fontWeight: 300 }}
+              className="text-xl md:text-2xl text-primary/70"
+              style={{ fontFamily: "Cormorant, serif", fontWeight: 400 }}
             >
-              ждём тебя 1 декабря в 12:00
+              магазинчик рукотворных вещиц azaluk откроется через... 🔮
             </p>
 
-            <div className="grid grid-cols-4 gap-4 md:gap-6 max-w-xl mx-auto">
+            {/* Timer */}
+            <div className="flex justify-center gap-4 md:gap-6 max-w-2xl mx-auto">
               {[
                 { value: timeLeft.days, label: "дней" },
                 { value: timeLeft.hours, label: "часов" },
@@ -134,33 +96,75 @@ export default function ComingSoon() {
               ].map((item, index) => (
                 <div
                   key={index}
-                  className="bg-white/60 backdrop-blur rounded-2xl p-4 md:p-6 shadow-lg"
+                  className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 md:p-8 shadow-lg min-w-[100px] md:min-w-[140px]"
                 >
-                  <div className="text-3xl md:text-5xl font-light text-primary mb-2">
+                  <div className="text-4xl md:text-6xl font-light text-primary mb-2">
                     {String(item.value).padStart(2, "0")}
                   </div>
-                  <div className="text-xs md:text-sm text-muted-foreground/60">
+                  <div className="text-sm md:text-base text-muted-foreground/60">
                     {item.label}
                   </div>
                 </div>
               ))}
             </div>
-          </div>
 
-          <div className="space-y-4">
-            <p
-              className="text-lg md:text-xl text-muted-foreground/70"
-              style={{ fontFamily: "Cormorant, serif", fontWeight: 300 }}
-            >
-              а пока можешь{" "}
-              <button
-                onClick={() => setShowFortune(true)}
-                className="text-primary hover:text-primary/80 underline underline-offset-4 transition-colors"
+            {/* What awaits */}
+            <div className="space-y-6 max-w-2xl mx-auto pt-8">
+              <h2
+                className="text-2xl md:text-3xl text-primary"
+                style={{ fontFamily: "Cormorant, serif", fontWeight: 500 }}
               >
-                вытянуть своё предсказание
-              </button>{" "}
-              на зиму ✨
-            </p>
+                что вас ждёт?
+              </h2>
+
+              <div className="space-y-4 text-left">
+                <div className="flex items-start gap-4 p-4 bg-white/60 backdrop-blur-sm rounded-xl">
+                  <span className="text-2xl">🧶</span>
+                  <div>
+                    <p className="text-lg text-primary font-normal">
+                      вязаные чепчики
+                    </p>
+                    <p className="text-sm text-muted-foreground/70">
+                      мягкие и тёплые для зимы
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4 p-4 bg-white/60 backdrop-blur-sm rounded-xl">
+                  <span className="text-2xl">🧥</span>
+                  <div>
+                    <p className="text-lg text-primary font-normal">
+                      мохеровые свитера
+                    </p>
+                    <p className="text-sm text-muted-foreground/70">
+                      воздушные и согревающие
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4 p-4 bg-white/60 backdrop-blur-sm rounded-xl">
+                  <span className="text-2xl">🍄</span>
+                  <div>
+                    <p className="text-lg text-primary font-normal">подвесы</p>
+                    <p className="text-sm text-muted-foreground/70">
+                      задорные грибочки и изящные ленты
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4 p-4 bg-white/60 backdrop-blur-sm rounded-xl">
+                  <span className="text-2xl">🖊️</span>
+                  <div>
+                    <p className="text-lg text-primary font-normal">
+                      уютная упаковка
+                    </p>
+                    <p className="text-sm text-muted-foreground/70">
+                      с волшебством в каждом заказе для вас и ваших близких!
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
