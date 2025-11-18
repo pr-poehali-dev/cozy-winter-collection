@@ -394,51 +394,33 @@ export default function ComingSoon() {
 
       <div className="flex-1 flex items-center justify-center px-4 py-12">
         <div className="max-w-4xl w-full text-center space-y-12">
-          {/* Photo Carousel */}
-          <div className="relative">
-            <div className="aspect-[16/10] md:aspect-[21/9] rounded-3xl overflow-hidden shadow-2xl border-8 border-white">
-              <img
-                src={photos[currentPhotoIndex]}
-                alt={`Slide ${currentPhotoIndex + 1}`}
-                className="w-full h-full object-cover"
-              />
+          {/* Photo Carousel - 3 photos in a row */}
+          <div className="space-y-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {photos.map((photo, index) => (
+                <div
+                  key={index}
+                  className="aspect-square rounded-3xl overflow-hidden shadow-xl border-4 border-white"
+                >
+                  <img
+                    src={photo}
+                    alt={`Фото ${index + 1}`}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              ))}
             </div>
 
-            {/* Navigation Buttons */}
-            <button
-              onClick={handlePrevPhoto}
-              className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white p-3 md:p-4 rounded-full shadow-lg transition-all group"
-              aria-label="Предыдущее фото"
-            >
-              <Icon
-                name="ChevronLeft"
-                size={24}
-                className="text-primary group-hover:text-primary/80"
-              />
-            </button>
-
-            <button
-              onClick={handleNextPhoto}
-              className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white p-3 md:p-4 rounded-full shadow-lg transition-all group"
-              aria-label="Следующее фото"
-            >
-              <Icon
-                name="ChevronRight"
-                size={24}
-                className="text-primary group-hover:text-primary/80"
-              />
-            </button>
-
             {/* Dots Indicator */}
-            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+            <div className="flex justify-center gap-2">
               {photos.map((_, index) => (
                 <button
                   key={index}
                   onClick={() => setCurrentPhotoIndex(index)}
                   className={`w-2.5 h-2.5 rounded-full transition-all ${
                     index === currentPhotoIndex
-                      ? "bg-white w-8"
-                      : "bg-white/50 hover:bg-white/75"
+                      ? "bg-primary w-8"
+                      : "bg-primary/30 hover:bg-primary/50"
                   }`}
                   aria-label={`Перейти к фото ${index + 1}`}
                 />
