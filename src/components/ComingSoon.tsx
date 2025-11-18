@@ -1,9 +1,10 @@
-import { useState, useEffect, useRef } from "react";
-import Icon from "@/components/ui/icon";
+import { useState, useEffect } from "react";
 import Shop from "./Shop";
 import { Button } from "@/components/ui/button";
 import Footer from "./shop/Footer";
-import { toPng } from "html-to-image";
+import FortuneModal from "./coming-soon/FortuneModal";
+import PhotoCarousel from "./coming-soon/PhotoCarousel";
+import CountdownTimer from "./coming-soon/CountdownTimer";
 
 interface TimeLeft {
   days: number;
@@ -11,6 +12,48 @@ interface TimeLeft {
   minutes: number;
   seconds: number;
 }
+
+const fortunes = [
+  {
+    text: "этой зимой ты окружишь себя вещами, которые приносят радость. каждая мелочь будет иметь значение!",
+    emoji: "❄️",
+  },
+  {
+    text: "тебя ждёт сезон тёплых встреч и уютных вечеров. создавай моменты, которые останутся в памяти!",
+    emoji: "🔮",
+  },
+  {
+    text: "холодные дни напомнят о ценности простых удовольствий. позволь себе наслаждаться каждым из них!",
+    emoji: "✨",
+  },
+  {
+    text: "зима станет временем для творчества и самовыражения. не бойся пробовать новое!",
+    emoji: "❄️",
+  },
+  {
+    text: "впереди сезон, когда дом станет твоим любимым местом. создай в нём атмосферу волшебства!",
+    emoji: "🔮",
+  },
+  {
+    text: "этой зимой ты откроешь для себя красоту в деталях. обрати внимание на то, что раньше не замечал!",
+    emoji: "✨",
+  },
+  {
+    text: "морозные дни принесут вдохновение и ясность мыслей. доверяй своей интуиции!",
+    emoji: "❄️",
+  },
+  {
+    text: "тебя ждёт зима новых привычек и маленьких ритуалов, которые сделают жизнь уютнее!",
+    emoji: "🔮",
+  },
+];
+
+const photos = [
+  "https://cdn.poehali.dev/files/57107aad-784f-4d91-8dce-e3cf50d5bc00.png",
+  "https://cdn.poehali.dev/files/8867a9f7-cd4f-480d-aabc-0c4f42ff119f.png",
+  "https://cdn.poehali.dev/files/f8445542-17af-4f89-8a9e-f292c0b1de9a.png",
+  "https://cdn.poehali.dev/files/655b86f9-f74c-4457-b2a5-b64dc57811cd.png",
+];
 
 export default function ComingSoon() {
   const DEV_MODE = false;
@@ -36,56 +79,6 @@ export default function ComingSoon() {
 
   const [timeLeft, setTimeLeft] = useState<TimeLeft>(calculateTimeLeft());
   const [showFortune, setShowFortune] = useState(true);
-  const [fortuneOpened, setFortuneOpened] = useState(false);
-  const [isShaking, setIsShaking] = useState(false);
-  const [currentFortune, setCurrentFortune] = useState<{
-    text: string;
-    emoji: string;
-  } | null>(null);
-  const fortuneCardRef = useRef<HTMLDivElement>(null);
-  const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
-
-  const photos = [
-    "https://cdn.poehali.dev/files/57107aad-784f-4d91-8dce-e3cf50d5bc00.png",
-    "https://cdn.poehali.dev/files/8867a9f7-cd4f-480d-aabc-0c4f42ff119f.png",
-    "https://cdn.poehali.dev/files/f8445542-17af-4f89-8a9e-f292c0b1de9a.png",
-    "https://cdn.poehali.dev/files/655b86f9-f74c-4457-b2a5-b64dc57811cd.png",
-  ];
-
-  const fortunes = [
-    {
-      text: "этой зимой ты окружишь себя вещами, которые приносят радость. каждая мелочь будет иметь значение!",
-      emoji: "❄️",
-    },
-    {
-      text: "тебя ждёт сезон тёплых встреч и уютных вечеров. создавай моменты, которые останутся в памяти!",
-      emoji: "🔮",
-    },
-    {
-      text: "холодные дни напомнят о ценности простых удовольствий. позволь себе наслаждаться каждым из них!",
-      emoji: "✨",
-    },
-    {
-      text: "зима станет временем для творчества и самовыражения. не бойся пробовать новое!",
-      emoji: "❄️",
-    },
-    {
-      text: "впереди сезон, когда дом станет твоим любимым местом. создай в нём атмосферу волшебства!",
-      emoji: "🔮",
-    },
-    {
-      text: "этой зимой ты откроешь для себя красоту в деталях. обрати внимание на то, что раньше не замечал!",
-      emoji: "✨",
-    },
-    {
-      text: "морозные дни принесут вдохновение и ясность мыслей. доверяй своей интуиции!",
-      emoji: "❄️",
-    },
-    {
-      text: "тебя ждёт зима новых привычек и маленьких ритуалов, которые сделают жизнь уютнее!",
-      emoji: "🔮",
-    },
-  ];
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -105,355 +98,19 @@ export default function ComingSoon() {
     return <Shop />;
   }
 
-  const handleFortuneCookieClick = () => {
-    if (!fortuneOpened && !isShaking) {
-      setIsShaking(true);
-      setTimeout(() => {
-        const randomFortune =
-          fortunes[Math.floor(Math.random() * fortunes.length)];
-        setCurrentFortune(randomFortune);
-        setFortuneOpened(true);
-        setIsShaking(false);
-      }, 2000);
-    }
-  };
-
-  const handlePrevPhoto = () => {
-    setCurrentPhotoIndex((prev) => (prev === 0 ? photos.length - 1 : prev - 1));
-  };
-
-  const handleNextPhoto = () => {
-    setCurrentPhotoIndex((prev) => (prev === photos.length - 1 ? 0 : prev + 1));
-  };
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-white via-orange-50 to-amber-50 flex flex-col">
       {showFortune && (
-        <div className="fixed inset-0 bg-gradient-to-br from-white via-orange-50 to-amber-50 z-50 flex flex-col items-center justify-between px-4 py-8">
-          <button
-            onClick={() => setShowFortune(false)}
-            className="absolute top-4 right-4 md:top-8 md:right-8 p-2 rounded-full hover:bg-white/50 transition-colors group"
-            aria-label="Закрыть"
-          >
-            <Icon
-              name="X"
-              size={24}
-              className="text-muted-foreground group-hover:text-primary transition-colors"
-            />
-          </button>
-          <div className="max-w-md w-full flex flex-col items-center space-y-8 flex-1 justify-center">
-            {!fortuneOpened ? (
-              <>
-                <div className="space-y-4 text-center">
-                  <p className="text-lg md:text-xl text-primary">
-                    добро пожаловать! 🔮
-                  </p>
-                  <p className="text-sm md:text-base text-muted-foreground">
-                    прежде чем узнать о магазинчике,
-                    <br />
-                    вытяни своё зимнее предсказание:
-                  </p>
-                </div>
-                <button
-                  onClick={handleFortuneCookieClick}
-                  className="group relative cursor-pointer focus:outline-none"
-                  disabled={isShaking}
-                >
-                  <div
-                    className={`text-8xl md:text-9xl transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6 ${isShaking ? "cookie-shake" : ""}`}
-                  >
-                    🥠
-                  </div>
-                  <p className="mt-4 text-sm md:text-base text-muted-foreground/60 group-hover:text-muted-foreground transition-colors">
-                    {isShaking ? "печенье раскрывается..." : "нажми на печенье"}
-                  </p>
-                </button>
-              </>
-            ) : (
-              <div className="space-y-6 animate-fade-in w-full">
-                <div className="flex items-center justify-center gap-3 text-5xl">
-                  <span
-                    className="animate-bounce"
-                    style={{ animationDelay: "0s" }}
-                  >
-                    🥠
-                  </span>
-                  <span
-                    className="animate-bounce"
-                    style={{ animationDelay: "0.1s" }}
-                  >
-                    ✨
-                  </span>
-                </div>
-                <div className="space-y-3">
-                  <div
-                    ref={fortuneCardRef}
-                    className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 md:p-8 shadow-lg border border-border"
-                  >
-                    <p className="text-base md:text-lg text-primary font-normal leading-relaxed">
-                      {currentFortune?.text}
-                    </p>
-                    <div className="pt-4 mt-4 border-t border-border/50">
-                      <div className="flex items-center gap-2">
-                        <p className="text-xs md:text-sm text-muted-foreground/80 flex-1">
-                          сохрани этот смайлик до первой покупки, чтобы получить подарок!
-                        </p>
-                        <span className="text-muted-foreground/60 text-2xl">→</span>
-                        <p className="text-4xl md:text-5xl">
-                          {currentFortune?.emoji}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="space-y-1">
-                    <button
-                      onClick={async () => {
-                        try {
-                          const canvas = document.createElement("canvas");
-                          canvas.width = 1080;
-                          canvas.height = 1920;
-                          const ctx = canvas.getContext("2d");
-
-                          if (ctx) {
-                            // Ламповый градиентный фон (молочно-карамельный)
-                            const gradient = ctx.createLinearGradient(
-                              0,
-                              0,
-                              0,
-                              1920,
-                            );
-                            gradient.addColorStop(0, "#f8f3ed");
-                            gradient.addColorStop(0.5, "#f5ede3");
-                            gradient.addColorStop(1, "#f0e4d7");
-                            ctx.fillStyle = gradient;
-                            ctx.fillRect(0, 0, 1080, 1920);
-
-                            // Печенька вверху (с уютной мягкой тенью)
-                            ctx.shadowColor = "rgba(139, 117, 91, 0.25)";
-                            ctx.shadowBlur = 45;
-                            ctx.shadowOffsetX = 0;
-                            ctx.shadowOffsetY = 15;
-
-                            const cookieSize = 200;
-                            ctx.font = `${cookieSize}px serif`;
-                            ctx.textAlign = "center";
-                            ctx.fillText("🥠", 540, 550);
-
-                            // Вычисляем размер текста для адаптивной высоты
-                            const text = `${currentFortune?.text || ""} ${currentFortune?.emoji || ""}`;
-                            const maxWidth = 800;
-                            const fontSize = 46;
-                            const lineHeight = 66;
-                            ctx.font = `400 ${fontSize}px system-ui, -apple-system, sans-serif`;
-
-                            // Разбиваем текст на строки
-                            const words = text.split(" ");
-                            const lines: string[] = [];
-                            let line = "";
-
-                            for (let i = 0; i < words.length; i++) {
-                              const testLine = line + words[i] + " ";
-                              const metrics = ctx.measureText(testLine);
-                              if (metrics.width > maxWidth && i > 0) {
-                                lines.push(line.trim());
-                                line = words[i] + " ";
-                              } else {
-                                line = testLine;
-                              }
-                            }
-                            lines.push(line.trim());
-
-                            // Вычисляем адаптивную высоту подложки
-                            const padding = 75;
-                            const boxHeight =
-                              lines.length * lineHeight + padding * 2;
-                            const boxWidth = 920;
-                            const boxX = 80;
-                            const boxY = 700;
-                            const radius = 40;
-
-                            // Мягкая ламповая тень (уютная глубина)
-                            ctx.shadowColor = "rgba(139, 117, 91, 0.12)";
-                            ctx.shadowBlur = 70;
-                            ctx.shadowOffsetX = 0;
-                            ctx.shadowOffsetY = 25;
-
-                            // Тёплая белая подложка с закругленными углами
-                            ctx.fillStyle = "#fffef9";
-                            ctx.beginPath();
-                            ctx.moveTo(boxX + radius, boxY);
-                            ctx.lineTo(boxX + boxWidth - radius, boxY);
-                            ctx.quadraticCurveTo(
-                              boxX + boxWidth,
-                              boxY,
-                              boxX + boxWidth,
-                              boxY + radius,
-                            );
-                            ctx.lineTo(
-                              boxX + boxWidth,
-                              boxY + boxHeight - radius,
-                            );
-                            ctx.quadraticCurveTo(
-                              boxX + boxWidth,
-                              boxY + boxHeight,
-                              boxX + boxWidth - radius,
-                              boxY + boxHeight,
-                            );
-                            ctx.lineTo(boxX + radius, boxY + boxHeight);
-                            ctx.quadraticCurveTo(
-                              boxX,
-                              boxY + boxHeight,
-                              boxX,
-                              boxY + boxHeight - radius,
-                            );
-                            ctx.lineTo(boxX, boxY + radius);
-                            ctx.quadraticCurveTo(
-                              boxX,
-                              boxY,
-                              boxX + radius,
-                              boxY,
-                            );
-                            ctx.closePath();
-                            ctx.fill();
-
-                            // Вторая мягкая тень для ламповой глубины
-                            ctx.shadowColor = "rgba(139, 117, 91, 0.06)";
-                            ctx.shadowBlur = 35;
-                            ctx.shadowOffsetX = 0;
-                            ctx.shadowOffsetY = 12;
-                            ctx.fill();
-
-                            // Убираем тень для текста
-                            ctx.shadowColor = "transparent";
-                            ctx.shadowBlur = 0;
-                            ctx.shadowOffsetX = 0;
-                            ctx.shadowOffsetY = 0;
-
-                            // Текст предсказания (тёплая уютная типографика)
-                            ctx.fillStyle = "#3d3630";
-                            ctx.font = `400 ${fontSize}px system-ui, -apple-system, sans-serif`;
-                            ctx.textAlign = "left";
-
-                            let y = boxY + padding + fontSize + 10;
-                            for (const textLine of lines) {
-                              ctx.fillText(textLine, boxX + padding, y);
-                              y += lineHeight;
-                            }
-
-                            // CTA текст (шрифт Cormorant, уютный оттенок)
-                            ctx.fillStyle = "#8b7a6a";
-                            ctx.font = "300 40px Cormorant, serif";
-                            ctx.textAlign = "center";
-                            ctx.fillText(
-                              "вытяни своё предсказание",
-                              540,
-                              boxY + boxHeight + 100,
-                            );
-                            ctx.fillText(
-                              "на зиму на azaluk.shop ✨",
-                              540,
-                              boxY + boxHeight + 150,
-                            );
-
-                            const dataUrl = canvas.toDataURL("image/png", 1.0);
-                            const link = document.createElement("a");
-                            link.download = `azaluk-предсказание.png`;
-                            link.href = dataUrl;
-                            link.click();
-                          }
-                        } catch (err) {
-                          console.error("Ошибка при сохранении:", err);
-                        }
-                      }}
-                      className="text-sm text-primary/60 hover:text-primary transition-colors underline underline-offset-4 text-center w-full py-1"
-                    >
-                      📸 сохрани предсказание
-                    </button>
-                    <p className="text-xs text-muted-foreground/50 text-center">
-                      делись в соцсетях, отмечай тгк @azalukk
-                    </p>
-                  </div>
-                </div>
-                <button
-                  onClick={() => setShowFortune(false)}
-                  className="w-full py-3 px-6 bg-primary hover:bg-primary/90 text-white rounded-xl transition-colors text-sm font-light shadow-md hover:shadow-lg"
-                >
-                  перейти к магазину →
-                </button>
-              </div>
-            )}
-          </div>
-          <p
-            className="text-xl md:text-2xl text-muted-foreground/40 tracking-wide"
-            style={{ fontFamily: "Cormorant, serif", fontWeight: 300 }}
-          >
-            azaluk.shop
-          </p>
-        </div>
+        <FortuneModal
+          fortunes={fortunes}
+          onClose={() => setShowFortune(false)}
+        />
       )}
 
       <div className="flex-1 flex items-center justify-center px-4 py-12">
         <div className="max-w-4xl w-full text-center space-y-12">
-          {/* Photo Carousel - одна строка со стрелками */}
-          <div className="relative max-w-5xl mx-auto">
-            <div className="flex gap-3 md:gap-4 overflow-hidden">
-              {photos.map((photo, index) => (
-                <div
-                  key={index}
-                  className="flex-none w-[45%] md:w-[30%] aspect-square rounded-2xl md:rounded-3xl overflow-hidden shadow-lg border-2 md:border-4 border-white"
-                >
-                  <img
-                    src={photo}
-                    alt={`Фото ${index + 1}`}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              ))}
-            </div>
+          <PhotoCarousel photos={photos} />
 
-            {/* Navigation Arrows */}
-            <button
-              onClick={handlePrevPhoto}
-              className="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 bg-white hover:bg-white/90 p-3 rounded-full shadow-xl transition-all group"
-              aria-label="Предыдущее фото"
-            >
-              <Icon
-                name="ChevronLeft"
-                size={24}
-                className="text-primary"
-              />
-            </button>
-
-            <button
-              onClick={handleNextPhoto}
-              className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 bg-white hover:bg-white/90 p-3 rounded-full shadow-xl transition-all group"
-              aria-label="Следующее фото"
-            >
-              <Icon
-                name="ChevronRight"
-                size={24}
-                className="text-primary"
-              />
-            </button>
-
-            {/* Dots Indicator */}
-            <div className="flex justify-center gap-2 mt-6">
-              {photos.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentPhotoIndex(index)}
-                  className={`w-2 h-2 md:w-2.5 md:h-2.5 rounded-full transition-all ${
-                    index === currentPhotoIndex
-                      ? "bg-primary w-6 md:w-8"
-                      : "bg-primary/30 hover:bg-primary/50"
-                  }`}
-                  aria-label={`Перейти к фото ${index + 1}`}
-                />
-              ))}
-            </div>
-          </div>
-
-          {/* Hero section with compact layout on mobile */}
           <div className="space-y-6">
             <p className="text-lg md:text-xl text-[#71685d] my-0 mx-[1px] py-0 px-0">
               магазинчик рукотворных вещиц azaluk откроется через... 🔮
@@ -506,7 +163,6 @@ export default function ComingSoon() {
             </div>
           </div>
 
-          {/* What awaits you block - compact mobile version */}
           <div className="flex flex-col items-center space-y-4 md:space-y-6">
             <h2 className="text-xl md:text-3xl font-light text-primary">
               что вас ждёт?
@@ -538,35 +194,53 @@ export default function ComingSoon() {
                 </p>
               </div>
               <div className="flex gap-2 md:gap-3 items-start">
-                <span className="text-xl md:text-2xl flex-shrink-0">🪄</span>
+                <span className="text-xl md:text-2xl flex-shrink-0">🎀</span>
                 <p>
                   <strong className="text-primary font-medium">
-                    уютная упаковка
+                    украшения из полимерной глины
                   </strong>{" "}
-                  — с волшебством в каждом заказе для вас и ваших близких!
+                  — каждое — произведение искусства
                 </p>
               </div>
             </div>
           </div>
 
-          {/* Telegram subscribe - simplified mobile CTA */}
-          <div className="bg-gradient-to-br from-white/80 to-orange-50/40 backdrop-blur-sm rounded-2xl p-5 md:p-8 shadow-lg border border-border max-w-xl mx-auto space-y-3 md:space-y-4">
-            <h3 className="text-lg md:text-2xl font-light text-primary">
-              следите за новостями 💌
-            </h3>
-            <a
-              href="https://t.me/azalukk"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block"
-            >
-              <Button className="w-full px-6 py-3 bg-primary hover:bg-primary/90 text-white rounded-xl transition-colors text-sm md:text-base shadow-md hover:shadow-lg transition-all">
-                подписаться на телеграм ✨
-              </Button>
-            </a>
-            <p className="text-xs text-muted-foreground/60">
-              анонсы, закулисье создания и немного волшебства
+          <div className="flex flex-col items-center gap-3 md:gap-4 pb-6 md:pb-0">
+            <p className="text-sm md:text-base text-muted-foreground/80">
+              следите за обновлениями:
             </p>
+            <div className="flex gap-3 md:gap-4">
+              <Button
+                variant="outline"
+                size="lg"
+                className="border-2 bg-white/50"
+                asChild
+              >
+                <a
+                  href="https://t.me/azalukk"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <span className="text-lg md:text-xl mr-2">📱</span>
+                  telegram
+                </a>
+              </Button>
+              <Button
+                variant="outline"
+                size="lg"
+                className="border-2 bg-white/50"
+                asChild
+              >
+                <a
+                  href="https://vk.com/azalukk"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <span className="text-lg md:text-xl mr-2">💙</span>
+                  вконтакте
+                </a>
+              </Button>
+            </div>
           </div>
         </div>
       </div>
