@@ -199,28 +199,29 @@ export default function ComingSoon() {
                           const ctx = canvas.getContext("2d");
 
                           if (ctx) {
-                            // Градиентный фон (тёплый, элегантный)
+                            // Ламповый градиентный фон (молочно-карамельный)
                             const gradient = ctx.createLinearGradient(
                               0,
                               0,
                               0,
                               1920,
                             );
-                            gradient.addColorStop(0, "#fef7f0");
-                            gradient.addColorStop(1, "#fcebd4");
+                            gradient.addColorStop(0, "#f8f3ed");
+                            gradient.addColorStop(0.5, "#f5ede3");
+                            gradient.addColorStop(1, "#f0e4d7");
                             ctx.fillStyle = gradient;
                             ctx.fillRect(0, 0, 1080, 1920);
 
-                            // Печенька вверху (с мягкой тенью)
-                            ctx.shadowColor = "rgba(113, 104, 93, 0.15)";
-                            ctx.shadowBlur = 30;
+                            // Печенька вверху (с уютной мягкой тенью)
+                            ctx.shadowColor = "rgba(139, 117, 91, 0.25)";
+                            ctx.shadowBlur = 45;
                             ctx.shadowOffsetX = 0;
-                            ctx.shadowOffsetY = 10;
+                            ctx.shadowOffsetY = 15;
 
-                            const cookieSize = 180;
+                            const cookieSize = 200;
                             ctx.font = `${cookieSize}px serif`;
                             ctx.textAlign = "center";
-                            ctx.fillText("🥠", 540, 580);
+                            ctx.fillText("🥠", 540, 550);
 
                             // Вычисляем размер текста для адаптивной высоты
                             const text = `${currentFortune?.text || ""} ${currentFortune?.emoji || ""}`;
@@ -247,22 +248,22 @@ export default function ComingSoon() {
                             lines.push(line.trim());
 
                             // Вычисляем адаптивную высоту подложки
-                            const padding = 70;
+                            const padding = 75;
                             const boxHeight =
                               lines.length * lineHeight + padding * 2;
-                            const boxWidth = 940;
-                            const boxX = 70;
-                            const boxY = 720;
-                            const radius = 32;
+                            const boxWidth = 920;
+                            const boxX = 80;
+                            const boxY = 700;
+                            const radius = 40;
 
-                            // Многослойная тень (глубина и объём)
-                            ctx.shadowColor = "rgba(113, 104, 93, 0.08)";
-                            ctx.shadowBlur = 60;
+                            // Мягкая ламповая тень (уютная глубина)
+                            ctx.shadowColor = "rgba(139, 117, 91, 0.12)";
+                            ctx.shadowBlur = 70;
                             ctx.shadowOffsetX = 0;
-                            ctx.shadowOffsetY = 20;
+                            ctx.shadowOffsetY = 25;
 
-                            // Белая подложка с закругленными углами
-                            ctx.fillStyle = "#ffffff";
+                            // Тёплая белая подложка с закругленными углами
+                            ctx.fillStyle = "#fffef9";
                             ctx.beginPath();
                             ctx.moveTo(boxX + radius, boxY);
                             ctx.lineTo(boxX + boxWidth - radius, boxY);
@@ -299,11 +300,11 @@ export default function ComingSoon() {
                             ctx.closePath();
                             ctx.fill();
 
-                            // Вторая тень для глубины
-                            ctx.shadowColor = "rgba(113, 104, 93, 0.04)";
-                            ctx.shadowBlur = 30;
+                            // Вторая мягкая тень для ламповой глубины
+                            ctx.shadowColor = "rgba(139, 117, 91, 0.06)";
+                            ctx.shadowBlur = 35;
                             ctx.shadowOffsetX = 0;
-                            ctx.shadowOffsetY = 10;
+                            ctx.shadowOffsetY = 12;
                             ctx.fill();
 
                             // Убираем тень для текста
@@ -312,8 +313,8 @@ export default function ComingSoon() {
                             ctx.shadowOffsetX = 0;
                             ctx.shadowOffsetY = 0;
 
-                            // Текст предсказания (улучшенная типографика)
-                            ctx.fillStyle = "#4a423a";
+                            // Текст предсказания (тёплая уютная типографика)
+                            ctx.fillStyle = "#3d3630";
                             ctx.font = `400 ${fontSize}px system-ui, -apple-system, sans-serif`;
                             ctx.textAlign = "left";
 
@@ -323,19 +324,19 @@ export default function ComingSoon() {
                               y += lineHeight;
                             }
 
-                            // CTA текст (шрифт Cormorant, мелкий)
-                            ctx.fillStyle = "#71685d";
-                            ctx.font = "300 38px Cormorant, serif";
+                            // CTA текст (шрифт Cormorant, уютный оттенок)
+                            ctx.fillStyle = "#8b7a6a";
+                            ctx.font = "300 40px Cormorant, serif";
                             ctx.textAlign = "center";
                             ctx.fillText(
                               "вытяни своё предсказание",
                               540,
-                              boxY + boxHeight + 95,
+                              boxY + boxHeight + 100,
                             );
                             ctx.fillText(
                               "на зиму на azaluk.shop ✨",
                               540,
-                              boxY + boxHeight + 140,
+                              boxY + boxHeight + 150,
                             );
 
                             const dataUrl = canvas.toDataURL("image/png", 1.0);
