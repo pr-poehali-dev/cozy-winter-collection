@@ -209,38 +209,21 @@ export default function ComingSoon() {
             <p className="text-sm md:text-base text-muted-foreground/80">
               следите за обновлениями:
             </p>
-            <div className="flex gap-3 md:gap-4">
-              <Button
-                variant="outline"
-                size="lg"
-                className="border-2 bg-white/50"
-                asChild
+            <Button
+              variant="outline"
+              size="lg"
+              className="border-2 bg-white/50"
+              asChild
+            >
+              <a
+                href="https://t.me/azalukk"
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                <a
-                  href="https://t.me/azalukk"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <span className="text-lg md:text-xl mr-2">📱</span>
-                  telegram
-                </a>
-              </Button>
-              <Button
-                variant="outline"
-                size="lg"
-                className="border-2 bg-white/50"
-                asChild
-              >
-                <a
-                  href="https://vk.com/azalukk"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <span className="text-lg md:text-xl mr-2">💙</span>
-                  вконтакте
-                </a>
-              </Button>
-            </div>
+                <span className="text-lg md:text-xl mr-2">☕</span>
+                telegram
+              </a>
+            </Button>
           </div>
         </div>
       </div>
