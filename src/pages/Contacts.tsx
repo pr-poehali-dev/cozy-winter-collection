@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import Icon from '@/components/ui/icon';
-import Footer from '@/components/Footer';
+import Footer from '@/components/shop/Footer';
 
 export default function Contacts() {
   return (
