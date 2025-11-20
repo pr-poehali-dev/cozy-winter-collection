@@ -72,7 +72,7 @@ export default function Contacts() {
 
           <div className="rounded-2xl overflow-hidden shadow-lg">
             <img 
-              src="https://cdn.poehali.dev/files/c6135958-072c-49ce-af5e-e447efea7864.png" 
+              src="https://cdn.poehali.dev/files/b92bfbfe-23cf-41f0-a7a2-f2212bac68b6.jpeg" 
               alt="Наши изделия"
               className="w-full h-auto object-cover"
             />
