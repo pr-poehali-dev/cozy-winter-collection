@@ -57,6 +57,9 @@ export default function Contacts() {
             <div className="text-primary font-light">
               <span className="font-normal">телеграм:</span> @azaluk
             </div>
+            <div className="text-primary font-light">
+              <span className="font-normal">телефон:</span> +7 (900) 123-45-67
+            </div>
           </div>
 
           <p className="text-center text-primary/70 font-light text-sm md:text-base max-w-3xl mx-auto leading-relaxed mb-12">
