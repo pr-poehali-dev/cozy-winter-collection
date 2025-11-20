@@ -40,9 +40,9 @@ export default function Header({
             <Link to="/delivery" className="text-sm font-light text-primary hover:text-muted-foreground transition-colors">
               оплата и доставка
             </Link>
-            <a href="#contacts" className="text-sm font-light text-primary hover:text-muted-foreground transition-colors">
+            <Link to="/contacts" className="text-sm font-light text-primary hover:text-muted-foreground transition-colors">
               контакты
-            </a>
+            </Link>
           </nav>
           
           <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
@@ -77,13 +77,13 @@ export default function Header({
                 >
                   оплата и доставка
                 </Link>
-                <a 
-                  href="#contacts" 
+                <Link 
+                  to="/contacts" 
                   className="text-sm font-light text-primary hover:text-muted-foreground transition-colors"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   контакты
-                </a>
+                </Link>
               </nav>
             </SheetContent>
           </Sheet>

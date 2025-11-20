@@ -10,6 +10,7 @@ import DeliveryPage from "./pages/Delivery";
 import Privacy from "./pages/Privacy";
 import Offer from "./pages/Offer";
 import Personal from "./pages/Personal";
+import Contacts from "./pages/Contacts";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -24,6 +25,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/about" element={<About />} />
           <Route path="/delivery" element={<DeliveryPage />} />
+          <Route path="/contacts" element={<Contacts />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/offer" element={<Offer />} />
           <Route path="/personal" element={<Personal />} />
