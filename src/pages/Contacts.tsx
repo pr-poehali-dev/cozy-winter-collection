@@ -12,7 +12,7 @@ export default function Contacts() {
   const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
-    <div className="min-h-screen bg-[#FAF8F5] flex flex-col">
+    <div className="min-h-screen bg-background flex flex-col">
       <Header
         cart={cart}
         isCartOpen={isCartOpen}
@@ -36,7 +36,7 @@ export default function Contacts() {
               <Icon name="Send" size={28} className="text-white" strokeWidth={1.5} />
             </a>
             <a
-              href="https://youtube.com/@azalukk"
+              href="https://www.youtube.com/@azaluk"
               target="_blank"
               rel="noopener noreferrer"
               className="w-16 h-16 rounded-full bg-primary flex items-center justify-center hover:scale-110 transition-transform"
@@ -60,7 +60,7 @@ export default function Contacts() {
           </div>
 
           <p className="text-center text-primary/70 font-light text-sm md:text-base max-w-3xl mx-auto leading-relaxed mb-12">
-            а ещё мы с удовольствием разместим свои товары у вас в магазине книг или подарков, кафе или кофейне, уютном городском пространстве или на полочках вашей тату-студии 🤍
+            а ещё мы с удовольствием разместим свои товары у вас в магазине книг или подарков, кафе или кофейне, уютном городском пространстве 🤍
           </p>
 
           <div className="rounded-2xl overflow-hidden shadow-lg max-w-md mx-auto">
