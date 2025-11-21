@@ -88,6 +88,12 @@ export default function ComingSoon() {
     return () => clearInterval(timer);
   }, []);
 
+  useEffect(() => {
+    if (!showFortune) {
+      window.scrollTo(0, 0);
+    }
+  }, [showFortune]);
+
   const isLaunched =
     timeLeft.days === 0 &&
     timeLeft.hours === 0 &&
@@ -103,10 +109,7 @@ export default function ComingSoon() {
       {showFortune && (
         <FortuneModal
           fortunes={fortunes}
-          onClose={() => {
-            setShowFortune(false);
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          }}
+          onClose={() => setShowFortune(false)}
         />
       )}
 

@@ -32,7 +32,7 @@ export default function FortuneModal({ fortunes, onClose }: FortuneModalProps) {
   };
 
   return (
-    <div className="fixed inset-0 bg-gradient-to-br from-white via-orange-50 to-amber-50 z-50 flex flex-col items-center justify-between px-4 py-8">
+    <div className="fixed inset-0 bg-gradient-to-br from-white via-orange-50 to-amber-50 z-50 flex flex-col items-center justify-between px-4 py-8 overflow-hidden">
       <button
         onClick={onClose}
         className="absolute top-4 right-4 md:top-8 md:right-8 p-2 rounded-full hover:bg-white/50 transition-colors group"
