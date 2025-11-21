@@ -7,14 +7,19 @@ interface PhotoCarouselProps {
 
 export default function PhotoCarousel({ photos }: PhotoCarouselProps) {
   const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const autoScrollInterval = useRef<NodeJS.Timeout | null>(null);
+  const animationRef = useRef<number | null>(null);
 
-  const handlePrevPhoto = () => {
+  const handlePrevPhoto = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
     setCurrentPhotoIndex((prev) => (prev === 0 ? photos.length - 1 : prev - 1));
   };
 
-  const handleNextPhoto = () => {
+  const handleNextPhoto = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
     setCurrentPhotoIndex((prev) => (prev === photos.length - 1 ? 0 : prev + 1));
   };
 
@@ -34,16 +39,29 @@ export default function PhotoCarousel({ photos }: PhotoCarouselProps) {
   }, [currentPhotoIndex]);
 
   useEffect(() => {
-    autoScrollInterval.current = setInterval(() => {
-      setCurrentPhotoIndex((prev) => (prev === photos.length - 1 ? 0 : prev + 1));
-    }, 4000);
+    const container = scrollContainerRef.current;
+    if (!container) return;
+
+    const scroll = () => {
+      if (!isHovered && container) {
+        container.scrollLeft += 0.5;
+        
+        const maxScroll = container.scrollWidth - container.clientWidth;
+        if (container.scrollLeft >= maxScroll) {
+          container.scrollLeft = 0;
+        }
+      }
+      animationRef.current = requestAnimationFrame(scroll);
+    };
+
+    animationRef.current = requestAnimationFrame(scroll);
 
     return () => {
-      if (autoScrollInterval.current) {
-        clearInterval(autoScrollInterval.current);
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
       }
     };
-  }, [photos.length]);
+  }, [isHovered]);
 
   const handleScroll = () => {
     if (scrollContainerRef.current) {
@@ -57,21 +75,25 @@ export default function PhotoCarousel({ photos }: PhotoCarouselProps) {
   };
 
   return (
-    <div className="relative max-w-5xl mx-auto">
+    <div 
+      className="relative max-w-5xl mx-auto"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
       <div
         ref={scrollContainerRef}
         onScroll={handleScroll}
-        className="flex gap-3 md:gap-4 overflow-x-auto overflow-y-hidden snap-x snap-mandatory scrollbar-hide"
+        className="flex gap-3 md:gap-4 overflow-x-auto overflow-y-hidden scrollbar-hide"
         style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
       >
-        {photos.map((photo, index) => (
+        {[...photos, ...photos].map((photo, index) => (
           <div
             key={index}
-            className="flex-none w-[45%] md:w-[30%] aspect-square rounded-2xl md:rounded-3xl overflow-hidden shadow-lg border-2 md:border-4 border-white snap-start"
+            className="flex-none w-[45%] md:w-[30%] aspect-square rounded-2xl md:rounded-3xl overflow-hidden shadow-lg border-2 md:border-4 border-white"
           >
             <img
               src={photo}
-              alt={`Фото ${index + 1}`}
+              alt={`Фото ${(index % photos.length) + 1}`}
               className="w-full h-full object-cover"
             />
           </div>
@@ -80,7 +102,7 @@ export default function PhotoCarousel({ photos }: PhotoCarouselProps) {
 
       <button
         onClick={handlePrevPhoto}
-        className="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 bg-white hover:bg-white/90 p-3 rounded-full shadow-xl transition-all group"
+        className="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 bg-white hover:bg-white/90 p-3 rounded-full shadow-xl transition-all group z-10 cursor-pointer"
         aria-label="Предыдущее фото"
       >
         <Icon name="ChevronLeft" size={24} className="text-primary" />
@@ -88,7 +110,7 @@ export default function PhotoCarousel({ photos }: PhotoCarouselProps) {
 
       <button
         onClick={handleNextPhoto}
-        className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 bg-white hover:bg-white/90 p-3 rounded-full shadow-xl transition-all group"
+        className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 bg-white hover:bg-white/90 p-3 rounded-full shadow-xl transition-all group z-10 cursor-pointer"
         aria-label="Следующее фото"
       >
         <Icon name="ChevronRight" size={24} className="text-primary" />
