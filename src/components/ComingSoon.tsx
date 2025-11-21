@@ -103,7 +103,10 @@ export default function ComingSoon() {
       {showFortune && (
         <FortuneModal
           fortunes={fortunes}
-          onClose={() => setShowFortune(false)}
+          onClose={() => {
+            setShowFortune(false);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }}
         />
       )}
 
