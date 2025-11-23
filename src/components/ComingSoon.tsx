@@ -206,9 +206,9 @@ export default function ComingSoon() {
                 <span className="text-xl md:text-2xl flex-shrink-0">🎀</span>
                 <p>
                   <strong className="text-primary font-medium">
-                    украшения из полимерной глины
+                    подарочная упаковка
                   </strong>{" "}
-                  — каждое — произведение искусства
+                  — для тех, кто любит дарить красиво
                 </p>
               </div>
             </div>
