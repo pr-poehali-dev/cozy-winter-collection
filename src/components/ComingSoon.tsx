@@ -147,18 +147,18 @@ export default function ComingSoon() {
     return <Shop />;
   }
 
-  const randomFortune =
-    fortunes[Math.floor(Math.random() * fortunes.length)];
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-white via-orange-50 to-amber-50 flex flex-col">
+      {showFortune && (
+        <FortuneModal
+          fortunes={fortunes}
+          onClose={() => setShowFortune(false)}
+        />
+      )}
+
       <div className="flex-1 flex items-center justify-center px-4 py-12">
         <div className="max-w-4xl w-full text-center space-y-12">
-          <div className="max-w-2xl mx-auto bg-white/80 backdrop-blur-sm rounded-3xl shadow-lg border border-orange-200 p-8 md:p-12">
-            <p className="text-xl md:text-2xl text-[#71685d] leading-relaxed">
-              {randomFortune.text} {randomFortune.emoji}
-            </p>
-          </div>
+          <PhotoCarousel photos={photos} />
 
           <div className="space-y-6">
             <p className="text-lg md:text-xl text-[#71685d] my-0 mx-[1px] py-0 px-0">
@@ -253,9 +253,6 @@ export default function ComingSoon() {
           </div>
 
           <div className="flex flex-col items-center gap-3 md:gap-4 pb-6 md:pb-0">
-            <p className="text-sm md:text-base text-muted-foreground/80 font-light">
-              вытяни своё предсказание на зиму на azaluk.shop ✨
-            </p>
             <p className="text-sm md:text-base text-muted-foreground/80">
               следите за обновлениями:
             </p>
