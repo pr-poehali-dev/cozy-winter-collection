@@ -51,7 +51,7 @@ export default function FortuneCard({ fortune }: FortuneCardProps) {
         const boxHeight = lines.length * lineHeight + padding * 2;
         const boxWidth = 920;
         const boxX = 80;
-        const boxY = 600;
+        const boxY = 700;
         const radius = 40;
 
         ctx.shadowColor = "rgba(139, 117, 91, 0.12)";
