@@ -9,7 +9,7 @@ export default function Footer() {
             <h3 className="text-base md:text-xl font-light tracking-wide text-[#F5F1E8]">azaluk</h3>
             <div className="flex items-center gap-2.5">
               <a 
-                href="https://youtube.com" 
+                href="https://www.youtube.com/@azaluk" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-[#F5F1E8] hover:text-[#F5F1E8]/70 transition-colors"
