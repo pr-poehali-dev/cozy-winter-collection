@@ -25,36 +25,6 @@ export default function FortuneCard({ fortune }: FortuneCardProps) {
         ctx.fillStyle = gradient;
         ctx.fillRect(0, 0, 1080, 1920);
 
-        const cookieSize = 180;
-        const cookieX = 540 - cookieSize / 2;
-        const cookieY = 320;
-        
-        ctx.beginPath();
-        ctx.arc(540, cookieY + cookieSize / 2, cookieSize / 2, 0, Math.PI * 2);
-        ctx.fillStyle = "#f4e4c1";
-        ctx.fill();
-        
-        ctx.beginPath();
-        ctx.moveTo(540, cookieY + 40);
-        ctx.lineTo(540 + 60, cookieY + cookieSize / 2);
-        ctx.lineTo(540, cookieY + cookieSize - 40);
-        ctx.lineTo(540 - 60, cookieY + cookieSize / 2);
-        ctx.closePath();
-        ctx.fillStyle = "#e8d4a8";
-        ctx.fill();
-        
-        for (let i = 0; i < 15; i++) {
-          const x = cookieX + Math.random() * cookieSize;
-          const y = cookieY + Math.random() * cookieSize;
-          const distance = Math.sqrt(Math.pow(x - 540, 2) + Math.pow(y - (cookieY + cookieSize/2), 2));
-          if (distance < cookieSize / 2) {
-            ctx.fillStyle = "#d4b896";
-            ctx.beginPath();
-            ctx.arc(x, y, 2, 0, Math.PI * 2);
-            ctx.fill();
-          }
-        }
-
         const text = `${fortune?.text || ""} ${fortune?.emoji || ""}`;
         const maxWidth = 800;
         const fontSize = 46;
@@ -81,7 +51,7 @@ export default function FortuneCard({ fortune }: FortuneCardProps) {
         const boxHeight = lines.length * lineHeight + padding * 2;
         const boxWidth = 920;
         const boxX = 80;
-        const boxY = 650;
+        const boxY = 600;
         const radius = 40;
 
         ctx.shadowColor = "rgba(139, 117, 91, 0.12)";
