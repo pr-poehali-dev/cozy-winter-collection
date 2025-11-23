@@ -208,7 +208,7 @@ export default function ComingSoon() {
                   <strong className="text-primary font-medium">
                     подарочная упаковка
                   </strong>{" "}
-                  — для тех, кто любит дарить красиво
+                  — для тех, кто любит получать или дарить красиво
                 </p>
               </div>
             </div>
