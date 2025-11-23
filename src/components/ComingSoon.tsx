@@ -50,7 +50,7 @@ const fortunes = [
 
 const photos = [
   "https://cdn.poehali.dev/files/57107aad-784f-4d91-8dce-e3cf50d5bc00.png",
-  "https://cdn.poehali.dev/files/8867a9f7-cd4f-480d-aabc-0c4f42ff119f.png",
+  "https://cdn.poehali.dev/files/75695108-6b58-4f54-af05-b9d85940ca7a.jpg",
   "https://cdn.poehali.dev/files/f8445542-17af-4f89-8a9e-f292c0b1de9a.png",
   "https://cdn.poehali.dev/files/655b86f9-f74c-4457-b2a5-b64dc57811cd.png",
   "https://cdn.poehali.dev/files/27ada226-9f13-443c-a0a6-8b4c706bbf14.png",
