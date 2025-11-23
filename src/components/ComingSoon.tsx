@@ -56,7 +56,6 @@ const photos = [
   "https://cdn.poehali.dev/files/27ada226-9f13-443c-a0a6-8b4c706bbf14.png",
   "https://cdn.poehali.dev/files/aa0f058c-76ae-4702-b67b-a1fc0759619f.png",
   "https://cdn.poehali.dev/files/6624ec60-2dfb-4be5-a729-0a161a7cc7f5.png",
-  "https://cdn.poehali.dev/files/44560af1-ba91-4d55-88dc-636ab50661a3.png",
   "https://cdn.poehali.dev/files/66cedb26-2d08-421a-8bc6-e785de403812.png",
 ];
 
