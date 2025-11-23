@@ -25,6 +25,12 @@ export default function FortuneCard({ fortune }: FortuneCardProps) {
         ctx.fillStyle = gradient;
         ctx.fillRect(0, 0, 1080, 1920);
 
+        const cookieY = 400;
+        ctx.font = "220px serif";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText("🥠", 540, cookieY);
+
         const text = `${fortune?.text || ""} ${fortune?.emoji || ""}`;
         const maxWidth = 800;
         const fontSize = 46;
@@ -51,7 +57,7 @@ export default function FortuneCard({ fortune }: FortuneCardProps) {
         const boxHeight = lines.length * lineHeight + padding * 2;
         const boxWidth = 920;
         const boxX = 80;
-        const boxY = 600;
+        const boxY = 650;
         const radius = 40;
 
         ctx.shadowColor = "rgba(139, 117, 91, 0.12)";
