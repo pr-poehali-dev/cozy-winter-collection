@@ -192,7 +192,7 @@ export default function ComingSoon() {
                   <strong className="text-primary font-medium">
                     мохеровые свитера
                   </strong>{" "}
-                  — воздушные и согревающие
+                  — невесомые и согревающие
                 </p>
               </div>
               <div className="flex gap-2 md:gap-3 items-start">
