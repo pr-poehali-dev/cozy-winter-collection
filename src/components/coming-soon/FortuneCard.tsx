@@ -25,16 +25,6 @@ export default function FortuneCard({ fortune }: FortuneCardProps) {
         ctx.fillStyle = gradient;
         ctx.fillRect(0, 0, 1080, 1920);
 
-        ctx.shadowColor = "rgba(139, 117, 91, 0.25)";
-        ctx.shadowBlur = 45;
-        ctx.shadowOffsetX = 0;
-        ctx.shadowOffsetY = 15;
-
-        const cookieSize = 200;
-        ctx.font = `${cookieSize}px serif`;
-        ctx.textAlign = "center";
-        ctx.fillText("🥠", 540, 550);
-
         const text = `${fortune?.text || ""} ${fortune?.emoji || ""}`;
         const maxWidth = 800;
         const fontSize = 46;
@@ -61,7 +51,7 @@ export default function FortuneCard({ fortune }: FortuneCardProps) {
         const boxHeight = lines.length * lineHeight + padding * 2;
         const boxWidth = 920;
         const boxX = 80;
-        const boxY = 700;
+        const boxY = 600;
         const radius = 40;
 
         ctx.shadowColor = "rgba(139, 117, 91, 0.12)";
