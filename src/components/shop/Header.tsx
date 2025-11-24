@@ -1,10 +1,8 @@
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import Icon from '@/components/ui/icon';
 import { CartItem } from './types';
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { createRobokassaPaymentLink } from '@/lib/payment';
-import { toast } from '@/hooks/use-toast';
 
 interface HeaderProps {
   cart: CartItem[];
@@ -26,43 +24,6 @@ export default function Header({
   cartCount
 }: HeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isCheckoutLoading, setIsCheckoutLoading] = useState(false);
-
-  const totalQuantity = useMemo(() => cart.reduce((sum, item) => sum + item.quantity, 0), [cart]);
-  const formattedTotal = useMemo(() => cartTotal.toLocaleString('ru-RU'), [cartTotal]);
-
-  const handleCheckout = async () => {
-    if (!cart.length || isCheckoutLoading) return;
-
-    try {
-      setIsCheckoutLoading(true);
-
-      const orderId = Date.now();
-      const description = cart.length === 1
-        ? cart[0].name
-        : `Заказ из ${cart.length} товаров`;
-
-      const result = await createRobokassaPaymentLink({
-        amount: Number(cartTotal.toFixed(2)),
-        orderId,
-        description,
-      });
-
-      window.open(result.payment_url, '_blank');
-      toast({
-        title: 'Ссылка на оплату открыта',
-        description: 'оплата откроется в новой вкладке',
-      });
-    } catch (error) {
-      toast({
-        title: 'не получилось создать ссылку',
-        description: 'попробуйте ещё раз или напишите нам',
-      });
-    } finally {
-      setIsCheckoutLoading(false);
-    }
-  };
-
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-card/95 backdrop-blur-sm border-b border-border">
       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
@@ -202,19 +163,11 @@ export default function Header({
                 </div>
                 <div className="flex-shrink-0 pt-6 border-t border-border space-y-4 bg-card">
                   <div className="flex justify-between items-center text-lg font-light">
-                    <div>
-                      <span className="text-muted-foreground block">итого</span>
-                      <span className="text-xs text-muted-foreground/70">{totalQuantity} {totalQuantity === 1 ? 'предмет' : 'предметов'}</span>
-                    </div>
-                    <span className="text-primary text-xl">{formattedTotal} р.</span>
+                    <span className="text-muted-foreground">итого:</span>
+                    <span className="text-primary">{cartTotal.toLocaleString('ru-RU')} р.</span>
                   </div>
-                  <button
-                    onClick={handleCheckout}
-                    disabled={isCheckoutLoading}
-                    className="w-full py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors text-sm font-light flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
-                  >
-                    {isCheckoutLoading ? 'создаю ссылку...' : 'оформить заказ'}
-                    <Icon name="ArrowUpRight" size={16} className="text-white" />
+                  <button className="w-full py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors text-sm font-light">
+                    оформить заказ
                   </button>
                 </div>
               </>
