@@ -104,7 +104,8 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
         'InvId': order_id,
         'Description': description,
         'SignatureValue': signature,
-        'IsTest': is_test
+        'IsTest': is_test,
+        'Encoding': 'utf-8'
     }
 
     payment_url = f"{ROBOKASSA_URL}?{urlencode(query_params)}"
