@@ -23,6 +23,8 @@ export const createRobokassaPaymentLink = async (
     is_test: payload.isTest ?? (import.meta.env.DEV ? 1 : 0),
   };
 
+  console.log('[DEBUG] Sending payment request:', requestBody);
+
   const response = await fetch(ROBOKASSA_ENDPOINT, {
     method: "POST",
     headers: {
@@ -31,10 +33,15 @@ export const createRobokassaPaymentLink = async (
     body: JSON.stringify(requestBody),
   });
 
+  console.log('[DEBUG] Response status:', response.status);
+
   if (!response.ok) {
     const errorText = await response.text();
+    console.error('[ERROR] Payment request failed:', errorText);
     throw new Error(errorText || "Не удалось создать ссылку на оплату");
   }
 
-  return response.json();
+  const result = await response.json();
+  console.log('[DEBUG] Payment response:', result);
+  return result;
 };

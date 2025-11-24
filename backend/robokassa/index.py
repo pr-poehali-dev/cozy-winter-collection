@@ -73,9 +73,13 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
 
     try:
         body_str = event.get('body') or '{}'
+        print(f"[DEBUG] Received body: {body_str}")
         payload = json.loads(body_str)
+        print(f"[DEBUG] Parsed payload: {payload}")
         request_data = PaymentRequest(**payload)
+        print(f"[DEBUG] Validated request data: amount={request_data.amount}, order_id={request_data.order_id}, is_test={request_data.is_test}")
     except (json.JSONDecodeError, ValidationError) as exc:
+        print(f"[ERROR] Validation failed: {exc}")
         return {
             'statusCode': 400,
             'headers': HEADERS,
@@ -103,6 +107,9 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     from urllib.parse import urlencode
 
     payment_url = f"{ROBOKASSA_URL}?{urlencode(query_params)}"
+    print(f"[DEBUG] Generated payment URL: {payment_url}")
+    print(f"[DEBUG] Signature input: merchant={merchant_login}, amount={amount_str}, order_id={request_data.order_id}")
+    print(f"[DEBUG] Signature: {signature}")
 
     response = PaymentResponse(
         payment_url=payment_url,
@@ -110,6 +117,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
         amount=amount_str
     )
 
+    print(f"[DEBUG] Returning successful response: {response.model_dump_json()}")
     return {
         'statusCode': 200,
         'headers': {**HEADERS, 'Content-Type': 'application/json'},
