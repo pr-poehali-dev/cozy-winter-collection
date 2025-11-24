@@ -3,45 +3,38 @@ import os
 import hashlib
 from decimal import Decimal, ROUND_HALF_UP
 from typing import Any, Dict
-from pydantic import BaseModel, Field, ValidationError
+from urllib.parse import urlencode
 
 
-def _calculate_signature(*args: Any) -> str:
+def calculate_signature(*args: Any) -> str:
+    """Создание MD5 подписи по документации Robokassa"""
     joined: str = ':'.join(str(arg) for arg in args)
     return hashlib.md5(joined.encode()).hexdigest()
 
 
-class PaymentRequest(BaseModel):
-    amount: Decimal = Field(..., gt=Decimal('0'))
-    order_id: int = Field(..., gt=0)
-    description: str = Field(..., min_length=1, max_length=255)
-    is_test: int = Field(0, ge=0, le=1)
-
-
-class PaymentResponse(BaseModel):
-    payment_url: str
-    order_id: int
-    amount: str
-
-
-def _format_amount(amount: Decimal) -> str:
+def format_amount(amount: Decimal) -> str:
+    """Форматирование суммы: число с точкой, 2 знака после запятой"""
     normalized = amount.quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
-    return f"{normalized:.2f}".replace(',', '.')
+    return f"{normalized:.2f}"
 
 
 HEADERS = {
     'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
     'Access-Control-Allow-Headers': 'Content-Type, X-User-Id, X-Session-Id, X-Auth-Token',
-    'Access-Control-Max-Age': '86400'
+    'Access-Control-Max-Age': '86400',
+    'Content-Type': 'application/json'
 }
-
 
 ROBOKASSA_URL = 'https://auth.robokassa.ru/Merchant/Index.aspx'
 
 
 def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
-    '''Generate Robokassa payment link for cart checkout.'''
+    '''
+    Business: Генерация ссылки на оплату в Robokassa
+    Args: event с httpMethod, body (amount, order_id, description, is_test)
+    Returns: payment_url для редиректа пользователя
+    '''
     method = event.get('httpMethod', 'GET').upper()
 
     if method == 'OPTIONS':
@@ -67,19 +60,27 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
         return {
             'statusCode': 500,
             'headers': HEADERS,
-            'body': json.dumps({'error': 'Robokassa credentials are not configured'}),
+            'body': json.dumps({'error': 'Robokassa credentials not configured'}),
             'isBase64Encoded': False
         }
 
     try:
-        body_str = event.get('body') or '{}'
-        print(f"[DEBUG] Received body: {body_str}")
+        body_str = event.get('body', '{}')
         payload = json.loads(body_str)
-        print(f"[DEBUG] Parsed payload: {payload}")
-        request_data = PaymentRequest(**payload)
-        print(f"[DEBUG] Validated request data: amount={request_data.amount}, order_id={request_data.order_id}, is_test={request_data.is_test}")
-    except (json.JSONDecodeError, ValidationError) as exc:
-        print(f"[ERROR] Validation failed: {exc}")
+        
+        amount = Decimal(str(payload.get('amount', 0)))
+        order_id = int(payload.get('order_id', 0))
+        description = str(payload.get('description', 'Заказ'))
+        is_test = int(payload.get('is_test', 0))
+
+        if amount <= 0:
+            raise ValueError('Amount must be greater than 0')
+        if order_id <= 0:
+            raise ValueError('Order ID must be greater than 0')
+        if len(description) > 100:
+            description = description[:100]
+
+    except (json.JSONDecodeError, ValueError, KeyError) as exc:
         return {
             'statusCode': 400,
             'headers': HEADERS,
@@ -87,40 +88,36 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             'isBase64Encoded': False
         }
 
-    amount_str = _format_amount(request_data.amount)
-    signature = _calculate_signature(
+    amount_str = format_amount(amount)
+    
+    # Расчет подписи: MerchantLogin:OutSum:InvId:Пароль#1
+    signature = calculate_signature(
         merchant_login,
         amount_str,
-        request_data.order_id,
+        order_id,
         password_1
     )
 
     query_params = {
         'MerchantLogin': merchant_login,
         'OutSum': amount_str,
-        'InvId': request_data.order_id,
-        'Description': request_data.description,
+        'InvId': order_id,
+        'Description': description,
         'SignatureValue': signature,
-        'IsTest': request_data.is_test
+        'IsTest': is_test
     }
 
-    from urllib.parse import urlencode
-
     payment_url = f"{ROBOKASSA_URL}?{urlencode(query_params)}"
-    print(f"[DEBUG] Generated payment URL: {payment_url}")
-    print(f"[DEBUG] Signature input: merchant={merchant_login}, amount={amount_str}, order_id={request_data.order_id}")
-    print(f"[DEBUG] Signature: {signature}")
 
-    response = PaymentResponse(
-        payment_url=payment_url,
-        order_id=request_data.order_id,
-        amount=amount_str
-    )
+    response_data = {
+        'payment_url': payment_url,
+        'order_id': order_id,
+        'amount': amount_str
+    }
 
-    print(f"[DEBUG] Returning successful response: {response.model_dump_json()}")
     return {
         'statusCode': 200,
-        'headers': {**HEADERS, 'Content-Type': 'application/json'},
-        'body': response.model_dump_json(),
+        'headers': HEADERS,
+        'body': json.dumps(response_data),
         'isBase64Encoded': False
     }
