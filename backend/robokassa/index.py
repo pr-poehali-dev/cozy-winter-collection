@@ -90,7 +90,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     )
 
     response_data = {
-        'payment_url': str(payment_response),
+        'payment_url': payment_response.url,
         'order_id': order_id,
         'amount': f"{amount:.2f}"
     }
