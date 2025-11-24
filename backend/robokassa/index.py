@@ -94,7 +94,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     query_params = {
         'MerchantLogin': merchant_login,
         'OutSum': amount_str,
-        'InvId': order_id,
+        'InvoiceID': order_id,
         'Description': description,
         'SignatureValue': signature,
         'IsTest': is_test,
