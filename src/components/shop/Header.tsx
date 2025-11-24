@@ -6,14 +6,6 @@ import { Link } from 'react-router-dom';
 import { createRobokassaPaymentLink } from '@/lib/payment';
 import { toast } from '@/hooks/use-toast';
 
-declare global {
-  interface Window {
-    Robokassa?: {
-      StartPayment: (params: any) => void;
-    };
-  }
-}
-
 interface HeaderProps {
   cart: CartItem[];
   isCartOpen: boolean;
@@ -53,28 +45,12 @@ export default function Header({
         description,
       });
 
-      // Используем iframe версию Robokassa
-      if (window.Robokassa) {
-        const url = new URL(result.payment_url);
-        const params = Object.fromEntries(url.searchParams);
-        
-        window.Robokassa.StartPayment({
-          MerchantLogin: params.MerchantLogin,
-          OutSum: params.OutSum,
-          InvId: params.InvId,
-          Description: params.Description,
-          SignatureValue: params.SignatureValue,
-          IsTest: params.IsTest || 0,
-          Culture: 'ru',
-          Encoding: 'utf-8'
-        });
-      } else {
-        window.open(result.payment_url, '_blank');
-      }
+      // Открываем в новой вкладке (iframe требует регистрации домена в Robokassa)
+      window.open(result.payment_url, '_blank');
       
       toast({
         title: 'Окно оплаты открыто',
-        description: 'завершите оплату в форме',
+        description: 'завершите оплату в новой вкладке',
       });
     } catch (error) {
       toast({
