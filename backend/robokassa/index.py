@@ -81,24 +81,23 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             'isBase64Encoded': False
         }
 
-    amount_str = f"{amount:.2f}"
+    # Используем целое число для суммы
+    amount_int = int(amount)
     
     # Расчет подписи: MerchantLogin:OutSum:InvId:Пароль#1
     signature = calculate_signature(
         merchant_login,
-        amount_str,
+        amount_int,
         order_id,
         password_1
     )
 
     query_params = {
         'MerchantLogin': merchant_login,
-        'OutSum': amount_str,
+        'OutSum': amount_int,
         'InvoiceID': order_id,
-        'Description': description,
         'SignatureValue': signature,
-        'IsTest': is_test,
-        'Encoding': 'utf-8'
+        'IsTest': is_test
     }
 
     payment_url = f"{ROBOKASSA_URL}?{urlencode(query_params)}"
@@ -106,7 +105,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     response_data = {
         'payment_url': payment_url,
         'order_id': order_id,
-        'amount': amount_str
+        'amount': str(amount_int)
     }
 
     return {
