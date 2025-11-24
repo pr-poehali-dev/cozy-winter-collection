@@ -1,7 +1,14 @@
 import json
 import os
+import hashlib
 from typing import Any, Dict
-from robokassa import Robokassa, HashAlgorithm
+from urllib.parse import urlencode
+
+
+def calculate_signature(*args: Any) -> str:
+    """Создание MD5 подписи по документации Robokassa"""
+    joined: str = ':'.join(str(arg) for arg in args)
+    return hashlib.md5(joined.encode()).hexdigest()
 
 
 HEADERS = {
@@ -12,10 +19,12 @@ HEADERS = {
     'Content-Type': 'application/json'
 }
 
+ROBOKASSA_URL = 'https://auth.robokassa.ru/Merchant/Index.aspx'
+
 
 def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     '''
-    Business: Генерация ссылки на оплату в Robokassa через официальную библиотеку
+    Business: Генерация ссылки на оплату в Robokassa
     Args: event с httpMethod, body (amount, order_id, description, is_test)
     Returns: payment_url для редиректа пользователя
     '''
@@ -38,10 +47,9 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
         }
 
     merchant_login = os.getenv('ROBOKASSA_MERCHANT_LOGIN')
-    password1 = os.getenv('ROBOKASSA_PASSWORD_1')
-    password2 = os.getenv('ROBOKASSA_PASSWORD_2')
+    password_1 = os.getenv('ROBOKASSA_PASSWORD_1')
 
-    if not merchant_login or not password1 or not password2:
+    if not merchant_login or not password_1:
         return {
             'statusCode': 500,
             'headers': HEADERS,
@@ -56,7 +64,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
         amount = float(payload.get('amount', 0))
         order_id = int(payload.get('order_id', 0))
         description = str(payload.get('description', 'Заказ'))
-        is_test = bool(payload.get('is_test', 1))
+        is_test = int(payload.get('is_test', 0))
 
         if amount <= 0:
             raise ValueError('Amount must be greater than 0')
@@ -73,26 +81,32 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             'isBase64Encoded': False
         }
 
-    # Инициализация Robokassa
-    robokassa = Robokassa(
-        merchant_login=merchant_login,
-        password1=password1,
-        password2=password2,
-        is_test=is_test,
-        algorithm=HashAlgorithm.md5
+    amount_str = f"{amount:.2f}"
+    
+    # Расчет подписи: MerchantLogin:OutSum:InvId:Пароль#1
+    signature = calculate_signature(
+        merchant_login,
+        amount_str,
+        order_id,
+        password_1
     )
 
-    # Генерация ссылки на оплату
-    payment_response = robokassa.generate_open_payment_link(
-        out_sum=amount,
-        inv_id=order_id,
-        description=description
-    )
+    query_params = {
+        'MerchantLogin': merchant_login,
+        'OutSum': amount_str,
+        'InvId': order_id,
+        'Description': description,
+        'SignatureValue': signature,
+        'IsTest': is_test,
+        'Encoding': 'utf-8'
+    }
+
+    payment_url = f"{ROBOKASSA_URL}?{urlencode(query_params)}"
 
     response_data = {
-        'payment_url': payment_response.url,
+        'payment_url': payment_url,
         'order_id': order_id,
-        'amount': f"{amount:.2f}"
+        'amount': amount_str
     }
 
     return {
