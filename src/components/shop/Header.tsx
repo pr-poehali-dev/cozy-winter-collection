@@ -3,6 +3,8 @@ import Icon from '@/components/ui/icon';
 import { CartItem } from './types';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { createRobokassaPaymentLink } from '@/lib/payment';
+import { toast } from '@/hooks/use-toast';
 
 interface HeaderProps {
   cart: CartItem[];
@@ -24,6 +26,39 @@ export default function Header({
   cartCount
 }: HeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isCheckoutLoading, setIsCheckoutLoading] = useState(false);
+
+  const handleCheckout = async () => {
+    if (!cart.length || isCheckoutLoading) return;
+
+    try {
+      setIsCheckoutLoading(true);
+
+      const orderId = Date.now();
+      const description = cart.length === 1
+        ? cart[0].name
+        : `Заказ из ${cart.length} товаров`;
+
+      const result = await createRobokassaPaymentLink({
+        amount: Number(cartTotal.toFixed(2)),
+        orderId,
+        description,
+      });
+
+      window.open(result.payment_url, '_blank');
+      toast({
+        title: 'Ссылка на оплату открыта',
+        description: 'оплата откроется в новой вкладке',
+      });
+    } catch (error) {
+      toast({
+        title: 'не получилось создать ссылку',
+        description: 'попробуйте ещё раз или напишите нам',
+      });
+    } finally {
+      setIsCheckoutLoading(false);
+    }
+  };
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-card/95 backdrop-blur-sm border-b border-border">
       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
@@ -166,8 +201,12 @@ export default function Header({
                     <span className="text-muted-foreground">итого:</span>
                     <span className="text-primary">{cartTotal.toLocaleString('ru-RU')} р.</span>
                   </div>
-                  <button className="w-full py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors text-sm font-light">
-                    оформить заказ
+                  <button 
+                    onClick={handleCheckout}
+                    disabled={isCheckoutLoading || cart.length === 0}
+                    className="w-full py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors text-sm font-light disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {isCheckoutLoading ? 'создаю ссылку...' : 'оформить заказ'}
                   </button>
                 </div>
               </>
