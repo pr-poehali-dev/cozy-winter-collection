@@ -1,0 +1,22 @@
+{
+  "tests": [
+    {
+      "name": "create payment link",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "amount": 1990,
+        "order_id": 101,
+        "description": "Test order",
+        "is_test": 1
+      },
+      "expectedStatus": 200,
+      "expectedBody": {
+        "payment_url": "string",
+        "order_id": 101,
+        "amount": "string"
+      },
+      "bodyMatcher": "partial"
+    }
+  ]
+}
