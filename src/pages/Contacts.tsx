@@ -87,7 +87,9 @@ export default function Contacts() {
               </div>
 
               <div className="p-6 md:p-8 rounded-3xl border border-primary/20">
-                <p className="text-2xl mb-4 text-center">✨</p>
+                <h2 className="text-xl md:text-2xl font-light text-primary mb-6 text-center" style={{ fontFamily: 'Cormorant, serif' }}>
+                  сотрудничество ✨
+                </h2>
                 <p className="text-sm md:text-base text-muted-foreground font-light leading-relaxed text-center mb-4">
                   мы с удовольствием разместим свои товары у вас в магазине книг или подарков, кафе или кофейне, уютном городском пространстве
                 </p>
