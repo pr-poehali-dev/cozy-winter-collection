@@ -45,6 +45,9 @@ export default function DeliveryPage() {
 
       <main className="flex-1 pt-32 pb-16 px-6 md:px-8">
         <div className="max-w-3xl mx-auto">
+          <div className="text-center mb-4">
+            <span className="text-2xl">🎠 ☁️ 🍄</span>
+          </div>
           <p className="text-center text-muted-foreground font-light text-sm md:text-base mb-12 leading-relaxed">
             каждая вещица создаётся нами вручную и отправляется упакованная в коробочку и немного магии!
           </p>
