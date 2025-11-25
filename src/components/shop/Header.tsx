@@ -253,21 +253,9 @@ export default function Header({
                   title="Оплата заказа"
                 />
                 <div className="px-6 pb-6">
-                  <p className="text-sm text-muted-foreground text-center mb-4">
+                  <p className="text-sm text-muted-foreground text-center">
                     после оплаты вы автоматически перейдете на страницу заказа
                   </p>
-                  <button 
-                    onClick={() => {
-                      setShowPaymentIframe(false);
-                      setPaymentUrl('');
-                      setOrderNumber('');
-                      setCheckoutData({ name: '', email: '', phone: '', address: '', comment: '', telegram: '', deliveryType: 'pvz' });
-                      setDeliveryCost(0);
-                    }}
-                    className="w-full py-3 rounded-lg font-light border border-border hover:bg-secondary transition-colors"
-                  >
-                    отменить
-                  </button>
                 </div>
               </div>
             ) : showCheckoutForm ? (
@@ -393,15 +381,7 @@ export default function Header({
                 </div>
                 <div className="flex-shrink-0 border-t border-border pt-4 mt-4 pb-6">
                   <div className="space-y-2 mb-4">
-                    <div className="flex justify-between items-center text-sm">
-                      <span className="font-light text-muted-foreground">Товары:</span>
-                      <span className="font-light">{cartTotal.toLocaleString('ru-RU')} ₽</span>
-                    </div>
-                    <div className="flex justify-between items-center text-sm">
-                      <span className="font-light text-muted-foreground">Доставка:</span>
-                      <span className="font-light">{deliveryCost === 0 ? 'Бесплатно' : `${deliveryCost} ₽`}</span>
-                    </div>
-                    <div className="flex justify-between items-center pt-2 border-t border-border">
+                    <div className="flex justify-between items-center pt-2">
                       <span className="text-lg font-light text-primary">Итого:</span>
                       <span className="text-2xl font-light text-primary">{(cartTotal + deliveryCost).toLocaleString('ru-RU')} ₽</span>
                     </div>
@@ -412,12 +392,6 @@ export default function Header({
                     className="w-full bg-primary text-white py-3 rounded-lg font-light hover:opacity-90 transition-opacity disabled:opacity-50"
                   >
                     {isCheckoutLoading ? 'загружаем...' : 'перейти к оплате'}
-                  </button>
-                  <button 
-                    onClick={() => setShowCheckoutForm(false)}
-                    className="w-full mt-2 py-3 rounded-lg font-light border border-border hover:bg-secondary transition-colors"
-                  >
-                    назад к корзине
                   </button>
                 </div>
               </div>
