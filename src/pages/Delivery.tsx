@@ -45,13 +45,9 @@ export default function DeliveryPage() {
 
       <main className="flex-1 pt-32 pb-16 px-6 md:px-8">
         <div className="max-w-3xl mx-auto">
-          <h1 className="text-3xl md:text-4xl font-light text-primary mb-12 text-center">
-            оплата и доставка
-          </h1>
-
           <div className="space-y-8">
             <section className="p-6 md:p-8 rounded-3xl border border-primary/20">
-              <h2 className="text-xl font-light text-primary mb-4 flex items-center gap-2">
+              <h2 className="text-2xl md:text-3xl font-light text-primary mb-6 flex items-center gap-2" style={{ fontFamily: 'Cormorant, serif' }}>
                 <span className="text-2xl">🏹</span>
                 доставка
               </h2>
@@ -61,7 +57,7 @@ export default function DeliveryPage() {
                 </p>
                 
                 <div className="grid md:grid-cols-2 gap-4 pt-2">
-                  <div className="p-4 bg-secondary/30 rounded-lg border border-border">
+                  <div className="p-4 bg-cream/50 rounded-lg border border-primary/10">
                     <div className="flex items-start gap-2 mb-2">
                       <span className="text-lg">📦</span>
                       <div>
@@ -74,7 +70,7 @@ export default function DeliveryPage() {
                     </p>
                   </div>
                   
-                  <div className="p-4 bg-secondary/30 rounded-lg border border-border">
+                  <div className="p-4 bg-cream/50 rounded-lg border border-primary/10">
                     <div className="flex items-start gap-2 mb-2">
                       <span className="text-lg">🤝</span>
                       <div>
@@ -109,7 +105,7 @@ export default function DeliveryPage() {
             </section>
 
             <section className="p-6 md:p-8 rounded-3xl border border-primary/20">
-              <h2 className="text-xl font-light text-primary mb-4 flex items-center gap-2">
+              <h2 className="text-2xl md:text-3xl font-light text-primary mb-6 flex items-center gap-2" style={{ fontFamily: 'Cormorant, serif' }}>
                 <span className="text-2xl">💳</span>
                 оплата
               </h2>
@@ -131,7 +127,7 @@ export default function DeliveryPage() {
             </section>
 
             <section className="p-6 md:p-8 rounded-3xl border border-primary/20">
-              <h2 className="text-xl font-light text-primary mb-4 flex items-center gap-2">
+              <h2 className="text-2xl md:text-3xl font-light text-primary mb-6 flex items-center gap-2" style={{ fontFamily: 'Cormorant, serif' }}>
                 <span className="text-2xl">✨</span>
                 как оформить заказ
               </h2>
