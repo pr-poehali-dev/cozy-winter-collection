@@ -179,15 +179,6 @@ export default function DeliveryPage() {
                 </div>
               </div>
             </section>
-
-            <section className="vintage-card p-6 md:p-8 rounded-2xl">
-              <div className="flex items-center gap-3 justify-center">
-                <span className="text-2xl">🎁</span>
-                <p className="text-sm text-muted-foreground font-light text-center">
-                  каждый заказ упаковываем с душой — в крафтовую коробку с маленькими сюрпризами внутри
-                </p>
-              </div>
-            </section>
           </div>
         </div>
       </main>
