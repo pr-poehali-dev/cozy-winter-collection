@@ -130,7 +130,7 @@ export default function DeliveryPage() {
                 </div>
 
                 <p className="text-sm pt-2">
-                  оплата происходит через официальный сервис робокасса и защищена протоколом ssl
+                  оплата происходит через официальный сервис Robokassa и защищена протоколом SSL ✨
                 </p>
 
                 <div className="p-3 bg-cream/40 rounded-lg text-xs">
