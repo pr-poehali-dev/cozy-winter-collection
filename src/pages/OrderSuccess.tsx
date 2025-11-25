@@ -186,69 +186,70 @@ export default function OrderSuccess() {
               </div>
             </div>
           ) : (
-          <div className="space-y-4 mb-6">
             <div>
-              <Label className="text-sm font-light mb-2 block">выберите службу доставки</Label>
-              <RadioGroup value={deliveryService} onValueChange={(v) => setDeliveryService(v as 'yandex' | 'ozon')}>
-                <div className="flex items-center space-x-3 p-3 border border-border rounded-lg hover:bg-secondary transition-colors">
-                  <RadioGroupItem value="yandex" id="yandex" />
-                  <Label htmlFor="yandex" className="flex-1 cursor-pointer font-light">
-                    <div className="flex items-center gap-2">
-                      <span className="text-yellow-500">📦</span>
-                      <span>Яндекс Доставка</span>
+              <div className="space-y-4 mb-6">
+                <div>
+                  <Label className="text-sm font-light mb-2 block">выберите службу доставки</Label>
+                  <RadioGroup value={deliveryService} onValueChange={(v) => setDeliveryService(v as 'yandex' | 'ozon')}>
+                    <div className="flex items-center space-x-3 p-3 border border-border rounded-lg hover:bg-secondary transition-colors">
+                      <RadioGroupItem value="yandex" id="yandex" />
+                      <Label htmlFor="yandex" className="flex-1 cursor-pointer font-light">
+                        <div className="flex items-center gap-2">
+                          <span className="text-yellow-500">📦</span>
+                          <span>Яндекс Доставка</span>
+                        </div>
+                        <p className="text-xs text-muted-foreground mt-1">нужен аккаунт в Яндекс ID</p>
+                      </Label>
                     </div>
-                    <p className="text-xs text-muted-foreground mt-1">нужен аккаунт в Яндекс ID</p>
-                  </Label>
-                </div>
-                <div className="flex items-center space-x-3 p-3 border border-border rounded-lg hover:bg-secondary transition-colors">
-                  <RadioGroupItem value="ozon" id="ozon" />
-                  <Label htmlFor="ozon" className="flex-1 cursor-pointer font-light">
-                    <div className="flex items-center gap-2">
-                      <span className="text-blue-500">📦</span>
-                      <span>Ozon</span>
+                    <div className="flex items-center space-x-3 p-3 border border-border rounded-lg hover:bg-secondary transition-colors">
+                      <RadioGroupItem value="ozon" id="ozon" />
+                      <Label htmlFor="ozon" className="flex-1 cursor-pointer font-light">
+                        <div className="flex items-center gap-2">
+                          <span className="text-blue-500">📦</span>
+                          <span>Ozon</span>
+                        </div>
+                        <p className="text-xs text-muted-foreground mt-1">нужен аккаунт на Ozon</p>
+                      </Label>
                     </div>
-                    <p className="text-xs text-muted-foreground mt-1">нужен аккаунт на Ozon</p>
-                  </Label>
+                  </RadioGroup>
                 </div>
-              </RadioGroup>
-            </div>
 
-            <div>
-              <Label htmlFor="phone" className="text-sm font-light">телефон</Label>
-              <Input
-                id="phone"
-                type="tel"
-                value={deliveryPhone}
-                onChange={(e) => setDeliveryPhone(e.target.value)}
-                placeholder="+7 (999) 123-45-67"
-                className="font-light mt-2"
-              />
-              <p className="text-xs text-muted-foreground mt-1">
-                укажите номер, привязанный к аккаунту {deliveryService === 'yandex' ? 'Яндекс' : 'Ozon'}
-              </p>
-            </div>
+                <div>
+                  <Label htmlFor="phone" className="text-sm font-light">телефон</Label>
+                  <Input
+                    id="phone"
+                    type="tel"
+                    value={deliveryPhone}
+                    onChange={(e) => setDeliveryPhone(e.target.value)}
+                    placeholder="+7 (999) 123-45-67"
+                    className="font-light mt-2"
+                  />
+                  <p className="text-xs text-muted-foreground mt-1">
+                    укажите номер, привязанный к аккаунту {deliveryService === 'yandex' ? 'Яндекс' : 'Ozon'}
+                  </p>
+                </div>
 
-            <div>
-              <Label htmlFor="address" className="text-sm font-light">адрес доставки</Label>
-              <Input
-                id="address"
-                type="text"
-                value={deliveryAddress}
-                onChange={(e) => setDeliveryAddress(e.target.value)}
-                placeholder="Москва, ул. Примерная, д. 1, кв. 1"
-                className="font-light mt-2"
-              />
-            </div>
-          </div>
+                <div>
+                  <Label htmlFor="address" className="text-sm font-light">адрес доставки</Label>
+                  <Input
+                    id="address"
+                    type="text"
+                    value={deliveryAddress}
+                    onChange={(e) => setDeliveryAddress(e.target.value)}
+                    placeholder="Москва, ул. Примерная, д. 1, кв. 1"
+                    className="font-light mt-2"
+                  />
+                </div>
+              </div>
 
-          <button
-            onClick={handleSubmitDelivery}
-            disabled={submitting}
-            className="w-full bg-primary text-white py-3 rounded-lg font-light hover:opacity-90 transition-opacity disabled:opacity-50"
-          >
-            {submitting ? 'сохраняем...' : 'оформить доставку'}
-          </button>
-          </div>
+              <button
+                onClick={handleSubmitDelivery}
+                disabled={submitting}
+                className="w-full bg-primary text-white py-3 rounded-lg font-light hover:opacity-90 transition-opacity disabled:opacity-50"
+              >
+                {submitting ? 'сохраняем...' : 'оформить доставку'}
+              </button>
+            </div>
           )}
         </div>
 
