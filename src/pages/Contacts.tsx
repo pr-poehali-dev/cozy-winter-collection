@@ -90,12 +90,8 @@ export default function Contacts() {
                 <h2 className="text-xl md:text-2xl font-light text-primary mb-6 text-center" style={{ fontFamily: 'Cormorant, serif' }}>
                   сотрудничество ✨
                 </h2>
-                <p className="text-sm md:text-base text-muted-foreground font-light leading-relaxed text-center mb-4">
-                  мы с удовольствием разместим свои товары у вас в магазине книг или подарков, кафе или кофейне, уютном городском пространстве
-                </p>
-                <p className="text-sm md:text-base text-muted-foreground font-light leading-relaxed text-center">
-                  также готовы создать партию изделий специально для вашего проекта или события — свадьбы, корпоратива, подарков для гостей
-                </p>
+                <p className="text-sm md:text-base text-muted-foreground font-light leading-relaxed text-center mb-4">сотрудничество ✨</p>
+                <p className="text-sm md:text-base text-muted-foreground font-light leading-relaxed text-center">также готовы создать партию изделий специально для вашего проекта или события </p>
               </div>
             </div>
 
