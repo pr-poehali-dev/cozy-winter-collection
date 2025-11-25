@@ -87,17 +87,17 @@ export default function Contacts() {
               </div>
 
               <div className="p-6 md:p-8 rounded-3xl border border-primary/20">
-                <h2 className="text-xl md:text-2xl font-light text-primary mb-6 text-center" style={{ fontFamily: 'Cormorant, serif' }}>
+                <h2 className="text-xl md:text-2xl font-light text-primary mb-6 text-center md:text-left" style={{ fontFamily: 'Cormorant, serif' }}>
                   сотрудничество ✨
                 </h2>
-                <p className="text-sm md:text-base text-muted-foreground font-light leading-relaxed text-center mb-4">
+                <p className="text-sm md:text-base text-muted-foreground font-light leading-relaxed text-center md:text-left mb-4">
                   мы с удовольствием разместим свои товары у вас в магазине, кафе, уютном пространстве
                 </p>
-                <p className="text-sm md:text-base text-muted-foreground font-light leading-relaxed text-center mb-4">
+                <p className="text-sm md:text-base text-muted-foreground font-light leading-relaxed text-center md:text-left mb-4">
                   также готовы создать партию изделий специально для вашего проекта или события
                 </p>
-                <p className="text-center">
-                  <a href="https://t.me/azaluk" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-light">
+                <p className="text-center md:text-left">
+                  <a href="https://t.me/azaluk" target="_blank" rel="noopener noreferrer" className="text-xs font-light hover:underline" style={{ color: '#8B0000' }}>
                     пишите! 💌
                   </a>
                 </p>
