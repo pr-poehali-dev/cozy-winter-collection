@@ -45,12 +45,9 @@ export default function DeliveryPage() {
 
       <main className="flex-1 py-16 px-6 md:px-8">
         <div className="max-w-3xl mx-auto">
-          <h1 className="text-3xl md:text-4xl font-light text-primary mb-3 text-center">
+          <h1 className="text-3xl md:text-4xl font-light text-primary mb-12 text-center">
             оплата и доставка
           </h1>
-          <p className="text-center text-muted-foreground mb-12 font-light">
-            всё, что нужно знать о заказе
-          </p>
 
           <div className="space-y-8">
             <section className="vintage-card p-6 md:p-8 rounded-2xl">
