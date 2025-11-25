@@ -6,14 +6,17 @@
       "path": "/",
       "body": {
         "amount": 1990,
-        "order_id": 101,
-        "description": "Test order",
+        "user_name": "Test User",
+        "user_email": "test@example.com",
+        "user_phone": "+79991234567",
         "is_test": 1
       },
       "expectedStatus": 200,
       "expectedBody": {
         "payment_url": "string",
-        "order_id": 101,
+        "order_id": "number",
+        "order_number": "string",
+        "robokassa_inv_id": "number",
         "amount": "string"
       },
       "bodyMatcher": "partial"

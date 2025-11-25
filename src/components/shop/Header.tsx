@@ -1,4 +1,6 @@
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import Icon from '@/components/ui/icon';
 import { CartItem } from './types';
 import { useState } from 'react';
@@ -27,40 +29,55 @@ export default function Header({
 }: HeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isCheckoutLoading, setIsCheckoutLoading] = useState(false);
+  const [showCheckoutForm, setShowCheckoutForm] = useState(false);
+  const [checkoutData, setCheckoutData] = useState({
+    name: '',
+    email: '',
+    phone: ''
+  });
 
   const handleCheckout = async () => {
     if (!cart.length || isCheckoutLoading) return;
 
+    if (!checkoutData.name || !checkoutData.email || !checkoutData.phone) {
+      toast({
+        title: 'Заполните все поля',
+        description: 'Нам нужны ваши данные для оформления заказа',
+        variant: 'destructive'
+      });
+      return;
+    }
+
     try {
       setIsCheckoutLoading(true);
 
-      const orderId = Date.now();
-      const description = cart.length === 1
-        ? cart[0].name
-        : `Заказ из ${cart.length} товаров`;
-
       const result = await createRobokassaPaymentLink({
         amount: Number(cartTotal.toFixed(2)),
-        orderId,
-        description,
+        userName: checkoutData.name,
+        userEmail: checkoutData.email,
+        userPhone: checkoutData.phone,
       });
 
-      // Открываем в новой вкладке (iframe требует регистрации домена в Robokassa)
       window.open(result.payment_url, '_blank');
       
       toast({
         title: 'Окно оплаты открыто',
-        description: 'завершите оплату в новой вкладке',
+        description: `Заказ ${result.order_number} - завершите оплату в новой вкладке`,
       });
+
+      setShowCheckoutForm(false);
+      setCheckoutData({ name: '', email: '', phone: '' });
     } catch (error) {
       toast({
-        title: 'не получилось создать ссылку',
-        description: 'попробуйте ещё раз или напишите нам',
+        title: 'Не получилось создать ссылку',
+        description: 'Попробуйте ещё раз или напишите нам',
+        variant: 'destructive'
       });
     } finally {
       setIsCheckoutLoading(false);
     }
   };
+
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-card/95 backdrop-blur-sm border-b border-border">
       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
@@ -140,15 +157,23 @@ export default function Header({
             <SheetHeader className="flex-shrink-0">
               <div className="flex items-center justify-between">
                 <button 
-                  onClick={() => setIsCartOpen(false)}
+                  onClick={() => {
+                    setIsCartOpen(false);
+                    setShowCheckoutForm(false);
+                  }}
                   className="p-2 hover:bg-secondary rounded-lg transition-colors"
                   aria-label="Назад"
                 >
                   <Icon name="ArrowLeft" size={20} className="text-primary" strokeWidth={1.5} />
                 </button>
-                <SheetTitle className="text-2xl font-light text-primary">корзина</SheetTitle>
+                <SheetTitle className="text-2xl font-light text-primary">
+                  {showCheckoutForm ? 'оформление' : 'корзина'}
+                </SheetTitle>
                 <button 
-                  onClick={() => setIsCartOpen(false)}
+                  onClick={() => {
+                    setIsCartOpen(false);
+                    setShowCheckoutForm(false);
+                  }}
                   className="p-2 hover:bg-secondary rounded-lg transition-colors"
                   aria-label="Закрыть"
                 >
@@ -159,6 +184,63 @@ export default function Header({
             {cart.length === 0 ? (
               <div className="flex-1 flex items-center justify-center text-muted-foreground font-light">
                 <p>корзина пуста</p>
+              </div>
+            ) : showCheckoutForm ? (
+              <div className="flex-1 flex flex-col mt-8">
+                <div className="space-y-4 flex-1">
+                  <div className="space-y-2">
+                    <Label htmlFor="name" className="text-sm font-light">Имя</Label>
+                    <Input
+                      id="name"
+                      type="text"
+                      value={checkoutData.name}
+                      onChange={(e) => setCheckoutData({ ...checkoutData, name: e.target.value })}
+                      placeholder="Ваше имя"
+                      className="font-light"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="email" className="text-sm font-light">Email</Label>
+                    <Input
+                      id="email"
+                      type="email"
+                      value={checkoutData.email}
+                      onChange={(e) => setCheckoutData({ ...checkoutData, email: e.target.value })}
+                      placeholder="your@email.com"
+                      className="font-light"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="phone" className="text-sm font-light">Телефон</Label>
+                    <Input
+                      id="phone"
+                      type="tel"
+                      value={checkoutData.phone}
+                      onChange={(e) => setCheckoutData({ ...checkoutData, phone: e.target.value })}
+                      placeholder="+7 (999) 123-45-67"
+                      className="font-light"
+                    />
+                  </div>
+                </div>
+                <div className="flex-shrink-0 border-t border-border pt-4 mt-4">
+                  <div className="flex justify-between items-center mb-4">
+                    <span className="text-lg font-light text-primary">итого:</span>
+                    <span className="text-2xl font-light text-primary">{cartTotal.toLocaleString('ru-RU')} р.</span>
+                  </div>
+                  <button 
+                    onClick={handleCheckout}
+                    disabled={isCheckoutLoading}
+                    className="w-full bg-primary text-white py-3 rounded-lg font-light hover:opacity-90 transition-opacity disabled:opacity-50"
+                  >
+                    {isCheckoutLoading ? 'загружаем...' : 'перейти к оплате'}
+                  </button>
+                  <button 
+                    onClick={() => setShowCheckoutForm(false)}
+                    className="w-full mt-2 py-3 rounded-lg font-light border border-border hover:bg-secondary transition-colors"
+                  >
+                    назад к корзине
+                  </button>
+                </div>
               </div>
             ) : (
               <>
@@ -198,17 +280,17 @@ export default function Header({
                     </div>
                   ))}
                 </div>
-                <div className="flex-shrink-0 pt-6 border-t border-border space-y-4 bg-card">
-                  <div className="flex justify-between items-center text-lg font-light">
-                    <span className="text-muted-foreground">итого:</span>
-                    <span className="text-primary">{cartTotal.toLocaleString('ru-RU')} р.</span>
+                <div className="flex-shrink-0 border-t border-border pt-4 mt-4">
+                  <div className="flex justify-between items-center mb-4">
+                    <span className="text-lg font-light text-primary">итого:</span>
+                    <span className="text-2xl font-light text-primary">{cartTotal.toLocaleString('ru-RU')} р.</span>
                   </div>
                   <button 
-                    onClick={handleCheckout}
+                    onClick={() => setShowCheckoutForm(true)}
                     disabled={isCheckoutLoading || cart.length === 0}
-                    className="w-full py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors text-sm font-light disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full bg-primary text-white py-3 rounded-lg font-light hover:opacity-90 transition-opacity disabled:opacity-50"
                   >
-                    {isCheckoutLoading ? 'создаю ссылку...' : 'оформить заказ'}
+                    оформить заказ
                   </button>
                 </div>
               </>

@@ -2,14 +2,17 @@ const ROBOKASSA_ENDPOINT = "https://functions.poehali.dev/eca02619-6f06-4c87-984
 
 interface PaymentPayload {
   amount: number;
-  orderId: number;
-  description: string;
+  userName: string;
+  userEmail: string;
+  userPhone: string;
   isTest?: number;
 }
 
 interface PaymentResponse {
   payment_url: string;
   order_id: number;
+  order_number: string;
+  robokassa_inv_id: number;
   amount: string;
 }
 
@@ -18,8 +21,9 @@ export const createRobokassaPaymentLink = async (
 ): Promise<PaymentResponse> => {
   const requestBody = {
     amount: Number(payload.amount.toFixed(2)),
-    order_id: payload.orderId,
-    description: payload.description,
+    user_name: payload.userName,
+    user_email: payload.userEmail,
+    user_phone: payload.userPhone,
     is_test: payload.isTest ?? (import.meta.env.DEV ? 1 : 0),
   };
 
