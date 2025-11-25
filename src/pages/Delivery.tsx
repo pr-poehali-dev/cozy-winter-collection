@@ -47,59 +47,42 @@ export default function DeliveryPage() {
         <div className="max-w-3xl mx-auto">
           <div className="space-y-8">
             <section className="p-6 md:p-8 rounded-3xl border border-primary/20">
-              <h2 className="text-2xl md:text-3xl font-light text-primary mb-6 flex items-center gap-2" style={{ fontFamily: 'Cormorant, serif' }}>
-                <span className="text-2xl">🏹</span>
+              <h2 className="text-2xl md:text-3xl font-light text-primary mb-6" style={{ fontFamily: 'Cormorant, serif' }}>
                 доставка
               </h2>
-              <div className="space-y-4 text-muted-foreground leading-relaxed font-light">
-                <p className="text-sm md:text-base">
-                  каждая вещица создаётся нами вручную и отправляется упакованная в коробочку и немного магии!
-                </p>
-                
-                <div className="grid md:grid-cols-2 gap-4 pt-2">
-                  <div className="p-4 bg-cream/30 rounded-lg border border-primary/10">
-                    <div className="flex items-start gap-2 mb-2">
-                      <span className="text-lg">📦</span>
+              
+              <div className="space-y-6">
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div className="p-5 bg-cream/30 rounded-2xl border border-primary/10">
+                    <div className="flex items-center gap-3 mb-3">
+                      <span className="text-2xl">📦</span>
                       <div>
-                        <p className="font-medium text-primary text-sm">пункт выдачи ozon</p>
-                        <p className="text-sm text-muted-foreground">200 ₽ по всей россии</p>
+                        <p className="font-medium text-primary">пункт выдачи ozon</p>
+                        <p className="text-lg font-light text-primary">200 ₽</p>
                       </div>
                     </div>
-                    <p className="text-xs text-muted-foreground mt-2">
-                      выберите удобный пункт при оформлении
+                    <p className="text-xs text-muted-foreground font-light">
+                      по всей россии • 3–5 рабочих дней
                     </p>
                   </div>
                   
-                  <div className="p-4 rounded-lg border border-primary/10 bg-[#fffaf5]">
-                    <div className="flex items-start gap-2 mb-2">
-                      <span className="text-lg">🤝</span>
+                  <div className="p-5 bg-cream/30 rounded-2xl border border-primary/10">
+                    <div className="flex items-center gap-3 mb-3">
+                      <span className="text-2xl">🤝</span>
                       <div>
-                        <p className="font-medium text-primary text-sm">самовывоз</p>
-                        <p className="text-sm text-muted-foreground">бесплатно</p>
+                        <p className="font-medium text-primary">самовывоз</p>
+                        <p className="text-lg font-light text-primary">бесплатно</p>
                       </div>
                     </div>
-                    <p className="text-xs text-muted-foreground mt-2">
+                    <p className="text-xs text-muted-foreground font-light">
                       м. тульская, москва
                     </p>
                   </div>
                 </div>
 
-                <div className="pt-2 flex items-center gap-2 text-sm">
-                  <span>⏱️</span>
-                  <span><strong className="text-primary">срок:</strong> 3–5 рабочих дней после оплаты</span>
-                </div>
-
-                <div className="space-y-2 pt-2">
-                  <div className="p-3 bg-cream/40 rounded-lg text-xs">
-                    <p>
-                      <strong className="text-primary">для ozon:</strong> укажите номер телефона из личного кабинета ozon — заказ появится в приложении в течение суток 📱
-                    </p>
-                  </div>
-                  <div className="p-3 bg-cream/40 rounded-lg text-xs">
-                    <p>
-                      <strong className="text-primary">для самовывоза:</strong> свяжемся с вами в телеграм для согласования времени 💬
-                    </p>
-                  </div>
+                <div className="text-sm text-muted-foreground font-light space-y-2 pt-2">
+                  <p>📱 <span className="text-primary font-medium">ozon:</span> укажите номер из личного кабинета — заказ появится в приложении</p>
+                  <p>💬 <span className="text-primary font-medium">самовывоз:</span> свяжемся в телеграм для согласования времени</p>
                 </div>
               </div>
             </section>
