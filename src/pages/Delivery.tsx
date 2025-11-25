@@ -57,24 +57,21 @@ export default function DeliveryPage() {
               </h2>
               <div className="space-y-4 text-muted-foreground leading-relaxed">
                 <p>
-                  каждая вещь создаётся нами вручную и отправляется из нашей мастерской,
-                  завёрнутая в бумагу и немного магии.
+                  каждая вещица создаётся нами вручную и отправляется упакованная в коробочку и немного магии!
                 </p>
                 <div className="pt-2">
                   <p className="mb-3">
                     <strong className="text-primary font-light">способы доставки:</strong>
                   </p>
                   <ul className="space-y-2 ml-6">
-                    <li>• <strong className="text-primary font-light">пункт выдачи ozon</strong> — 200 ₽ по всей россии</li>
+                    <li>• <strong className="text-primary font-light">пункт выдачи ozon</strong> — 200 ₽ по всей россии (при оформлении заказа вы сможете выбрать удобный пункт выдачи)</li>
                     <li>• <strong className="text-primary font-light">самовывоз</strong> — бесплатно (м. тульская, москва)</li>
                   </ul>
                 </div>
                 <p>
                   <strong className="text-primary font-light">срок отправки</strong> — 3–5 рабочих дней после оплаты
                 </p>
-                <p className="text-sm">
-                  при выборе пвз вы сможете выбрать удобный пункт выдачи на карте ozon
-                </p>
+
               </div>
             </section>
 
