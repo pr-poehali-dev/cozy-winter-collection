@@ -1,0 +1,11 @@
+{
+  "tests": [
+    {
+      "name": "get order details",
+      "method": "GET",
+      "path": "/?order_number=ORD-20251125-123456",
+      "expectedStatus": 404,
+      "bodyMatcher": "partial"
+    }
+  ]
+}

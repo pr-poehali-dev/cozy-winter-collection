@@ -58,6 +58,7 @@ export default function Header({
         userName: checkoutData.name,
         userEmail: checkoutData.email,
         userPhone: checkoutData.phone,
+        cartItems: cart,
       });
 
       setPaymentUrl(result.payment_url);

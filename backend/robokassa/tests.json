@@ -9,6 +9,7 @@
         "user_name": "Test User",
         "user_email": "test@example.com",
         "user_phone": "+79991234567",
+        "cart_items": [{"id": 1, "name": "Test Product", "price": 1990, "quantity": 1}],
         "is_test": 1
       },
       "expectedStatus": 200,

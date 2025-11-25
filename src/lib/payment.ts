@@ -1,10 +1,18 @@
 const ROBOKASSA_ENDPOINT = "https://functions.poehali.dev/eca02619-6f06-4c87-9840-7fcced969a38";
 
+interface CartItem {
+  id: number;
+  name: string;
+  price: number;
+  quantity: number;
+}
+
 interface PaymentPayload {
   amount: number;
   userName: string;
   userEmail: string;
   userPhone: string;
+  cartItems: CartItem[];
   isTest?: number;
 }
 
@@ -24,6 +32,7 @@ export const createRobokassaPaymentLink = async (
     user_name: payload.userName,
     user_email: payload.userEmail,
     user_phone: payload.userPhone,
+    cart_items: payload.cartItems,
     is_test: 0,
   };
 

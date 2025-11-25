@@ -77,6 +77,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
         user_email = str(payload.get('user_email', ''))
         user_phone = str(payload.get('user_phone', ''))
         is_test = int(payload.get('is_test', 0))
+        cart_items = payload.get('cart_items', [])
 
         if amount <= 0:
             raise ValueError('Amount must be greater than 0')
@@ -84,6 +85,8 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             raise ValueError('User name is required')
         if not user_email:
             raise ValueError('User email is required')
+        if not cart_items:
+            raise ValueError('Cart items are required')
 
     except (json.JSONDecodeError, ValueError, KeyError) as exc:
         return {
@@ -124,6 +127,13 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
         """, (order_number, user_name, user_email, user_phone, amount_decimal, robokassa_inv_id, 'pending'))
         
         order_id = cur.fetchone()[0]
+        
+        for item in cart_items:
+            cur.execute("""
+                INSERT INTO order_items 
+                (order_id, product_id, product_name, product_price, quantity)
+                VALUES (%s, %s, %s, %s, %s)
+            """, (order_id, item.get('id'), item.get('name'), item.get('price'), item.get('quantity')))
         
         amount_str = f"{amount:.2f}"
         
