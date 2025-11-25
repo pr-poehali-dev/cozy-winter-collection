@@ -56,7 +56,10 @@ export default function Contacts() {
                     </div>
                   </div>
 
-                  <div className="pt-4 mt-4 border-t border-primary/10">
+                  <div className="pt-4 mt-4">
+                    <h2 className="text-xl md:text-2xl font-light text-primary mb-6 text-center md:text-left" style={{ fontFamily: 'Cormorant, serif' }}>
+                      наша жизнь и новости
+                    </h2>
                     <div className="flex justify-center md:justify-start gap-4">
                       <a
                         href="https://t.me/azalukk"
