@@ -169,23 +169,25 @@ export default function ProductDetails({ product, onClose, addToCart }: ProductD
                   {displayPrice.toLocaleString('ru-RU')} ₽
                 </div>
                 
-                <Button
-                  size="lg"
-                  className="w-full max-w-xs px-8 rounded-full text-sm py-4 bg-primary hover:bg-primary/90 transition-all hover:scale-[1.02] shadow-lg hover:shadow-xl font-light"
-                  onClick={() => {
-                    const productToAdd = currentVariant ? {
-                      ...product,
-                      price: currentVariant.price,
-                      name: `${product.name} (${currentVariant.name})`,
-                      selectedVariantId: currentVariant.id
-                    } : product;
-                    addToCart(productToAdd);
-                    onClose();
-                  }}
-                  disabled={product.variants && product.variants.length > 0 && !selectedVariant}
-                >
-                  добавить в корзину
-                </Button>
+                {product.badge !== 'soon' && (
+                  <Button
+                    size="lg"
+                    className="w-full max-w-xs px-8 rounded-full text-sm py-4 bg-primary hover:bg-primary/90 transition-all hover:scale-[1.02] shadow-lg hover:shadow-xl font-light"
+                    onClick={() => {
+                      const productToAdd = currentVariant ? {
+                        ...product,
+                        price: currentVariant.price,
+                        name: `${product.name} (${currentVariant.name})`,
+                        selectedVariantId: currentVariant.id
+                      } : product;
+                      addToCart(productToAdd);
+                      onClose();
+                    }}
+                    disabled={product.variants && product.variants.length > 0 && !selectedVariant}
+                  >
+                    добавить в корзину
+                  </Button>
+                )}
                 
                 <div className="space-y-6 pt-2">
                   <p className="text-sm text-moss/70 leading-relaxed font-light">
