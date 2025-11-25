@@ -115,7 +115,7 @@ export default function DeliveryPage() {
               </h2>
               <div className="space-y-4 text-muted-foreground leading-relaxed font-light">
                 <p className="text-sm">
-                  принимаем банковские карты Visa, Мир, СБП, T-Pay, Яндекс Сплит
+                  возможна оплата банковскими картами, СБП, T-Pay, Яндекс Сплит
                 </p>
 
                 <p className="text-sm">
