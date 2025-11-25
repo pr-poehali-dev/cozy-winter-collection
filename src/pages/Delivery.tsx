@@ -52,7 +52,7 @@ export default function DeliveryPage() {
           <div className="space-y-12">
             <section className="vintage-card p-8 rounded-2xl">
               <h2 className="text-2xl md:text-3xl font-light text-primary mb-6 flex items-center gap-3">
-                <span className="text-3xl">🚚</span>
+                <span className="text-3xl">🏹</span>
                 доставка
               </h2>
               <div className="space-y-4 text-muted-foreground leading-relaxed">
@@ -77,7 +77,7 @@ export default function DeliveryPage() {
 
             <section className="vintage-card p-8 rounded-2xl">
               <h2 className="text-2xl md:text-3xl font-light text-primary mb-6 flex items-center gap-3">
-                <span className="text-3xl">💳</span>
+                <span className="text-3xl">💰</span>
                 оплата
               </h2>
               <div className="space-y-4 text-muted-foreground leading-relaxed">
@@ -98,7 +98,7 @@ export default function DeliveryPage() {
 
             <section className="vintage-card p-8 rounded-2xl">
               <h2 className="text-2xl md:text-3xl font-light text-primary mb-6 flex items-center gap-3">
-                <span className="text-3xl">📦</span>
+                <span className="text-3xl">💌</span>
                 упаковка
               </h2>
               <div className="space-y-4 text-muted-foreground leading-relaxed">
@@ -110,7 +110,7 @@ export default function DeliveryPage() {
 
             <section className="vintage-card p-8 rounded-2xl bg-cream/50">
               <h2 className="text-2xl md:text-3xl font-light text-primary mb-6 flex items-center gap-3">
-                <span className="text-3xl">💬</span>
+                <span className="text-3xl">📜</span>
                 как заказать?
               </h2>
               <div className="space-y-4 text-muted-foreground leading-relaxed">
