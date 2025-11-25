@@ -104,11 +104,9 @@ export default function DeliveryPage() {
                   оплата происходит через официальный сервис Robokassa и защищена протоколом SSL ✨
                 </p>
 
-                <div className="p-3 bg-cream/40 rounded-lg text-xs">
-                  <p>
-                    принимаем <strong className="text-primary">иностранные карты и криптовалюту</strong> — свяжитесь с нами в <a href="https://t.me/azalukshop" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">@azaluk.shop</a>
-                  </p>
-                </div>
+                <p className="text-sm">
+                  принимаем иностранные карты и криптовалюту — свяжитесь с нами в <a href="https://t.me/azalukshop" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-light">телеграм</a>
+                </p>
               </div>
             </section>
 
