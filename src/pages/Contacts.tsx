@@ -55,34 +55,34 @@ export default function Contacts() {
                       </a>
                     </div>
                   </div>
-                </div>
-              </div>
 
-              <div className="p-6 md:p-8 rounded-3xl border border-primary/20">
-                <p className="text-xs text-muted-foreground mb-4 uppercase tracking-wide text-center">наши блоги</p>
-                <div className="flex justify-center gap-4">
-                  <a
-                    href="https://t.me/azalukk"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex flex-col items-center gap-2 group"
-                  >
-                    <div className="w-11 h-11 rounded-full bg-primary/90 flex items-center justify-center group-hover:bg-primary group-hover:scale-105 transition-all">
-                      <Icon name="Send" size={18} className="text-white" strokeWidth={1.5} />
+                  <div className="pt-4 mt-4 border-t border-primary/10">
+                    <p className="text-xs text-muted-foreground mb-4 uppercase tracking-wide text-center">наши блоги</p>
+                    <div className="flex justify-center gap-4">
+                      <a
+                        href="https://t.me/azalukk"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex flex-col items-center gap-2 group"
+                      >
+                        <div className="w-11 h-11 rounded-full bg-primary/90 flex items-center justify-center group-hover:bg-primary group-hover:scale-105 transition-all">
+                          <Icon name="Send" size={18} className="text-white" strokeWidth={1.5} />
+                        </div>
+                        <span className="text-xs text-muted-foreground font-light">телеграм-канал</span>
+                      </a>
+                      <a
+                        href="https://www.youtube.com/@azaluk"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex flex-col items-center gap-2 group"
+                      >
+                        <div className="w-11 h-11 rounded-full bg-primary/90 flex items-center justify-center group-hover:bg-primary group-hover:scale-105 transition-all">
+                          <Icon name="Youtube" size={18} className="text-white" strokeWidth={1.5} />
+                        </div>
+                        <span className="text-xs text-muted-foreground font-light">ютуб-канал</span>
+                      </a>
                     </div>
-                    <span className="text-xs text-muted-foreground font-light">телеграм-канал</span>
-                  </a>
-                  <a
-                    href="https://www.youtube.com/@azaluk"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex flex-col items-center gap-2 group"
-                  >
-                    <div className="w-11 h-11 rounded-full bg-primary/90 flex items-center justify-center group-hover:bg-primary group-hover:scale-105 transition-all">
-                      <Icon name="Youtube" size={18} className="text-white" strokeWidth={1.5} />
-                    </div>
-                    <span className="text-xs text-muted-foreground font-light">ютуб-канал</span>
-                  </a>
+                  </div>
                 </div>
               </div>
 
@@ -97,7 +97,7 @@ export default function Contacts() {
               </div>
             </div>
 
-            <div className="rounded-3xl overflow-hidden shadow-md sticky top-24 order-1 md:order-2">
+            <div className="rounded-3xl overflow-hidden shadow-md md:sticky md:top-24 order-1 md:order-2">
               <img 
                 src="https://cdn.poehali.dev/files/b92bfbfe-23cf-41f0-a7a2-f2212bac68b6.jpeg" 
                 alt="Наши изделия"
