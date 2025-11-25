@@ -36,7 +36,7 @@ export default function Contacts() {
                 </p>
                 <div className="space-y-5">
                   <div className="flex items-start gap-4">
-                    <span className="text-2xl mt-1">📧</span>
+                    <span className="text-2xl mt-1">🕊️</span>
                     <div className="flex-1">
                       <p className="text-xs text-muted-foreground mb-1 uppercase tracking-wide">почта</p>
                       <a href="mailto:azaluk.halimova@gmail.com" className="text-sm text-primary hover:underline font-light">
@@ -46,7 +46,7 @@ export default function Contacts() {
                   </div>
                   
                   <div className="flex items-start gap-4">
-                    <span className="text-2xl mt-1">💬</span>
+                    <span className="text-2xl mt-1">☁️</span>
                     <div className="flex-1">
                       <p className="text-xs text-muted-foreground mb-1 uppercase tracking-wide">телеграм</p>
                       <a href="https://t.me/azaluk" target="_blank" rel="noopener noreferrer" className="text-sm text-primary hover:underline font-light">
