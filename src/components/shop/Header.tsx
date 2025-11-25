@@ -30,6 +30,8 @@ export default function Header({
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isCheckoutLoading, setIsCheckoutLoading] = useState(false);
   const [showCheckoutForm, setShowCheckoutForm] = useState(false);
+  const [showPaymentIframe, setShowPaymentIframe] = useState(false);
+  const [paymentUrl, setPaymentUrl] = useState('');
   const [checkoutData, setCheckoutData] = useState({
     name: '',
     email: '',
@@ -58,15 +60,9 @@ export default function Header({
         userPhone: checkoutData.phone,
       });
 
-      window.open(result.payment_url, '_blank');
-      
-      toast({
-        title: 'Окно оплаты открыто',
-        description: `Заказ ${result.order_number} - завершите оплату в новой вкладке`,
-      });
-
+      setPaymentUrl(result.payment_url);
       setShowCheckoutForm(false);
-      setCheckoutData({ name: '', email: '', phone: '' });
+      setShowPaymentIframe(true);
     } catch (error) {
       toast({
         title: 'Не получилось создать ссылку',
@@ -158,8 +154,14 @@ export default function Header({
               <div className="flex items-center justify-between">
                 <button 
                   onClick={() => {
-                    setIsCartOpen(false);
-                    setShowCheckoutForm(false);
+                    if (showPaymentIframe) {
+                      setShowPaymentIframe(false);
+                      setShowCheckoutForm(true);
+                    } else if (showCheckoutForm) {
+                      setShowCheckoutForm(false);
+                    } else {
+                      setIsCartOpen(false);
+                    }
                   }}
                   className="p-2 hover:bg-secondary rounded-lg transition-colors"
                   aria-label="Назад"
@@ -167,12 +169,14 @@ export default function Header({
                   <Icon name="ArrowLeft" size={20} className="text-primary" strokeWidth={1.5} />
                 </button>
                 <SheetTitle className="text-2xl font-light text-primary">
-                  {showCheckoutForm ? 'оформление' : 'корзина'}
+                  {showPaymentIframe ? 'оплата' : showCheckoutForm ? 'оформление' : 'корзина'}
                 </SheetTitle>
                 <button 
                   onClick={() => {
                     setIsCartOpen(false);
                     setShowCheckoutForm(false);
+                    setShowPaymentIframe(false);
+                    setPaymentUrl('');
                   }}
                   className="p-2 hover:bg-secondary rounded-lg transition-colors"
                   aria-label="Закрыть"
@@ -184,6 +188,24 @@ export default function Header({
             {cart.length === 0 ? (
               <div className="flex-1 flex items-center justify-center text-muted-foreground font-light">
                 <p>корзина пуста</p>
+              </div>
+            ) : showPaymentIframe ? (
+              <div className="flex-1 flex flex-col mt-8">
+                <iframe
+                  src={paymentUrl}
+                  className="w-full flex-1 border-0 rounded-lg"
+                  title="Оплата заказа"
+                />
+                <button 
+                  onClick={() => {
+                    setShowPaymentIframe(false);
+                    setPaymentUrl('');
+                    setCheckoutData({ name: '', email: '', phone: '' });
+                  }}
+                  className="w-full mt-4 py-3 rounded-lg font-light border border-border hover:bg-secondary transition-colors"
+                >
+                  закрыть
+                </button>
               </div>
             ) : showCheckoutForm ? (
               <div className="flex-1 flex flex-col mt-8">
