@@ -41,8 +41,10 @@ export default function Header({
     phone: '',
     address: '',
     comment: '',
-    telegram: ''
+    telegram: '',
+    deliveryType: 'pvz' as 'pvz' | 'pickup'
   });
+  const [deliveryCost, setDeliveryCost] = useState(0);
 
   useEffect(() => {
     if (!showPaymentIframe || !orderNumber) return;
@@ -76,10 +78,19 @@ export default function Header({
   const handleCheckout = async () => {
     if (!cart.length || isCheckoutLoading) return;
 
-    if (!checkoutData.name || !checkoutData.email || !checkoutData.phone || !checkoutData.address) {
+    if (!checkoutData.name || !checkoutData.email || !checkoutData.phone) {
       toast({
         title: 'Заполните все поля',
-        description: 'Нам нужны ваши данные и адрес доставки',
+        description: 'Нам нужны ваши данные',
+        variant: 'destructive'
+      });
+      return;
+    }
+
+    if (checkoutData.deliveryType === 'pvz' && !checkoutData.address) {
+      toast({
+        title: 'Выберите пункт выдачи',
+        description: 'Укажите адрес ПВЗ Ozon',
         variant: 'destructive'
       });
       return;
@@ -88,14 +99,18 @@ export default function Header({
     try {
       setIsCheckoutLoading(true);
 
+      const totalWithDelivery = Number((cartTotal + deliveryCost).toFixed(2));
+
       const result = await createRobokassaPaymentLink({
-        amount: Number(cartTotal.toFixed(2)),
+        amount: totalWithDelivery,
         userName: checkoutData.name,
         userEmail: checkoutData.email,
         userPhone: checkoutData.phone,
         userAddress: checkoutData.address,
         orderComment: checkoutData.comment,
         userTelegram: checkoutData.telegram,
+        deliveryType: checkoutData.deliveryType,
+        deliveryCost: deliveryCost,
         cartItems: cart,
       });
 
@@ -246,7 +261,8 @@ export default function Header({
                       setShowPaymentIframe(false);
                       setPaymentUrl('');
                       setOrderNumber('');
-                      setCheckoutData({ name: '', email: '', phone: '', address: '', comment: '', telegram: '' });
+                      setCheckoutData({ name: '', email: '', phone: '', address: '', comment: '', telegram: '', deliveryType: 'pvz' });
+                      setDeliveryCost(0);
                     }}
                     className="w-full py-3 rounded-lg font-light border border-border hover:bg-secondary transition-colors"
                   >
@@ -257,6 +273,41 @@ export default function Header({
             ) : showCheckoutForm ? (
               <div className="flex-1 flex flex-col mt-8 px-6">
                 <div className="space-y-4 flex-1">
+                  <div className="space-y-3">
+                    <Label>Способ доставки</Label>
+                    <div className="grid grid-cols-2 gap-3">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setCheckoutData({ ...checkoutData, deliveryType: 'pvz', address: '' });
+                          setDeliveryCost(200);
+                        }}
+                        className={`p-4 rounded-lg border-2 text-left transition-all ${
+                          checkoutData.deliveryType === 'pvz'
+                            ? 'border-primary bg-primary/5'
+                            : 'border-border hover:border-primary/50'
+                        }`}
+                      >
+                        <div className="font-semibold text-sm mb-1">ПВЗ Ozon</div>
+                        <div className="text-xs text-muted-foreground font-light">200 ₽</div>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setCheckoutData({ ...checkoutData, deliveryType: 'pickup', address: 'Москва, м. Тульская' });
+                          setDeliveryCost(0);
+                        }}
+                        className={`p-4 rounded-lg border-2 text-left transition-all ${
+                          checkoutData.deliveryType === 'pickup'
+                            ? 'border-primary bg-primary/5'
+                            : 'border-border hover:border-primary/50'
+                        }`}
+                      >
+                        <div className="font-semibold text-sm mb-1">Самовывоз</div>
+                        <div className="text-xs text-muted-foreground font-light">Бесплатно</div>
+                      </button>
+                    </div>
+                  </div>
                   <div className="space-y-2">
                     <Label htmlFor="name">Имя</Label>
                     <Input
@@ -290,17 +341,32 @@ export default function Header({
                       className="font-light"
                     />
                   </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="address">Адрес доставки</Label>
-                    <Input
-                      id="address"
-                      type="text"
-                      value={checkoutData.address}
-                      onChange={(e) => setCheckoutData({ ...checkoutData, address: e.target.value })}
-                      placeholder="Москва, ул. Примерная, д. 1, кв. 1"
-                      className="font-light"
-                    />
-                  </div>
+                  {checkoutData.deliveryType === 'pvz' ? (
+                    <div className="space-y-2">
+                      <Label htmlFor="address">Адрес ПВЗ Ozon</Label>
+                      <Input
+                        id="address"
+                        type="text"
+                        value={checkoutData.address}
+                        onChange={(e) => setCheckoutData({ ...checkoutData, address: e.target.value })}
+                        placeholder="Начните вводить адрес или название ПВЗ"
+                        className="font-light"
+                      />
+                      <p className="text-xs text-muted-foreground font-light">
+                        <a href="https://www.ozon.ru/my/deliverypoints" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
+                          Найти ближайший пункт выдачи на карте Ozon →
+                        </a>
+                      </p>
+                    </div>
+                  ) : (
+                    <div className="space-y-2">
+                      <Label>Адрес самовывоза</Label>
+                      <div className="p-3 rounded-lg bg-secondary/50 border border-border">
+                        <p className="text-sm font-light">Москва, м. Тульская</p>
+                        <p className="text-xs text-muted-foreground font-light mt-1">Свяжемся с вами для уточнения времени встречи</p>
+                      </div>
+                    </div>
+                  )}
                   <div className="space-y-2">
                     <Label htmlFor="telegram">Ник в телеграм (необязательно)</Label>
                     <Input
@@ -326,9 +392,19 @@ export default function Header({
                   </div>
                 </div>
                 <div className="flex-shrink-0 border-t border-border pt-4 mt-4 pb-6">
-                  <div className="flex justify-between items-center mb-4">
-                    <span className="text-lg font-light text-primary">итого:</span>
-                    <span className="text-2xl font-light text-primary">{cartTotal.toLocaleString('ru-RU')} р.</span>
+                  <div className="space-y-2 mb-4">
+                    <div className="flex justify-between items-center text-sm">
+                      <span className="font-light text-muted-foreground">Товары:</span>
+                      <span className="font-light">{cartTotal.toLocaleString('ru-RU')} ₽</span>
+                    </div>
+                    <div className="flex justify-between items-center text-sm">
+                      <span className="font-light text-muted-foreground">Доставка:</span>
+                      <span className="font-light">{deliveryCost === 0 ? 'Бесплатно' : `${deliveryCost} ₽`}</span>
+                    </div>
+                    <div className="flex justify-between items-center pt-2 border-t border-border">
+                      <span className="text-lg font-light text-primary">Итого:</span>
+                      <span className="text-2xl font-light text-primary">{(cartTotal + deliveryCost).toLocaleString('ru-RU')} ₽</span>
+                    </div>
                   </div>
                   <button 
                     onClick={handleCheckout}

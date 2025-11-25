@@ -15,6 +15,8 @@ interface PaymentPayload {
   userAddress: string;
   orderComment?: string;
   userTelegram?: string;
+  deliveryType: 'pvz' | 'pickup';
+  deliveryCost: number;
   cartItems: CartItem[];
   isTest?: number;
 }
@@ -38,6 +40,8 @@ export const createRobokassaPaymentLink = async (
     user_address: payload.userAddress,
     order_comment: payload.orderComment || '',
     user_telegram: payload.userTelegram || '',
+    delivery_type: payload.deliveryType,
+    delivery_cost: payload.deliveryCost,
     cart_items: payload.cartItems,
     is_test: 0,
   };
