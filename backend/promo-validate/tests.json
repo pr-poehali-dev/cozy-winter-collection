@@ -1,0 +1,35 @@
+{
+  "tests": [
+    {
+      "name": "Validate existing promo code",
+      "method": "GET",
+      "path": "/?code=AZALUK10",
+      "expectedStatus": 200,
+      "expectedBody": {
+        "code": "AZALUK10",
+        "discount_percent": 10
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Invalid promo code",
+      "method": "GET",
+      "path": "/?code=INVALID",
+      "expectedStatus": 404,
+      "expectedBody": {
+        "error": "string"
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Missing promo code",
+      "method": "GET",
+      "path": "/",
+      "expectedStatus": 400,
+      "expectedBody": {
+        "error": "string"
+      },
+      "bodyMatcher": "partial"
+    }
+  ]
+}

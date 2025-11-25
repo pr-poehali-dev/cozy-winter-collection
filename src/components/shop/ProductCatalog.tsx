@@ -50,24 +50,19 @@ export default function ProductCatalog({
                   alt={product.name}
                   className="w-full h-full object-cover"
                 />
-                {product.badge === 'soon' && (
-                  <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-                    <span className="text-white text-lg font-light tracking-wider">скоро</span>
-                  </div>
-                )}
-                {product.badge === 'limited' && (
-                  <div className="absolute top-3 right-3 bg-primary text-white px-3 py-1 rounded-full text-xs font-light">
-                    limited
-                  </div>
-                )}
               </div>
               <div className="text-center space-y-2">
                 <h3 className="text-base font-light text-primary leading-relaxed px-4">
                   {product.name}
                 </h3>
+                {product.badge === 'soon' && (
+                  <p className="text-xs font-light" style={{ color: '#8B0000' }}>
+                    soon
+                  </p>
+                )}
                 {product.stock !== undefined && product.stock <= 5 && product.badge !== 'soon' && (
                   <p className="text-xs text-muted-foreground">
-                    осталось {product.stock} {product.stock === 1 ? 'шт' : 'шт'}
+                    осталось {product.stock} {product.stock === 1 ? 'шт' : 'шт'}{product.badge === 'limited' && <span style={{ color: '#8B0000' }} className="ml-2">limited</span>}
                   </p>
                 )}
                 <div className="flex items-center justify-center gap-3">

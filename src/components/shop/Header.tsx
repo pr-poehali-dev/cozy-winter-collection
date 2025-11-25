@@ -370,28 +370,34 @@ export default function Header({
                     <p className="text-xs text-muted-foreground font-light">напишем вам только в случае возникновения вопросов по заказу</p>
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="promoCode">Промокод (необязательно)</Label>
+                    <Label htmlFor="promoCode">Промокод</Label>
                     <div className="flex gap-2">
                       <Input
                         id="promoCode"
                         type="text"
                         value={checkoutData.promoCode}
                         onChange={(e) => setCheckoutData({ ...checkoutData, promoCode: e.target.value.toUpperCase() })}
-                        placeholder="введите промокод"
                         className="font-light uppercase"
                       />
                       <button
                         type="button"
-                        onClick={() => {
+                        onClick={async () => {
                           const code = checkoutData.promoCode.trim();
-                          if (code === 'AZALUK10') {
-                            setPromoDiscount(cartTotal * 0.1);
-                            toast({ title: 'Промокод применён!', description: 'Скидка 10%' });
-                          } else if (code === 'WINTER15') {
-                            setPromoDiscount(cartTotal * 0.15);
-                            toast({ title: 'Промокод применён!', description: 'Скидка 15%' });
-                          } else if (code) {
-                            toast({ title: 'Неверный промокод', variant: 'destructive' });
+                          if (!code) return;
+                          
+                          try {
+                            const response = await fetch(`https://functions.poehali.dev/9fc2ae98-daea-4d40-98de-6d1a45d029cb?code=${code}`);
+                            
+                            if (response.ok) {
+                              const data = await response.json();
+                              setPromoDiscount(cartTotal * (data.discount_percent / 100));
+                              toast({ title: 'Промокод применён!', description: `Скидка ${data.discount_percent}%` });
+                            } else {
+                              toast({ title: 'Неверный промокод', variant: 'destructive' });
+                              setPromoDiscount(0);
+                            }
+                          } catch (error) {
+                            toast({ title: 'Ошибка', description: 'Не удалось проверить промокод', variant: 'destructive' });
                             setPromoDiscount(0);
                           }
                         }}
