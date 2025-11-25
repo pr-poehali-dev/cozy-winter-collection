@@ -125,18 +125,18 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
         
         order_id = cur.fetchone()[0]
         
-        amount_int = int(amount)
+        amount_str = f"{amount:.2f}"
         
         signature = calculate_signature(
             merchant_login,
-            amount_int,
+            amount_str,
             robokassa_inv_id,
             password_1
         )
 
         query_params = {
             'MerchantLogin': merchant_login,
-            'OutSum': amount_int,
+            'OutSum': amount_str,
             'InvoiceID': robokassa_inv_id,
             'SignatureValue': signature,
             'IsTest': is_test,
@@ -160,7 +160,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             'order_id': order_id,
             'order_number': order_number,
             'robokassa_inv_id': robokassa_inv_id,
-            'amount': str(amount_int)
+            'amount': amount_str
         }
 
         return {
