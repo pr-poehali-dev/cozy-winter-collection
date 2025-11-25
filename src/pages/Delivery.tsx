@@ -114,18 +114,21 @@ export default function DeliveryPage() {
                 оплата
               </h2>
               <div className="space-y-4 text-muted-foreground leading-relaxed font-light">
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                  <div className="p-3 bg-secondary/30 rounded-lg text-center">
-                    <p className="text-xs">банк. карты</p>
+                <div className="grid grid-cols-3 md:grid-cols-5 gap-4 items-center">
+                  <div className="p-3 bg-white rounded-lg flex items-center justify-center h-16 border border-border">
+                    <img src="https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/files/add6be44-ee6f-4685-90be-36acd5d766be.jpg" alt="Visa" className="h-8 object-contain" />
                   </div>
-                  <div className="p-3 bg-secondary/30 rounded-lg text-center">
-                    <p className="text-xs">сбп</p>
+                  <div className="p-3 bg-white rounded-lg flex items-center justify-center h-16 border border-border">
+                    <img src="https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/files/44ce6c4c-b708-4baa-b567-731332094f12.jpg" alt="Мир" className="h-8 object-contain" />
                   </div>
-                  <div className="p-3 bg-secondary/30 rounded-lg text-center">
-                    <p className="text-xs">t-pay</p>
+                  <div className="p-3 bg-white rounded-lg flex items-center justify-center h-16 border border-border">
+                    <img src="https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/files/acdea01d-4d3d-407e-abfd-5981028b0a93.jpg" alt="СБП" className="h-8 object-contain" />
                   </div>
-                  <div className="p-3 bg-secondary/30 rounded-lg text-center">
-                    <p className="text-xs">я.сплит</p>
+                  <div className="p-3 bg-white rounded-lg flex items-center justify-center h-16 border border-border">
+                    <img src="https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/files/59ab67df-dc2d-4797-98a4-b912adc718cf.jpg" alt="T-Pay" className="h-8 object-contain" />
+                  </div>
+                  <div className="p-3 bg-white rounded-lg flex items-center justify-center h-16 border border-border">
+                    <img src="https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/files/f95bcf4b-0726-4518-9a86-e2b72f1952a9.jpg" alt="Яндекс Сплит" className="h-8 object-contain" />
                   </div>
                 </div>
 
