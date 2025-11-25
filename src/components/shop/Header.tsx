@@ -98,6 +98,15 @@ export default function Header({
       return;
     }
 
+    if (checkoutData.deliveryType === 'pickup' && !checkoutData.telegram) {
+      toast({
+        title: 'Укажите ник в телеграм',
+        description: 'Для самовывоза нужен телеграм для связи',
+        variant: 'destructive'
+      });
+      return;
+    }
+
     try {
       setIsCheckoutLoading(true);
 

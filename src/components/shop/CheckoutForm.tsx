@@ -139,7 +139,9 @@ export default function CheckoutForm({
           </div>
         )}
         <div className="space-y-2">
-          <Label htmlFor="telegram">Ник в телеграм (необязательно)</Label>
+          <Label htmlFor="telegram">
+            Ник в телеграм {checkoutData.deliveryType === 'pickup' ? '' : '(необязательно)'}
+          </Label>
           <Input
             id="telegram"
             type="text"
@@ -148,7 +150,11 @@ export default function CheckoutForm({
             placeholder="@username"
             className="font-light"
           />
-          <p className="text-xs text-muted-foreground font-light">напишем вам только в случае возникновения вопросов по заказу</p>
+          <p className="text-xs text-muted-foreground font-light">
+            {checkoutData.deliveryType === 'pickup' 
+              ? 'свяжемся для согласования времени встречи'
+              : 'напишем вам только в случае возникновения вопросов по заказу'}
+          </p>
         </div>
         <div className="space-y-2">
           <Label htmlFor="promoCode">Промокод</Label>
