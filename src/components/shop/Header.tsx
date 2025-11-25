@@ -190,10 +190,10 @@ export default function Header({
                 <p>корзина пуста</p>
               </div>
             ) : showPaymentIframe ? (
-              <div className="flex-1 flex flex-col mt-8">
+              <div className="flex-1 flex flex-col -mx-6 mt-8">
                 <iframe
                   src={paymentUrl}
-                  className="w-full flex-1 border-0 rounded-lg"
+                  className="w-full flex-1 border-0"
                   title="Оплата заказа"
                 />
                 <button 
@@ -202,7 +202,7 @@ export default function Header({
                     setPaymentUrl('');
                     setCheckoutData({ name: '', email: '', phone: '' });
                   }}
-                  className="w-full mt-4 py-3 rounded-lg font-light border border-border hover:bg-secondary transition-colors"
+                  className="w-full mx-6 mb-4 py-3 rounded-lg font-light border border-border hover:bg-secondary transition-colors"
                 >
                   закрыть
                 </button>
