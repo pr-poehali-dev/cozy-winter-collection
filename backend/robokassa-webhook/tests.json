@@ -1,12 +1,16 @@
 {
   "tests": [
     {
-      "name": "webhook with valid signature",
-      "method": "GET",
-      "path": "/?OutSum=1990.00&InvId=123456&SignatureValue=test",
-      "expectedStatus": 200,
+      "name": "webhook validates signature correctly",
+      "method": "POST",
+      "path": "/",
+      "body": "OutSum=100.00&InvId=999999&SignatureValue=INVALID",
+      "headers": {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      "expectedStatus": 400,
       "bodyMatcher": "contains",
-      "expectedBody": "OK"
+      "expectedBody": "Invalid signature"
     }
   ]
 }

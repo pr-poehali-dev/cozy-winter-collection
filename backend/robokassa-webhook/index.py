@@ -56,17 +56,28 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             'isBase64Encoded': False
         }
 
-    params = event.get('queryStringParameters', {})
+    body = event.get('body', '')
+    is_base64 = event.get('isBase64Encoded', False)
     
-    if method == 'POST':
-        body = event.get('body', '')
-        if body:
-            parsed = parse_qs(body)
-            params = {k: v[0] if isinstance(v, list) else v for k, v in parsed.items()}
+    params = {}
+    
+    if method == 'POST' and body:
+        if is_base64:
+            import base64
+            body = base64.b64decode(body).decode('utf-8')
+        
+        if isinstance(body, str) and body.startswith('"') and body.endswith('"'):
+            body = json.loads(body)
+        
+        parsed = parse_qs(body)
+        params = {k: v[0] if isinstance(v, list) else v for k, v in parsed.items()}
+    
+    if not params:
+        params = event.get('queryStringParameters') or {}
 
-    out_sum = params.get('OutSum', '')
-    inv_id = params.get('InvId', '')
-    signature_value = params.get('SignatureValue', '').upper()
+    out_sum = params.get('OutSum', params.get('out_summ', ''))
+    inv_id = params.get('InvId', params.get('inv_id', ''))
+    signature_value = params.get('SignatureValue', params.get('crc', '')).upper()
 
     if not out_sum or not inv_id or not signature_value:
         return {
