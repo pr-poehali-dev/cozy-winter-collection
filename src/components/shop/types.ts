@@ -1,3 +1,10 @@
+export interface ProductVariant {
+  id: string;
+  name: string;
+  price: number;
+  description?: string;
+}
+
 export interface Product {
   id: number;
   name: string;
@@ -9,10 +16,12 @@ export interface Product {
   gallery?: string[];
   storyDescription?: string;
   composition?: string;
+  variants?: ProductVariant[];
 }
 
 export interface CartItem extends Product {
   quantity: number;
+  selectedVariantId?: string;
 }
 
 export interface HeroSlide {

@@ -14,11 +14,15 @@ interface ProductDetailsProps {
 export default function ProductDetails({ product, onClose, addToCart }: ProductDetailsProps) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [selectedVariant, setSelectedVariant] = useState<string | null>(null);
   
   if (!product) return null;
   
   const images = product.gallery || [product.image];
   const storyText = product.storyDescription || product.description;
+  
+  const currentVariant = product.variants?.find(v => v.id === selectedVariant);
+  const displayPrice = currentVariant?.price || product.price;
   
   return (
     <>
@@ -111,17 +115,53 @@ export default function ProductDetails({ product, onClose, addToCart }: ProductD
                   <div className="h-px w-16 bg-primary/20"></div>
                 </div>
                 
+                {product.variants && product.variants.length > 0 && (
+                  <div className="space-y-3">
+                    <h3 className="text-xs uppercase tracking-wider text-primary/60 font-normal">выберите вариант</h3>
+                    <div className="space-y-2">
+                      {product.variants.map((variant) => (
+                        <button
+                          key={variant.id}
+                          onClick={() => setSelectedVariant(variant.id)}
+                          className={`w-full text-left p-3 rounded-lg border transition-all ${
+                            selectedVariant === variant.id
+                              ? 'border-primary bg-primary/5'
+                              : 'border-border hover:border-primary/50 hover:bg-secondary/50'
+                          }`}
+                        >
+                          <div className="flex justify-between items-start">
+                            <div className="space-y-1">
+                              <p className="text-sm font-light text-primary">{variant.name}</p>
+                              {variant.description && (
+                                <p className="text-xs text-muted-foreground font-light">{variant.description}</p>
+                              )}
+                            </div>
+                            <p className="text-sm font-light text-primary">{variant.price.toLocaleString('ru-RU')} ₽</p>
+                          </div>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
+                
                 <div className="text-xl font-light text-primary">
-                  {product.price.toLocaleString('ru-RU')} ₽
+                  {displayPrice.toLocaleString('ru-RU')} ₽
                 </div>
                 
                 <Button
                   size="lg"
                   className="w-full max-w-xs px-8 rounded-full text-sm py-4 bg-primary hover:bg-primary/90 transition-all hover:scale-[1.02] shadow-lg hover:shadow-xl font-light"
                   onClick={() => {
-                    addToCart(product);
+                    const productToAdd = currentVariant ? {
+                      ...product,
+                      price: currentVariant.price,
+                      name: `${product.name} (${currentVariant.name})`,
+                      selectedVariantId: currentVariant.id
+                    } : product;
+                    addToCart(productToAdd);
                     onClose();
                   }}
+                  disabled={product.variants && product.variants.length > 0 && !selectedVariant}
                 >
                   добавить в корзину
                 </Button>
