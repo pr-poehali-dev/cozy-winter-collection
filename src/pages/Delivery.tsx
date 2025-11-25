@@ -45,10 +45,13 @@ export default function DeliveryPage() {
 
       <main className="flex-1 pt-32 pb-16 px-6 md:px-8">
         <div className="max-w-3xl mx-auto">
+          <p className="text-center text-muted-foreground font-light text-sm md:text-base mb-12 leading-relaxed">
+            каждая вещица создаётся нами вручную и отправляется упакованная в коробочку и немного магии!
+          </p>
           <div className="space-y-8">
             <section className="p-6 md:p-8 rounded-3xl border border-primary/20">
               <h2 className="text-2xl md:text-3xl font-light text-primary mb-6" style={{ fontFamily: 'Cormorant, serif' }}>
-                доставка
+                🏹 доставка
               </h2>
               
               <div className="space-y-6">
@@ -57,8 +60,8 @@ export default function DeliveryPage() {
                     <div className="flex items-center gap-3 mb-3">
                       <span className="text-2xl">📦</span>
                       <div>
-                        <p className="font-medium text-primary">пункт выдачи ozon</p>
-                        <p className="text-lg font-light text-primary">200 ₽</p>
+                        <p className="text-sm font-light text-primary">пункт выдачи ozon</p>
+                        <p className="text-base font-light text-primary">200 ₽</p>
                       </div>
                     </div>
                     <p className="text-xs text-muted-foreground font-light">
@@ -70,8 +73,8 @@ export default function DeliveryPage() {
                     <div className="flex items-center gap-3 mb-3">
                       <span className="text-2xl">🤝</span>
                       <div>
-                        <p className="font-medium text-primary">самовывоз</p>
-                        <p className="text-lg font-light text-primary">бесплатно</p>
+                        <p className="text-sm font-light text-primary">самовывоз</p>
+                        <p className="text-base font-light text-primary">бесплатно</p>
                       </div>
                     </div>
                     <p className="text-xs text-muted-foreground font-light">
@@ -81,8 +84,8 @@ export default function DeliveryPage() {
                 </div>
 
                 <div className="text-sm text-muted-foreground font-light space-y-2 pt-2">
-                  <p>📱 <span className="text-primary font-medium">ozon:</span> укажите номер из личного кабинета — заказ появится в приложении</p>
-                  <p>💬 <span className="text-primary font-medium">самовывоз:</span> свяжемся в телеграм для согласования времени</p>
+                  <p>📱 <span className="text-primary font-light">ozon:</span> при оформлении заказа укажите номер телефона вашего личного кабинета — заказ появится в приложении в течение суток</p>
+                  <p>💬 <span className="text-primary font-light">самовывоз:</span> свяжемся с вами в телеграм для согласования времени</p>
                 </div>
               </div>
             </section>
