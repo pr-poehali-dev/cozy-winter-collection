@@ -150,7 +150,7 @@ export default function Header({
               </button>
             </SheetTrigger>
             <SheetContent className="w-full sm:max-w-lg flex flex-col p-0">
-            <SheetHeader className="flex-shrink-0 px-6">
+            <SheetHeader className="flex-shrink-0 px-6 pt-6">
               <div className="flex items-center justify-between">
                 <button 
                   onClick={() => {
@@ -190,22 +190,24 @@ export default function Header({
                 <p>корзина пуста</p>
               </div>
             ) : showPaymentIframe ? (
-              <div className="flex-1 flex flex-col mt-8">
+              <div className="flex-1 flex flex-col">
                 <iframe
                   src={paymentUrl}
-                  className="w-full flex-1 border-0"
+                  className="w-full flex-1 border-0 mt-8"
                   title="Оплата заказа"
                 />
-                <button 
-                  onClick={() => {
-                    setShowPaymentIframe(false);
-                    setPaymentUrl('');
-                    setCheckoutData({ name: '', email: '', phone: '' });
-                  }}
-                  className="w-full mt-4 mx-6 py-3 rounded-lg font-light border border-border hover:bg-secondary transition-colors"
-                >
-                  закрыть
-                </button>
+                <div className="px-6 pb-6">
+                  <button 
+                    onClick={() => {
+                      setShowPaymentIframe(false);
+                      setPaymentUrl('');
+                      setCheckoutData({ name: '', email: '', phone: '' });
+                    }}
+                    className="w-full mt-4 py-3 rounded-lg font-light border border-border hover:bg-secondary transition-colors"
+                  >
+                    закрыть
+                  </button>
+                </div>
               </div>
             ) : showCheckoutForm ? (
               <div className="flex-1 flex flex-col mt-8 px-6">
@@ -244,7 +246,7 @@ export default function Header({
                     />
                   </div>
                 </div>
-                <div className="flex-shrink-0 border-t border-border pt-4 mt-4">
+                <div className="flex-shrink-0 border-t border-border pt-4 mt-4 pb-6">
                   <div className="flex justify-between items-center mb-4">
                     <span className="text-lg font-light text-primary">итого:</span>
                     <span className="text-2xl font-light text-primary">{cartTotal.toLocaleString('ru-RU')} р.</span>
@@ -302,7 +304,7 @@ export default function Header({
                     </div>
                   ))}
                 </div>
-                <div className="flex-shrink-0 border-t border-border pt-4 mt-4 px-6">
+                <div className="flex-shrink-0 border-t border-border pt-4 mt-4 px-6 pb-6">
                   <div className="flex justify-between items-center mb-4">
                     <span className="text-lg font-light text-primary">итого:</span>
                     <span className="text-2xl font-light text-primary">{cartTotal.toLocaleString('ru-RU')} р.</span>
