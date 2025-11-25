@@ -43,7 +43,7 @@ export default function DeliveryPage() {
         cartCount={cartCount}
       />
 
-      <main className="flex-1 py-16 px-6 md:px-8">
+      <main className="flex-1 pt-32 pb-16 px-6 md:px-8">
         <div className="max-w-3xl mx-auto">
           <h1 className="text-3xl md:text-4xl font-light text-primary mb-12 text-center">
             оплата и доставка

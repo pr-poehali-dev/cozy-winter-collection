@@ -23,55 +23,82 @@ export default function Contacts() {
         cartCount={cartCount}
       />
 
-      <main className="flex-1 pt-32 pb-16 px-6">
-        <div className="max-w-4xl mx-auto">
-          <div className="flex justify-center gap-6 mb-12">
-            <a
-              href="https://t.me/azaluk"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-16 h-16 rounded-full bg-primary flex items-center justify-center hover:scale-110 transition-transform"
-              aria-label="Telegram"
-            >
-              <Icon name="Send" size={28} className="text-white" strokeWidth={1.5} />
-            </a>
-            <a
-              href="https://www.youtube.com/@azaluk"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-16 h-16 rounded-full bg-primary flex items-center justify-center hover:scale-110 transition-transform"
-              aria-label="YouTube"
-            >
-              <Icon name="Youtube" size={28} className="text-white" strokeWidth={1.5} />
-            </a>
-          </div>
+      <main className="flex-1 pt-32 pb-16 px-6 md:px-8">
+        <div className="max-w-3xl mx-auto">
+          <h1 className="text-3xl md:text-4xl font-light text-primary mb-12 text-center">
+            контакты
+          </h1>
 
-          <p className="text-center text-primary/80 font-light text-base md:text-lg mb-8 max-w-2xl mx-auto leading-relaxed">
-            с радостью ответим на любые ваши вопросы, связанные с заказами и ассортиментом
-          </p>
+          <div className="space-y-8">
+            <section className="vintage-card p-6 md:p-8 rounded-2xl">
+              <h2 className="text-xl font-light text-primary mb-4 flex items-center gap-2">
+                <span className="text-2xl">💬</span>
+                свяжитесь с нами
+              </h2>
+              <div className="space-y-4 text-muted-foreground leading-relaxed font-light">
+                <p className="text-sm md:text-base">
+                  с радостью ответим на любые ваши вопросы, связанные с заказами и ассортиментом
+                </p>
+                
+                <div className="space-y-3 pt-2">
+                  <div className="p-4 bg-secondary/30 rounded-lg border border-border">
+                    <p className="font-medium text-primary text-sm mb-1">почта:</p>
+                    <a href="mailto:azaluk.halimova@gmail.com" className="text-sm hover:underline">azaluk.halimova@gmail.com</a>
+                  </div>
+                  
+                  <div className="p-4 bg-secondary/30 rounded-lg border border-border">
+                    <p className="font-medium text-primary text-sm mb-1">телеграм:</p>
+                    <a href="https://t.me/azaluk" target="_blank" rel="noopener noreferrer" className="text-sm hover:underline">@azaluk</a>
+                  </div>
+                  
+                  <div className="p-4 bg-secondary/30 rounded-lg border border-border">
+                    <p className="font-medium text-primary text-sm mb-1">телефон:</p>
+                    <a href="tel:+79001234567" className="text-sm hover:underline">+7 (900) 123-45-67</a>
+                  </div>
+                </div>
 
-          <div className="text-center space-y-3 mb-12">
-            <div className="text-primary font-light">
-              <span className="font-normal">почта:</span> azaluk.halimova@gmail.com
-            </div>
-            <div className="text-primary font-light">
-              <span className="font-normal">телеграм:</span> @azaluk
-            </div>
-            <div className="text-primary font-light">
-              <span className="font-normal">телефон:</span> +7 (900) 123-45-67
-            </div>
-          </div>
+                <div className="flex justify-center gap-6 pt-4">
+                  <a
+                    href="https://t.me/azaluk"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-12 h-12 rounded-full bg-primary flex items-center justify-center hover:scale-110 transition-transform"
+                    aria-label="Telegram"
+                  >
+                    <Icon name="Send" size={20} className="text-white" strokeWidth={1.5} />
+                  </a>
+                  <a
+                    href="https://www.youtube.com/@azaluk"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-12 h-12 rounded-full bg-primary flex items-center justify-center hover:scale-110 transition-transform"
+                    aria-label="YouTube"
+                  >
+                    <Icon name="Youtube" size={20} className="text-white" strokeWidth={1.5} />
+                  </a>
+                </div>
+              </div>
+            </section>
 
-          <p className="text-center text-primary/70 font-light text-sm md:text-base max-w-3xl mx-auto leading-relaxed mb-12">
-            а ещё мы с удовольствием разместим свои товары у вас в магазине книг или подарков, кафе или кофейне, уютном городском пространстве 🤍
-          </p>
-
-          <div className="rounded-2xl overflow-hidden shadow-lg max-w-md mx-auto">
-            <img 
-              src="https://cdn.poehali.dev/files/b92bfbfe-23cf-41f0-a7a2-f2212bac68b6.jpeg" 
-              alt="Наши изделия"
-              className="w-full h-auto object-cover"
-            />
+            <section className="vintage-card p-6 md:p-8 rounded-2xl bg-cream/30 border-2 border-primary/20">
+              <h2 className="text-xl font-light text-primary mb-4 flex items-center gap-2">
+                <span className="text-2xl">✨</span>
+                сотрудничество
+              </h2>
+              <div className="space-y-4 text-muted-foreground leading-relaxed font-light">
+                <p className="text-sm md:text-base">
+                  а ещё мы с удовольствием разместим свои товары у вас в магазине книг или подарков, кафе или кофейне, уютном городском пространстве 🤍
+                </p>
+                
+                <div className="rounded-2xl overflow-hidden shadow-lg mt-4">
+                  <img 
+                    src="https://cdn.poehali.dev/files/b92bfbfe-23cf-41f0-a7a2-f2212bac68b6.jpeg" 
+                    alt="Наши изделия"
+                    className="w-full h-auto object-cover"
+                  />
+                </div>
+              </div>
+            </section>
           </div>
         </div>
       </main>
