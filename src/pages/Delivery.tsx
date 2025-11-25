@@ -89,7 +89,7 @@ export default function DeliveryPage() {
 
             <section className="p-6 md:p-8 rounded-3xl border border-primary/20">
               <h2 className="text-2xl md:text-3xl font-light text-primary mb-6 flex items-center gap-2" style={{ fontFamily: 'Cormorant, serif' }}>
-                <span className="text-2xl">💳</span>
+                <span className="text-2xl">💰</span>
                 оплата
               </h2>
               <div className="space-y-4 text-muted-foreground leading-relaxed font-light">
