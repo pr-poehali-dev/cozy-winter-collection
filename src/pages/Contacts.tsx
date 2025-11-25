@@ -25,16 +25,15 @@ export default function Contacts() {
 
       <main className="flex-1 pt-32 pb-16 px-6 md:px-8">
         <div className="max-w-6xl mx-auto">
-          <h1 className="text-3xl md:text-4xl font-light text-primary mb-4 text-center">
-            контакты
-          </h1>
-          <p className="text-center text-muted-foreground font-light text-sm md:text-base mb-12 leading-relaxed">
-            с радостью ответим на любые ваши вопросы 💌
-          </p>
-
           <div className="grid md:grid-cols-2 gap-8 items-start">
             <div className="space-y-6 order-2 md:order-1">
               <div className="p-6 md:p-8 rounded-3xl border border-primary/20">
+                <h1 className="text-3xl md:text-4xl font-light text-primary mb-4 text-center md:text-left">
+                  контакты
+                </h1>
+                <p className="text-center md:text-left text-muted-foreground font-light text-sm md:text-base mb-8 leading-relaxed">
+                  с радостью ответим на любые ваши вопросы 💌
+                </p>
                 <div className="space-y-5">
                   <div className="flex items-start gap-4">
                     <span className="text-2xl mt-1">📧</span>
@@ -56,35 +55,36 @@ export default function Contacts() {
                     </div>
                   </div>
 
-                  <div className="pt-4 mt-4">
-                    <h2 className="text-xl md:text-2xl font-light text-primary mb-6 text-center md:text-left" style={{ fontFamily: 'Cormorant, serif' }}>
-                      наша жизнь и новости
-                    </h2>
-                    <div className="flex justify-center md:justify-start gap-4">
-                      <a
-                        href="https://t.me/azalukk"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex flex-col items-center gap-2 group"
-                      >
-                        <div className="w-11 h-11 rounded-full bg-primary/90 flex items-center justify-center group-hover:bg-primary group-hover:scale-105 transition-all">
-                          <Icon name="Send" size={18} className="text-white" strokeWidth={1.5} />
-                        </div>
-                        <span className="text-xs text-muted-foreground font-light">телеграм-канал</span>
-                      </a>
-                      <a
-                        href="https://www.youtube.com/@azaluk"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex flex-col items-center gap-2 group"
-                      >
-                        <div className="w-11 h-11 rounded-full bg-primary/90 flex items-center justify-center group-hover:bg-primary group-hover:scale-105 transition-all">
-                          <Icon name="Youtube" size={18} className="text-white" strokeWidth={1.5} />
-                        </div>
-                        <span className="text-xs text-muted-foreground font-light">ютуб-канал</span>
-                      </a>
+                </div>
+              </div>
+
+              <div className="p-6 md:p-8 rounded-3xl border border-primary/20">
+                <h2 className="text-xl md:text-2xl font-light text-primary mb-6 text-center md:text-left" style={{ fontFamily: 'Cormorant, serif' }}>
+                  наша жизнь и новости
+                </h2>
+                <div className="flex justify-center md:justify-start gap-4">
+                  <a
+                    href="https://t.me/azalukk"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex flex-col items-center gap-2 group"
+                  >
+                    <div className="w-11 h-11 rounded-full bg-primary/90 flex items-center justify-center group-hover:bg-primary group-hover:scale-105 transition-all">
+                      <Icon name="Send" size={18} className="text-white" strokeWidth={1.5} />
                     </div>
-                  </div>
+                    <span className="text-xs text-muted-foreground font-light">телеграм-канал</span>
+                  </a>
+                  <a
+                    href="https://www.youtube.com/@azaluk"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex flex-col items-center gap-2 group"
+                  >
+                    <div className="w-11 h-11 rounded-full bg-primary/90 flex items-center justify-center group-hover:bg-primary group-hover:scale-105 transition-all">
+                      <Icon name="Youtube" size={18} className="text-white" strokeWidth={1.5} />
+                    </div>
+                    <span className="text-xs text-muted-foreground font-light">ютуб-канал</span>
+                  </a>
                 </div>
               </div>
 
