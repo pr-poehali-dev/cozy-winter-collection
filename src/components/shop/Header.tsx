@@ -40,7 +40,8 @@ export default function Header({
     email: '',
     phone: '',
     address: '',
-    comment: ''
+    comment: '',
+    telegram: ''
   });
 
   useEffect(() => {
@@ -94,6 +95,7 @@ export default function Header({
         userPhone: checkoutData.phone,
         userAddress: checkoutData.address,
         orderComment: checkoutData.comment,
+        userTelegram: checkoutData.telegram,
         cartItems: cart,
       });
 
@@ -244,7 +246,7 @@ export default function Header({
                       setShowPaymentIframe(false);
                       setPaymentUrl('');
                       setOrderNumber('');
-                      setCheckoutData({ name: '', email: '', phone: '', address: '', comment: '' });
+                      setCheckoutData({ name: '', email: '', phone: '', address: '', comment: '', telegram: '' });
                     }}
                     className="w-full py-3 rounded-lg font-light border border-border hover:bg-secondary transition-colors"
                   >
@@ -298,6 +300,18 @@ export default function Header({
                       placeholder="Москва, ул. Примерная, д. 1, кв. 1"
                       className="font-light"
                     />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="telegram" className="text-sm font-light">Ник в телеграм (необязательно)</Label>
+                    <Input
+                      id="telegram"
+                      type="text"
+                      value={checkoutData.telegram}
+                      onChange={(e) => setCheckoutData({ ...checkoutData, telegram: e.target.value })}
+                      placeholder="@username"
+                      className="font-light"
+                    />
+                    <p className="text-xs text-muted-foreground font-light">напишем вам только в случае возникновения вопросов по заказу</p>
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="comment" className="text-sm font-light">Комментарий к заказу (необязательно)</Label>
