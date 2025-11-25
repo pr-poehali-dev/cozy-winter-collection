@@ -50,7 +50,7 @@ export default function DeliveryPage() {
           </h1>
 
           <div className="space-y-8">
-            <section className="vintage-card p-6 md:p-8 rounded-2xl">
+            <section className="p-6 md:p-8 rounded-3xl border border-primary/20">
               <h2 className="text-xl font-light text-primary mb-4 flex items-center gap-2">
                 <span className="text-2xl">🏹</span>
                 доставка
@@ -108,7 +108,7 @@ export default function DeliveryPage() {
               </div>
             </section>
 
-            <section className="vintage-card p-6 md:p-8 rounded-2xl">
+            <section className="p-6 md:p-8 rounded-3xl border border-primary/20">
               <h2 className="text-xl font-light text-primary mb-4 flex items-center gap-2">
                 <span className="text-2xl">💳</span>
                 оплата
@@ -130,7 +130,7 @@ export default function DeliveryPage() {
               </div>
             </section>
 
-            <section className="vintage-card p-6 md:p-8 rounded-2xl bg-cream/30 border-2 border-primary/20">
+            <section className="p-6 md:p-8 rounded-3xl border border-primary/20">
               <h2 className="text-xl font-light text-primary mb-4 flex items-center gap-2">
                 <span className="text-2xl">✨</span>
                 как оформить заказ
