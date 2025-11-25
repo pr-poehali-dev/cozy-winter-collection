@@ -1,5 +1,6 @@
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import Icon from '@/components/ui/icon';
 import { CartItem } from './types';
@@ -38,7 +39,8 @@ export default function Header({
     name: '',
     email: '',
     phone: '',
-    address: ''
+    address: '',
+    comment: ''
   });
 
   useEffect(() => {
@@ -91,6 +93,7 @@ export default function Header({
         userEmail: checkoutData.email,
         userPhone: checkoutData.phone,
         userAddress: checkoutData.address,
+        orderComment: checkoutData.comment,
         cartItems: cart,
       });
 
@@ -241,7 +244,7 @@ export default function Header({
                       setShowPaymentIframe(false);
                       setPaymentUrl('');
                       setOrderNumber('');
-                      setCheckoutData({ name: '', email: '', phone: '', address: '' });
+                      setCheckoutData({ name: '', email: '', phone: '', address: '', comment: '' });
                     }}
                     className="w-full py-3 rounded-lg font-light border border-border hover:bg-secondary transition-colors"
                   >
@@ -294,6 +297,17 @@ export default function Header({
                       onChange={(e) => setCheckoutData({ ...checkoutData, address: e.target.value })}
                       placeholder="Москва, ул. Примерная, д. 1, кв. 1"
                       className="font-light"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="comment" className="text-sm font-light">Комментарий к заказу (необязательно)</Label>
+                    <Textarea
+                      id="comment"
+                      value={checkoutData.comment}
+                      onChange={(e) => setCheckoutData({ ...checkoutData, comment: e.target.value })}
+                      placeholder="Пожелания по доставке, выбору цвета или другие детали..."
+                      className="font-light resize-none"
+                      rows={3}
                     />
                   </div>
                 </div>

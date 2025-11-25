@@ -55,7 +55,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             cur = conn.cursor()
             
             cur.execute("""
-                SELECT id, order_number, user_name, user_email, amount, status, 
+                SELECT id, order_number, user_name, user_email, user_phone, amount, status, 
                        delivery_service, delivery_phone, delivery_address
                 FROM orders 
                 WHERE order_number = %s
@@ -87,11 +87,12 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                 'order_number': order[1],
                 'user_name': order[2],
                 'user_email': order[3],
-                'amount': float(order[4]),
-                'status': order[5],
-                'delivery_service': order[6],
-                'delivery_phone': order[7],
-                'delivery_address': order[8],
+                'user_phone': order[4],
+                'amount': float(order[5]),
+                'status': order[6],
+                'delivery_service': order[7],
+                'delivery_phone': order[8],
+                'delivery_address': order[9],
                 'items': [
                     {
                         'product_id': item[0],

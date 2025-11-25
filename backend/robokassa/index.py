@@ -77,6 +77,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
         user_email = str(payload.get('user_email', ''))
         user_phone = str(payload.get('user_phone', ''))
         user_address = str(payload.get('user_address', ''))
+        order_comment = str(payload.get('order_comment', ''))
         is_test = int(payload.get('is_test', 0))
         cart_items = payload.get('cart_items', [])
 
@@ -124,10 +125,10 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
         
         cur.execute("""
             INSERT INTO orders 
-            (order_number, user_name, user_email, user_phone, amount, robokassa_inv_id, status, delivery_address)
-            VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+            (order_number, user_name, user_email, user_phone, amount, robokassa_inv_id, status, delivery_address, order_comment)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
             RETURNING id
-        """, (order_number, user_name, user_email, user_phone, amount_decimal, robokassa_inv_id, 'pending', user_address))
+        """, (order_number, user_name, user_email, user_phone, amount_decimal, robokassa_inv_id, 'pending', user_address, order_comment))
         
         order_id = cur.fetchone()[0]
         

@@ -13,6 +13,7 @@ interface PaymentPayload {
   userEmail: string;
   userPhone: string;
   userAddress: string;
+  orderComment?: string;
   cartItems: CartItem[];
   isTest?: number;
 }
@@ -34,6 +35,7 @@ export const createRobokassaPaymentLink = async (
     user_email: payload.userEmail,
     user_phone: payload.userPhone,
     user_address: payload.userAddress,
+    order_comment: payload.orderComment || '',
     cart_items: payload.cartItems,
     is_test: 0,
   };

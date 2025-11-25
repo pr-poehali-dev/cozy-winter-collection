@@ -15,6 +15,8 @@ interface OrderData {
   items: OrderItem[];
   user_name: string;
   user_email: string;
+  user_phone: string;
+  delivery_address: string;
 }
 
 export default function OrderSuccess() {
@@ -75,15 +77,29 @@ export default function OrderSuccess() {
 
   return (
     <div className="min-h-screen bg-background">
-      <header className="border-b border-border">
-        <div className="max-w-3xl mx-auto px-6 py-4">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-card/95 backdrop-blur-sm border-b border-border">
+        <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
           <Link to="/" className="text-2xl text-primary tracking-wide hover:opacity-70 transition-opacity" style={{ fontFamily: 'Cormorant, serif', fontWeight: 300 }}>
             azaluk
           </Link>
+          <nav className="hidden md:flex items-center gap-6">
+            <Link to="/" className="text-sm font-light text-primary hover:text-muted-foreground transition-colors">
+              главная
+            </Link>
+            <Link to="/about" className="text-sm font-light text-primary hover:text-muted-foreground transition-colors">
+              о нас
+            </Link>
+            <Link to="/delivery" className="text-sm font-light text-primary hover:text-muted-foreground transition-colors">
+              оплата и доставка
+            </Link>
+            <Link to="/contacts" className="text-sm font-light text-primary hover:text-muted-foreground transition-colors">
+              контакты
+            </Link>
+          </nav>
         </div>
       </header>
 
-      <main className="max-w-3xl mx-auto px-6 py-12">
+      <main className="max-w-3xl mx-auto px-6 py-12 pt-24">
         <div className="text-center mb-12">
           <div className="inline-flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mb-4">
             <Icon name="Check" size={32} className="text-green-600" />
@@ -120,6 +136,7 @@ export default function OrderSuccess() {
           <div className="space-y-2 text-sm">
             <p className="text-muted-foreground">Имя: <span className="text-primary font-medium">{orderData.user_name}</span></p>
             <p className="text-muted-foreground">Email: <span className="text-primary font-medium">{orderData.user_email}</span></p>
+            <p className="text-muted-foreground">Телефон: <span className="text-primary font-medium">{orderData.user_phone}</span></p>
             <p className="text-muted-foreground">Адрес доставки: <span className="text-primary font-medium">{orderData.delivery_address}</span></p>
           </div>
         </div>
