@@ -2,6 +2,7 @@ import { Sheet, SheetContent } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import Icon from '@/components/ui/icon';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { Product } from './types';
 import { useState } from 'react';
 
@@ -118,8 +119,21 @@ export default function ProductDetails({ product, onClose, addToCart }: ProductD
                 {product.variants && product.variants.length > 0 && (
                   <div className="space-y-3 p-4 rounded-xl border-2 border-primary/20 bg-primary/5">
                     <div className="flex items-center gap-2">
-                      <Icon name="AlertCircle" size={16} className="text-primary" strokeWidth={2} />
-                      <h3 className="text-sm font-normal text-primary">выберите вариант</h3>
+                      <TooltipProvider>
+                        <Tooltip delayDuration={200}>
+                          <TooltipTrigger asChild>
+                            <div className="flex items-center gap-2 cursor-help">
+                              <Icon name="AlertCircle" size={16} className="text-primary" strokeWidth={2} />
+                              <h3 className="text-sm font-normal text-primary">выберите вариант</h3>
+                            </div>
+                          </TooltipTrigger>
+                          <TooltipContent side="top" className="max-w-xs">
+                            <p className="text-xs leading-relaxed">
+                              этот товар доступен в нескольких вариантах с разным составом, весом и уровнем тепла — выберите тот, что подходит именно вам ✨
+                            </p>
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
                     </div>
                     <div className="space-y-2">
                       {product.variants.map((variant) => (
