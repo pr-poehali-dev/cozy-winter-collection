@@ -2,6 +2,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { toast } from '@/hooks/use-toast';
+import { useState } from 'react';
 
 interface CheckoutData {
   name: string;
@@ -37,6 +38,9 @@ export default function CheckoutForm({
   isCheckoutLoading,
   onCheckout
 }: CheckoutFormProps) {
+  const [hasGift, setHasGift] = useState(false);
+  const giftEmojis = ['❄️', '🔮', '✨'];
+
   return (
     <div className="flex-1 flex flex-col mt-8 px-6 overflow-hidden">
       <div className="space-y-4 flex-1 overflow-y-auto pb-4">
@@ -162,20 +166,30 @@ export default function CheckoutForm({
                 const code = checkoutData.promoCode.trim();
                 if (!code) return;
                 
+                if (giftEmojis.includes(code)) {
+                  setHasGift(true);
+                  setPromoDiscount(0);
+                  toast({ title: 'подарочек к заказу добавлен! ✨', description: 'сюрприз ждёт вас в посылке' });
+                  return;
+                }
+                
                 try {
                   const response = await fetch(`https://functions.poehali.dev/9fc2ae98-daea-4d40-98de-6d1a45d029cb?code=${code}`);
                   
                   if (response.ok) {
                     const data = await response.json();
                     setPromoDiscount(cartTotal * (data.discount_percent / 100));
+                    setHasGift(false);
                     toast({ title: 'Промокод применён!', description: `Скидка ${data.discount_percent}%` });
                   } else {
                     toast({ title: 'Неверный промокод', variant: 'destructive' });
                     setPromoDiscount(0);
+                    setHasGift(false);
                   }
                 } catch (error) {
                   toast({ title: 'Ошибка', description: 'Не удалось проверить промокод', variant: 'destructive' });
                   setPromoDiscount(0);
+                  setHasGift(false);
                 }
               }}
               className="px-4 py-2 bg-primary text-white rounded-lg hover:opacity-90 transition-opacity text-sm font-light whitespace-nowrap"
@@ -186,6 +200,11 @@ export default function CheckoutForm({
           {promoDiscount > 0 && (
             <p className="text-xs text-green-600 font-light">
               ✓ Скидка -{promoDiscount.toLocaleString('ru-RU')} ₽
+            </p>
+          )}
+          {hasGift && (
+            <p className="text-xs text-green-600 font-light">
+              ✓ подарочек к заказу добавлен! ✨
             </p>
           )}
         </div>
