@@ -57,29 +57,23 @@ export default function DeliveryPage() {
               <div className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-4">
                   <div className="p-5 bg-cream/30 rounded-2xl border border-primary/10">
-                    <div className="flex items-center gap-3 mb-3">
+                    <div className="flex items-center gap-3">
                       <span className="text-2xl">📦</span>
                       <div>
-                        <p className="text-sm font-light text-primary">пункт выдачи ozon</p>
-                        <p className="text-base font-light text-primary">200 ₽</p>
+                        <p className="text-sm font-light text-primary">пункт выдачи ozon • 200 ₽</p>
+                        <p className="text-xs text-muted-foreground font-light">по всей россии, 3–5 дней</p>
                       </div>
                     </div>
-                    <p className="text-xs text-muted-foreground font-light">
-                      по всей россии • 3–5 рабочих дней
-                    </p>
                   </div>
                   
                   <div className="p-5 bg-cream/30 rounded-2xl border border-primary/10">
-                    <div className="flex items-center gap-3 mb-3">
+                    <div className="flex items-center gap-3">
                       <span className="text-2xl">🤝</span>
                       <div>
-                        <p className="text-sm font-light text-primary">самовывоз</p>
-                        <p className="text-base font-light text-primary">бесплатно</p>
+                        <p className="text-sm font-light text-primary">самовывоз • бесплатно</p>
+                        <p className="text-xs text-muted-foreground font-light">м. тульская, москва</p>
                       </div>
                     </div>
-                    <p className="text-xs text-muted-foreground font-light">
-                      м. тульская, москва
-                    </p>
                   </div>
                 </div>
 
