@@ -32,20 +32,35 @@ export default function OrderSuccess() {
   const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
-    if (orderId) {
-      // TODO: Загрузить данные заказа из бэкенда
-      setLoading(false);
-      setOrderData({
-        order_number: orderId,
-        amount: 0,
-        status: 'paid',
-        items: [],
-        user_name: '',
-        user_email: ''
-      });
-    } else {
-      setLoading(false);
-    }
+    const fetchOrderData = async () => {
+      if (!orderId) {
+        setLoading(false);
+        return;
+      }
+
+      try {
+        const response = await fetch(
+          `https://functions.poehali.dev/25f876e5-53fb-4cb1-878a-a7177baa1950?order_number=${orderId}`
+        );
+
+        if (!response.ok) {
+          throw new Error('Order not found');
+        }
+
+        const data = await response.json();
+        setOrderData(data);
+        setDeliveryPhone(data.delivery_phone || '');
+        setDeliveryService(data.delivery_service || 'yandex');
+        setDeliveryAddress(data.delivery_address || '');
+      } catch (error) {
+        console.error('Failed to load order:', error);
+        setOrderData(null);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchOrderData();
   }, [orderId]);
 
   const handleSubmitDelivery = async () => {
@@ -60,8 +75,22 @@ export default function OrderSuccess() {
 
     setSubmitting(true);
     try {
-      // TODO: Отправить данные доставки на бэкенд
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      const response = await fetch('https://functions.poehali.dev/25f876e5-53fb-4cb1-878a-a7177baa1950', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          order_number: orderId,
+          delivery_service: deliveryService,
+          delivery_phone: deliveryPhone,
+          delivery_address: deliveryAddress,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to save delivery info');
+      }
       
       toast({
         title: 'Данные сохранены!',
@@ -144,6 +173,19 @@ export default function OrderSuccess() {
         <div className="bg-card border border-border rounded-lg p-6">
           <h2 className="text-xl font-light text-primary mb-4">данные доставки</h2>
           
+          {orderData.delivery_phone && orderData.delivery_address ? (
+            <div className="space-y-3">
+              <div className="flex items-center gap-2 text-green-600 mb-4">
+                <Icon name="CheckCircle2" size={20} />
+                <span className="font-light">данные доставки сохранены</span>
+              </div>
+              <div className="space-y-2 text-sm">
+                <p className="text-muted-foreground">Служба: <span className="text-primary font-medium">{orderData.delivery_service === 'yandex' ? 'Яндекс Доставка' : 'Ozon'}</span></p>
+                <p className="text-muted-foreground">Телефон: <span className="text-primary font-medium">{orderData.delivery_phone}</span></p>
+                <p className="text-muted-foreground">Адрес: <span className="text-primary font-medium">{orderData.delivery_address}</span></p>
+              </div>
+            </div>
+          ) : (
           <div className="space-y-4 mb-6">
             <div>
               <Label className="text-sm font-light mb-2 block">выберите службу доставки</Label>
@@ -206,6 +248,8 @@ export default function OrderSuccess() {
           >
             {submitting ? 'сохраняем...' : 'оформить доставку'}
           </button>
+          </div>
+          )}
         </div>
 
         <p className="text-center text-sm text-muted-foreground mt-8">

@@ -144,6 +144,8 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             password_1
         )
 
+        success_url = f"https://azaluk.shop/order-success?order={order_number}"
+        
         query_params = {
             'MerchantLogin': merchant_login,
             'OutSum': amount_str,
@@ -151,7 +153,8 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             'SignatureValue': signature,
             'IsTest': is_test,
             'Culture': 'ru',
-            'Description': f'Заказ {order_number}'
+            'Description': f'Заказ {order_number}',
+            'SuccessURL': success_url
         }
 
         payment_url = f"{ROBOKASSA_URL}?{urlencode(query_params)}"
