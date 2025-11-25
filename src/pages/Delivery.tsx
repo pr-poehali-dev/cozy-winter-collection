@@ -130,7 +130,7 @@ export default function DeliveryPage() {
                 </div>
 
                 <p className="text-sm pt-2">
-                  оплата защищена протоколом ssl. после оформления вы автоматически перейдёте на страницу оплаты ✨
+                  оплата происходит через официальный сервис робокасса и защищена протоколом ssl
                 </p>
 
                 <div className="p-3 bg-cream/40 rounded-lg text-xs">
