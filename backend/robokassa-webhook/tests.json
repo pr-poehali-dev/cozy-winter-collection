@@ -1,0 +1,12 @@
+{
+  "tests": [
+    {
+      "name": "webhook with valid signature",
+      "method": "GET",
+      "path": "/?OutSum=1990.00&InvId=123456&SignatureValue=test",
+      "expectedStatus": 200,
+      "bodyMatcher": "contains",
+      "expectedBody": "OK"
+    }
+  ]
+}
