@@ -57,8 +57,7 @@ export default function Contacts() {
                   </div>
 
                   <div className="pt-4 mt-4 border-t border-primary/10">
-                    <p className="text-xs text-muted-foreground mb-4 uppercase tracking-wide text-center">наши блоги</p>
-                    <div className="flex justify-center gap-4">
+                    <div className="flex justify-center md:justify-start gap-4">
                       <a
                         href="https://t.me/azalukk"
                         target="_blank"
