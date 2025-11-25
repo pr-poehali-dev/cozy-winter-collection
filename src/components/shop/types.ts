@@ -20,6 +20,7 @@ export interface Product {
   storyDescription?: string;
   composition?: string;
   variants?: ProductVariant[];
+  stock?: number;
 }
 
 export interface CartItem extends Product {

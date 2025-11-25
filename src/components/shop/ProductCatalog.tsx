@@ -44,35 +44,49 @@ export default function ProductCatalog({
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredProducts.map((product) => (
             <div key={product.id} className="group cursor-pointer" onClick={() => onProductClick(product)}>
-              <div className="aspect-square overflow-hidden rounded-2xl mb-4 bg-card shadow-sm border border-border transition-transform group-hover:scale-[1.02]">
+              <div className="relative aspect-square overflow-hidden rounded-2xl mb-4 bg-card shadow-sm border border-border transition-transform group-hover:scale-[1.02]">
                 <img 
                   src={product.image} 
                   alt={product.name}
                   className="w-full h-full object-cover"
                 />
+                {product.badge === 'soon' && (
+                  <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+                    <span className="text-white text-lg font-light tracking-wider">скоро</span>
+                  </div>
+                )}
+                {product.badge === 'limited' && (
+                  <div className="absolute top-3 right-3 bg-primary text-white px-3 py-1 rounded-full text-xs font-light">
+                    limited
+                  </div>
+                )}
               </div>
               <div className="text-center space-y-2">
                 <h3 className="text-base font-light text-primary leading-relaxed px-4">
                   {product.name}
                 </h3>
-                {product.badge && (
-                  <p className="text-xs text-muted-foreground italic">{product.badge}</p>
+                {product.stock !== undefined && product.stock <= 5 && product.badge !== 'soon' && (
+                  <p className="text-xs text-muted-foreground">
+                    осталось {product.stock} {product.stock === 1 ? 'шт' : 'шт'}
+                  </p>
                 )}
                 <div className="flex items-center justify-center gap-3">
                   <p className="text-base font-light text-primary">
                     {product.price.toLocaleString('ru-RU')} р.
                   </p>
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      addToCart(product);
-                    }}
-                    className="px-3 py-1.5 rounded-full bg-primary/10 hover:bg-primary/20 flex items-center gap-1 transition-all hover:scale-105 text-primary font-light"
-                    aria-label="Добавить в корзину"
-                  >
-                    <Icon name="ShoppingBag" size={14} strokeWidth={1.5} />
-                    <span className="text-sm">+</span>
-                  </button>
+                  {product.badge !== 'soon' && (
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        addToCart(product);
+                      }}
+                      className="px-3 py-1.5 rounded-full bg-primary/10 hover:bg-primary/20 flex items-center gap-1 transition-all hover:scale-105 text-primary font-light"
+                      aria-label="Добавить в корзину"
+                    >
+                      <Icon name="ShoppingBag" size={14} strokeWidth={1.5} />
+                      <span className="text-sm">+</span>
+                    </button>
+                  )}
                 </div>
               </div>
             </div>
