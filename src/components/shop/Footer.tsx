@@ -42,7 +42,6 @@ export default function Footer() {
           <div className="text-[10px] md:text-xs font-light text-[#F5F1E8]/70 text-center md:text-right">
             <p>яроцкая азалия наильевна</p>
             <p>инн 022504012700</p>
-            <p>г. Москва | azali.halimova@gmail.com</p>
           </div>
         </div>
       </div>
