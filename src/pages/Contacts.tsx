@@ -28,10 +28,10 @@ export default function Contacts() {
           <div className="grid md:grid-cols-2 gap-8 items-start">
             <div className="space-y-6 order-2 md:order-1">
               <div className="p-6 md:p-8 rounded-3xl border border-primary/20">
-                <h1 className="text-3xl md:text-4xl font-light text-primary mb-4 text-center md:text-left">
+                <h2 className="text-2xl md:text-3xl font-light text-primary mb-4 text-center md:text-left" style={{ fontFamily: 'Cormorant, serif' }}>
                   контакты
-                </h1>
-                <p className="text-center md:text-left text-muted-foreground font-light text-sm md:text-base mb-8 leading-relaxed">
+                </h2>
+                <p className="text-center md:text-left text-muted-foreground font-light text-sm leading-relaxed mb-8">
                   с радостью ответим на любые ваши вопросы 💌
                 </p>
                 <div className="space-y-5">
@@ -39,7 +39,7 @@ export default function Contacts() {
                     <span className="text-2xl mt-1">📧</span>
                     <div className="flex-1">
                       <p className="text-xs text-muted-foreground mb-1 uppercase tracking-wide">почта</p>
-                      <a href="mailto:azaluk.halimova@gmail.com" className="text-primary hover:underline font-light">
+                      <a href="mailto:azaluk.halimova@gmail.com" className="text-sm text-primary hover:underline font-light">
                         azaluk.halimova@gmail.com
                       </a>
                     </div>
@@ -48,8 +48,8 @@ export default function Contacts() {
                   <div className="flex items-start gap-4">
                     <span className="text-2xl mt-1">💬</span>
                     <div className="flex-1">
-                      <p className="text-xs text-muted-foreground mb-1 uppercase tracking-wide">телеграм для поддержки и вопросов</p>
-                      <a href="https://t.me/azaluk" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-light">
+                      <p className="text-xs text-muted-foreground mb-1 uppercase tracking-wide">телеграм</p>
+                      <a href="https://t.me/azaluk" target="_blank" rel="noopener noreferrer" className="text-sm text-primary hover:underline font-light">
                         @azaluk
                       </a>
                     </div>
@@ -59,7 +59,7 @@ export default function Contacts() {
               </div>
 
               <div className="p-6 md:p-8 rounded-3xl border border-primary/20">
-                <h2 className="text-xl md:text-2xl font-light text-primary mb-6 text-center md:text-left" style={{ fontFamily: 'Cormorant, serif' }}>
+                <h2 className="text-2xl md:text-3xl font-light text-primary mb-6 text-center md:text-left" style={{ fontFamily: 'Cormorant, serif' }}>
                   наша жизнь и новости
                 </h2>
                 <div className="flex justify-center md:justify-start gap-4">
@@ -89,7 +89,7 @@ export default function Contacts() {
               </div>
 
               <div className="p-6 md:p-8 rounded-3xl border border-primary/20">
-                <h2 className="text-xl md:text-2xl font-light text-primary mb-6 text-center md:text-left" style={{ fontFamily: 'Cormorant, serif' }}>
+                <h2 className="text-2xl md:text-3xl font-light text-primary mb-6 text-center md:text-left" style={{ fontFamily: 'Cormorant, serif' }}>
                   сотрудничество ✨
                 </h2>
                 <p className="text-sm md:text-base text-muted-foreground font-light leading-relaxed text-center md:text-left mb-4">
