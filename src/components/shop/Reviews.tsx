@@ -29,7 +29,7 @@ export default function Reviews() {
   const [expandedImage, setExpandedImage] = useState(false);
 
   return (
-    <section id="reviews" className="py-12 md:py-16 px-6 md:px-8 bg-gradient-to-br from-card via-secondary/20 to-card relative overflow-hidden">
+    <section id="reviews" className="py-12 md:py-16 px-6 md:px-8 relative overflow-hidden">
       <div className="absolute top-6 left-8 text-2xl opacity-10 animate-pulse">✨</div>
       <div className="absolute top-10 right-12 text-xl opacity-10">💫</div>
       <div className="absolute bottom-8 left-16 text-xl opacity-10">🤍</div>
