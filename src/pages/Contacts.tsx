@@ -34,7 +34,7 @@ export default function Contacts() {
 
           <div className="grid md:grid-cols-2 gap-8 items-start">
             <div className="space-y-6 order-2 md:order-1">
-              <div className="bg-white/80 backdrop-blur-sm p-6 md:p-8 rounded-3xl shadow-sm border border-primary/10">
+              <div className="p-6 md:p-8 rounded-3xl border border-primary/20">
                 <div className="space-y-5">
                   <div className="flex items-start gap-4">
                     <span className="text-2xl mt-1">📧</span>
@@ -58,7 +58,7 @@ export default function Contacts() {
                 </div>
               </div>
 
-              <div className="bg-white/80 backdrop-blur-sm p-6 md:p-8 rounded-3xl shadow-sm border border-primary/10">
+              <div className="p-6 md:p-8 rounded-3xl border border-primary/20">
                 <p className="text-xs text-muted-foreground mb-4 uppercase tracking-wide text-center">наши блоги</p>
                 <div className="flex justify-center gap-4">
                   <a
@@ -86,7 +86,7 @@ export default function Contacts() {
                 </div>
               </div>
 
-              <div className="bg-white/60 backdrop-blur-sm p-6 md:p-8 rounded-3xl shadow-sm border border-primary/10">
+              <div className="p-6 md:p-8 rounded-3xl border border-primary/20">
                 <p className="text-2xl mb-4 text-center">✨</p>
                 <p className="text-sm md:text-base text-muted-foreground font-light leading-relaxed text-center mb-4">
                   мы с удовольствием разместим свои товары у вас в магазине книг или подарков, кафе или кофейне, уютном городском пространстве
