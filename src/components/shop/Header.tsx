@@ -149,8 +149,8 @@ export default function Header({
                 )}
               </button>
             </SheetTrigger>
-            <SheetContent className="w-full sm:max-w-lg flex flex-col">
-            <SheetHeader className="flex-shrink-0">
+            <SheetContent className="w-full sm:max-w-lg flex flex-col p-0">
+            <SheetHeader className="flex-shrink-0 px-6">
               <div className="flex items-center justify-between">
                 <button 
                   onClick={() => {
@@ -193,7 +193,7 @@ export default function Header({
               <div className="flex-1 flex flex-col mt-8">
                 <iframe
                   src={paymentUrl}
-                  className="w-full flex-1 border-0 -mx-6"
+                  className="w-full flex-1 border-0"
                   title="Оплата заказа"
                 />
                 <button 
@@ -202,13 +202,13 @@ export default function Header({
                     setPaymentUrl('');
                     setCheckoutData({ name: '', email: '', phone: '' });
                   }}
-                  className="w-full mt-4 py-3 rounded-lg font-light border border-border hover:bg-secondary transition-colors"
+                  className="w-full mt-4 mx-6 py-3 rounded-lg font-light border border-border hover:bg-secondary transition-colors"
                 >
                   закрыть
                 </button>
               </div>
             ) : showCheckoutForm ? (
-              <div className="flex-1 flex flex-col mt-8">
+              <div className="flex-1 flex flex-col mt-8 px-6">
                 <div className="space-y-4 flex-1">
                   <div className="space-y-2">
                     <Label htmlFor="name" className="text-sm font-light">Имя</Label>
@@ -266,7 +266,7 @@ export default function Header({
               </div>
             ) : (
               <>
-                <div className="flex-1 overflow-auto mt-8 space-y-4 pb-4">
+                <div className="flex-1 overflow-auto mt-8 space-y-4 pb-4 px-6">
                   {cart.map(item => (
                     <div key={item.id} className="flex gap-4 pb-4 border-b border-border">
                       <img 
@@ -302,7 +302,7 @@ export default function Header({
                     </div>
                   ))}
                 </div>
-                <div className="flex-shrink-0 border-t border-border pt-4 mt-4">
+                <div className="flex-shrink-0 border-t border-border pt-4 mt-4 px-6">
                   <div className="flex justify-between items-center mb-4">
                     <span className="text-lg font-light text-primary">итого:</span>
                     <span className="text-2xl font-light text-primary">{cartTotal.toLocaleString('ru-RU')} р.</span>
