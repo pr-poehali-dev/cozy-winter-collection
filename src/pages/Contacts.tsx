@@ -54,44 +54,44 @@ export default function Contacts() {
                     </a>
                   </div>
                 </div>
-                
-                <div className="flex items-start gap-4">
-                  <span className="text-2xl mt-1">📱</span>
-                  <div className="flex-1">
-                    <p className="text-xs text-muted-foreground mb-1 uppercase tracking-wide">телефон</p>
-                    <a href="tel:+79001234567" className="text-primary hover:underline font-light">
-                      +7 (900) 123-45-67
-                    </a>
-                  </div>
-                </div>
               </div>
+            </div>
 
-              <div className="flex justify-center gap-4 pt-8 mt-8 border-t border-primary/10">
+            <div className="bg-white/80 backdrop-blur-sm p-6 md:p-8 rounded-3xl shadow-sm border border-primary/10">
+              <p className="text-xs text-muted-foreground mb-4 uppercase tracking-wide text-center">наши блоги</p>
+              <div className="flex justify-center gap-4">
                 <a
-                  href="https://t.me/azaluk"
+                  href="https://t.me/azalukk"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-11 h-11 rounded-full bg-primary/90 flex items-center justify-center hover:bg-primary hover:scale-105 transition-all"
-                  aria-label="Telegram"
+                  className="flex flex-col items-center gap-2 group"
                 >
-                  <Icon name="Send" size={18} className="text-white" strokeWidth={1.5} />
+                  <div className="w-11 h-11 rounded-full bg-primary/90 flex items-center justify-center group-hover:bg-primary group-hover:scale-105 transition-all">
+                    <Icon name="Send" size={18} className="text-white" strokeWidth={1.5} />
+                  </div>
+                  <span className="text-xs text-muted-foreground font-light">телеграм-канал</span>
                 </a>
                 <a
                   href="https://www.youtube.com/@azaluk"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-11 h-11 rounded-full bg-primary/90 flex items-center justify-center hover:bg-primary hover:scale-105 transition-all"
-                  aria-label="YouTube"
+                  className="flex flex-col items-center gap-2 group"
                 >
-                  <Icon name="Youtube" size={18} className="text-white" strokeWidth={1.5} />
+                  <div className="w-11 h-11 rounded-full bg-primary/90 flex items-center justify-center group-hover:bg-primary group-hover:scale-105 transition-all">
+                    <Icon name="Youtube" size={18} className="text-white" strokeWidth={1.5} />
+                  </div>
+                  <span className="text-xs text-muted-foreground font-light">ютуб-канал</span>
                 </a>
               </div>
             </div>
 
-            <div className="bg-white/60 backdrop-blur-sm p-6 md:p-8 rounded-3xl shadow-sm border border-primary/10 text-center">
-              <p className="text-2xl mb-3">✨</p>
-              <p className="text-sm md:text-base text-muted-foreground font-light leading-relaxed">
+            <div className="bg-white/60 backdrop-blur-sm p-6 md:p-8 rounded-3xl shadow-sm border border-primary/10">
+              <p className="text-2xl mb-4 text-center">✨</p>
+              <p className="text-sm md:text-base text-muted-foreground font-light leading-relaxed text-center mb-4">
                 мы с удовольствием разместим свои товары у вас в магазине книг или подарков, кафе или кофейне, уютном городском пространстве
+              </p>
+              <p className="text-sm md:text-base text-muted-foreground font-light leading-relaxed text-center">
+                также готовы создать партию изделий специально для вашего проекта или события — свадьбы, корпоратива, подарков для гостей
               </p>
             </div>
 
