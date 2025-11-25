@@ -2,6 +2,7 @@ import json
 import os
 import hashlib
 import psycopg2
+import random
 from typing import Any, Dict
 from urllib.parse import urlencode
 from datetime import datetime
@@ -97,8 +98,19 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
         conn = get_db_connection()
         cur = conn.cursor()
         
-        cur.execute("SELECT nextval('robokassa_inv_id_seq')")
-        robokassa_inv_id = cur.fetchone()[0]
+        max_attempts = 10
+        robokassa_inv_id = None
+        
+        for _ in range(max_attempts):
+            robokassa_inv_id = random.randint(100000, 2147483647)
+            
+            cur.execute("SELECT COUNT(*) FROM orders WHERE robokassa_inv_id = %s", (robokassa_inv_id,))
+            exists = cur.fetchone()[0]
+            
+            if exists == 0:
+                break
+        else:
+            raise ValueError('Failed to generate unique invoice ID')
         
         order_number = f"ORD-{datetime.now().strftime('%Y%m%d')}-{robokassa_inv_id}"
         
