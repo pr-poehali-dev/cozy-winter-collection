@@ -24,7 +24,7 @@ export const createRobokassaPaymentLink = async (
     user_name: payload.userName,
     user_email: payload.userEmail,
     user_phone: payload.userPhone,
-    is_test: payload.isTest ?? (import.meta.env.DEV ? 1 : 0),
+    is_test: 0,
   };
 
   console.log('[DEBUG] Sending payment request:', requestBody);
