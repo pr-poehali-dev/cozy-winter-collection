@@ -91,10 +91,15 @@ export default function Contacts() {
                   сотрудничество ✨
                 </h2>
                 <p className="text-sm md:text-base text-muted-foreground font-light leading-relaxed text-center mb-4">
-                  мы с удовольствием разместим свои товары у вас в магазине книг или подарков, кафе или кофейне, уютном городском пространстве
+                  мы с удовольствием разместим свои товары у вас в магазине, кафе, уютном пространстве
                 </p>
-                <p className="text-sm md:text-base text-muted-foreground font-light leading-relaxed text-center">
-                  также готовы создать партию изделий специально для вашего проекта или события — свадьбы, корпоратива, подарков для гостей
+                <p className="text-sm md:text-base text-muted-foreground font-light leading-relaxed text-center mb-4">
+                  также готовы создать партию изделий специально для вашего проекта или события
+                </p>
+                <p className="text-center">
+                  <a href="https://t.me/azaluk" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-light">
+                    пишите! 💌
+                  </a>
                 </p>
               </div>
             </div>
