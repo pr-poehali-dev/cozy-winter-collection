@@ -1,5 +1,6 @@
 import Icon from '@/components/ui/icon';
-import { CartItem } from './types';
+import { CartItem, Product } from './types';
+import { products } from './data';
 
 interface CartItemsListProps {
   cart: CartItem[];
@@ -8,6 +9,7 @@ interface CartItemsListProps {
   cartTotal: number;
   isCheckoutLoading: boolean;
   onCheckout: () => void;
+  addToCart: (product: Product) => void;
 }
 
 export default function CartItemsList({
@@ -16,8 +18,17 @@ export default function CartItemsList({
   removeFromCart,
   cartTotal,
   isCheckoutLoading,
-  onCheckout
+  onCheckout,
+  addToCart
 }: CartItemsListProps) {
+  const cartProductIds = cart.map(item => item.id);
+  
+  const recommendations = products
+    .filter(p => !cartProductIds.includes(p.id))
+    .filter(p => p.badge !== 'soon')
+    .filter(p => p.price <= 1500)
+    .slice(0, 3);
+
   return (
     <>
       <div className="flex-1 overflow-auto mt-8 space-y-4 pb-4 px-6">
@@ -55,6 +66,33 @@ export default function CartItemsList({
             </div>
           </div>
         ))}
+        
+        {recommendations.length > 0 && (
+          <div className="border-t border-border pt-4 mt-4">
+            <h3 className="text-sm font-light text-primary mb-3">возьми с собой ✨</h3>
+            <div className="space-y-3">
+              {recommendations.map(product => (
+                <div key={product.id} className="flex gap-3 items-center">
+                  <img 
+                    src={product.image} 
+                    alt={product.name}
+                    className="w-16 h-16 object-cover rounded-lg flex-shrink-0"
+                  />
+                  <div className="flex-1 min-w-0">
+                    <h4 className="text-xs font-light text-primary truncate">{product.name}</h4>
+                    <p className="text-xs text-muted-foreground font-light">{product.price.toLocaleString('ru-RU')} ₽</p>
+                  </div>
+                  <button
+                    onClick={() => addToCart(product)}
+                    className="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center hover:opacity-90 transition-opacity"
+                  >
+                    <Icon name="Plus" size={14} />
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
       <div className="flex-shrink-0 border-t border-border pt-4 mt-4 px-6 pb-6">
         <div className="flex justify-between items-center mb-4">

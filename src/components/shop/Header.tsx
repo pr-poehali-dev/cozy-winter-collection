@@ -1,6 +1,6 @@
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import Icon from '@/components/ui/icon';
-import { CartItem } from './types';
+import { CartItem, Product } from './types';
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { createRobokassaPaymentLink } from '@/lib/payment';
@@ -17,6 +17,7 @@ interface HeaderProps {
   removeFromCart: (productId: number) => void;
   cartTotal: number;
   cartCount: number;
+  addToCart: (product: Product) => void;
 }
 
 export default function Header({
@@ -26,7 +27,8 @@ export default function Header({
   updateQuantity,
   removeFromCart,
   cartTotal,
-  cartCount
+  cartCount,
+  addToCart
 }: HeaderProps) {
   const navigate = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -278,6 +280,7 @@ export default function Header({
                 cartTotal={cartTotal}
                 isCheckoutLoading={isCheckoutLoading}
                 onCheckout={() => setShowCheckoutForm(true)}
+                addToCart={addToCart}
               />
             )}
             </SheetContent>
