@@ -32,7 +32,7 @@ export default function Contacts() {
                   контакты
                 </h2>
                 <p className="text-center md:text-left text-muted-foreground font-light text-sm leading-relaxed mb-8">
-                  с радостью ответим на любые ваши вопросы 💌
+                  ответим на ваши вопросы 💌
                 </p>
                 <div className="space-y-5">
                   <div className="flex items-start gap-4">
