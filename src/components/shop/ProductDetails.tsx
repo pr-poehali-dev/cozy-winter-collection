@@ -19,11 +19,12 @@ export default function ProductDetails({ product, onClose, addToCart }: ProductD
   
   if (!product) return null;
   
-  const images = product.gallery || [product.image];
   const storyText = product.storyDescription || product.description;
   
   const currentVariant = product.variants?.find(v => v.id === selectedVariant);
   const displayPrice = currentVariant?.price || product.price;
+  
+  const images = currentVariant?.gallery || product.gallery || [product.image];
   
   return (
     <>
@@ -139,7 +140,10 @@ export default function ProductDetails({ product, onClose, addToCart }: ProductD
                       {product.variants.map((variant) => (
                         <button
                           key={variant.id}
-                          onClick={() => setSelectedVariant(variant.id)}
+                          onClick={() => {
+                            setSelectedVariant(variant.id);
+                            setCurrentImageIndex(0);
+                          }}
                           className={`w-full text-left p-3 rounded-lg border-2 transition-all ${
                             selectedVariant === variant.id
                               ? 'border-primary bg-white shadow-md'

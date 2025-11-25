@@ -5,6 +5,7 @@ export interface ProductVariant {
   description?: string;
   composition?: string;
   weight?: string;
+  gallery?: string[];
 }
 
 export interface Product {
