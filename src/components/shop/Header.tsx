@@ -42,9 +42,11 @@ export default function Header({
     address: '',
     comment: '',
     telegram: '',
-    deliveryType: 'pvz' as 'pvz' | 'pickup'
+    deliveryType: 'pvz' as 'pvz' | 'pickup',
+    promoCode: ''
   });
   const [deliveryCost, setDeliveryCost] = useState(0);
+  const [promoDiscount, setPromoDiscount] = useState(0);
 
   useEffect(() => {
     if (!showPaymentIframe || !orderNumber) return;
@@ -99,7 +101,7 @@ export default function Header({
     try {
       setIsCheckoutLoading(true);
 
-      const totalWithDelivery = Number((cartTotal + deliveryCost).toFixed(2));
+      const totalWithDelivery = Number((cartTotal + deliveryCost - promoDiscount).toFixed(2));
 
       const result = await createRobokassaPaymentLink({
         amount: totalWithDelivery,
@@ -368,6 +370,43 @@ export default function Header({
                     <p className="text-xs text-muted-foreground font-light">напишем вам только в случае возникновения вопросов по заказу</p>
                   </div>
                   <div className="space-y-2">
+                    <Label htmlFor="promoCode">Промокод (необязательно)</Label>
+                    <div className="flex gap-2">
+                      <Input
+                        id="promoCode"
+                        type="text"
+                        value={checkoutData.promoCode}
+                        onChange={(e) => setCheckoutData({ ...checkoutData, promoCode: e.target.value.toUpperCase() })}
+                        placeholder="введите промокод"
+                        className="font-light uppercase"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => {
+                          const code = checkoutData.promoCode.trim();
+                          if (code === 'AZALUK10') {
+                            setPromoDiscount(cartTotal * 0.1);
+                            toast({ title: 'Промокод применён!', description: 'Скидка 10%' });
+                          } else if (code === 'WINTER15') {
+                            setPromoDiscount(cartTotal * 0.15);
+                            toast({ title: 'Промокод применён!', description: 'Скидка 15%' });
+                          } else if (code) {
+                            toast({ title: 'Неверный промокод', variant: 'destructive' });
+                            setPromoDiscount(0);
+                          }
+                        }}
+                        className="px-4 py-2 bg-primary text-white rounded-lg hover:opacity-90 transition-opacity text-sm font-light whitespace-nowrap"
+                      >
+                        применить
+                      </button>
+                    </div>
+                    {promoDiscount > 0 && (
+                      <p className="text-xs text-green-600 font-light">
+                        ✓ Скидка -{promoDiscount.toLocaleString('ru-RU')} ₽
+                      </p>
+                    )}
+                  </div>
+                  <div className="space-y-2">
                     <Label htmlFor="comment">Комментарий к заказу (необязательно)</Label>
                     <Textarea
                       id="comment"
@@ -381,9 +420,15 @@ export default function Header({
                 </div>
                 <div className="flex-shrink-0 border-t border-border pt-4 mt-4 pb-6">
                   <div className="space-y-2 mb-4">
+                    {promoDiscount > 0 && (
+                      <div className="flex justify-between items-center text-sm">
+                        <span className="font-light text-muted-foreground">Скидка:</span>
+                        <span className="font-light text-green-600">-{promoDiscount.toLocaleString('ru-RU')} ₽</span>
+                      </div>
+                    )}
                     <div className="flex justify-between items-center pt-2">
                       <span className="text-lg font-light text-primary">Итого:</span>
-                      <span className="text-2xl font-light text-primary">{(cartTotal + deliveryCost).toLocaleString('ru-RU')} ₽</span>
+                      <span className="text-2xl font-light text-primary">{(cartTotal + deliveryCost - promoDiscount).toLocaleString('ru-RU')} ₽</span>
                     </div>
                   </div>
                   <button 
