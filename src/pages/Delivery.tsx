@@ -57,7 +57,7 @@ export default function DeliveryPage() {
                 </p>
                 
                 <div className="grid md:grid-cols-2 gap-4 pt-2">
-                  <div className="p-4 bg-cream/50 rounded-lg border border-primary/10">
+                  <div className="p-4 bg-cream/30 rounded-lg border border-primary/10">
                     <div className="flex items-start gap-2 mb-2">
                       <span className="text-lg">📦</span>
                       <div>
@@ -70,7 +70,7 @@ export default function DeliveryPage() {
                     </p>
                   </div>
                   
-                  <div className="p-4 bg-cream/50 rounded-lg border border-primary/10">
+                  <div className="p-4 bg-cream/30 rounded-lg border border-primary/10">
                     <div className="flex items-start gap-2 mb-2">
                       <span className="text-lg">🤝</span>
                       <div>
