@@ -258,7 +258,7 @@ export default function Header({
               <div className="flex-1 flex flex-col mt-8 px-6">
                 <div className="space-y-4 flex-1">
                   <div className="space-y-2">
-                    <Label htmlFor="name" className="text-sm font-light">Имя</Label>
+                    <Label htmlFor="name">Имя</Label>
                     <Input
                       id="name"
                       type="text"
@@ -269,7 +269,7 @@ export default function Header({
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="email" className="text-sm font-light">Email</Label>
+                    <Label htmlFor="email">Email</Label>
                     <Input
                       id="email"
                       type="email"
@@ -280,7 +280,7 @@ export default function Header({
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="phone" className="text-sm font-light">Телефон</Label>
+                    <Label htmlFor="phone">Телефон</Label>
                     <Input
                       id="phone"
                       type="tel"
@@ -291,7 +291,7 @@ export default function Header({
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="address" className="text-sm font-light">Адрес доставки</Label>
+                    <Label htmlFor="address">Адрес доставки</Label>
                     <Input
                       id="address"
                       type="text"
@@ -302,7 +302,7 @@ export default function Header({
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="telegram" className="text-sm font-light">Ник в телеграм (необязательно)</Label>
+                    <Label htmlFor="telegram">Ник в телеграм (необязательно)</Label>
                     <Input
                       id="telegram"
                       type="text"
@@ -314,7 +314,7 @@ export default function Header({
                     <p className="text-xs text-muted-foreground font-light">напишем вам только в случае возникновения вопросов по заказу</p>
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="comment" className="text-sm font-light">Комментарий к заказу (необязательно)</Label>
+                    <Label htmlFor="comment">Комментарий к заказу (необязательно)</Label>
                     <Textarea
                       id="comment"
                       value={checkoutData.comment}
