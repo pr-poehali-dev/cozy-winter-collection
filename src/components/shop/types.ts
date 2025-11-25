@@ -3,6 +3,8 @@ export interface ProductVariant {
   name: string;
   price: number;
   description?: string;
+  composition?: string;
+  weight?: string;
 }
 
 export interface Product {

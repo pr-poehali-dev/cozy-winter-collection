@@ -171,11 +171,20 @@ export default function ProductDetails({ product, onClose, addToCart }: ProductD
                     {storyText}
                   </p>
                   
-                  {product.composition && (
+                  {(currentVariant?.composition || product.composition) && (
                     <div className="space-y-2 pt-4 border-t border-primary/10">
                       <h3 className="text-xs uppercase tracking-wider text-primary/60 font-normal">состав</h3>
                       <p className="text-sm text-moss/70 leading-relaxed whitespace-pre-line font-light">
-                        {product.composition}
+                        {currentVariant?.composition || product.composition}
+                      </p>
+                    </div>
+                  )}
+                  
+                  {currentVariant?.weight && (
+                    <div className="space-y-2 pt-4 border-t border-primary/10">
+                      <h3 className="text-xs uppercase tracking-wider text-primary/60 font-normal">вес</h3>
+                      <p className="text-sm text-moss/70 leading-relaxed font-light">
+                        {currentVariant.weight}
                       </p>
                     </div>
                   )}
