@@ -116,27 +116,30 @@ export default function ProductDetails({ product, onClose, addToCart }: ProductD
                 </div>
                 
                 {product.variants && product.variants.length > 0 && (
-                  <div className="space-y-3">
-                    <h3 className="text-xs uppercase tracking-wider text-primary/60 font-normal">выберите вариант</h3>
+                  <div className="space-y-3 p-4 rounded-xl border-2 border-primary/20 bg-primary/5">
+                    <div className="flex items-center gap-2">
+                      <Icon name="AlertCircle" size={16} className="text-primary" strokeWidth={2} />
+                      <h3 className="text-sm font-normal text-primary">выберите вариант</h3>
+                    </div>
                     <div className="space-y-2">
                       {product.variants.map((variant) => (
                         <button
                           key={variant.id}
                           onClick={() => setSelectedVariant(variant.id)}
-                          className={`w-full text-left p-3 rounded-lg border transition-all ${
+                          className={`w-full text-left p-3 rounded-lg border-2 transition-all ${
                             selectedVariant === variant.id
-                              ? 'border-primary bg-primary/5'
-                              : 'border-border hover:border-primary/50 hover:bg-secondary/50'
+                              ? 'border-primary bg-white shadow-md'
+                              : 'border-border/50 bg-white hover:border-primary/50 hover:shadow-sm'
                           }`}
                         >
                           <div className="flex justify-between items-start">
                             <div className="space-y-1">
-                              <p className="text-sm font-light text-primary">{variant.name}</p>
+                              <p className="text-sm font-normal text-primary">{variant.name}</p>
                               {variant.description && (
                                 <p className="text-xs text-muted-foreground font-light">{variant.description}</p>
                               )}
                             </div>
-                            <p className="text-sm font-light text-primary">{variant.price.toLocaleString('ru-RU')} ₽</p>
+                            <p className="text-sm font-normal text-primary">{variant.price.toLocaleString('ru-RU')} ₽</p>
                           </div>
                         </button>
                       ))}
@@ -173,19 +176,15 @@ export default function ProductDetails({ product, onClose, addToCart }: ProductD
                   
                   {(currentVariant?.composition || product.composition) && (
                     <div className="space-y-2 pt-4 border-t border-primary/10">
-                      <h3 className="text-xs uppercase tracking-wider text-primary/60 font-normal">состав</h3>
+                      <h3 className="text-xs uppercase tracking-wider text-primary/60 font-normal">состав и характеристики</h3>
                       <p className="text-sm text-moss/70 leading-relaxed whitespace-pre-line font-light">
                         {currentVariant?.composition || product.composition}
                       </p>
-                    </div>
-                  )}
-                  
-                  {currentVariant?.weight && (
-                    <div className="space-y-2 pt-4 border-t border-primary/10">
-                      <h3 className="text-xs uppercase tracking-wider text-primary/60 font-normal">вес</h3>
-                      <p className="text-sm text-moss/70 leading-relaxed font-light">
-                        {currentVariant.weight}
-                      </p>
+                      {currentVariant?.weight && (
+                        <p className="text-sm text-moss/70 leading-relaxed font-light pt-1">
+                          вес: {currentVariant.weight}
+                        </p>
+                      )}
                     </div>
                   )}
                 </div>
