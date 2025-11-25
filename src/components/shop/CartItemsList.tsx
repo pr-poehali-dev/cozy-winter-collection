@@ -66,9 +66,10 @@ export default function CartItemsList({
             </div>
           </div>
         ))}
-        
+      </div>
+      <div className="flex-shrink-0 border-t border-border pt-4 mt-4 px-6 pb-6">
         {recommendations.length > 0 && (
-          <div className="border-t border-border pt-4 mt-4">
+          <div className="mb-4">
             <h3 className="text-sm font-light text-primary mb-3">возьми с собой ✨</h3>
             <div className="space-y-3">
               {recommendations.map(product => (
@@ -93,8 +94,6 @@ export default function CartItemsList({
             </div>
           </div>
         )}
-      </div>
-      <div className="flex-shrink-0 border-t border-border pt-4 mt-4 px-6 pb-6">
         <div className="flex justify-between items-center mb-4">
           <span className="text-lg font-light text-primary">итого:</span>
           <span className="text-2xl font-light text-primary">{cartTotal.toLocaleString('ru-RU')} р.</span>
