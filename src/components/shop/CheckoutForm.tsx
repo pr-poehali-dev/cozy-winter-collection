@@ -134,7 +134,6 @@ export default function CheckoutForm({
             <Label>Адрес самовывоза</Label>
             <div className="p-3 rounded-lg bg-secondary/50 border border-border">
               <p className="text-sm font-light">Москва, м. Тульская</p>
-              <p className="text-xs text-muted-foreground font-light mt-1">Свяжемся с вами для уточнения времени встречи</p>
             </div>
           </div>
         )}
