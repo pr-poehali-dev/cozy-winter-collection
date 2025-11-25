@@ -3,8 +3,8 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import Icon from '@/components/ui/icon';
 import { CartItem } from './types';
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { createRobokassaPaymentLink } from '@/lib/payment';
 import { toast } from '@/hooks/use-toast';
 
@@ -27,14 +27,47 @@ export default function Header({
   cartTotal,
   cartCount
 }: HeaderProps) {
+  const navigate = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isCheckoutLoading, setIsCheckoutLoading] = useState(false);
   const [showCheckoutForm, setShowCheckoutForm] = useState(false);
+  const [showPaymentIframe, setShowPaymentIframe] = useState(false);
+  const [paymentUrl, setPaymentUrl] = useState('');
+  const [orderNumber, setOrderNumber] = useState('');
   const [checkoutData, setCheckoutData] = useState({
     name: '',
     email: '',
     phone: ''
   });
+
+  useEffect(() => {
+    if (!showPaymentIframe || !orderNumber) return;
+
+    const checkPaymentStatus = async () => {
+      try {
+        const response = await fetch(
+          `https://functions.poehali.dev/25f876e5-53fb-4cb1-878a-a7177baa1950?order_number=${orderNumber}`
+        );
+
+        if (response.ok) {
+          const data = await response.json();
+          
+          if (data.status === 'paid') {
+            setIsCartOpen(false);
+            setShowPaymentIframe(false);
+            navigate(`/order-success?order=${orderNumber}`);
+          }
+        }
+      } catch (error) {
+        console.error('Failed to check payment status:', error);
+      }
+    };
+
+    const interval = setInterval(checkPaymentStatus, 5000);
+    checkPaymentStatus();
+
+    return () => clearInterval(interval);
+  }, [showPaymentIframe, orderNumber, navigate, setIsCartOpen]);
 
   const handleCheckout = async () => {
     if (!cart.length || isCheckoutLoading) return;
@@ -59,8 +92,10 @@ export default function Header({
         cartItems: cart,
       });
 
-      const paymentPageUrl = `/payment?url=${encodeURIComponent(result.payment_url)}&order=${result.order_number}`;
-      window.location.href = paymentPageUrl;
+      setPaymentUrl(result.payment_url);
+      setOrderNumber(result.order_number);
+      setShowCheckoutForm(false);
+      setShowPaymentIframe(true);
     } catch (error) {
       toast({
         title: 'Не получилось создать ссылку',
@@ -152,7 +187,10 @@ export default function Header({
               <div className="flex items-center justify-between">
                 <button 
                   onClick={() => {
-                    if (showCheckoutForm) {
+                    if (showPaymentIframe) {
+                      setShowPaymentIframe(false);
+                      setShowCheckoutForm(true);
+                    } else if (showCheckoutForm) {
                       setShowCheckoutForm(false);
                     } else {
                       setIsCartOpen(false);
@@ -164,12 +202,15 @@ export default function Header({
                   <Icon name="ArrowLeft" size={20} className="text-primary" strokeWidth={1.5} />
                 </button>
                 <SheetTitle className="text-2xl font-light text-primary">
-                  {showCheckoutForm ? 'оформление' : 'корзина'}
+                  {showPaymentIframe ? 'оплата' : showCheckoutForm ? 'оформление' : 'корзина'}
                 </SheetTitle>
                 <button 
                   onClick={() => {
                     setIsCartOpen(false);
                     setShowCheckoutForm(false);
+                    setShowPaymentIframe(false);
+                    setPaymentUrl('');
+                    setOrderNumber('');
                   }}
                   className="p-2 hover:bg-secondary rounded-lg transition-colors"
                   aria-label="Закрыть"
@@ -181,6 +222,30 @@ export default function Header({
             {cart.length === 0 ? (
               <div className="flex-1 flex items-center justify-center text-muted-foreground font-light">
                 <p>корзина пуста</p>
+              </div>
+            ) : showPaymentIframe ? (
+              <div className="flex-1 flex flex-col">
+                <iframe
+                  src={paymentUrl}
+                  className="w-full flex-1 border-0 mt-8"
+                  title="Оплата заказа"
+                />
+                <div className="px-6 pb-6">
+                  <p className="text-sm text-muted-foreground text-center mb-4">
+                    после оплаты вы автоматически перейдете на страницу заказа
+                  </p>
+                  <button 
+                    onClick={() => {
+                      setShowPaymentIframe(false);
+                      setPaymentUrl('');
+                      setOrderNumber('');
+                      setCheckoutData({ name: '', email: '', phone: '' });
+                    }}
+                    className="w-full py-3 rounded-lg font-light border border-border hover:bg-secondary transition-colors"
+                  >
+                    отменить
+                  </button>
+                </div>
               </div>
             ) : showCheckoutForm ? (
               <div className="flex-1 flex flex-col mt-8 px-6">
