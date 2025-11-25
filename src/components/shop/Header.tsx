@@ -349,11 +349,11 @@ export default function Header({
                         type="text"
                         value={checkoutData.address}
                         onChange={(e) => setCheckoutData({ ...checkoutData, address: e.target.value })}
-                        placeholder="Начните вводить адрес или название ПВЗ"
+                        placeholder="Введите адрес удобного пункта выдачи"
                         className="font-light"
                       />
                       <p className="text-xs text-muted-foreground font-light">
-                        <a href="https://www.ozon.ru/my/deliverypoints" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
+                        <a href="https://www.ozon.ru/geo/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
                           Найти ближайший пункт выдачи на карте Ozon →
                         </a>
                       </p>
