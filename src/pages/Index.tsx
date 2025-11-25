@@ -60,7 +60,6 @@ export default function Index() {
     "для дома",
     "для зимней прогулки",
     "аксессуары",
-    "наборы и боксы",
   ];
 
   const addToCart = (product: Product) => {
