@@ -271,8 +271,8 @@ export default function Header({
                 </div>
               </div>
             ) : showCheckoutForm ? (
-              <div className="flex-1 flex flex-col mt-8 px-6">
-                <div className="space-y-4 flex-1">
+              <div className="flex-1 flex flex-col mt-8 px-6 overflow-hidden">
+                <div className="space-y-4 flex-1 overflow-y-auto pb-4">
                   <div className="space-y-3">
                     <Label>Способ доставки</Label>
                     <div className="grid grid-cols-2 gap-3">
@@ -315,7 +315,7 @@ export default function Header({
                       type="text"
                       value={checkoutData.name}
                       onChange={(e) => setCheckoutData({ ...checkoutData, name: e.target.value })}
-                      placeholder="Ваше имя"
+                      placeholder="ваше имя"
                       className="font-light"
                     />
                   </div>
@@ -326,7 +326,7 @@ export default function Header({
                       type="email"
                       value={checkoutData.email}
                       onChange={(e) => setCheckoutData({ ...checkoutData, email: e.target.value })}
-                      placeholder="your@email.com"
+                      placeholder="ваш email"
                       className="font-light"
                     />
                   </div>
@@ -349,7 +349,7 @@ export default function Header({
                         type="text"
                         value={checkoutData.address}
                         onChange={(e) => setCheckoutData({ ...checkoutData, address: e.target.value })}
-                        placeholder="Введите адрес удобного пункта выдачи"
+                        placeholder="введите адрес удобного пункта выдачи"
                         className="font-light"
                       />
                       <p className="text-xs text-muted-foreground font-light">
@@ -385,7 +385,7 @@ export default function Header({
                       id="comment"
                       value={checkoutData.comment}
                       onChange={(e) => setCheckoutData({ ...checkoutData, comment: e.target.value })}
-                      placeholder="Пожелания по доставке, выбору цвета или другие детали..."
+                      placeholder="пожелания по доставке, выбору цвета или другие детали..."
                       className="font-light resize-none"
                       rows={3}
                     />
