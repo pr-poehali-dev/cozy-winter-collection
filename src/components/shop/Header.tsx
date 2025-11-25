@@ -37,7 +37,8 @@ export default function Header({
   const [checkoutData, setCheckoutData] = useState({
     name: '',
     email: '',
-    phone: ''
+    phone: '',
+    address: ''
   });
 
   useEffect(() => {
@@ -72,10 +73,10 @@ export default function Header({
   const handleCheckout = async () => {
     if (!cart.length || isCheckoutLoading) return;
 
-    if (!checkoutData.name || !checkoutData.email || !checkoutData.phone) {
+    if (!checkoutData.name || !checkoutData.email || !checkoutData.phone || !checkoutData.address) {
       toast({
         title: 'Заполните все поля',
-        description: 'Нам нужны ваши данные для оформления заказа',
+        description: 'Нам нужны ваши данные и адрес доставки',
         variant: 'destructive'
       });
       return;
@@ -89,6 +90,7 @@ export default function Header({
         userName: checkoutData.name,
         userEmail: checkoutData.email,
         userPhone: checkoutData.phone,
+        userAddress: checkoutData.address,
         cartItems: cart,
       });
 
@@ -239,7 +241,7 @@ export default function Header({
                       setShowPaymentIframe(false);
                       setPaymentUrl('');
                       setOrderNumber('');
-                      setCheckoutData({ name: '', email: '', phone: '' });
+                      setCheckoutData({ name: '', email: '', phone: '', address: '' });
                     }}
                     className="w-full py-3 rounded-lg font-light border border-border hover:bg-secondary transition-colors"
                   >
@@ -280,6 +282,17 @@ export default function Header({
                       value={checkoutData.phone}
                       onChange={(e) => setCheckoutData({ ...checkoutData, phone: e.target.value })}
                       placeholder="+7 (999) 123-45-67"
+                      className="font-light"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="address" className="text-sm font-light">Адрес доставки</Label>
+                    <Input
+                      id="address"
+                      type="text"
+                      value={checkoutData.address}
+                      onChange={(e) => setCheckoutData({ ...checkoutData, address: e.target.value })}
+                      placeholder="Москва, ул. Примерная, д. 1, кв. 1"
                       className="font-light"
                     />
                   </div>

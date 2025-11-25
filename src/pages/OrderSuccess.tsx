@@ -1,10 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import Icon from '@/components/ui/icon';
-import { toast } from '@/hooks/use-toast';
 
 interface OrderItem {
   product_name: string;
@@ -26,10 +22,6 @@ export default function OrderSuccess() {
   const orderId = searchParams.get('order');
   const [orderData, setOrderData] = useState<OrderData | null>(null);
   const [loading, setLoading] = useState(true);
-  const [deliveryPhone, setDeliveryPhone] = useState('');
-  const [deliveryService, setDeliveryService] = useState<'yandex' | 'ozon'>('yandex');
-  const [deliveryAddress, setDeliveryAddress] = useState('');
-  const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
     const fetchOrderData = async () => {
@@ -49,9 +41,6 @@ export default function OrderSuccess() {
 
         const data = await response.json();
         setOrderData(data);
-        setDeliveryPhone(data.delivery_phone || '');
-        setDeliveryService(data.delivery_service || 'yandex');
-        setDeliveryAddress(data.delivery_address || '');
       } catch (error) {
         console.error('Failed to load order:', error);
         setOrderData(null);
@@ -62,50 +51,6 @@ export default function OrderSuccess() {
 
     fetchOrderData();
   }, [orderId]);
-
-  const handleSubmitDelivery = async () => {
-    if (!deliveryPhone || !deliveryAddress) {
-      toast({
-        title: 'Заполните все поля',
-        description: 'Укажите телефон и адрес доставки',
-        variant: 'destructive'
-      });
-      return;
-    }
-
-    setSubmitting(true);
-    try {
-      const response = await fetch('https://functions.poehali.dev/25f876e5-53fb-4cb1-878a-a7177baa1950', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          order_number: orderId,
-          delivery_service: deliveryService,
-          delivery_phone: deliveryPhone,
-          delivery_address: deliveryAddress,
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to save delivery info');
-      }
-      
-      toast({
-        title: 'Данные сохранены!',
-        description: 'Мы свяжемся с вами для уточнения деталей',
-      });
-    } catch (error) {
-      toast({
-        title: 'Ошибка',
-        description: 'Не удалось сохранить данные',
-        variant: 'destructive'
-      });
-    } finally {
-      setSubmitting(false);
-    }
-  };
 
   if (loading) {
     return (
@@ -171,86 +116,12 @@ export default function OrderSuccess() {
         </div>
 
         <div className="bg-card border border-border rounded-lg p-6">
-          <h2 className="text-xl font-light text-primary mb-4">данные доставки</h2>
-          
-          {orderData.delivery_phone && orderData.delivery_address ? (
-            <div className="space-y-3">
-              <div className="flex items-center gap-2 text-green-600 mb-4">
-                <Icon name="CheckCircle2" size={20} />
-                <span className="font-light">данные доставки сохранены</span>
-              </div>
-              <div className="space-y-2 text-sm">
-                <p className="text-muted-foreground">Служба: <span className="text-primary font-medium">{orderData.delivery_service === 'yandex' ? 'Яндекс Доставка' : 'Ozon'}</span></p>
-                <p className="text-muted-foreground">Телефон: <span className="text-primary font-medium">{orderData.delivery_phone}</span></p>
-                <p className="text-muted-foreground">Адрес: <span className="text-primary font-medium">{orderData.delivery_address}</span></p>
-              </div>
-            </div>
-          ) : (
-            <div>
-              <div className="space-y-4 mb-6">
-                <div>
-                  <Label className="text-sm font-light mb-2 block">выберите службу доставки</Label>
-                  <RadioGroup value={deliveryService} onValueChange={(v) => setDeliveryService(v as 'yandex' | 'ozon')}>
-                    <div className="flex items-center space-x-3 p-3 border border-border rounded-lg hover:bg-secondary transition-colors">
-                      <RadioGroupItem value="yandex" id="yandex" />
-                      <Label htmlFor="yandex" className="flex-1 cursor-pointer font-light">
-                        <div className="flex items-center gap-2">
-                          <span className="text-yellow-500">📦</span>
-                          <span>Яндекс Доставка</span>
-                        </div>
-                        <p className="text-xs text-muted-foreground mt-1">нужен аккаунт в Яндекс ID</p>
-                      </Label>
-                    </div>
-                    <div className="flex items-center space-x-3 p-3 border border-border rounded-lg hover:bg-secondary transition-colors">
-                      <RadioGroupItem value="ozon" id="ozon" />
-                      <Label htmlFor="ozon" className="flex-1 cursor-pointer font-light">
-                        <div className="flex items-center gap-2">
-                          <span className="text-blue-500">📦</span>
-                          <span>Ozon</span>
-                        </div>
-                        <p className="text-xs text-muted-foreground mt-1">нужен аккаунт на Ozon</p>
-                      </Label>
-                    </div>
-                  </RadioGroup>
-                </div>
-
-                <div>
-                  <Label htmlFor="phone" className="text-sm font-light">телефон</Label>
-                  <Input
-                    id="phone"
-                    type="tel"
-                    value={deliveryPhone}
-                    onChange={(e) => setDeliveryPhone(e.target.value)}
-                    placeholder="+7 (999) 123-45-67"
-                    className="font-light mt-2"
-                  />
-                  <p className="text-xs text-muted-foreground mt-1">
-                    укажите номер, привязанный к аккаунту {deliveryService === 'yandex' ? 'Яндекс' : 'Ozon'}
-                  </p>
-                </div>
-
-                <div>
-                  <Label htmlFor="address" className="text-sm font-light">адрес доставки</Label>
-                  <Input
-                    id="address"
-                    type="text"
-                    value={deliveryAddress}
-                    onChange={(e) => setDeliveryAddress(e.target.value)}
-                    placeholder="Москва, ул. Примерная, д. 1, кв. 1"
-                    className="font-light mt-2"
-                  />
-                </div>
-              </div>
-
-              <button
-                onClick={handleSubmitDelivery}
-                disabled={submitting}
-                className="w-full bg-primary text-white py-3 rounded-lg font-light hover:opacity-90 transition-opacity disabled:opacity-50"
-              >
-                {submitting ? 'сохраняем...' : 'оформить доставку'}
-              </button>
-            </div>
-          )}
+          <h2 className="text-xl font-light text-primary mb-4">контактные данные</h2>
+          <div className="space-y-2 text-sm">
+            <p className="text-muted-foreground">Имя: <span className="text-primary font-medium">{orderData.user_name}</span></p>
+            <p className="text-muted-foreground">Email: <span className="text-primary font-medium">{orderData.user_email}</span></p>
+            <p className="text-muted-foreground">Адрес доставки: <span className="text-primary font-medium">{orderData.delivery_address}</span></p>
+          </div>
         </div>
 
         <p className="text-center text-sm text-muted-foreground mt-8">

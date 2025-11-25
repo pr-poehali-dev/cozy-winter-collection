@@ -12,6 +12,7 @@ interface PaymentPayload {
   userName: string;
   userEmail: string;
   userPhone: string;
+  userAddress: string;
   cartItems: CartItem[];
   isTest?: number;
 }
@@ -32,6 +33,7 @@ export const createRobokassaPaymentLink = async (
     user_name: payload.userName,
     user_email: payload.userEmail,
     user_phone: payload.userPhone,
+    user_address: payload.userAddress,
     cart_items: payload.cartItems,
     is_test: 0,
   };

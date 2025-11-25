@@ -76,6 +76,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
         user_name = str(payload.get('user_name', ''))
         user_email = str(payload.get('user_email', ''))
         user_phone = str(payload.get('user_phone', ''))
+        user_address = str(payload.get('user_address', ''))
         is_test = int(payload.get('is_test', 0))
         cart_items = payload.get('cart_items', [])
 
@@ -85,6 +86,8 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             raise ValueError('User name is required')
         if not user_email:
             raise ValueError('User email is required')
+        if not user_address:
+            raise ValueError('User address is required')
         if not cart_items:
             raise ValueError('Cart items are required')
 
@@ -121,10 +124,10 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
         
         cur.execute("""
             INSERT INTO orders 
-            (order_number, user_name, user_email, user_phone, amount, robokassa_inv_id, status)
-            VALUES (%s, %s, %s, %s, %s, %s, %s)
+            (order_number, user_name, user_email, user_phone, amount, robokassa_inv_id, status, delivery_address)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
             RETURNING id
-        """, (order_number, user_name, user_email, user_phone, amount_decimal, robokassa_inv_id, 'pending'))
+        """, (order_number, user_name, user_email, user_phone, amount_decimal, robokassa_inv_id, 'pending', user_address))
         
         order_id = cur.fetchone()[0]
         
@@ -143,8 +146,6 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             robokassa_inv_id,
             password_1
         )
-
-        success_url = f"https://azaluk.shop/order-success?order={order_number}"
         
         query_params = {
             'MerchantLogin': merchant_login,
@@ -153,8 +154,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             'SignatureValue': signature,
             'IsTest': is_test,
             'Culture': 'ru',
-            'Description': f'Заказ {order_number}',
-            'SuccessURL': success_url
+            'Description': f'Заказ {order_number}'
         }
 
         payment_url = f"{ROBOKASSA_URL}?{urlencode(query_params)}"
