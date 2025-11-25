@@ -43,103 +43,151 @@ export default function DeliveryPage() {
         cartCount={cartCount}
       />
 
-      <main className="flex-1 py-20 px-6 md:px-8">
-        <div className="max-w-4xl mx-auto">
-          <h1 className="text-4xl md:text-5xl font-light text-primary mb-12 text-center">
+      <main className="flex-1 py-16 px-6 md:px-8">
+        <div className="max-w-3xl mx-auto">
+          <h1 className="text-3xl md:text-4xl font-light text-primary mb-3 text-center">
             оплата и доставка
           </h1>
+          <p className="text-center text-muted-foreground mb-12 font-light">
+            всё, что нужно знать о заказе
+          </p>
 
-          <div className="space-y-12">
-            <section className="vintage-card p-8 rounded-2xl">
-              <h2 className="text-2xl md:text-3xl font-light text-primary mb-6 flex items-center gap-3">
-                <span className="text-3xl">🏹</span>
+          <div className="space-y-8">
+            <section className="vintage-card p-6 md:p-8 rounded-2xl">
+              <h2 className="text-xl font-light text-primary mb-4 flex items-center gap-2">
+                <span className="text-2xl">🏹</span>
                 доставка
               </h2>
-              <div className="space-y-4 text-muted-foreground leading-relaxed">
-                <p>
+              <div className="space-y-4 text-muted-foreground leading-relaxed font-light">
+                <p className="text-sm md:text-base">
                   каждая вещица создаётся нами вручную и отправляется упакованная в коробочку и немного магии!
                 </p>
-                <div className="pt-2">
-                  <p className="mb-3">
-                    <strong className="text-primary font-light">способы доставки:</strong>
-                  </p>
-                  <ul className="space-y-2 ml-6">
-                    <li>• <strong className="text-primary font-light">пункт выдачи ozon</strong> — 200 ₽ по всей россии (при оформлении заказа вы сможете выбрать удобный пункт выдачи)</li>
-                    <li>• <strong className="text-primary font-light">самовывоз</strong> — бесплатно (м. тульская, москва)</li>
-                  </ul>
-                </div>
-                <p>
-                  <strong className="text-primary font-light">срок отправки</strong> — 3–5 рабочих дней после оплаты
-                </p>
-                <div className="mt-4 space-y-3">
-                  <div className="p-4 bg-cream/30 rounded-lg border border-primary/20">
-                    <p className="text-sm">
-                      <strong className="text-primary font-light">важно для доставки ozon:</strong> при оформлении заказа укажите номер телефона, на который у вас зарегистрирован личный кабинет ozon. заказ появится в мобильном приложении ozon в течение суток — там вы сможете отслеживать его статус 📱
+                
+                <div className="grid md:grid-cols-2 gap-4 pt-2">
+                  <div className="p-4 bg-secondary/30 rounded-lg border border-border">
+                    <div className="flex items-start gap-2 mb-2">
+                      <span className="text-lg">📦</span>
+                      <div>
+                        <p className="font-medium text-primary text-sm">пункт выдачи ozon</p>
+                        <p className="text-sm text-muted-foreground">200 ₽ по всей россии</p>
+                      </div>
+                    </div>
+                    <p className="text-xs text-muted-foreground mt-2">
+                      выберите удобный пункт при оформлении
                     </p>
                   </div>
-                  <div className="p-4 bg-cream/30 rounded-lg border border-primary/20">
-                    <p className="text-sm">
-                      <strong className="text-primary font-light">важно для самовывоза:</strong> после оплаты мы свяжемся с вами для согласования даты и времени по указанному телеграму 💬
+                  
+                  <div className="p-4 bg-secondary/30 rounded-lg border border-border">
+                    <div className="flex items-start gap-2 mb-2">
+                      <span className="text-lg">🤝</span>
+                      <div>
+                        <p className="font-medium text-primary text-sm">самовывоз</p>
+                        <p className="text-sm text-muted-foreground">бесплатно</p>
+                      </div>
+                    </div>
+                    <p className="text-xs text-muted-foreground mt-2">
+                      м. тульская, москва
+                    </p>
+                  </div>
+                </div>
+
+                <div className="pt-2 flex items-center gap-2 text-sm">
+                  <span>⏱️</span>
+                  <span><strong className="text-primary">срок:</strong> 3–5 рабочих дней после оплаты</span>
+                </div>
+
+                <div className="space-y-2 pt-2">
+                  <div className="p-3 bg-cream/40 rounded-lg text-xs">
+                    <p>
+                      <strong className="text-primary">для ozon:</strong> укажите номер телефона из личного кабинета ozon — заказ появится в приложении в течение суток 📱
+                    </p>
+                  </div>
+                  <div className="p-3 bg-cream/40 rounded-lg text-xs">
+                    <p>
+                      <strong className="text-primary">для самовывоза:</strong> свяжемся с вами в телеграм для согласования времени 💬
                     </p>
                   </div>
                 </div>
               </div>
             </section>
 
-            <section className="vintage-card p-8 rounded-2xl">
-              <h2 className="text-2xl md:text-3xl font-light text-primary mb-6 flex items-center gap-3">
-                <span className="text-3xl">💰</span>
+            <section className="vintage-card p-6 md:p-8 rounded-2xl">
+              <h2 className="text-xl font-light text-primary mb-4 flex items-center gap-2">
+                <span className="text-2xl">💳</span>
                 оплата
               </h2>
-              <div className="space-y-4 text-muted-foreground leading-relaxed">
-                <p>
-                  для оплаты доступны:
+              <div className="space-y-4 text-muted-foreground leading-relaxed font-light">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                  <div className="p-3 bg-secondary/30 rounded-lg text-center">
+                    <p className="text-xs">банк. карты</p>
+                  </div>
+                  <div className="p-3 bg-secondary/30 rounded-lg text-center">
+                    <p className="text-xs">сбп</p>
+                  </div>
+                  <div className="p-3 bg-secondary/30 rounded-lg text-center">
+                    <p className="text-xs">t-pay</p>
+                  </div>
+                  <div className="p-3 bg-secondary/30 rounded-lg text-center">
+                    <p className="text-xs">я.сплит</p>
+                  </div>
+                </div>
+
+                <p className="text-sm pt-2">
+                  оплата защищена протоколом ssl. после оформления вы автоматически перейдёте на страницу оплаты ✨
                 </p>
-                <ul className="space-y-2 ml-6">
-                  <li>• банковские карты (visa, mastercard, мир)</li>
-                  <li>• сбп (система быстрых платежей)</li>
-                  <li>• t-pay</li>
-                  <li>• яндекс сплит</li>
-                </ul>
-                <p className="pt-4">
-                  после оформления заказа вы автоматически перейдёте на страницу оплаты. оплата безопасна и защищена протоколом ssl ✨
-                </p>
-                <div className="mt-4 p-4 bg-cream/30 rounded-lg border border-primary/20">
-                  <p className="text-sm">
-                    также мы можем принять оплату за заказ с <strong className="text-primary font-light">иностранной карты или криптовалютой</strong>. для этого свяжитесь с нами в отделе заботы в тг <a href="https://t.me/azalukshop" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">@azaluk.shop</a>
+
+                <div className="p-3 bg-cream/40 rounded-lg text-xs">
+                  <p>
+                    принимаем <strong className="text-primary">иностранные карты и криптовалюту</strong> — свяжитесь с нами в <a href="https://t.me/azalukshop" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">@azaluk.shop</a>
                   </p>
                 </div>
               </div>
             </section>
 
-            <section className="vintage-card p-8 rounded-2xl">
-              <h2 className="text-2xl md:text-3xl font-light text-primary mb-6 flex items-center gap-3">
-                <span className="text-3xl">💌</span>
-                упаковка
+            <section className="vintage-card p-6 md:p-8 rounded-2xl bg-cream/30 border-2 border-primary/20">
+              <h2 className="text-xl font-light text-primary mb-4 flex items-center gap-2">
+                <span className="text-2xl">✨</span>
+                как оформить заказ
               </h2>
-              <div className="space-y-4 text-muted-foreground leading-relaxed">
-                <p>
-                  каждый заказ мы упаковываем с душой и заботой — в крафтовую коробку и маленькими сюрпризами внутри 🎁
-                </p>
+              <div className="space-y-3 text-muted-foreground font-light">
+                <div className="flex gap-3">
+                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center text-xs text-primary font-medium">1</span>
+                  <p className="text-sm">добавьте товары в корзину</p>
+                </div>
+                <div className="flex gap-3">
+                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center text-xs text-primary font-medium">2</span>
+                  <p className="text-sm">выберите доставку (пвз ozon или самовывоз)</p>
+                </div>
+                <div className="flex gap-3">
+                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center text-xs text-primary font-medium">3</span>
+                  <p className="text-sm">укажите контактные данные</p>
+                </div>
+                <div className="flex gap-3">
+                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center text-xs text-primary font-medium">4</span>
+                  <p className="text-sm">оплатите удобным способом</p>
+                </div>
+                <div className="flex gap-3">
+                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center text-xs text-primary font-medium">5</span>
+                  <p className="text-sm">мы начнём собирать ваш заказ ✨</p>
+                </div>
+                <div className="flex gap-3">
+                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center text-xs text-primary font-medium">6</span>
+                  <p className="text-sm">свяжемся в тг или заказ появится в приложении ozon</p>
+                </div>
+
+                <div className="pt-4 text-center">
+                  <p className="text-sm">
+                    остались вопросы? <a href="https://t.me/azalukshop" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">напишите нам</a> 💗
+                  </p>
+                </div>
               </div>
             </section>
 
-            <section className="vintage-card p-8 rounded-2xl bg-cream/50">
-              <h2 className="text-2xl md:text-3xl font-light text-primary mb-6 flex items-center gap-3">
-                <span className="text-3xl">📜</span>
-                как заказать?
-              </h2>
-              <div className="space-y-4 text-muted-foreground leading-relaxed">
-                <ol className="space-y-3 ml-6">
-                  <li>1. добавьте понравившиеся вещи в корзину</li>
-                  <li>2. выберите способ доставки (пвз ozon или самовывоз)</li>
-                  <li>3. заполните контактные данные</li>
-                  <li>4. оплатите заказ банковской картой</li>
-                  <li>5. после оплаты мы начнём собирать ваш заказ ✨</li>
-                  <li>6. свяжемся с вами в тг (самовывоз) или заказ появится в приложении ozon (пвз)</li>
-                </ol>
-                <p className="pt-4">
-                  если остались вопросы — пишите в <a href="https://t.me/azalukshop" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">телеграм</a>, с радостью ответим! 💗
+            <section className="vintage-card p-6 md:p-8 rounded-2xl">
+              <div className="flex items-center gap-3 justify-center">
+                <span className="text-2xl">🎁</span>
+                <p className="text-sm text-muted-foreground font-light text-center">
+                  каждый заказ упаковываем с душой — в крафтовую коробку с маленькими сюрпризами внутри
                 </p>
               </div>
             </section>
