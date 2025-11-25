@@ -49,7 +49,7 @@ export default function DeliveryPage() {
             <span className="text-2xl">🎠 ☁️ 🍄</span>
           </div>
           <p className="text-center text-muted-foreground font-light text-sm md:text-base mb-12 leading-relaxed">
-            каждая вещица создаётся нами вручную и отправляется упакованная в коробочку и немного магии!
+            каждая вещица создаётся вручную и отправляется в коробочке с капелькой магии!
           </p>
           <div className="space-y-8">
             <section className="p-6 md:p-8 rounded-3xl border border-primary/20">
