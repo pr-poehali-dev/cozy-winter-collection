@@ -8,6 +8,7 @@ import { toast } from '@/hooks/use-toast';
 import CartItemsList from './CartItemsList';
 import CheckoutForm from './CheckoutForm';
 import PaymentIframe from './PaymentIframe';
+import { products } from './data';
 
 interface HeaderProps {
   cart: CartItem[];
@@ -255,8 +256,35 @@ export default function Header({
               </div>
             </SheetHeader>
             {cart.length === 0 ? (
-              <div className="flex-1 flex items-center justify-center text-muted-foreground font-light">
-                <p>корзина пуста</p>
+              <div className="flex-1 flex flex-col mt-8 px-6 overflow-y-auto pb-6">
+                <div className="text-center mb-6">
+                  <p className="text-muted-foreground font-light mb-2">корзина пока пустая</p>
+                  <p className="text-sm text-muted-foreground font-light">посмотри, что у нас есть ✨</p>
+                </div>
+                <div className="space-y-4">
+                  {products
+                    .filter(p => p.badge !== 'soon')
+                    .slice(0, 6)
+                    .map(product => (
+                      <div key={product.id} className="flex gap-3 items-center pb-4 border-b border-border">
+                        <img 
+                          src={product.image} 
+                          alt={product.name}
+                          className="w-20 h-20 object-cover rounded-lg flex-shrink-0"
+                        />
+                        <div className="flex-1 min-w-0">
+                          <h4 className="text-sm font-light text-primary line-clamp-2">{product.name}</h4>
+                          <p className="text-sm text-muted-foreground font-light mt-1">{product.price.toLocaleString('ru-RU')} ₽</p>
+                        </div>
+                        <button
+                          onClick={() => addToCart(product)}
+                          className="flex-shrink-0 w-9 h-9 rounded-full bg-primary text-white flex items-center justify-center hover:opacity-90 transition-opacity"
+                        >
+                          <Icon name="Plus" size={16} />
+                        </button>
+                      </div>
+                    ))}
+                </div>
               </div>
             ) : showPaymentIframe ? (
               <PaymentIframe paymentUrl={paymentUrl} />
