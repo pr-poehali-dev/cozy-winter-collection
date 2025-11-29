@@ -24,7 +24,29 @@ export default function ProductDetails({ product, onClose, addToCart }: ProductD
   const currentVariant = product.variants?.find(v => v.id === selectedVariant);
   const displayPrice = currentVariant?.price || product.price;
   
-  const images = currentVariant?.gallery || product.gallery || [product.image];
+  const getAllImages = () => {
+    const allImages = new Set<string>();
+    
+    if (product.gallery) {
+      product.gallery.forEach(img => allImages.add(img));
+    }
+    
+    product.variants?.forEach(variant => {
+      if (variant.gallery) {
+        variant.gallery.forEach(img => allImages.add(img));
+      }
+    });
+    
+    if (allImages.size === 0) {
+      allImages.add(product.image);
+    }
+    
+    return Array.from(allImages);
+  };
+  
+  const images = selectedVariant && currentVariant?.gallery 
+    ? currentVariant.gallery 
+    : getAllImages();
   
   return (
     <>
