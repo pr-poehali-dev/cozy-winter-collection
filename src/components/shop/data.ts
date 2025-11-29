@@ -154,7 +154,10 @@ export const products: Product[] = [
       'https://cdn.poehali.dev/files/33d7e3d2-a87f-455b-9e58-691957bba1de.jpg',
       'https://cdn.poehali.dev/files/f3b2d06b-5d73-471d-bcb3-46f06977be63.jpg',
       'https://cdn.poehali.dev/files/a26a1719-7eb3-44a0-b383-e9fed8563add.jpg',
-      'https://cdn.poehali.dev/files/7a3313b7-8c6a-4753-944a-27237da4eeda.jpg'
+      'https://cdn.poehali.dev/files/7a3313b7-8c6a-4753-944a-27237da4eeda.jpg',
+      'https://cdn.poehali.dev/files/096a230c-7ce7-46c7-9fb0-4dad451f038b.jpg',
+      'https://cdn.poehali.dev/files/6d281d98-acd7-44a2-b61d-6931bcecaa13.jpg',
+      'https://cdn.poehali.dev/files/ac9b8533-00aa-43b5-b888-0463ea4fe2e9.jpg'
     ]
   },
   {
