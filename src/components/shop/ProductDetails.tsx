@@ -149,9 +149,7 @@ export default function ProductDetails({ product, onClose, addToCart }: ProductD
                             </div>
                           </TooltipTrigger>
                           <TooltipContent side="top" className="max-w-xs">
-                            <p className="text-xs leading-relaxed">
-                              этот товар доступен в нескольких вариантах с разным составом, весом и уровнем тепла — выберите тот, что подходит именно вам ✨
-                            </p>
+                            <p className="text-xs leading-relaxed">этот товар доступен в нескольких вариантах  — выберите тот, что подходит именно вам ✨</p>
                           </TooltipContent>
                         </Tooltip>
                       </TooltipProvider>
