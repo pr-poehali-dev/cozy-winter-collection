@@ -114,17 +114,6 @@ export const products: Product[] = [
     stock: 3,
     variants: [
       { 
-        id: 'simple', 
-        name: 'классический', 
-        price: 1200, 
-        description: 'уютный минималистичный вариант',
-        gallery: [
-          'https://cdn.poehali.dev/files/a57dfc87-237b-49bd-ab07-26e035d47fe8.jpg',
-          'https://cdn.poehali.dev/files/773fe20c-cdca-4437-a0b8-3afe744d19a1.jpg',
-          'https://cdn.poehali.dev/files/0f6b47b4-47ed-44b3-a16c-b437d4d3746a.jpg'
-        ]
-      },
-      { 
         id: 'embroidered', 
         name: 'с расшивкой', 
         price: 1500, 
@@ -135,6 +124,17 @@ export const products: Product[] = [
           'https://cdn.poehali.dev/files/833b567d-12d0-4596-9844-60bce21cfa52.jpg',
           'https://cdn.poehali.dev/files/a2aaefa3-591c-495b-babe-cffc3c4e69d4.jpg',
           'https://cdn.poehali.dev/files/26a4ccc7-3cae-4fe9-b872-e669c39cd005.jpg',
+          'https://cdn.poehali.dev/files/0f6b47b4-47ed-44b3-a16c-b437d4d3746a.jpg'
+        ]
+      },
+      { 
+        id: 'simple', 
+        name: 'классический', 
+        price: 1200, 
+        description: 'уютный минималистичный вариант',
+        gallery: [
+          'https://cdn.poehali.dev/files/a57dfc87-237b-49bd-ab07-26e035d47fe8.jpg',
+          'https://cdn.poehali.dev/files/773fe20c-cdca-4437-a0b8-3afe744d19a1.jpg',
           'https://cdn.poehali.dev/files/0f6b47b4-47ed-44b3-a16c-b437d4d3746a.jpg'
         ]
       }
