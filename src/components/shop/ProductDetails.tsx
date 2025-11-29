@@ -240,25 +240,48 @@ export default function ProductDetails({ product, onClose, addToCart }: ProductD
       {isFullscreen && (
         <div 
           className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center"
-          onClick={() => setIsFullscreen(false)}
+          onClick={(e) => {
+            if (e.target === e.currentTarget) {
+              setIsFullscreen(false);
+            }
+          }}
         >
           <button
-            onClick={() => setIsFullscreen(false)}
-            className="absolute top-6 right-6 p-2 hover:bg-white/10 rounded-lg transition-colors"
+            onClick={(e) => {
+              e.stopPropagation();
+              setIsFullscreen(false);
+            }}
+            className="absolute top-6 right-6 p-2 hover:bg-white/10 rounded-lg transition-colors z-10"
             aria-label="Закрыть"
           >
             <Icon name="X" size={32} className="text-white" strokeWidth={1.5} />
           </button>
           
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
-            }}
-            className="absolute left-6 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 rounded-full p-3 transition-all"
-          >
-            <Icon name="ChevronLeft" size={32} className="text-white" />
-          </button>
+          {images.length > 1 && (
+            <>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
+                }}
+                className="absolute left-6 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 rounded-full p-3 transition-all z-10"
+                aria-label="Предыдущее фото"
+              >
+                <Icon name="ChevronLeft" size={32} className="text-white" />
+              </button>
+              
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setCurrentImageIndex((prev) => (prev + 1) % images.length);
+                }}
+                className="absolute right-6 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 rounded-full p-3 transition-all z-10"
+                aria-label="Следующее фото"
+              >
+                <Icon name="ChevronRight" size={32} className="text-white" />
+              </button>
+            </>
+          )}
           
           <img
             src={images[currentImageIndex]}
@@ -267,33 +290,25 @@ export default function ProductDetails({ product, onClose, addToCart }: ProductD
             onClick={(e) => e.stopPropagation()}
           />
           
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              setCurrentImageIndex((prev) => (prev + 1) % images.length);
-            }}
-            className="absolute right-6 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 rounded-full p-3 transition-all"
-          >
-            <Icon name="ChevronRight" size={32} className="text-white" />
-          </button>
-          
-          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2">
-            {images.map((_, index) => (
-              <button
-                key={index}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setCurrentImageIndex(index);
-                }}
-                className={`w-2 h-2 rounded-full transition-all ${
-                  index === currentImageIndex 
-                    ? 'bg-white w-8' 
-                    : 'bg-white/40'
-                }`}
-                aria-label={`Фото ${index + 1}`}
-              />
-            ))}
-          </div>
+          {images.length > 1 && (
+            <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+              {images.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setCurrentImageIndex(index);
+                  }}
+                  className={`w-2 h-2 rounded-full transition-all ${
+                    index === currentImageIndex 
+                      ? 'bg-white w-8' 
+                      : 'bg-white/40 hover:bg-white/60'
+                  }`}
+                  aria-label={`Фото ${index + 1}`}
+                />
+              ))}
+            </div>
+          )}
         </div>
       )}
     </>
