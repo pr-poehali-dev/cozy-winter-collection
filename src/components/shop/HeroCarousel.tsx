@@ -15,18 +15,17 @@ export default function HeroCarousel() {
         </picture>
         <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60"></div>
         
-        <div className="absolute inset-0 flex flex-col items-center justify-end text-center px-4 pb-16 md:pb-20 z-10">
-          <div className="max-w-4xl w-full space-y-6 md:space-y-8">
-            <div className="space-y-2 md:space-y-4">
-              <p className="text-[10px] md:text-sm text-white/75 uppercase tracking-[0.3em] font-light font-sans">
+        <div className="absolute inset-0 flex flex-col items-center justify-end text-center px-6 pb-12 md:pb-16 z-10">
+          <div className="max-w-3xl space-y-8 md:space-y-10">
+            <div className="space-y-3">
+              <p className="text-sm md:text-base text-white/85 uppercase tracking-[0.25em] font-light">
                 магазинчик вещиц ручной работы
               </p>
-              <h1 className="text-2xl md:text-5xl lg:text-6xl text-white leading-tight tracking-wide font-serif text-center font-thin" style={{ fontWeight: 300 }}>волшебство, которое 
-можно носить</h1>
+              <h1 className="md:text-5xl lg:text-7xl font-light text-white leading-tight tracking-wide text-3xl">волшебство, которое можно носить</h1>
             </div>
             
             <button
-              className="rounded-full px-10 md:px-14 py-3 md:py-4 text-xs md:text-sm bg-white/95 text-primary hover:bg-white hover:scale-105 transition-all font-light tracking-widest uppercase shadow-2xl font-sans"
+              className="rounded-full px-12 py-4 text-sm md:text-base bg-white text-primary hover:bg-white/95 hover:scale-105 transition-all font-normal tracking-wide shadow-xl"
               onClick={() => {
                 document.getElementById('catalog')?.scrollIntoView({ behavior: 'smooth' });
               }}
