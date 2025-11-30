@@ -6,6 +6,7 @@ export interface ProductVariant {
   composition?: string;
   weight?: string;
   gallery?: string[];
+  sizing?: string;
 }
 
 export interface Product {
@@ -23,6 +24,7 @@ export interface Product {
   stock?: number;
   videoUrl?: string;
   videoTitle?: string;
+  sizing?: string;
 }
 
 export interface CartItem extends Product {
