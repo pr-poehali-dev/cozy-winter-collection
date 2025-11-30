@@ -52,7 +52,7 @@ export default function ProductCatalog({
                 />
               </div>
               <div className="text-center space-y-2">
-                <h3 className="text-base font-light text-primary leading-relaxed px-4">
+                <h3 className="text-sm md:text-base font-light text-primary leading-relaxed px-2 md:px-4 line-clamp-1">
                   {product.name}
                 </h3>
                 {product.badge === 'soon' && (
