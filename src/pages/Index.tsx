@@ -10,7 +10,7 @@ import Reviews from "@/components/shop/Reviews";
 import Footer from "@/components/shop/Footer";
 import ComingSoon from "@/components/ComingSoon";
 
-const DEV_MODE = true;
+const DEV_MODE = false;
 
 export default function Index() {
   const [searchParams] = useSearchParams();
@@ -55,12 +55,7 @@ export default function Index() {
     };
   }, [isPreviewMode, hasSecretKey]);
 
-  const categories = [
-    "все",
-    "для дома",
-    "для зимней прогулки",
-    "аксессуары",
-  ];
+  const categories = ["все", "для дома", "для зимней прогулки", "аксессуары"];
 
   const addToCart = (product: Product) => {
     setCart((prev) => {
