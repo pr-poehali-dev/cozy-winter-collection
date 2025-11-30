@@ -11,20 +11,27 @@ interface ProductDetailsProps {
   onClose: () => void;
   addToCart: (product: Product) => void;
   setIsCartOpen: (isOpen: boolean) => void;
+  cart: any[];
 }
 
-export default function ProductDetails({ product, onClose, addToCart, setIsCartOpen }: ProductDetailsProps) {
+export default function ProductDetails({ product, onClose, addToCart, setIsCartOpen, cart }: ProductDetailsProps) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [selectedVariant, setSelectedVariant] = useState<string | null>(null);
   const [showAddedNotification, setShowAddedNotification] = useState(false);
   const [buttonState, setButtonState] = useState<'add' | 'added' | 'checkout'>('add');
   
-  // Reset carousel to first image when product changes
+  // Reset carousel and variant when product changes
   useEffect(() => {
     setCurrentImageIndex(0);
-    setButtonState('add');
+    setSelectedVariant(null);
     setShowAddedNotification(false);
-  }, [product?.id]);
+    
+    // Check if product is in cart
+    if (product) {
+      const isInCart = cart.some(item => item.id === product.id);
+      setButtonState(isInCart ? 'checkout' : 'add');
+    }
+  }, [product?.id, cart]);
   
   if (!product) return null;
   
@@ -111,14 +118,22 @@ export default function ProductDetails({ product, onClose, addToCart, setIsCartO
         </div>
       )}
       
-      <Sheet open={!!product} onOpenChange={(open) => !open && onClose()}>
+      <Sheet open={!!product} onOpenChange={(open) => {
+        if (!open) {
+          setSelectedVariant(null);
+          onClose();
+        }
+      }}>
         <SheetContent 
           side="right" 
           className="w-screen h-screen max-w-none overflow-y-auto p-0 sm:max-w-none border-0"
           onOpenAutoFocus={(e) => e.preventDefault()}
         >
           <button
-            onClick={onClose}
+            onClick={() => {
+              setSelectedVariant(null);
+              onClose();
+            }}
             className="fixed top-6 left-6 z-50 p-2 hover:bg-secondary rounded-lg transition-colors"
             aria-label="Закрыть"
           >
@@ -126,7 +141,10 @@ export default function ProductDetails({ product, onClose, addToCart, setIsCartO
           </button>
 
           <button
-            onClick={onClose}
+            onClick={() => {
+              setSelectedVariant(null);
+              onClose();
+            }}
             className="fixed top-6 right-6 z-50 p-2 hover:bg-secondary rounded-lg transition-colors"
             aria-label="Закрыть"
           >
