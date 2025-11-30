@@ -321,7 +321,7 @@ export default function ProductDetails({ product, onClose, addToCart, setIsCartO
                             : '!bg-primary hover:!bg-primary/90'
                         }`}
                         onClick={handleButtonClick}
-                        disabled={product.variants && product.variants.length > 0 && !selectedVariant}
+                        disabled={buttonState !== 'checkout' && product.variants && product.variants.length > 0 && !selectedVariant}
                       >
                         {buttonState === 'checkout' ? (
                           <>
@@ -424,7 +424,7 @@ export default function ProductDetails({ product, onClose, addToCart, setIsCartO
                     : '!bg-primary hover:!bg-primary/90'
                 }`}
                 onClick={handleButtonClick}
-                disabled={product.variants && product.variants.length > 0 && !selectedVariant}
+                disabled={buttonState !== 'checkout' && product.variants && product.variants.length > 0 && !selectedVariant}
               >
                 {buttonState === 'checkout' ? (
                   <>
