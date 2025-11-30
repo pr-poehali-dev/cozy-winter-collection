@@ -69,7 +69,7 @@ export default function DeliveryPage() {
                     </div>
                   </div>
                   
-                  <div className="p-5 bg-cream/30 rounded-2xl border border-primary/10">
+                  <div className="p-5 rounded-2xl border border-primary/10 bg-[#ffffff]">
                     <div className="flex items-center gap-3">
                       <span className="text-2xl">🤝</span>
                       <div>
