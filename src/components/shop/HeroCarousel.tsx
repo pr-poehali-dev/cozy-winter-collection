@@ -9,7 +9,7 @@ export default function HeroCarousel() {
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60"></div>
         
-        <div className="absolute inset-0 flex flex-col items-center justify-end md:justify-center text-center px-6 pb-16 md:pb-0 z-10">
+        <div className="absolute inset-0 flex flex-col items-center justify-end text-center px-6 pb-16 md:pb-20 z-10">
           <div className="max-w-2xl space-y-6">
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-light text-white leading-relaxed tracking-wide">
               вещи с душой и теплом
