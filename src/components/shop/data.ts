@@ -99,7 +99,8 @@ export const products: Product[] = [
           'https://cdn.poehali.dev/files/c2e3a29d-2893-4e89-a329-8973ed5202ea.jpg',
           'https://cdn.poehali.dev/files/ed9dc0de-2697-4392-9648-f3bbac34da56.jpg',
           'https://cdn.poehali.dev/files/feb0529b-a88f-4928-a52f-981fef474dd3.jpg',
-          'https://cdn.poehali.dev/files/6d0be73d-87f3-42c4-8ca6-f7bb745b4df7.jpg'
+          'https://cdn.poehali.dev/files/6d0be73d-87f3-42c4-8ca6-f7bb745b4df7.jpg',
+          'https://cdn.poehali.dev/files/bd6663ce-1fdb-422f-a0c2-ec478293f74a.jpg'
         ]
       },
       { 
@@ -114,7 +115,8 @@ export const products: Product[] = [
           'https://cdn.poehali.dev/files/22ae82a5-5ea8-4df0-82b7-f24004122192.jpg',
           'https://cdn.poehali.dev/files/f2cf4d41-258f-4b60-9ac8-9d9bbe05a9db.jpg',
           'https://cdn.poehali.dev/files/2894683c-0403-4f80-9298-ce42bea4fb41.jpg',
-          'https://cdn.poehali.dev/files/7b6a21ad-f56e-4e03-9a42-207315477f35.jpg'
+          'https://cdn.poehali.dev/files/7b6a21ad-f56e-4e03-9a42-207315477f35.jpg',
+          'https://cdn.poehali.dev/files/bd6663ce-1fdb-422f-a0c2-ec478293f74a.jpg'
         ]
       },
       { 
@@ -128,7 +130,8 @@ export const products: Product[] = [
           'https://cdn.poehali.dev/files/af3c7eaf-a178-48a0-996d-7f0b079af3fc.jpg',
           'https://cdn.poehali.dev/files/2c716feb-82d6-4f8b-93a4-ef4d89c69a23.jpg',
           'https://cdn.poehali.dev/files/c1b610c0-f9e3-4eb2-b23e-3a0a65c662c8.jpg',
-          'https://cdn.poehali.dev/files/8dad26b9-7272-4e61-b7c2-1d988bc702cd.jpg'
+          'https://cdn.poehali.dev/files/8dad26b9-7272-4e61-b7c2-1d988bc702cd.jpg',
+          'https://cdn.poehali.dev/files/bd6663ce-1fdb-422f-a0c2-ec478293f74a.jpg'
         ]
       }
     ]
