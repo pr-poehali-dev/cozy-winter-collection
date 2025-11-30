@@ -228,6 +228,8 @@ export const products: Product[] = [
         composition: '75% мохер, 25% шёлк\nручная стирка в холодной воде\nсушить в горизонтальном положении',
         weight: '130 г',
         gallery: [
+          'https://cdn.poehali.dev/files/f7ab3103-6c8e-40be-9ff4-981be22aa3d0.jpg',
+          'https://cdn.poehali.dev/files/90ae7a2d-7845-4365-826d-3e173fbf2cea.jpg',
           'https://cdn.poehali.dev/files/47ca964b-cb26-49b8-9411-b7635cf02832.jpg',
           'https://cdn.poehali.dev/files/c7ab2409-f2f1-4a3e-a69a-98f82d77309f.jpg',
           'https://cdn.poehali.dev/files/2b4dedb9-cb70-4178-adb0-e974307f0285.jpg',
