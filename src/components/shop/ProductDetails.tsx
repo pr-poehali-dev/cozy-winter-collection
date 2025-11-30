@@ -283,7 +283,6 @@ export default function ProductDetails({ product, onClose, addToCart, setIsCartO
                           key={variant.id}
                           onClick={() => {
                             setSelectedVariant(variant.id);
-                            setCurrentImageIndex(0);
                           }}
                           className={`w-full text-left p-3 rounded-lg border-2 transition-all ${
                             selectedVariant === variant.id
