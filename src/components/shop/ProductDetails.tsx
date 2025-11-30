@@ -264,10 +264,10 @@ export default function ProductDetails({ product, onClose, addToCart }: ProductD
                         size="lg"
                         className={`w-full max-w-xs px-8 rounded-full text-sm py-4 transition-all hover:scale-[1.02] shadow-lg hover:shadow-xl font-light ${
                           buttonState === 'added' 
-                            ? 'bg-moss hover:bg-moss/90 text-white' 
+                            ? '!bg-moss hover:!bg-moss/90 !text-white' 
                             : buttonState === 'checkout'
-                            ? 'bg-darkRed hover:bg-darkRed/90 text-white'
-                            : 'bg-primary hover:bg-primary/90'
+                            ? '!bg-darkRed hover:!bg-darkRed/90 !text-white'
+                            : '!bg-primary hover:!bg-primary/90'
                         }`}
                         onClick={handleAddToCart}
                         disabled={product.variants && product.variants.length > 0 && !selectedVariant}
@@ -323,10 +323,10 @@ export default function ProductDetails({ product, onClose, addToCart }: ProductD
                 size="lg"
                 className={`w-full px-8 rounded-full text-sm py-4 transition-all shadow-2xl font-light ${
                   buttonState === 'added' 
-                    ? 'bg-moss hover:bg-moss/90 text-white' 
+                    ? '!bg-moss hover:!bg-moss/90 !text-white' 
                     : buttonState === 'checkout'
-                    ? 'bg-darkRed hover:bg-darkRed/90 text-white'
-                    : 'bg-primary hover:bg-primary/90'
+                    ? '!bg-darkRed hover:!bg-darkRed/90 !text-white'
+                    : '!bg-primary hover:!bg-primary/90'
                 }`}
                 onClick={handleAddToCart}
                 disabled={product.variants && product.variants.length > 0 && !selectedVariant}
