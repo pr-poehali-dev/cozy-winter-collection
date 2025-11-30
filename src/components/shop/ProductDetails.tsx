@@ -44,7 +44,7 @@ export default function ProductDetails({ product, onClose, addToCart, setIsCartO
     }
   }, [product?.id, cart]);
   
-  // Update button state when variant is selected
+  // Update button state when variant is selected (but not when cart changes)
   useEffect(() => {
     if (!product || !selectedVariant) return;
     
@@ -52,7 +52,7 @@ export default function ProductDetails({ product, onClose, addToCart, setIsCartO
       item.id === product.id && item.selectedVariantId === selectedVariant
     );
     setButtonState(isVariantInCart ? 'checkout' : 'add');
-  }, [selectedVariant, cart, product]);
+  }, [selectedVariant, product]);
   
   // Auto-scroll thumbnails when image changes
   useEffect(() => {
