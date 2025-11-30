@@ -320,7 +320,7 @@ export default function ProductDetails({ product, onClose, addToCart, setIsCartO
                     ? '!bg-darkRed hover:!bg-darkRed/90 !text-white'
                     : '!bg-primary hover:!bg-primary/90'
                 }`}
-                onClick={handleAddToCart}
+                onClick={handleButtonClick}
                 disabled={product.variants && product.variants.length > 0 && !selectedVariant}
               >
                 {buttonState === 'checkout' ? (
