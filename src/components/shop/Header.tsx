@@ -260,7 +260,6 @@ export default function Header({
                 <div className="text-center mb-6">
                   <p className="text-muted-foreground font-light mb-2 py-[7px] px-[37px] mx-16">корзина пока пустая, 
 посмотри, что у нас есть 👇🏻✨</p>
-                  <p className="text-sm text-muted-foreground font-light">посмотри, что у нас есть ✨</p>
                 </div>
                 <div className="space-y-4">
                   {products
