@@ -1,7 +1,19 @@
+import { useState } from 'react';
+
 export default function HeroCarousel() {
+  const [imageLoaded, setImageLoaded] = useState(false);
+
   return (
     <section className="relative overflow-hidden mt-[72px]">
       <div className="relative w-full">
+        {!imageLoaded && (
+          <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-primary/10 via-primary/5 to-transparent">
+            <div className="relative">
+              <div className="w-16 h-16 border-4 border-primary/20 border-t-primary rounded-full animate-spin"></div>
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 border-4 border-transparent border-t-primary/40 rounded-full animate-spin" style={{ animationDirection: 'reverse', animationDuration: '0.8s' }}></div>
+            </div>
+          </div>
+        )}
         <picture>
           <source 
             media="(max-width: 768px)" 
@@ -10,7 +22,8 @@ export default function HeroCarousel() {
           <img
             src="https://cdn.poehali.dev/files/6b72c931-edad-4f06-8f42-fec92ace91e3.jpg"
             alt="вещи с душой и теплом"
-            className="w-full md:h-[85vh] md:object-cover"
+            className={`w-full md:h-[85vh] md:object-cover transition-opacity duration-700 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
+            onLoad={() => setImageLoaded(true)}
           />
         </picture>
         <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60"></div>
