@@ -73,6 +73,16 @@ export default function CheckoutForm({
     }
   };
 
+  const handleTelegramChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let value = e.target.value;
+    
+    if (!value.startsWith('@') && value.length > 0) {
+      value = '@' + value.replace(/@/g, '');
+    }
+    
+    setCheckoutData({ ...checkoutData, telegram: value });
+  };
+
   return (
     <div className="flex-1 flex flex-col mt-8 overflow-hidden">
       <div className="space-y-4 flex-1 overflow-y-auto pb-4 px-4 md:px-6">
@@ -118,7 +128,6 @@ export default function CheckoutForm({
             type="text"
             value={checkoutData.name}
             onChange={(e) => setCheckoutData({ ...checkoutData, name: e.target.value })}
-            placeholder="ваше имя"
             className="font-light"
           />
         </div>
@@ -129,7 +138,6 @@ export default function CheckoutForm({
             type="email"
             value={checkoutData.email}
             onChange={(e) => setCheckoutData({ ...checkoutData, email: e.target.value })}
-            placeholder="ваш email"
             className="font-light"
           />
         </div>
@@ -151,7 +159,6 @@ export default function CheckoutForm({
               type="text"
               value={checkoutData.address}
               onChange={(e) => setCheckoutData({ ...checkoutData, address: e.target.value })}
-              placeholder="введите адрес удобного пункта выдачи"
               className="font-light"
             />
             <p className="text-xs text-muted-foreground font-light">
@@ -170,14 +177,13 @@ export default function CheckoutForm({
         )}
         <div className="space-y-2">
           <Label htmlFor="telegram">
-            Ник в телеграм {checkoutData.deliveryType === 'pickup' ? '' : '(необязательно)'}
+            Ник в телеграм
           </Label>
           <Input
             id="telegram"
             type="text"
-            value={checkoutData.telegram}
-            onChange={(e) => setCheckoutData({ ...checkoutData, telegram: e.target.value })}
-            placeholder="@username"
+            value={checkoutData.telegram || '@'}
+            onChange={handleTelegramChange}
             className="font-light"
           />
           <p className="text-xs text-muted-foreground font-light">
@@ -245,12 +251,11 @@ export default function CheckoutForm({
           )}
         </div>
         <div className="space-y-2">
-          <Label htmlFor="comment">Комментарий к заказу (необязательно)</Label>
+          <Label htmlFor="comment">Комментарий к заказу</Label>
           <Textarea
             id="comment"
             value={checkoutData.comment}
             onChange={(e) => setCheckoutData({ ...checkoutData, comment: e.target.value })}
-            placeholder="пожелания по доставке, выбору цвета или другие детали..."
             className="font-light resize-none"
             rows={3}
           />
