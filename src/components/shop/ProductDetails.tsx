@@ -23,26 +23,15 @@ export default function ProductDetails({ product, onClose, addToCart, setIsCartO
   const [isSizingOpen, setIsSizingOpen] = useState(false);
   const thumbnailContainerRef = useRef<HTMLDivElement>(null);
   
-  // Reset carousel and variant when product changes
+  // Reset carousel and variant when product changes (not when cart changes)
   useEffect(() => {
     setCurrentImageIndex(0);
     setSelectedVariant(null);
     setShowAddedNotification(false);
     setIsCompositionOpen(false);
     setIsSizingOpen(false);
-    
-    // Check if current product/variant combination is in cart
-    if (product) {
-      const isInCart = cart.some(item => {
-        if (item.id !== product.id) return false;
-        // For products without variants, just check id
-        if (!product.variants || product.variants.length === 0) return true;
-        // For products with variants, need to check specific variant
-        return item.selectedVariantId !== undefined;
-      });
-      setButtonState(isInCart ? 'checkout' : 'add');
-    }
-  }, [product?.id, cart]);
+    setButtonState('add');
+  }, [product?.id]);
   
   // Update button state when variant is selected (but not when cart changes)
   useEffect(() => {
