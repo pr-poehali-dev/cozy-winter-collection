@@ -219,7 +219,7 @@ export default function ProductDetails({ product, onClose, addToCart, setIsCartO
                             </div>
                           </TooltipTrigger>
                           <TooltipContent side="top" className="max-w-xs">
-                            <p className="text-xs leading-relaxed">этот товар доступен в нескольких вариантах  — выберите тот, что подходит именно вам ✨</p>
+                            <p className="text-xs leading-relaxed">этот товар доступен в нескольких вариантах, но визуально они очень похожи! выберите тот, что подходит именно вам ✨</p>
                           </TooltipContent>
                         </Tooltip>
                       </TooltipProvider>
