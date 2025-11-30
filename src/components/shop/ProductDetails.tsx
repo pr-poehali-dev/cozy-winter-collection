@@ -42,19 +42,12 @@ export default function ProductDetails({ product, onClose, addToCart }: ProductD
     
     addToCart(productToAdd);
     setShowAddedNotification(true);
-    setButtonState('added');
+    setButtonState('checkout');
     
-    setTimeout(() => {
-      setButtonState('checkout');
-    }, 1500);
-    
+    // Hide notification after 3 seconds
     setTimeout(() => {
       setShowAddedNotification(false);
     }, 3000);
-    
-    setTimeout(() => {
-      setButtonState('add');
-    }, 5000);
   };
   
   const getAllImages = () => {
@@ -263,21 +256,14 @@ export default function ProductDetails({ product, onClose, addToCart }: ProductD
                       <Button
                         size="lg"
                         className={`w-full max-w-xs px-8 rounded-full text-sm py-4 transition-all hover:scale-[1.02] shadow-lg hover:shadow-xl font-light ${
-                          buttonState === 'added' 
-                            ? '!bg-moss hover:!bg-moss/90 !text-white' 
-                            : buttonState === 'checkout'
+                          buttonState === 'checkout'
                             ? '!bg-darkRed hover:!bg-darkRed/90 !text-white'
                             : '!bg-primary hover:!bg-primary/90'
                         }`}
                         onClick={handleAddToCart}
                         disabled={product.variants && product.variants.length > 0 && !selectedVariant}
                       >
-                        {buttonState === 'added' ? (
-                          <>
-                            <Icon name="Sparkles" size={18} className="mr-2" />
-                            в корзине! ✨
-                          </>
-                        ) : buttonState === 'checkout' ? (
+                        {buttonState === 'checkout' ? (
                           <>
                             <Icon name="ShoppingCart" size={18} className="mr-2" />
                             перейти к оформлению
@@ -322,21 +308,14 @@ export default function ProductDetails({ product, onClose, addToCart }: ProductD
               <Button
                 size="lg"
                 className={`w-full px-8 rounded-full text-sm py-4 transition-all shadow-2xl font-light ${
-                  buttonState === 'added' 
-                    ? '!bg-moss hover:!bg-moss/90 !text-white' 
-                    : buttonState === 'checkout'
+                  buttonState === 'checkout'
                     ? '!bg-darkRed hover:!bg-darkRed/90 !text-white'
                     : '!bg-primary hover:!bg-primary/90'
                 }`}
                 onClick={handleAddToCart}
                 disabled={product.variants && product.variants.length > 0 && !selectedVariant}
               >
-                {buttonState === 'added' ? (
-                  <>
-                    <Icon name="Sparkles" size={20} className="mr-2" />
-                    в корзине! ✨
-                  </>
-                ) : buttonState === 'checkout' ? (
+                {buttonState === 'checkout' ? (
                   <>
                     <Icon name="ShoppingCart" size={20} className="mr-2" />
                     оформить заказ
