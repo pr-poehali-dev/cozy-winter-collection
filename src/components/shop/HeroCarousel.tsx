@@ -22,8 +22,8 @@ export default function HeroCarousel() {
                 магазинчик вещиц ручной работы
               </p>
               <h1 
-                className="text-4xl md:text-6xl lg:text-7xl font-light text-white leading-[1.1] tracking-tight px-4 max-w-6xl"
-                style={{ fontFamily: 'Cormorant, serif' }}
+                className="text-4xl md:text-5xl font-extralight text-white leading-[1.1] tracking-tight px-4 max-w-6xl"
+                style={{ fontFamily: 'Cormorant, serif', fontWeight: 200 }}
               >
                 волшебство, которое можно носить
               </h1>
