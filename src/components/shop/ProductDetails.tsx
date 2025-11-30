@@ -157,7 +157,7 @@ export default function ProductDetails({ product, onClose, addToCart, setIsCartO
       }}>
         <SheetContent 
           side="right" 
-          className="w-screen h-screen max-w-none overflow-y-auto p-0 sm:max-w-none border-0"
+          className="w-screen h-screen max-w-none p-0 sm:max-w-none border-0 overflow-y-scroll"
           onOpenAutoFocus={(e) => e.preventDefault()}
         >
           <button
@@ -182,7 +182,7 @@ export default function ProductDetails({ product, onClose, addToCart, setIsCartO
             <Icon name="X" size={24} className="text-primary" strokeWidth={1.5} />
           </button>
           
-          <div className="flex flex-col lg:flex-row min-h-screen bg-gradient-to-br from-card via-secondary/30 to-card">
+          <div className="flex flex-col lg:flex-row min-h-screen bg-gradient-to-br from-card via-secondary/30 to-card pb-32 lg:pb-0">
             {/* Left side - Carousel */}
             <div className="lg:w-1/2 p-6 lg:p-12 pt-20 lg:pt-12 flex items-center justify-center lg:min-h-screen">
               <div className="w-full max-w-xl">
