@@ -108,7 +108,14 @@ export const products: Product[] = [
         price: 3000, 
         description: 'невесомый, но при этом теплый',
         composition: '70% мохер, 30% полиамид\nтончайшая воздушная пряжа\nручная стирка в холодной воде\nсушить в горизонтальном положении',
-        weight: '35 г'
+        weight: '35 г',
+        gallery: [
+          'https://cdn.poehali.dev/files/aa7924ea-16ce-48e3-bc7e-e283137165e7.jpg',
+          'https://cdn.poehali.dev/files/22ae82a5-5ea8-4df0-82b7-f24004122192.jpg',
+          'https://cdn.poehali.dev/files/f2cf4d41-258f-4b60-9ac8-9d9bbe05a9db.jpg',
+          'https://cdn.poehali.dev/files/2894683c-0403-4f80-9298-ce42bea4fb41.jpg',
+          'https://cdn.poehali.dev/files/7b6a21ad-f56e-4e03-9a42-207315477f35.jpg'
+        ]
       },
       { 
         id: 'warm', 
