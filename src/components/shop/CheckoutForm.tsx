@@ -138,9 +138,8 @@ export default function CheckoutForm({
           <Input
             id="phone"
             type="tel"
-            value={checkoutData.phone}
+            value={checkoutData.phone || '+7'}
             onChange={handlePhoneChange}
-            placeholder="+7 (999) 123-45-67"
             className="font-light"
           />
         </div>
