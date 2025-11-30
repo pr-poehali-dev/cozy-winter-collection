@@ -18,10 +18,10 @@ export default function HeroCarousel() {
         <div className="absolute inset-0 flex flex-col items-center justify-end text-center px-6 pb-12 md:pb-16 z-10">
           <div className="max-w-3xl space-y-8 md:space-y-10">
             <div className="space-y-3">
-              <p className="text-sm md:text-base text-white/85 uppercase tracking-[0.25em] font-light">
+              <p className="text-xs md:text-sm text-white/85 uppercase tracking-[0.25em] font-light whitespace-nowrap">
                 магазинчик вещиц ручной работы
               </p>
-              <h1 className="md:text-5xl lg:text-7xl font-light text-white leading-tight tracking-wide text-3xl">волшебство, которое можно носить</h1>
+              <h1 className="text-sm md:text-base text-white/85 uppercase tracking-[0.25em] font-light whitespace-nowrap">волшебство, которое можно носить</h1>
             </div>
             
             <button
