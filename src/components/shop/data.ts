@@ -201,7 +201,7 @@ export const products: Product[] = [
     description: 'воздушный свитер-паутинка из мохера и шёлка',
     price: 5400,
     category: 'для зимней прогулки',
-    image: 'https://cdn.poehali.dev/files/29be7d6c-35ce-4081-baaa-d4e15a6fbc37.png',
+    image: 'https://cdn.poehali.dev/files/f9900306-b261-49b1-8c22-4cd244265837.jpg',
     storyDescription: 'невесомый, как облако, нежный, как утренний туман 🤍 этот свитер-паутинка соткан из мохера и шёлка, каждая петелька дышит и обнимает. он для тех, кто ценит лёгкость и воздушность ✨☁️',
     composition: '75% мохер, 25% шёлк\nручная стирка в холодной воде\nсушить в горизонтальном положении',
     stock: 5,
@@ -213,7 +213,12 @@ export const products: Product[] = [
         description: 'укороченный вариант, подчёркивает силуэт',
         composition: '75% мохер, 25% шёлк\nручная стирка в холодной воде\nсушить в горизонтальном положении',
         weight: '100 г',
-        gallery: ['https://cdn.poehali.dev/files/29be7d6c-35ce-4081-baaa-d4e15a6fbc37.png']
+        gallery: [
+          'https://cdn.poehali.dev/files/47ca964b-cb26-49b8-9411-b7635cf02832.jpg',
+          'https://cdn.poehali.dev/files/c7ab2409-f2f1-4a3e-a69a-98f82d77309f.jpg',
+          'https://cdn.poehali.dev/files/2b4dedb9-cb70-4178-adb0-e974307f0285.jpg',
+          'https://cdn.poehali.dev/files/b5ea2111-f20b-4390-bef2-2f5281e13fa6.jpg'
+        ]
       },
       { 
         id: 'full', 
@@ -222,7 +227,12 @@ export const products: Product[] = [
         description: 'классическая длина для максимального комфорта',
         composition: '75% мохер, 25% шёлк\nручная стирка в холодной воде\nсушить в горизонтальном положении',
         weight: '130 г',
-        gallery: ['https://cdn.poehali.dev/files/29be7d6c-35ce-4081-baaa-d4e15a6fbc37.png']
+        gallery: [
+          'https://cdn.poehali.dev/files/47ca964b-cb26-49b8-9411-b7635cf02832.jpg',
+          'https://cdn.poehali.dev/files/c7ab2409-f2f1-4a3e-a69a-98f82d77309f.jpg',
+          'https://cdn.poehali.dev/files/2b4dedb9-cb70-4178-adb0-e974307f0285.jpg',
+          'https://cdn.poehali.dev/files/b5ea2111-f20b-4390-bef2-2f5281e13fa6.jpg'
+        ]
       }
     ]
   },
