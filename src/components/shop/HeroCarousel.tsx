@@ -27,10 +27,12 @@ export default function HeroCarousel() {
             <button
               className="rounded-full px-12 py-4 text-sm md:text-base bg-white text-primary hover:bg-white/95 hover:scale-105 transition-all font-normal tracking-wide shadow-xl"
               onClick={() => {
-                document.getElementById('catalog')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                setTimeout(() => {
-                  window.scrollBy({ top: -100, behavior: 'smooth' });
-                }, 500);
+                const catalog = document.getElementById('catalog');
+                if (catalog) {
+                  const yOffset = -100;
+                  const y = catalog.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                  window.scrollTo({ top: y, behavior: 'smooth' });
+                }
               }}
             >
               посмотреть коллекцию
