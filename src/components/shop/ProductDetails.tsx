@@ -212,7 +212,6 @@ export default function ProductDetails({ product, onClose, addToCart }: ProductD
                         selectedVariantId: currentVariant.id
                       } : product;
                       addToCart(productToAdd);
-                      onClose();
                     }}
                     disabled={product.variants && product.variants.length > 0 && !selectedVariant}
                   >
