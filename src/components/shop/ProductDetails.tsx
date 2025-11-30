@@ -4,7 +4,7 @@ import { Badge } from '@/components/ui/badge';
 import Icon from '@/components/ui/icon';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { Product } from './types';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 interface ProductDetailsProps {
   product: Product | null;
@@ -15,6 +15,11 @@ interface ProductDetailsProps {
 export default function ProductDetails({ product, onClose, addToCart }: ProductDetailsProps) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [selectedVariant, setSelectedVariant] = useState<string | null>(null);
+  
+  // Reset carousel to first image when product changes
+  useEffect(() => {
+    setCurrentImageIndex(0);
+  }, [product?.id]);
   
   if (!product) return null;
   
