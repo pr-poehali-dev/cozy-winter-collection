@@ -82,7 +82,7 @@ export default function ProductDetails({ product, onClose, addToCart }: ProductD
                     key={currentImageIndex}
                     src={images[currentImageIndex]}
                     alt={product.name}
-                    className="w-full aspect-square object-cover animate-in fade-in duration-300"
+                    className="w-full aspect-square object-cover animate-in fade-in duration-700"
                   />
                   <button
                     onClick={(e) => {
