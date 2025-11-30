@@ -10,7 +10,7 @@ export default function HeroCarousel() {
         <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60"></div>
         
         <div className="absolute inset-0 flex flex-col items-center justify-end text-center px-6 pb-16 md:pb-20 z-10">
-          <div className="max-w-2xl space-y-6">
+          <div className="max-w-2xl space-y-3">
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-light text-white leading-relaxed tracking-wide">
               вещи с душой и теплом
             </h1>
@@ -19,7 +19,7 @@ export default function HeroCarousel() {
             </p>
             
             <button
-              className="mt-8 rounded-full px-10 py-3.5 text-sm md:text-base bg-white/95 text-primary hover:bg-white hover:scale-105 transition-all font-light tracking-wide shadow-lg"
+              className="mt-4 rounded-full px-10 py-3.5 text-sm md:text-base bg-white/95 text-primary hover:bg-white hover:scale-105 transition-all font-light tracking-wide shadow-lg"
               onClick={() => {
                 document.getElementById('catalog')?.scrollIntoView({ behavior: 'smooth' });
               }}
