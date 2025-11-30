@@ -94,7 +94,13 @@ export const products: Product[] = [
         price: 2800, 
         description: 'демисезон, для просто прохладных дней',
         composition: '50% шерсть, 50% акрил\nоднослойная вязка средней плотности\nручная стирка в холодной воде\nсушить в горизонтальном положении',
-        weight: '80 г'
+        weight: '80 г',
+        gallery: [
+          'https://cdn.poehali.dev/files/c2e3a29d-2893-4e89-a329-8973ed5202ea.jpg',
+          'https://cdn.poehali.dev/files/ed9dc0de-2697-4392-9648-f3bbac34da56.jpg',
+          'https://cdn.poehali.dev/files/feb0529b-a88f-4928-a52f-981fef474dd3.jpg',
+          'https://cdn.poehali.dev/files/6d0be73d-87f3-42c4-8ca6-f7bb745b4df7.jpg'
+        ]
       },
       { 
         id: 'airy', 
