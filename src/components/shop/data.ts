@@ -48,6 +48,13 @@ export const products: Product[] = [
     image: 'https://cdn.poehali.dev/files/f9fe8956-e4b2-4d08-b2fc-0195aa240b23.png',
     storyDescription: 'этот чепчик — как объятие холодным зимним утром ☕️ связан из пряжи брусничного оттенка, он окутывает теплом и уютом. носить его — словно гулять по рождественской ярмарке и греть руки о стаканчик пряного глинтвейна 🍷✨🎠',
     stock: 5,
+    gallery: [
+      'https://cdn.poehali.dev/files/959e38dd-6a20-454a-9dca-33cd3e45547d.jpeg',
+      'https://cdn.poehali.dev/files/0d366c0c-1d81-4cbf-a1ae-8d0c9b0b1a34.jpg',
+      'https://cdn.poehali.dev/files/833c0761-23de-43db-8424-faa08fdb0d43.jpg',
+      'https://cdn.poehali.dev/files/2ca3539a-c662-4f5f-bb6e-bf404d4ceb14.jpg',
+      'https://cdn.poehali.dev/files/2b8c5eb3-b67c-4e1b-a9a8-21848d2ac746.jpg'
+    ],
     variants: [
       { 
         id: 'light', 
