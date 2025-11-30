@@ -79,9 +79,10 @@ export default function ProductDetails({ product, onClose, addToCart }: ProductD
                   className="relative overflow-hidden rounded-2xl shadow-lg bg-card"
                 >
                   <img
+                    key={currentImageIndex}
                     src={images[currentImageIndex]}
                     alt={product.name}
-                    className="w-full aspect-square object-cover"
+                    className="w-full aspect-square object-cover animate-in fade-in duration-300"
                   />
                   <button
                     onClick={(e) => {
