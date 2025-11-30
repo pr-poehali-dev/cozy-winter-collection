@@ -85,12 +85,12 @@ export default function About() {
                     </a>
                     {' '}и{' '}
                     <a 
-                      href="https://t.me/azaluk_shop_reviews" 
+                      href="https://t.me/azalukk" 
                       target="_blank" 
                       rel="noopener noreferrer"
                       className="link-red transition-colors"
                     >
-                      канал отзывов
+                      тг-канал
                     </a>
                     , в них делюсь своим мировоззрением, привношу волшебство в повседневность и показываю наши внутренние процессы!
                   </p>
