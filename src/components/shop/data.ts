@@ -342,6 +342,26 @@ export const products: Product[] = [
     image: 'https://cdn.poehali.dev/files/09835741-0a46-4a66-a784-75b67bd230fa.png',
     storyDescription: 'тестовый товар для проверки работы оплаты 🧪',
     badge: 'test',
-    stock: 5
+    stock: 5,
+    variants: [
+      { 
+        id: 'test-variant-1', 
+        name: 'тест 1', 
+        price: 10, 
+        description: 'первый тестовый вариант товара'
+      },
+      { 
+        id: 'test-variant-2', 
+        name: 'тест 2', 
+        price: 15, 
+        description: 'второй тестовый вариант товара'
+      },
+      { 
+        id: 'test-variant-3', 
+        name: 'тест 3', 
+        price: 20, 
+        description: 'третий тестовый вариант товара'
+      }
+    ]
   }
 ];
