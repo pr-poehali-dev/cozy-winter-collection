@@ -86,7 +86,7 @@ export default function ProductDetails({ product, onClose, addToCart }: ProductD
       {/* Added to Cart Notification */}
       {showAddedNotification && (
         <div className="fixed top-6 right-6 z-[100] animate-in slide-in-from-top-5 fade-in duration-300">
-          <div className="bg-white rounded-2xl shadow-2xl border-2 border-green-200 p-4 flex items-start gap-3 max-w-sm">
+          <div className="bg-white rounded-2xl shadow-2xl border-2 border-moss/20 p-4 flex items-start gap-3 max-w-sm">
             <div className="w-16 h-16 rounded-lg overflow-hidden flex-shrink-0 bg-secondary">
               <img 
                 src={currentVariant?.gallery?.[0] || product.image} 
@@ -96,8 +96,8 @@ export default function ProductDetails({ product, onClose, addToCart }: ProductD
             </div>
             <div className="flex-1 min-w-0">
               <div className="flex items-start gap-2 mb-1">
-                <Icon name="Sparkles" size={16} className="text-green-600 mt-0.5 flex-shrink-0" />
-                <p className="text-sm font-normal text-green-700">волшебство свершилось!</p>
+                <Icon name="Sparkles" size={16} className="text-moss mt-0.5 flex-shrink-0" />
+                <p className="text-sm font-normal text-moss">волшебство свершилось!</p>
               </div>
               <p className="text-xs text-muted-foreground leading-relaxed font-light">
                 {currentVariant ? `${product.name} (${currentVariant.name})` : product.name}
@@ -264,9 +264,9 @@ export default function ProductDetails({ product, onClose, addToCart }: ProductD
                         size="lg"
                         className={`w-full max-w-xs px-8 rounded-full text-sm py-4 transition-all hover:scale-[1.02] shadow-lg hover:shadow-xl font-light ${
                           buttonState === 'added' 
-                            ? 'bg-green-600 hover:bg-green-700' 
+                            ? 'bg-moss hover:bg-moss/90 text-white' 
                             : buttonState === 'checkout'
-                            ? 'bg-rose-600 hover:bg-rose-700'
+                            ? 'bg-darkRed hover:bg-darkRed/90 text-white'
                             : 'bg-primary hover:bg-primary/90'
                         }`}
                         onClick={handleAddToCart}
@@ -323,9 +323,9 @@ export default function ProductDetails({ product, onClose, addToCart }: ProductD
                 size="lg"
                 className={`w-full px-8 rounded-full text-sm py-4 transition-all shadow-2xl font-light ${
                   buttonState === 'added' 
-                    ? 'bg-green-600 hover:bg-green-700' 
+                    ? 'bg-moss hover:bg-moss/90 text-white' 
                     : buttonState === 'checkout'
-                    ? 'bg-rose-600 hover:bg-rose-700'
+                    ? 'bg-darkRed hover:bg-darkRed/90 text-white'
                     : 'bg-primary hover:bg-primary/90'
                 }`}
                 onClick={handleAddToCart}
