@@ -86,7 +86,7 @@ export default function Contacts() {
                     <span className="text-xs text-muted-foreground font-light">ютуб-канал</span>
                   </a>
                   <a
-                    href="https://t.me/azaluk_shop_reviews"
+                    href="https://t.me/azalukk/4001"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex flex-col items-center gap-2 group"
