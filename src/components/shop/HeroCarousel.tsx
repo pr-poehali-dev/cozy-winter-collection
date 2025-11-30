@@ -8,7 +8,7 @@ export default function HeroCarousel() {
             srcSet="https://cdn.poehali.dev/files/787fcd5b-c366-4747-a9d0-c0174e63907c.jpg"
           />
           <img
-            src="https://cdn.poehali.dev/files/c80476aa-bd53-4839-92a0-04dd2a2f6259.png"
+            src="https://cdn.poehali.dev/files/6b72c931-edad-4f06-8f42-fec92ace91e3.jpg"
             alt="вещи с душой и теплом"
             className="w-full md:h-[85vh] md:object-cover"
           />
