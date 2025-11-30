@@ -4,7 +4,7 @@ import { Badge } from '@/components/ui/badge';
 import Icon from '@/components/ui/icon';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { Product } from './types';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 interface ProductDetailsProps {
   product: Product | null;
@@ -19,6 +19,7 @@ export default function ProductDetails({ product, onClose, addToCart, setIsCartO
   const [selectedVariant, setSelectedVariant] = useState<string | null>(null);
   const [showAddedNotification, setShowAddedNotification] = useState(false);
   const [buttonState, setButtonState] = useState<'add' | 'added' | 'checkout'>('add');
+  const thumbnailContainerRef = useRef<HTMLDivElement>(null);
   
   // Reset carousel and variant when product changes
   useEffect(() => {
@@ -48,6 +49,20 @@ export default function ProductDetails({ product, onClose, addToCart, setIsCartO
     );
     setButtonState(isVariantInCart ? 'checkout' : 'add');
   }, [selectedVariant, cart, product]);
+  
+  // Auto-scroll thumbnails when image changes
+  useEffect(() => {
+    if (thumbnailContainerRef.current) {
+      const container = thumbnailContainerRef.current;
+      const thumbnailWidth = 80 + 12; // 80px width + 12px gap
+      const scrollPosition = currentImageIndex * thumbnailWidth - (container.clientWidth / 2) + (thumbnailWidth / 2);
+      
+      container.scrollTo({
+        left: scrollPosition,
+        behavior: 'smooth'
+      });
+    }
+  }, [currentImageIndex]);
   
   if (!product) return null;
   
@@ -208,7 +223,7 @@ export default function ProductDetails({ product, onClose, addToCart, setIsCartO
                 </div>
                 
                 {/* Thumbnail Gallery */}
-                <div className="flex gap-3 mt-4 justify-start overflow-x-auto pb-2">
+                <div ref={thumbnailContainerRef} className="flex gap-3 mt-4 justify-start overflow-x-auto pb-2">
                   {images.map((img, index) => (
                     <button
                       key={index}
