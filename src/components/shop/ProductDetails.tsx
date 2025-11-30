@@ -10,9 +10,10 @@ interface ProductDetailsProps {
   product: Product | null;
   onClose: () => void;
   addToCart: (product: Product) => void;
+  setIsCartOpen: (isOpen: boolean) => void;
 }
 
-export default function ProductDetails({ product, onClose, addToCart }: ProductDetailsProps) {
+export default function ProductDetails({ product, onClose, addToCart, setIsCartOpen }: ProductDetailsProps) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [selectedVariant, setSelectedVariant] = useState<string | null>(null);
   const [showAddedNotification, setShowAddedNotification] = useState(false);
@@ -32,22 +33,29 @@ export default function ProductDetails({ product, onClose, addToCart }: ProductD
   const currentVariant = product.variants?.find(v => v.id === selectedVariant);
   const displayPrice = currentVariant?.price || product.price;
   
-  const handleAddToCart = () => {
-    const productToAdd = currentVariant ? {
-      ...product,
-      price: currentVariant.price,
-      name: `${product.name} (${currentVariant.name})`,
-      selectedVariantId: currentVariant.id
-    } : product;
-    
-    addToCart(productToAdd);
-    setShowAddedNotification(true);
-    setButtonState('checkout');
-    
-    // Hide notification after 3 seconds
-    setTimeout(() => {
-      setShowAddedNotification(false);
-    }, 3000);
+  const handleButtonClick = () => {
+    if (buttonState === 'checkout') {
+      // Open cart and close product details
+      setIsCartOpen(true);
+      onClose();
+    } else {
+      // Add to cart
+      const productToAdd = currentVariant ? {
+        ...product,
+        price: currentVariant.price,
+        name: `${product.name} (${currentVariant.name})`,
+        selectedVariantId: currentVariant.id
+      } : product;
+      
+      addToCart(productToAdd);
+      setShowAddedNotification(true);
+      setButtonState('checkout');
+      
+      // Hide notification after 3 seconds
+      setTimeout(() => {
+        setShowAddedNotification(false);
+      }, 3000);
+    }
   };
   
   const getAllImages = () => {
@@ -260,7 +268,7 @@ export default function ProductDetails({ product, onClose, addToCart }: ProductD
                             ? '!bg-darkRed hover:!bg-darkRed/90 !text-white'
                             : '!bg-primary hover:!bg-primary/90'
                         }`}
-                        onClick={handleAddToCart}
+                        onClick={handleButtonClick}
                         disabled={product.variants && product.variants.length > 0 && !selectedVariant}
                       >
                         {buttonState === 'checkout' ? (

@@ -138,6 +138,7 @@ export default function Index() {
         product={selectedProduct}
         onClose={() => setSelectedProduct(null)}
         addToCart={addToCart}
+        setIsCartOpen={setIsCartOpen}
       />
 
       <Footer />
