@@ -66,7 +66,7 @@ export default function ProductCatalog({
                   </p>
                 )}
                 <div className="flex items-center justify-center gap-3">
-                  <p className="text-base font-light text-primary">{product.price.toLocaleString('ru-RU')} ₽</p>
+                  <p className="text-sm md:text-base font-light text-primary whitespace-nowrap">{product.price.toLocaleString('ru-RU')} ₽</p>
                   {product.badge !== 'soon' && (
                     <button
                       onClick={(e) => {

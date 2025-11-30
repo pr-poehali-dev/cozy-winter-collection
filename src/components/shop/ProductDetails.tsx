@@ -294,7 +294,7 @@ export default function ProductDetails({ product, onClose, addToCart, setIsCartO
                                 <p className="text-xs text-muted-foreground font-light">{variant.description}</p>
                               )}
                             </div>
-                            <p className="text-sm font-normal text-primary">{variant.price.toLocaleString('ru-RU')} ₽</p>
+                            <p className="text-sm font-normal text-primary whitespace-nowrap">{variant.price.toLocaleString('ru-RU')} ₽</p>
                           </div>
                         </button>
                       ))}
@@ -302,7 +302,7 @@ export default function ProductDetails({ product, onClose, addToCart, setIsCartO
                   </div>
                 )}
                 
-                <div className="text-xl font-light text-primary">
+                <div className="text-xl font-light text-primary whitespace-nowrap">
                   {displayPrice.toLocaleString('ru-RU')} ₽
                 </div>
                 
