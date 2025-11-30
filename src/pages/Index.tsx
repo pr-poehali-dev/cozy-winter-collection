@@ -59,27 +59,44 @@ export default function Index() {
 
   const addToCart = (product: Product) => {
     setCart((prev) => {
-      const existing = prev.find((item) => item.id === product.id);
+      const existing = prev.find((item) => {
+        if (item.id !== product.id) return false;
+        // For products with variants, check specific variant
+        if ('selectedVariantId' in product && 'selectedVariantId' in item) {
+          return item.selectedVariantId === product.selectedVariantId;
+        }
+        // For products without variants, just match by id
+        return true;
+      });
+      
       if (existing) {
-        return prev.map((item) =>
-          item.id === product.id
-            ? { ...item, quantity: item.quantity + 1 }
-            : item,
-        );
+        return prev.map((item) => {
+          const matches = item.id === product.id && 
+            (!('selectedVariantId' in product) || item.selectedVariantId === product.selectedVariantId);
+          return matches ? { ...item, quantity: item.quantity + 1 } : item;
+        });
       }
       return [...prev, { ...product, quantity: 1 }];
     });
   };
 
-  const removeFromCart = (productId: number) => {
-    setCart((prev) => prev.filter((item) => item.id !== productId));
+  const removeFromCart = (productId: number, variantId?: string) => {
+    setCart((prev) => prev.filter((item) => {
+      if (item.id !== productId) return true;
+      if (variantId && 'selectedVariantId' in item) {
+        return item.selectedVariantId !== variantId;
+      }
+      return false;
+    }));
   };
 
-  const updateQuantity = (productId: number, delta: number) => {
+  const updateQuantity = (productId: number, delta: number, variantId?: string) => {
     setCart((prev) =>
       prev
         .map((item) => {
-          if (item.id === productId) {
+          const matches = item.id === productId && 
+            (!variantId || !('selectedVariantId' in item) || item.selectedVariantId === variantId);
+          if (matches) {
             const newQuantity = item.quantity + delta;
             return newQuantity > 0 ? { ...item, quantity: newQuantity } : item;
           }

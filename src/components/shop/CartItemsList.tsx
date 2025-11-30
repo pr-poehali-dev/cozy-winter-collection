@@ -4,8 +4,8 @@ import { products } from './data';
 
 interface CartItemsListProps {
   cart: CartItem[];
-  updateQuantity: (productId: number, delta: number) => void;
-  removeFromCart: (productId: number) => void;
+  updateQuantity: (productId: number, delta: number, variantId?: string) => void;
+  removeFromCart: (productId: number, variantId?: string) => void;
   cartTotal: number;
   isCheckoutLoading: boolean;
   onCheckout: () => void;
@@ -32,8 +32,11 @@ export default function CartItemsList({
   return (
     <>
       <div className="flex-1 overflow-auto mt-8 space-y-4 pb-4 px-6">
-        {cart.map(item => (
-          <div key={item.id} className="flex gap-4 pb-4 border-b border-border">
+        {cart.map((item, index) => {
+          const variantId = 'selectedVariantId' in item ? item.selectedVariantId : undefined;
+          const cartKey = variantId ? `${item.id}-${variantId}` : `${item.id}-${index}`;
+          return (
+          <div key={cartKey} className="flex gap-4 pb-4 border-b border-border">
             <img 
               src={item.image} 
               alt={item.name}
@@ -45,27 +48,28 @@ export default function CartItemsList({
               <div className="flex items-center gap-2 mt-2">
                 <button 
                   className="h-7 w-7 border border-border rounded hover:bg-secondary transition-colors flex items-center justify-center"
-                  onClick={() => updateQuantity(item.id, -1)}
+                  onClick={() => updateQuantity(item.id, -1, variantId)}
                 >
                   <Icon name="Minus" size={12} />
                 </button>
                 <span className="text-sm w-8 text-center font-light">{item.quantity}</span>
                 <button 
                   className="h-7 w-7 border border-border rounded hover:bg-secondary transition-colors flex items-center justify-center"
-                  onClick={() => updateQuantity(item.id, 1)}
+                  onClick={() => updateQuantity(item.id, 1, variantId)}
                 >
                   <Icon name="Plus" size={12} />
                 </button>
                 <button 
                   className="h-7 w-7 ml-auto hover:bg-secondary rounded transition-colors flex items-center justify-center"
-                  onClick={() => removeFromCart(item.id)}
+                  onClick={() => removeFromCart(item.id, variantId)}
                 >
                   <Icon name="Trash2" size={14} />
                 </button>
               </div>
             </div>
           </div>
-        ))}
+        );
+        })}
       </div>
       <div className="flex-shrink-0 border-t border-border pt-4 mt-4 px-6 pb-6">
         {recommendations.length > 0 && (

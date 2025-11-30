@@ -14,8 +14,8 @@ interface HeaderProps {
   cart: CartItem[];
   isCartOpen: boolean;
   setIsCartOpen: (open: boolean) => void;
-  updateQuantity: (productId: number, delta: number) => void;
-  removeFromCart: (productId: number) => void;
+  updateQuantity: (productId: number, delta: number, variantId?: string) => void;
+  removeFromCart: (productId: number, variantId?: string) => void;
   cartTotal: number;
   cartCount: number;
   addToCart: (product: Product) => void;
