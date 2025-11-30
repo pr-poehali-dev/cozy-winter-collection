@@ -26,12 +26,28 @@ export default function ProductDetails({ product, onClose, addToCart, setIsCartO
     setSelectedVariant(null);
     setShowAddedNotification(false);
     
-    // Check if product is in cart
+    // Check if current product/variant combination is in cart
     if (product) {
-      const isInCart = cart.some(item => item.id === product.id);
+      const isInCart = cart.some(item => {
+        if (item.id !== product.id) return false;
+        // For products without variants, just check id
+        if (!product.variants || product.variants.length === 0) return true;
+        // For products with variants, need to check specific variant
+        return item.selectedVariantId !== undefined;
+      });
       setButtonState(isInCart ? 'checkout' : 'add');
     }
   }, [product?.id, cart]);
+  
+  // Update button state when variant is selected
+  useEffect(() => {
+    if (!product || !selectedVariant) return;
+    
+    const isVariantInCart = cart.some(item => 
+      item.id === product.id && item.selectedVariantId === selectedVariant
+    );
+    setButtonState(isVariantInCart ? 'checkout' : 'add');
+  }, [selectedVariant, cart, product]);
   
   if (!product) return null;
   
