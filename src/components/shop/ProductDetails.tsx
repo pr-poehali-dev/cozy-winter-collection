@@ -19,6 +19,8 @@ export default function ProductDetails({ product, onClose, addToCart, setIsCartO
   const [selectedVariant, setSelectedVariant] = useState<string | null>(null);
   const [showAddedNotification, setShowAddedNotification] = useState(false);
   const [buttonState, setButtonState] = useState<'add' | 'added' | 'checkout'>('add');
+  const [isCompositionOpen, setIsCompositionOpen] = useState(false);
+  const [isSizingOpen, setIsSizingOpen] = useState(false);
   const thumbnailContainerRef = useRef<HTMLDivElement>(null);
   
   // Reset carousel and variant when product changes
@@ -26,6 +28,8 @@ export default function ProductDetails({ product, onClose, addToCart, setIsCartO
     setCurrentImageIndex(0);
     setSelectedVariant(null);
     setShowAddedNotification(false);
+    setIsCompositionOpen(false);
+    setIsSizingOpen(false);
     
     // Check if current product/variant combination is in cart
     if (product) {
@@ -356,25 +360,53 @@ export default function ProductDetails({ product, onClose, addToCart, setIsCartO
                   )}
                   
                   {(currentVariant?.composition || product.composition) && (
-                    <div className="space-y-2 pt-4 border-t border-primary/10">
-                      <h3 className="text-xs uppercase tracking-wider text-primary/60 font-normal">состав и рекомендации</h3>
-                      <p className="text-sm text-moss/70 leading-relaxed whitespace-pre-line font-light">
-                        {currentVariant?.composition || product.composition}
-                      </p>
-                      {currentVariant?.weight && (
-                        <p className="text-sm text-moss/70 leading-relaxed font-light pt-1">
-                          вес: {currentVariant.weight}
-                        </p>
+                    <div className="pt-4 border-t border-primary/10">
+                      <button
+                        onClick={() => setIsCompositionOpen(!isCompositionOpen)}
+                        className="w-full flex items-center justify-between text-left group"
+                      >
+                        <h3 className="text-xs uppercase tracking-wider text-primary/60 font-normal">состав и рекомендации</h3>
+                        <Icon 
+                          name={isCompositionOpen ? "ChevronUp" : "ChevronDown"} 
+                          size={16} 
+                          className="text-primary/60 transition-transform group-hover:text-primary"
+                        />
+                      </button>
+                      {isCompositionOpen && (
+                        <div className="space-y-2 mt-3 animate-in slide-in-from-top-2 duration-200">
+                          <p className="text-sm text-moss/70 leading-relaxed whitespace-pre-line font-light">
+                            {currentVariant?.composition || product.composition}
+                          </p>
+                          {currentVariant?.weight && (
+                            <p className="text-sm text-moss/70 leading-relaxed font-light pt-1">
+                              вес: {currentVariant.weight}
+                            </p>
+                          )}
+                        </div>
                       )}
                     </div>
                   )}
                   
                   {(currentVariant?.sizing || product.sizing) && (
-                    <div className="space-y-2 pt-4 border-t border-primary/10">
-                      <h3 className="text-xs uppercase tracking-wider text-primary/60 font-normal">размеры и мерки</h3>
-                      <p className="text-sm text-moss/70 leading-relaxed whitespace-pre-line font-light">
-                        {currentVariant?.sizing || product.sizing}
-                      </p>
+                    <div className="pt-4 border-t border-primary/10">
+                      <button
+                        onClick={() => setIsSizingOpen(!isSizingOpen)}
+                        className="w-full flex items-center justify-between text-left group"
+                      >
+                        <h3 className="text-xs uppercase tracking-wider text-primary/60 font-normal">размеры и мерки</h3>
+                        <Icon 
+                          name={isSizingOpen ? "ChevronUp" : "ChevronDown"} 
+                          size={16} 
+                          className="text-primary/60 transition-transform group-hover:text-primary"
+                        />
+                      </button>
+                      {isSizingOpen && (
+                        <div className="mt-3 animate-in slide-in-from-top-2 duration-200">
+                          <p className="text-sm text-moss/70 leading-relaxed whitespace-pre-line font-light">
+                            {currentVariant?.sizing || product.sizing}
+                          </p>
+                        </div>
+                      )}
                     </div>
                   )}
                 </div>
