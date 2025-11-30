@@ -35,10 +35,10 @@ export default function HeroCarousel() {
                 магазинчик вещиц ручной работы
               </p>
               <h1 
-                className="text-[2.5rem] md:text-5xl text-white leading-[1.1] tracking-wide px-4 max-w-6xl"
-                style={{ fontFamily: 'Cormorant, serif', fontWeight: 100 }}
+                className="text-[2.5rem] md:text-5xl text-white leading-[1.15] px-4 max-w-6xl"
+                style={{ fontFamily: 'Cormorant, serif', fontWeight: 300, letterSpacing: '0.02em' }}
               >
-                волшебство, которое можно носить
+                носимое волшебство
               </h1>
             </div>
             

@@ -41,6 +41,38 @@ export default function CheckoutForm({
   const [hasGift, setHasGift] = useState(false);
   const giftEmojis = ['❄️', '🔮', '✨'];
 
+  const formatPhoneNumber = (value: string) => {
+    const cleaned = value.replace(/\D/g, '');
+    
+    if (cleaned.length === 0) return '';
+    
+    let formatted = '+7';
+    if (cleaned.length > 1) {
+      formatted += ' (' + cleaned.substring(1, 4);
+    }
+    if (cleaned.length > 4) {
+      formatted += ') ' + cleaned.substring(4, 7);
+    }
+    if (cleaned.length > 7) {
+      formatted += '-' + cleaned.substring(7, 9);
+    }
+    if (cleaned.length > 9) {
+      formatted += '-' + cleaned.substring(9, 11);
+    }
+    
+    return formatted;
+  };
+
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    const cleaned = value.replace(/\D/g, '');
+    
+    if (cleaned.length <= 11) {
+      const formatted = formatPhoneNumber(cleaned.startsWith('7') ? cleaned : '7' + cleaned);
+      setCheckoutData({ ...checkoutData, phone: formatted });
+    }
+  };
+
   return (
     <div className="flex-1 flex flex-col mt-8 overflow-hidden">
       <div className="space-y-4 flex-1 overflow-y-auto pb-4 px-4 md:px-6">
@@ -107,7 +139,7 @@ export default function CheckoutForm({
             id="phone"
             type="tel"
             value={checkoutData.phone}
-            onChange={(e) => setCheckoutData({ ...checkoutData, phone: e.target.value })}
+            onChange={handlePhoneChange}
             placeholder="+7 (999) 123-45-67"
             className="font-light"
           />
