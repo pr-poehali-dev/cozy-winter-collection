@@ -5,11 +5,11 @@ export default function HeroCarousel() {
         <img
           src="https://cdn.poehali.dev/files/c80476aa-bd53-4839-92a0-04dd2a2f6259.png"
           alt="вещи с душой и теплом"
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover md:object-center object-[50%_35%]"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/50"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60"></div>
         
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 z-10">
+        <div className="absolute inset-0 flex flex-col items-center justify-end md:justify-center text-center px-6 pb-16 md:pb-0 z-10">
           <div className="max-w-2xl space-y-6">
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-light text-white leading-relaxed tracking-wide">
               вещи с душой и теплом
