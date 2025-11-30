@@ -230,11 +230,18 @@ export const products: Product[] = [
     description: 'декоративное керамическое блюдце ручной работы',
     price: 1500,
     category: 'для дома',
-    image: 'https://cdn.poehali.dev/files/587ee171-323f-45b6-b02b-31ccfb299003.png',
+    image: 'https://cdn.poehali.dev/files/1215fc8d-4530-4f4f-8b6a-46cf0489a809.jpg',
     storyDescription: 'нежное керамическое блюдце, созданное вручную ⭐ каждое уникально, с авторской росписью. идеально для украшений или как самостоятельный элемент декора. осталось всего 2 штуки, повторов не планируется 💫',
     composition: 'диаметр: 6-7 см\nкерамика ручной работы\nбережное обращение',
     badge: 'limited',
-    stock: 2
+    stock: 2,
+    gallery: [
+      'https://cdn.poehali.dev/files/1215fc8d-4530-4f4f-8b6a-46cf0489a809.jpg',
+      'https://cdn.poehali.dev/files/f2195380-bf93-41cf-9947-8de6ba10119c.jpg',
+      'https://cdn.poehali.dev/files/852a81f2-359b-4de0-895e-2ff18dc66df1.jpg',
+      'https://cdn.poehali.dev/files/1a9f723e-68d6-489f-b402-f346dc70a2c6.jpg',
+      'https://cdn.poehali.dev/files/4d28d0ed-de13-4574-8ea5-26387a981d2f.jpg'
+    ]
   },
   {
     id: 7,
