@@ -117,11 +117,7 @@ export default function Index() {
         addToCart={addToCart}
       />
 
-      <HeroCarousel
-        slides={heroSlides}
-        currentSlide={currentSlide}
-        setCurrentSlide={setCurrentSlide}
-      />
+      <HeroCarousel />
 
       <ProductCatalog
         products={products}
