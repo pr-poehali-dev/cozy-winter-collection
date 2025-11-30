@@ -15,17 +15,20 @@ export default function HeroCarousel() {
         </picture>
         <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60"></div>
         
-        <div className="absolute inset-0 flex flex-col items-center justify-end text-center px-6 pb-16 md:pb-20 z-10">
-          <div className="max-w-2xl space-y-3">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-light text-white leading-relaxed tracking-wide">
+        <div className="absolute inset-0 flex flex-col items-center justify-end text-center px-6 pb-16 md:pb-24 z-10">
+          <div className="max-w-3xl space-y-4">
+            <p className="text-xs md:text-sm text-white/80 uppercase tracking-[0.2em] font-light">
+              магазинчик вещиц ручной работы
+            </p>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-light text-white leading-tight tracking-wide">
               вещи с душой и теплом
             </h1>
-            <p className="text-base md:text-lg text-white/95 leading-relaxed font-light tracking-wide max-w-xl mx-auto">
+            <p className="text-sm md:text-base text-white/90 leading-relaxed font-light max-w-lg mx-auto pt-2">
               каждая создана вручную, чтобы стать частью твоей истории
             </p>
             
             <button
-              className="mt-4 rounded-full px-10 py-3.5 text-sm md:text-base bg-white/95 text-primary hover:bg-white hover:scale-105 transition-all font-light tracking-wide shadow-lg"
+              className="mt-6 rounded-full px-12 py-4 text-sm md:text-base bg-white text-primary hover:bg-white/95 hover:scale-105 transition-all font-normal tracking-wide shadow-xl"
               onClick={() => {
                 document.getElementById('catalog')?.scrollIntoView({ behavior: 'smooth' });
               }}
