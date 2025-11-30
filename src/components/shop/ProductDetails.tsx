@@ -75,15 +75,22 @@ export default function ProductDetails({ product, onClose, addToCart }: ProductD
             {/* Left side - Carousel */}
             <div className="lg:w-1/2 p-6 lg:p-12 pt-20 lg:pt-12 flex items-center justify-center lg:min-h-screen">
               <div className="w-full max-w-xl">
-                <div 
-                  className="relative overflow-hidden rounded-2xl shadow-lg bg-card"
-                >
-                  <img
-                    key={currentImageIndex}
-                    src={images[currentImageIndex]}
-                    alt={product.name}
-                    className="w-full aspect-square object-cover animate-in fade-in duration-700"
-                  />
+                <div className="relative overflow-hidden rounded-2xl shadow-lg bg-card">
+                  <div className="relative w-full aspect-square">
+                    <div 
+                      className="flex transition-transform duration-500 ease-out h-full"
+                      style={{ transform: `translateX(-${currentImageIndex * 100}%)` }}
+                    >
+                      {images.map((img, index) => (
+                        <img
+                          key={index}
+                          src={img}
+                          alt={`${product.name} ${index + 1}`}
+                          className="w-full h-full object-cover flex-shrink-0"
+                        />
+                      ))}
+                    </div>
+                  </div>
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
