@@ -85,6 +85,17 @@ export default function Contacts() {
                     </div>
                     <span className="text-xs text-muted-foreground font-light">ютуб-канал</span>
                   </a>
+                  <a
+                    href="https://t.me/azaluk_shop_reviews"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex flex-col items-center gap-2 group"
+                  >
+                    <div className="w-11 h-11 rounded-full bg-primary/90 flex items-center justify-center group-hover:bg-primary group-hover:scale-105 transition-all">
+                      <Icon name="Mail" size={18} className="text-white" strokeWidth={1.5} />
+                    </div>
+                    <span className="text-xs text-muted-foreground font-light">отзывы</span>
+                  </a>
                 </div>
               </div>
 
