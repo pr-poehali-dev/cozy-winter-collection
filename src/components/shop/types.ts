@@ -21,6 +21,8 @@ export interface Product {
   composition?: string;
   variants?: ProductVariant[];
   stock?: number;
+  videoUrl?: string;
+  videoTitle?: string;
 }
 
 export interface CartItem extends Product {

@@ -235,6 +235,8 @@ export const products: Product[] = [
     composition: 'диаметр: 6-7 см\nручная работа\nбережное обращение',
     badge: 'limited',
     stock: 2,
+    videoUrl: 'https://youtu.be/qdCRV1GF898',
+    videoTitle: 'о хрупкой красоте',
     gallery: [
       'https://cdn.poehali.dev/files/1215fc8d-4530-4f4f-8b6a-46cf0489a809.jpg',
       'https://cdn.poehali.dev/files/f2195380-bf93-41cf-9947-8de6ba10119c.jpg',

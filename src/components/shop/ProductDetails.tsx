@@ -326,6 +326,20 @@ export default function ProductDetails({ product, onClose, addToCart, setIsCartO
                     {storyText}
                   </p>
                   
+                  {product.videoUrl && (
+                    <a
+                      href={product.videoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-sm text-primary hover:text-moss transition-colors group"
+                    >
+                      <Icon name="Play" size={16} className="group-hover:scale-110 transition-transform" />
+                      <span className="font-light border-b border-primary/20 group-hover:border-moss/50 transition-colors">
+                        {product.videoTitle || 'смотреть видео'}
+                      </span>
+                    </a>
+                  )}
+                  
                   {(currentVariant?.composition || product.composition) && (
                     <div className="space-y-2 pt-4 border-t border-primary/10">
                       <h3 className="text-xs uppercase tracking-wider text-primary/60 font-normal">состав и характеристики</h3>
