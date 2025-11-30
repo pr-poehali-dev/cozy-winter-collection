@@ -303,7 +303,7 @@ export const products: Product[] = [
     stock: 10,
     gallery: [
       'https://cdn.poehali.dev/files/ac09b638-81c4-400e-8704-6e2e5b3c96cd.jpg',
-      'https://cdn.poehali.dev/files/186dd4f5-e595-4e52-9782-f7e7a250206d.jpg',
+      'https://cdn.poehali.dev/files/7905e08b-5abf-47d9-92a6-fd45bf08f45c.jpg',
       'https://cdn.poehali.dev/files/fc95c5e5-6c9a-4281-9a39-e9a642920769.jpg',
       'https://cdn.poehali.dev/files/69416a27-a379-4a16-8d57-60207861a8ec.jpg'
     ]
