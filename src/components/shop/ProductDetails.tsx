@@ -15,12 +15,14 @@ interface ProductDetailsProps {
 export default function ProductDetails({ product, onClose, addToCart }: ProductDetailsProps) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [selectedVariant, setSelectedVariant] = useState<string | null>(null);
-  const [quantity, setQuantity] = useState(0);
+  const [showAddedNotification, setShowAddedNotification] = useState(false);
+  const [buttonState, setButtonState] = useState<'add' | 'added' | 'checkout'>('add');
   
   // Reset carousel to first image when product changes
   useEffect(() => {
     setCurrentImageIndex(0);
-    setQuantity(0);
+    setButtonState('add');
+    setShowAddedNotification(false);
   }, [product?.id]);
   
   if (!product) return null;
@@ -29,6 +31,31 @@ export default function ProductDetails({ product, onClose, addToCart }: ProductD
   
   const currentVariant = product.variants?.find(v => v.id === selectedVariant);
   const displayPrice = currentVariant?.price || product.price;
+  
+  const handleAddToCart = () => {
+    const productToAdd = currentVariant ? {
+      ...product,
+      price: currentVariant.price,
+      name: `${product.name} (${currentVariant.name})`,
+      selectedVariantId: currentVariant.id
+    } : product;
+    
+    addToCart(productToAdd);
+    setShowAddedNotification(true);
+    setButtonState('added');
+    
+    setTimeout(() => {
+      setButtonState('checkout');
+    }, 1500);
+    
+    setTimeout(() => {
+      setShowAddedNotification(false);
+    }, 3000);
+    
+    setTimeout(() => {
+      setButtonState('add');
+    }, 5000);
+  };
   
   const getAllImages = () => {
     const allImages = new Set<string>();
@@ -56,6 +83,33 @@ export default function ProductDetails({ product, onClose, addToCart }: ProductD
   
   return (
     <>
+      {/* Added to Cart Notification */}
+      {showAddedNotification && (
+        <div className="fixed top-6 right-6 z-[100] animate-in slide-in-from-top-5 fade-in duration-300">
+          <div className="bg-white rounded-2xl shadow-2xl border-2 border-green-200 p-4 flex items-start gap-3 max-w-sm">
+            <div className="w-16 h-16 rounded-lg overflow-hidden flex-shrink-0 bg-secondary">
+              <img 
+                src={currentVariant?.gallery?.[0] || product.image} 
+                alt={product.name}
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <div className="flex-1 min-w-0">
+              <div className="flex items-start gap-2 mb-1">
+                <Icon name="Sparkles" size={16} className="text-green-600 mt-0.5 flex-shrink-0" />
+                <p className="text-sm font-normal text-green-700">волшебство свершилось!</p>
+              </div>
+              <p className="text-xs text-muted-foreground leading-relaxed font-light">
+                {currentVariant ? `${product.name} (${currentVariant.name})` : product.name}
+              </p>
+              <p className="text-xs text-primary font-normal mt-1">
+                добавлено в корзину ✨
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+      
       <Sheet open={!!product} onOpenChange={(open) => !open && onClose()}>
         <SheetContent 
           side="right" 
@@ -203,53 +257,40 @@ export default function ProductDetails({ product, onClose, addToCart }: ProductD
                 </div>
                 
                 {product.badge !== 'soon' && (
-                  quantity === 0 ? (
-                    <Button
-                      size="lg"
-                      className="w-full max-w-xs px-8 rounded-full text-sm py-4 bg-primary hover:bg-primary/90 transition-all hover:scale-[1.02] shadow-lg hover:shadow-xl font-light"
-                      onClick={() => {
-                        const productToAdd = currentVariant ? {
-                          ...product,
-                          price: currentVariant.price,
-                          name: `${product.name} (${currentVariant.name})`,
-                          selectedVariantId: currentVariant.id
-                        } : product;
-                        addToCart(productToAdd);
-                        setQuantity(1);
-                      }}
-                      disabled={product.variants && product.variants.length > 0 && !selectedVariant}
-                    >
-                      <Icon name="ShoppingBag" size={18} className="mr-2" />
-                      добавить в корзину
-                    </Button>
-                  ) : (
-                    <div className="flex items-center justify-center gap-4 w-full max-w-xs">
-                      <button
-                        onClick={() => setQuantity(Math.max(0, quantity - 1))}
-                        className="w-12 h-12 flex items-center justify-center rounded-lg border border-border bg-card hover:bg-secondary transition-colors"
+                  <div className="space-y-3">
+                    {/* Desktop Button */}
+                    <div className="hidden sm:block">
+                      <Button
+                        size="lg"
+                        className={`w-full max-w-xs px-8 rounded-full text-sm py-4 transition-all hover:scale-[1.02] shadow-lg hover:shadow-xl font-light ${
+                          buttonState === 'added' 
+                            ? 'bg-green-600 hover:bg-green-700' 
+                            : buttonState === 'checkout'
+                            ? 'bg-rose-600 hover:bg-rose-700'
+                            : 'bg-primary hover:bg-primary/90'
+                        }`}
+                        onClick={handleAddToCart}
+                        disabled={product.variants && product.variants.length > 0 && !selectedVariant}
                       >
-                        <Icon name="Minus" size={18} className="text-primary" />
-                      </button>
-                      <span className="text-2xl font-light text-primary min-w-[3rem] text-center">
-                        {quantity}
-                      </span>
-                      <button
-                        onClick={() => {
-                          const productToAdd = currentVariant ? {
-                            ...product,
-                            price: currentVariant.price,
-                            name: `${product.name} (${currentVariant.name})`,
-                            selectedVariantId: currentVariant.id
-                          } : product;
-                          addToCart(productToAdd);
-                          setQuantity(quantity + 1);
-                        }}
-                        className="w-12 h-12 flex items-center justify-center rounded-lg border border-border bg-card hover:bg-secondary transition-colors"
-                      >
-                        <Icon name="Plus" size={18} className="text-primary" />
-                      </button>
+                        {buttonState === 'added' ? (
+                          <>
+                            <Icon name="Sparkles" size={18} className="mr-2" />
+                            в корзине! ✨
+                          </>
+                        ) : buttonState === 'checkout' ? (
+                          <>
+                            <Icon name="ShoppingCart" size={18} className="mr-2" />
+                            перейти к оформлению
+                          </>
+                        ) : (
+                          <>
+                            <Icon name="ShoppingBag" size={18} className="mr-2" />
+                            добавить в корзину
+                          </>
+                        )}
+                      </Button>
                     </div>
-                  )
+                  </div>
                 )}
                 
                 <div className="space-y-6 pt-2">
@@ -274,6 +315,41 @@ export default function ProductDetails({ product, onClose, addToCart }: ProductD
               </div>
             </div>
           </div>
+          
+          {/* Floating Mobile Button */}
+          {product.badge !== 'soon' && (
+            <div className="sm:hidden fixed bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-card via-card to-transparent z-40">
+              <Button
+                size="lg"
+                className={`w-full px-8 rounded-full text-sm py-4 transition-all shadow-2xl font-light ${
+                  buttonState === 'added' 
+                    ? 'bg-green-600 hover:bg-green-700' 
+                    : buttonState === 'checkout'
+                    ? 'bg-rose-600 hover:bg-rose-700'
+                    : 'bg-primary hover:bg-primary/90'
+                }`}
+                onClick={handleAddToCart}
+                disabled={product.variants && product.variants.length > 0 && !selectedVariant}
+              >
+                {buttonState === 'added' ? (
+                  <>
+                    <Icon name="Sparkles" size={20} className="mr-2" />
+                    в корзине! ✨
+                  </>
+                ) : buttonState === 'checkout' ? (
+                  <>
+                    <Icon name="ShoppingCart" size={20} className="mr-2" />
+                    оформить заказ
+                  </>
+                ) : (
+                  <>
+                    <Icon name="ShoppingBag" size={20} className="mr-2" />
+                    добавить в корзину
+                  </>
+                )}
+              </Button>
+            </div>
+          )}
         </SheetContent>
       </Sheet>
     </>
