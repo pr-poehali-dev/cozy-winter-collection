@@ -15,10 +15,12 @@ interface ProductDetailsProps {
 export default function ProductDetails({ product, onClose, addToCart }: ProductDetailsProps) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [selectedVariant, setSelectedVariant] = useState<string | null>(null);
+  const [isAdded, setIsAdded] = useState(false);
   
   // Reset carousel to first image when product changes
   useEffect(() => {
     setCurrentImageIndex(0);
+    setIsAdded(false);
   }, [product?.id]);
   
   if (!product) return null;
@@ -203,7 +205,11 @@ export default function ProductDetails({ product, onClose, addToCart }: ProductD
                 {product.badge !== 'soon' && (
                   <Button
                     size="lg"
-                    className="w-full max-w-xs px-8 rounded-full text-sm py-4 bg-primary hover:bg-primary/90 transition-all hover:scale-[1.02] shadow-lg hover:shadow-xl font-light"
+                    className={`w-full max-w-xs px-8 rounded-full text-sm py-4 transition-all hover:scale-[1.02] shadow-lg hover:shadow-xl font-light ${
+                      isAdded 
+                        ? 'bg-green-600 hover:bg-green-700' 
+                        : 'bg-primary hover:bg-primary/90'
+                    }`}
                     onClick={() => {
                       const productToAdd = currentVariant ? {
                         ...product,
@@ -212,10 +218,13 @@ export default function ProductDetails({ product, onClose, addToCart }: ProductD
                         selectedVariantId: currentVariant.id
                       } : product;
                       addToCart(productToAdd);
+                      setIsAdded(true);
+                      setTimeout(() => setIsAdded(false), 2000);
                     }}
                     disabled={product.variants && product.variants.length > 0 && !selectedVariant}
                   >
-                    добавить в корзину
+                    <Icon name={isAdded ? "Check" : "ShoppingBag"} size={18} className="mr-2" />
+                    {isAdded ? 'добавлено!' : 'добавить в корзину'}
                   </Button>
                 )}
                 
