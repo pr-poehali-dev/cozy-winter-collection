@@ -21,7 +21,7 @@ export default function HeroCarousel() {
               <p className="text-xs md:text-base text-white/85 uppercase tracking-[0.2em] md:tracking-[0.25em] font-light whitespace-nowrap">
                 магазинчик вещиц ручной работы
               </p>
-              <h1 className="md:text-5xl lg:text-7xl font-light text-white leading-none tracking-wide text-3xl my-0 py-0">волшебство, которое можно носить</h1>
+              <h1 className="md:text-5xl lg:text-7xl font-light text-white leading-none tracking-wide text-3xl my-0 py-0 md:whitespace-nowrap">волшебство, которое можно носить</h1>
             </div>
             
             <button
