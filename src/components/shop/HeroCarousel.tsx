@@ -5,7 +5,7 @@ export default function HeroCarousel() {
         <picture>
           <source 
             media="(max-width: 768px)" 
-            srcSet="https://cdn.poehali.dev/files/c48413ed-e345-42ea-80d3-e1633e6f8b93.png"
+            srcSet="https://cdn.poehali.dev/files/787fcd5b-c366-4747-a9d0-c0174e63907c.jpg"
           />
           <img
             src="https://cdn.poehali.dev/files/c80476aa-bd53-4839-92a0-04dd2a2f6259.png"
