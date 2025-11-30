@@ -89,9 +89,10 @@ export default function ProductDetails({ product, onClose, addToCart, setIsCartO
         selectedVariantId: currentVariant.id
       } : product;
       
-      addToCart(productToAdd);
+      // Show notification immediately before state updates
       setShowAddedNotification(true);
       setButtonState('checkout');
+      addToCart(productToAdd);
       
       // Hide notification after 3 seconds
       setTimeout(() => {
