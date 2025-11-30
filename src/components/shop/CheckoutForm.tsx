@@ -42,8 +42,8 @@ export default function CheckoutForm({
   const giftEmojis = ['❄️', '🔮', '✨'];
 
   return (
-    <div className="flex-1 flex flex-col mt-8 px-4 md:px-6 overflow-hidden">
-      <div className="space-y-4 flex-1 overflow-y-auto pb-4 pr-4 md:pr-6">
+    <div className="flex-1 flex flex-col mt-8 overflow-hidden">
+      <div className="space-y-4 flex-1 overflow-y-auto pb-4 px-4 md:px-6">
         <div className="space-y-3">
           <Label>Способ доставки</Label>
           <div className="grid grid-cols-2 gap-3">
