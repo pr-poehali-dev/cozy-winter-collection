@@ -258,7 +258,8 @@ export default function Header({
             {cart.length === 0 ? (
               <div className="flex-1 flex flex-col mt-8 px-6 overflow-y-auto pb-6">
                 <div className="text-center mb-6">
-                  <p className="text-muted-foreground font-light mb-2">корзина пока пустая</p>
+                  <p className="text-muted-foreground font-light mb-2 py-[7px] px-[37px] mx-16">корзина пока пустая, 
+посмотри, что у нас есть 👇🏻✨</p>
                   <p className="text-sm text-muted-foreground font-light">посмотри, что у нас есть ✨</p>
                 </div>
                 <div className="space-y-4">
