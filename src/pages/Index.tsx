@@ -10,7 +10,7 @@ import Reviews from "@/components/shop/Reviews";
 import Footer from "@/components/shop/Footer";
 import ComingSoon from "@/components/ComingSoon";
 
-const DEV_MODE = false;
+const DEV_MODE = true;
 
 export default function Index() {
   const [searchParams] = useSearchParams();
