@@ -48,9 +48,9 @@ export default function Contacts() {
                   <div className="flex items-start gap-4">
                     <span className="text-2xl mt-1">☁️</span>
                     <div className="flex-1">
-                      <p className="text-xs text-muted-foreground mb-1 uppercase tracking-wide">телеграм</p>
-                      <a href="https://t.me/azaluk" target="_blank" rel="noopener noreferrer" className="text-sm text-primary hover:underline font-light">
-                        @azaluk
+                      <p className="text-xs text-muted-foreground mb-1 uppercase tracking-wide">поддержка</p>
+                      <a href="https://t.me/azaluk_care" target="_blank" rel="noopener noreferrer" className="text-sm text-primary hover:underline font-light">
+                        @azaluk_care
                       </a>
                     </div>
                   </div>
@@ -64,7 +64,7 @@ export default function Contacts() {
                 </h2>
                 <div className="flex justify-center md:justify-start gap-4">
                   <a
-                    href="https://t.me/azalukk"
+                    href="https://t.me/azaluk_shop_reviews"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex flex-col items-center gap-2 group"
@@ -72,7 +72,7 @@ export default function Contacts() {
                     <div className="w-11 h-11 rounded-full bg-primary/90 flex items-center justify-center group-hover:bg-primary group-hover:scale-105 transition-all">
                       <Icon name="Send" size={18} className="text-white" strokeWidth={1.5} />
                     </div>
-                    <span className="text-xs text-muted-foreground font-light">телеграм-канал</span>
+                    <span className="text-xs text-muted-foreground font-light">отзывы</span>
                   </a>
                   <a
                     href="https://www.youtube.com/@azaluk"
@@ -99,7 +99,7 @@ export default function Contacts() {
                   также готовы создать партию изделий специально для вашего проекта или события
                 </p>
                 <p className="text-center md:text-left">
-                  <a href="https://t.me/azaluk" target="_blank" rel="noopener noreferrer" className="text-xs font-light hover:underline" style={{ color: '#8B0000' }}>
+                  <a href="https://t.me/azaluk_care" target="_blank" rel="noopener noreferrer" className="text-xs font-light hover:underline" style={{ color: '#8B0000' }}>
                     пишите! 💌
                   </a>
                 </p>

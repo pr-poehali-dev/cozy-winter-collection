@@ -138,7 +138,7 @@ export default function DeliveryPage() {
 
                 <div className="pt-4 text-center">
                   <p className="text-sm">
-                    остались вопросы? <a href="https://t.me/azalukshop" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">напишите нам</a> 💗
+                    остались вопросы? <a href="https://t.me/azaluk_care" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">напишите нам</a> 💗
                   </p>
                 </div>
               </div>

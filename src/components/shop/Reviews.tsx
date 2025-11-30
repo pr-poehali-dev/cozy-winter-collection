@@ -71,7 +71,7 @@ export default function Reviews() {
                     }`}>
                       <p className="text-sm text-primary/80 leading-relaxed font-light mb-3">
                         {review.text}<a 
-                          href="https://t.me/azalukk" 
+                          href="https://t.me/azaluk_shop_reviews" 
                           target="_blank" 
                           rel="noopener noreferrer"
                           className="text-[#C41E3A] hover:text-[#A01628] transition-colors text-xs whitespace-nowrap"
@@ -121,7 +121,7 @@ export default function Reviews() {
         {/* CTA to Telegram */}
         <div className="text-center mt-8">
           <a 
-            href="https://t.me/azalukk" 
+            href="https://t.me/azaluk_shop_reviews" 
             target="_blank" 
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 text-[#C41E3A] hover:text-[#A01628] underline transition-colors font-light text-sm group"
