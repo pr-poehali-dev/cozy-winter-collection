@@ -10,7 +10,7 @@ import Reviews from "@/components/shop/Reviews";
 import Footer from "@/components/shop/Footer";
 import ComingSoon from "@/components/ComingSoon";
 
-const DEV_MODE = true;
+const DEV_MODE = false;
 
 export default function Index() {
   const [searchParams] = useSearchParams();
@@ -62,17 +62,19 @@ export default function Index() {
       const existing = prev.find((item) => {
         if (item.id !== product.id) return false;
         // For products with variants, check specific variant
-        if ('selectedVariantId' in product && 'selectedVariantId' in item) {
+        if ("selectedVariantId" in product && "selectedVariantId" in item) {
           return item.selectedVariantId === product.selectedVariantId;
         }
         // For products without variants, just match by id
         return true;
       });
-      
+
       if (existing) {
         return prev.map((item) => {
-          const matches = item.id === product.id && 
-            (!('selectedVariantId' in product) || item.selectedVariantId === product.selectedVariantId);
+          const matches =
+            item.id === product.id &&
+            (!("selectedVariantId" in product) ||
+              item.selectedVariantId === product.selectedVariantId);
           return matches ? { ...item, quantity: item.quantity + 1 } : item;
         });
       }
@@ -81,21 +83,30 @@ export default function Index() {
   };
 
   const removeFromCart = (productId: number, variantId?: string) => {
-    setCart((prev) => prev.filter((item) => {
-      if (item.id !== productId) return true;
-      if (variantId && 'selectedVariantId' in item) {
-        return item.selectedVariantId !== variantId;
-      }
-      return false;
-    }));
+    setCart((prev) =>
+      prev.filter((item) => {
+        if (item.id !== productId) return true;
+        if (variantId && "selectedVariantId" in item) {
+          return item.selectedVariantId !== variantId;
+        }
+        return false;
+      }),
+    );
   };
 
-  const updateQuantity = (productId: number, delta: number, variantId?: string) => {
+  const updateQuantity = (
+    productId: number,
+    delta: number,
+    variantId?: string,
+  ) => {
     setCart((prev) =>
       prev
         .map((item) => {
-          const matches = item.id === productId && 
-            (!variantId || !('selectedVariantId' in item) || item.selectedVariantId === variantId);
+          const matches =
+            item.id === productId &&
+            (!variantId ||
+              !("selectedVariantId" in item) ||
+              item.selectedVariantId === variantId);
           if (matches) {
             const newQuantity = item.quantity + delta;
             return newQuantity > 0 ? { ...item, quantity: newQuantity } : item;
