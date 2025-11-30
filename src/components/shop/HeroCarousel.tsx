@@ -1,12 +1,18 @@
 export default function HeroCarousel() {
   return (
-    <section className="relative h-[80vh] md:h-[85vh] overflow-hidden">
-      <div className="relative w-full h-full">
-        <img
-          src="https://cdn.poehali.dev/files/c80476aa-bd53-4839-92a0-04dd2a2f6259.png"
-          alt="вещи с душой и теплом"
-          className="w-full h-full object-cover md:object-center object-[50%_35%]"
-        />
+    <section className="relative overflow-hidden">
+      <div className="relative w-full">
+        <picture>
+          <source 
+            media="(max-width: 768px)" 
+            srcSet="https://cdn.poehali.dev/files/c48413ed-e345-42ea-80d3-e1633e6f8b93.png"
+          />
+          <img
+            src="https://cdn.poehali.dev/files/c80476aa-bd53-4839-92a0-04dd2a2f6259.png"
+            alt="вещи с душой и теплом"
+            className="w-full md:h-[85vh] md:object-cover"
+          />
+        </picture>
         <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60"></div>
         
         <div className="absolute inset-0 flex flex-col items-center justify-end text-center px-6 pb-16 md:pb-20 z-10">
