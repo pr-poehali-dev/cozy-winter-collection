@@ -64,7 +64,7 @@ export default function Contacts() {
                 </h2>
                 <div className="flex justify-center md:justify-start gap-4">
                   <a
-                    href="https://t.me/azaluk_shop_reviews"
+                    href="https://t.me/azalukk"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex flex-col items-center gap-2 group"
@@ -72,7 +72,7 @@ export default function Contacts() {
                     <div className="w-11 h-11 rounded-full bg-primary/90 flex items-center justify-center group-hover:bg-primary group-hover:scale-105 transition-all">
                       <Icon name="Send" size={18} className="text-white" strokeWidth={1.5} />
                     </div>
-                    <span className="text-xs text-muted-foreground font-light">отзывы</span>
+                    <span className="text-xs text-muted-foreground font-light">телеграм-канал</span>
                   </a>
                   <a
                     href="https://www.youtube.com/@azaluk"
