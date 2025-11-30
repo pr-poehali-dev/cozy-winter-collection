@@ -65,9 +65,9 @@ export default function ProductCatalog({
                     осталось {product.stock} {product.stock === 1 ? 'шт' : 'шт'}{product.badge === 'limited' && <span style={{ color: '#8B0000' }} className="ml-2">limited</span>}
                   </p>
                 )}
-                <div className="flex items-center justify-center gap-3">
-                  <p className="text-sm md:text-base font-light text-primary whitespace-nowrap">{product.price.toLocaleString('ru-RU')} ₽</p>
-                  {product.badge !== 'soon' && (
+                {product.badge !== 'soon' && (
+                  <div className="flex items-center justify-center gap-3">
+                    <p className="text-sm md:text-base font-light text-primary whitespace-nowrap">{product.price.toLocaleString('ru-RU')} ₽</p>
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
@@ -79,8 +79,8 @@ export default function ProductCatalog({
                       <Icon name="ShoppingBag" size={14} strokeWidth={1.5} />
                       <span className="text-sm">+</span>
                     </button>
-                  )}
-                </div>
+                  </div>
+                )}
               </div>
             </div>
           ))}
