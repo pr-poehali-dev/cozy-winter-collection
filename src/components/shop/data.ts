@@ -130,7 +130,6 @@ export const products: Product[] = [
         composition: '32% шерсть, 32% акрил, 24% мохер, 8% шёлк, 3% люрекс\nтолстая тёплая пряжа\nручная стирка в холодной воде\nсушить в горизонтальном положении',
         weight: '120 г',
         gallery: [
-          'https://cdn.poehali.dev/files/af3c7eaf-a178-48a0-996d-7f0b079af3fc.jpg',
           'https://cdn.poehali.dev/files/2c716feb-82d6-4f8b-93a4-ef4d89c69a23.jpg',
           'https://cdn.poehali.dev/files/c1b610c0-f9e3-4eb2-b23e-3a0a65c662c8.jpg',
           'https://cdn.poehali.dev/files/8dad26b9-7272-4e61-b7c2-1d988bc702cd.jpg',
