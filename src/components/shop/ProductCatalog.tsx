@@ -60,9 +60,9 @@ export default function ProductCatalog({
                     soon
                   </p>
                 )}
-                {product.stock !== undefined && product.stock <= 5 && product.badge !== 'soon' && (
+                {product.stock !== undefined && product.stock <= 5 && product.badge !== 'soon' && product.badge === 'limited' && (
                   <p className="text-xs text-muted-foreground">
-                    в наличии{product.badge === 'limited' && <span style={{ color: '#8B0000' }} className="ml-2">limited</span>}
+                    осталось {product.stock} шт<span style={{ color: '#8B0000' }} className="ml-2">limited</span>
                   </p>
                 )}
                 {product.badge !== 'soon' && (
