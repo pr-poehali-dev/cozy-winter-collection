@@ -55,6 +55,15 @@ export default function Header({
   const [promoDiscount, setPromoDiscount] = useState(0);
 
   useEffect(() => {
+    const pendingOrder = localStorage.getItem('pending_order');
+    if (pendingOrder) {
+      setOrderNumber(pendingOrder);
+      setIsCartOpen(true);
+      setShowMobilePaymentWaiting(true);
+    }
+  }, [setIsCartOpen]);
+
+  useEffect(() => {
     if (!orderNumber) return;
 
     const checkPaymentStatus = async () => {
@@ -67,6 +76,7 @@ export default function Header({
           const data = await response.json();
           
           if (data.status === 'paid') {
+            localStorage.removeItem('pending_order');
             setIsCartOpen(false);
             setShowPaymentIframe(false);
             setShowMobilePaymentWaiting(false);
@@ -145,12 +155,8 @@ export default function Header({
       const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
       
       if (isMobile) {
-        window.open(result.payment_url, '_blank');
-        setOrderNumber(result.order_number);
-        setShowCheckoutForm(false);
-        setShowPaymentIframe(false);
-        setShowMobilePaymentWaiting(true);
-        setPaymentUrl(result.payment_url);
+        localStorage.setItem('pending_order', result.order_number);
+        window.location.href = result.payment_url;
       } else {
         setPaymentUrl(result.payment_url);
         setOrderNumber(result.order_number);
@@ -325,18 +331,9 @@ export default function Header({
                   <div className="space-y-2">
                     <h3 className="text-xl font-light text-primary">ожидаем оплату</h3>
                     <p className="text-sm text-muted-foreground font-light leading-relaxed">
-                      завершите оплату в открывшемся окне. после успешной оплаты вы автоматически перейдёте на страницу подтверждения заказа
+                      проверяем статус вашего заказа... после успешной оплаты вы автоматически перейдёте на страницу подтверждения
                     </p>
                   </div>
-                  <a
-                    href={paymentUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors text-sm font-light underline"
-                  >
-                    <Icon name="ExternalLink" size={16} />
-                    <span>открыть окно оплаты снова</span>
-                  </a>
                 </div>
               </div>
             ) : showPaymentIframe ? (
