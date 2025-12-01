@@ -17,6 +17,7 @@ interface ProductDetailsProps {
 export default function ProductDetails({ product, onClose, addToCart, setIsCartOpen, cart }: ProductDetailsProps) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [selectedVariant, setSelectedVariant] = useState<string | null>(null);
+  const [isManualSelection, setIsManualSelection] = useState(false);
   const [showAddedNotification, setShowAddedNotification] = useState(false);
   const [buttonState, setButtonState] = useState<'add' | 'added' | 'checkout'>('add');
   const [isCompositionOpen, setIsCompositionOpen] = useState(false);
@@ -30,6 +31,7 @@ export default function ProductDetails({ product, onClose, addToCart, setIsCartO
     setIsCompositionOpen(false);
     setIsSizingOpen(false);
     setButtonState('add');
+    setIsManualSelection(false);
     
     // Auto-select first variant if product has variants
     if (product?.variants && product.variants.length > 0) {
@@ -116,7 +118,7 @@ export default function ProductDetails({ product, onClose, addToCart, setIsCartO
     return Array.from(allImages);
   };
   
-  const images = selectedVariant && currentVariant?.gallery 
+  const images = selectedVariant && currentVariant?.gallery && isManualSelection
     ? currentVariant.gallery 
     : getAllImages();
   
@@ -256,6 +258,7 @@ export default function ProductDetails({ product, onClose, addToCart, setIsCartO
                           key={variant.id}
                           onClick={() => {
                             setSelectedVariant(variant.id);
+                            setIsManualSelection(true);
                           }}
                           className={`w-full text-left p-3 rounded-lg border-2 transition-all ${
                             selectedVariant === variant.id
