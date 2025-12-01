@@ -1,4 +1,5 @@
 {
+  "send-email": "https://functions.poehali.dev/76b36dee-db70-4316-b6a8-fed039d8df8c",
   "telegram-bot-setup": "https://functions.poehali.dev/aa1ac8a7-52d8-4fd3-b9f3-54fae1e02751",
   "telegram-bot": "https://functions.poehali.dev/93787d28-4035-466b-9508-7fbd757f53f8",
   "promo-validate": "https://functions.poehali.dev/9fc2ae98-daea-4d40-98de-6d1a45d029cb",

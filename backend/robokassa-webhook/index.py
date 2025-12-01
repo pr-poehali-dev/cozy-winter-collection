@@ -106,7 +106,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             UPDATE orders 
             SET status = %s, paid_at = CURRENT_TIMESTAMP, updated_at = CURRENT_TIMESTAMP
             WHERE robokassa_inv_id = %s AND status = %s
-            RETURNING id, order_number
+            RETURNING id, order_number, user_email, user_name
         """, ('paid', int(inv_id), 'pending'))
         
         result = cur.fetchone()
@@ -136,16 +136,24 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                 'isBase64Encoded': False
             }
         
+        order_id, order_number, user_email, user_name = result
+        
         conn.commit()
         cur.close()
         
         try:
             import urllib.request
+            from urllib.parse import quote
+            
             notify_url = 'https://functions.poehali.dev/93787d28-4035-466b-9508-7fbd757f53f8?action=notify'
             req = urllib.request.Request(notify_url, method='GET')
             urllib.request.urlopen(req, timeout=5)
+            
+            email_url = f'https://functions.poehali.dev/76b36dee-db70-4316-b6a8-fed039d8df8c?action=paid&order_number={quote(order_number)}&user_email={quote(user_email)}&user_name={quote(user_name)}'
+            req = urllib.request.Request(email_url, method='GET')
+            urllib.request.urlopen(req, timeout=5)
         except Exception as notify_error:
-            print(f"Failed to send telegram notification: {notify_error}")
+            print(f"Failed to send notifications: {notify_error}")
 
         return {
             'statusCode': 200,

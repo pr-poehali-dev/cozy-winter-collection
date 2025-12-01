@@ -1,0 +1,14 @@
+{
+  "tests": [
+    {
+      "name": "Test email sending with valid action",
+      "method": "GET",
+      "path": "/?action=paid&order_number=ORD-TEST-123&user_email=test@example.com&user_name=Тест",
+      "expectedStatus": 200,
+      "expectedBody": {
+        "success": true
+      },
+      "bodyMatcher": "partial"
+    }
+  ]
+}

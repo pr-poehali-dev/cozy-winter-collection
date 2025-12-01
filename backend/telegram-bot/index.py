@@ -260,6 +260,17 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                     order = cur.fetchone()
                     
                     if order:
+                        if new_status in ['shipped', 'delivered']:
+                            try:
+                                import urllib.request
+                                from urllib.parse import quote
+                                
+                                email_action = 'shipped' if new_status == 'shipped' else 'delivered'
+                                email_url = f'https://functions.poehali.dev/76b36dee-db70-4316-b6a8-fed039d8df8c?action={email_action}&order_number={quote(order["order_number"])}&user_email={quote(order["user_email"])}&user_name={quote(order["user_name"])}'
+                                req = urllib.request.Request(email_url, method='GET')
+                                urllib.request.urlopen(req, timeout=5)
+                            except Exception as email_error:
+                                print(f"Failed to send email: {email_error}")
                         # Отправляем обновлённое сообщение
                         msg = format_order_message(order)
                         keyboard = get_order_keyboard(order_id, new_status)
