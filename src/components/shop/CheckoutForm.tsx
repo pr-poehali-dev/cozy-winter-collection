@@ -2,7 +2,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { toast } from '@/hooks/use-toast';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 interface CheckoutData {
   name: string;
@@ -41,6 +41,30 @@ export default function CheckoutForm({
   const [hasGift, setHasGift] = useState(false);
   const giftEmojis = ['❄️', '🔮', '✨'];
 
+  useEffect(() => {
+    const savedData = localStorage.getItem('checkoutUserData');
+    if (savedData) {
+      const parsed = JSON.parse(savedData);
+      setCheckoutData({ 
+        ...checkoutData, 
+        name: parsed.name || '',
+        email: parsed.email || '',
+        phone: parsed.phone || '+7',
+        telegram: parsed.telegram || '@'
+      });
+    }
+  }, []);
+
+  const saveUserData = (data: CheckoutData) => {
+    const userDataToSave = {
+      name: data.name,
+      email: data.email,
+      phone: data.phone,
+      telegram: data.telegram
+    };
+    localStorage.setItem('checkoutUserData', JSON.stringify(userDataToSave));
+  };
+
   const formatPhoneNumber = (value: string) => {
     const cleaned = value.replace(/\D/g, '');
     
@@ -69,7 +93,9 @@ export default function CheckoutForm({
     
     if (cleaned.length <= 11) {
       const formatted = formatPhoneNumber(cleaned.startsWith('7') ? cleaned : '7' + cleaned);
-      setCheckoutData({ ...checkoutData, phone: formatted });
+      const newData = { ...checkoutData, phone: formatted };
+      setCheckoutData(newData);
+      saveUserData(newData);
     }
   };
 
@@ -80,12 +106,65 @@ export default function CheckoutForm({
       value = '@' + value.replace(/@/g, '');
     }
     
-    setCheckoutData({ ...checkoutData, telegram: value });
+    const newData = { ...checkoutData, telegram: value };
+    setCheckoutData(newData);
+    saveUserData(newData);
   };
 
   return (
     <div className="flex-1 flex flex-col mt-8 overflow-hidden">
       <div className="space-y-4 flex-1 overflow-y-auto pb-4 px-4 md:px-6">
+        <div className="space-y-2">
+          <Label htmlFor="name">Имя</Label>
+          <Input
+            id="name"
+            type="text"
+            value={checkoutData.name}
+            onChange={(e) => {
+              const newData = { ...checkoutData, name: e.target.value };
+              setCheckoutData(newData);
+              saveUserData(newData);
+            }}
+            className="font-light"
+          />
+        </div>
+        <div className="space-y-2">
+          <Label htmlFor="email">Email</Label>
+          <Input
+            id="email"
+            type="email"
+            value={checkoutData.email}
+            onChange={(e) => {
+              const newData = { ...checkoutData, email: e.target.value };
+              setCheckoutData(newData);
+              saveUserData(newData);
+            }}
+            className="font-light"
+            placeholder="example@mail.ru"
+          />
+        </div>
+        <div className="space-y-2">
+          <Label htmlFor="phone">Телефон</Label>
+          <Input
+            id="phone"
+            type="tel"
+            value={checkoutData.phone || '+7'}
+            onChange={handlePhoneChange}
+            className="font-light"
+          />
+        </div>
+        <div className="space-y-2">
+          <Label htmlFor="telegram">
+            Ник в телеграм
+          </Label>
+          <Input
+            id="telegram"
+            type="text"
+            value={checkoutData.telegram || '@'}
+            onChange={handleTelegramChange}
+            className="font-light"
+          />
+        </div>
         <div className="space-y-3">
           <Label>Способ доставки</Label>
           <div className="grid grid-cols-2 gap-3">
@@ -121,37 +200,6 @@ export default function CheckoutForm({
             </button>
           </div>
         </div>
-        <div className="space-y-2">
-          <Label htmlFor="name">Имя</Label>
-          <Input
-            id="name"
-            type="text"
-            value={checkoutData.name}
-            onChange={(e) => setCheckoutData({ ...checkoutData, name: e.target.value })}
-            className="font-light"
-          />
-        </div>
-        <div className="space-y-2">
-          <Label htmlFor="email">Email</Label>
-          <Input
-            id="email"
-            type="email"
-            value={checkoutData.email}
-            onChange={(e) => setCheckoutData({ ...checkoutData, email: e.target.value })}
-            className="font-light"
-            placeholder="example@mail.ru"
-          />
-        </div>
-        <div className="space-y-2">
-          <Label htmlFor="phone">Телефон</Label>
-          <Input
-            id="phone"
-            type="tel"
-            value={checkoutData.phone || '+7'}
-            onChange={handlePhoneChange}
-            className="font-light"
-          />
-        </div>
         {checkoutData.deliveryType === 'pvz' ? (
           <div className="space-y-2">
             <Label htmlFor="address">Адрес ПВЗ Ozon</Label>
@@ -174,24 +222,11 @@ export default function CheckoutForm({
             <div className="p-3 rounded-lg bg-secondary/50 border border-border">
               <p className="text-sm font-light">Москва, м. Тульская</p>
             </div>
+            <p className="text-xs text-muted-foreground font-light mt-2">
+              свяжемся для согласования времени встречи
+            </p>
           </div>
-        )}
-        <div className="space-y-2">
-          <Label htmlFor="telegram">
-            Ник в телеграм
-          </Label>
-          <Input
-            id="telegram"
-            type="text"
-            value={checkoutData.telegram || '@'}
-            onChange={handleTelegramChange}
-            className="font-light"
-          />
-          <p className="text-xs text-muted-foreground font-light">
-            {checkoutData.deliveryType === 'pickup' 
-              ? 'свяжемся для согласования времени встречи'
-              : 'напишем вам только в случае возникновения вопросов по заказу'}
-          </p>
+        )
         </div>
         <div className="space-y-2">
           <Label htmlFor="promoCode">Промокод</Label>
