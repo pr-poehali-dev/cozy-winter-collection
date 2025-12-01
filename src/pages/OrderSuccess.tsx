@@ -19,6 +19,15 @@ interface OrderData {
   delivery_address: string;
 }
 
+const statusData: Record<string, { label: string; emoji: string; color: string; description: string }> = {
+  pending: { label: 'ожидает оплаты', emoji: '⏳', color: 'text-yellow-600', description: 'заказ создан, ожидаем подтверждение оплаты' },
+  paid: { label: 'оплачен', emoji: '✅', color: 'text-green-600', description: 'оплата получена, начинаем собирать заказ' },
+  processing: { label: 'готовится', emoji: '📦', color: 'text-blue-600', description: 'создаём ваш заказ с любовью' },
+  shipped: { label: 'отправлен', emoji: '🚚', color: 'text-purple-600', description: 'заказ в пути к вам' },
+  delivered: { label: 'доставлен', emoji: '🎉', color: 'text-green-600', description: 'заказ у вас! наслаждайтесь покупкой' },
+  cancelled: { label: 'отменён', emoji: '❌', color: 'text-red-600', description: 'заказ был отменён' }
+};
+
 export default function OrderSuccess() {
   const [searchParams] = useSearchParams();
   const orderId = searchParams.get('order');
@@ -52,6 +61,9 @@ export default function OrderSuccess() {
     };
 
     fetchOrderData();
+    
+    const interval = setInterval(fetchOrderData, 10000);
+    return () => clearInterval(interval);
   }, [orderId]);
 
   if (loading) {
@@ -109,6 +121,41 @@ export default function OrderSuccess() {
         </div>
 
         <div className="bg-card border border-border rounded-lg p-6 mb-8">
+          <h2 className="text-xl font-light text-primary mb-4">статус заказа</h2>
+          <div className="flex items-center gap-4">
+            <span className="text-4xl">{statusData[orderData.status]?.emoji || '📋'}</span>
+            <div className="flex-1">
+              <p className={`text-lg font-medium ${statusData[orderData.status]?.color || 'text-primary'}`}>
+                {statusData[orderData.status]?.label || orderData.status}
+              </p>
+              <p className="text-sm text-muted-foreground mt-1">
+                {statusData[orderData.status]?.description || 'обрабатываем заказ'}
+              </p>
+            </div>
+          </div>
+          
+          <div className="mt-6 flex justify-between items-center relative">
+            <div className="absolute top-3 left-0 right-0 h-0.5 bg-border"></div>
+            {['paid', 'processing', 'shipped', 'delivered'].map((status, idx) => {
+              const isCompleted = ['paid', 'processing', 'shipped', 'delivered'].indexOf(orderData.status) >= idx;
+              const isCurrent = orderData.status === status;
+              return (
+                <div key={status} className="relative z-10 flex flex-col items-center">
+                  <div className={`w-6 h-6 rounded-full flex items-center justify-center text-xs transition-colors ${
+                    isCompleted ? 'bg-green-600 text-white' : isCurrent ? 'bg-yellow-500 text-white' : 'bg-border text-muted-foreground'
+                  }`}>
+                    {isCompleted ? '✓' : idx + 1}
+                  </div>
+                  <span className="text-[10px] text-muted-foreground mt-2 text-center max-w-[60px] leading-tight">
+                    {statusData[status]?.emoji}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        <div className="bg-card border border-border rounded-lg p-6 mb-8">
           <h2 className="text-xl font-light text-primary mb-4">товары в заказе</h2>
           <div className="space-y-3">
             {orderData.items.length > 0 ? (
@@ -141,7 +188,18 @@ export default function OrderSuccess() {
           </div>
         </div>
 
-        <p className="text-center text-sm text-muted-foreground mt-8">свяжитесь с нами, если есть вопросы по заказу 💌</p>
+        <div className="text-center mt-8">
+          <p className="text-sm text-muted-foreground mb-3">есть вопросы по заказу? 💌</p>
+          <a 
+            href="https://t.me/azaluk_care" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors group"
+          >
+            <Icon name="Send" size={16} className="group-hover:translate-x-0.5 transition-transform" />
+            <span className="text-sm font-light">написать в поддержку @azaluk_care</span>
+          </a>
+        </div>
       </main>
     </div>
   );
