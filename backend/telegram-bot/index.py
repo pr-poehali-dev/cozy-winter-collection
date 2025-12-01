@@ -262,23 +262,27 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                     if order:
                         delivery_type = order.get('delivery_type', 'pvz')
                         
+                        # Отправляем email при смене статуса на shipped или delivered
                         should_send_email = False
+                        email_action = None
+                        
                         if new_status == 'shipped' and delivery_type == 'pvz':
                             should_send_email = True
+                            email_action = 'shipped'
                         elif new_status == 'delivered':
                             should_send_email = True
+                            email_action = 'delivered'
                         
-                        if should_send_email:
+                        if should_send_email and email_action:
                             try:
                                 import urllib.request
                                 from urllib.parse import quote
                                 
-                                email_action = 'shipped' if new_status == 'shipped' else 'delivered'
-                                email_url = f'https://functions.poehali.dev/76b36dee-db70-4316-b6a8-fed039d8df8c?action={email_action}&order_number={quote(order["order_number"])}&user_email={quote(order["user_email"])}&user_name={quote(order["user_name"])}'
+                                email_url = f'https://functions.poehali.dev/76b36dee-db70-4316-b6a8-fed039d8df8c?action={email_action}&order_number={quote(order["order_number"])}'
                                 req = urllib.request.Request(email_url, method='GET')
                                 urllib.request.urlopen(req, timeout=5)
                             except Exception as email_error:
-                                print(f"Failed to send email: {email_error}")
+                                print(f"Failed to send email notification: {email_error}")
                         # Отправляем обновлённое сообщение
                         msg = format_order_message(order)
                         keyboard = get_order_keyboard(order_id, new_status)
