@@ -226,8 +226,7 @@ export default function CheckoutForm({
               свяжемся для согласования времени встречи
             </p>
           </div>
-        )
-        </div>
+        )}
         <div className="space-y-2">
           <Label htmlFor="promoCode">Промокод</Label>
           <div className="flex gap-2">
