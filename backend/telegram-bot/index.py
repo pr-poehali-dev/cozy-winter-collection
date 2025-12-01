@@ -56,7 +56,7 @@ def send_telegram_message(chat_id: str, text: str, reply_markup: Optional[Dict] 
         print(f"Error sending telegram message: {e}")
         return False
 
-def format_order_message(order: Dict) -> str:
+def format_order_message(order: Dict, items: list = None) -> str:
     """Форматирование сообщения о заказе"""
     status_emoji = {
         'pending': '⏳',
@@ -79,6 +79,13 @@ def format_order_message(order: Dict) -> str:
     msg += f"{status_emoji.get(status, '📋')} Статус: <b>{status}</b>\n"
     msg += f"💰 Сумма: <b>{float(order['amount']):.0f} ₽</b>\n\n"
     
+    # Состав заказа
+    if items:
+        msg += f"🛍 <b>Состав заказа:</b>\n"
+        for item in items:
+            msg += f"   • {item['product_name']} x{item['quantity']} — {float(item['product_price']):.0f} ₽\n"
+        msg += "\n"
+    
     msg += f"👤 <b>Клиент:</b>\n"
     msg += f"   • {order['user_name']}\n"
     msg += f"   • {order['user_email']}\n"
@@ -97,8 +104,14 @@ def format_order_message(order: Dict) -> str:
     if order.get('order_comment'):
         msg += f"\n💬 <b>Комментарий:</b>\n{order['order_comment']}\n"
     
+    # Время создания
     created = datetime.fromisoformat(str(order['created_at']))
-    msg += f"\n🕐 {created.strftime('%d.%m.%Y %H:%M')}"
+    msg += f"\n🕐 Создан: {created.strftime('%d.%m.%Y %H:%M')} МСК"
+    
+    # Время оплаты
+    if order.get('paid_at'):
+        paid = datetime.fromisoformat(str(order['paid_at']))
+        msg += f"\n✅ Оплачен: {paid.strftime('%d.%m.%Y %H:%M')} МСК"
     
     return msg
 
@@ -106,11 +119,7 @@ def get_order_keyboard(order_id: int, status: str):
     """Клавиатура для управления заказом"""
     buttons = []
     
-    if status == 'pending':
-        buttons.append([
-            {'text': '✅ Оплачен', 'callback_data': f'status_{order_id}_paid'}
-        ])
-    elif status == 'paid':
+    if status == 'paid':
         buttons.append([
             {'text': '📦 В обработке', 'callback_data': f'status_{order_id}_processing'}
         ])
@@ -122,10 +131,6 @@ def get_order_keyboard(order_id: int, status: str):
         buttons.append([
             {'text': '🎉 Доставлен', 'callback_data': f'status_{order_id}_delivered'}
         ])
-    
-    buttons.append([
-        {'text': '❌ Отменить', 'callback_data': f'status_{order_id}_cancelled'}
-    ])
     
     return {'inline_keyboard': buttons}
 
@@ -177,20 +182,19 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                         help_text = "🤖 <b>Azaluk Shop Bot</b>\n\n"
                         help_text += "Доступные команды:\n\n"
                         help_text += "/orders - все заказы (последние 10)\n"
-                        help_text += "/new - новые заказы (pending)\n"
                         help_text += "/paid - оплаченные заказы\n"
                         help_text += "/processing - в обработке\n"
                         help_text += "/shipped - отправленные\n"
+                        help_text += "/cancel_order ORD-XXX - отменить заказ\n"
                         help_text += "/help - эта справка\n\n"
                         help_text += "Нажимай на кнопки под заказами чтобы менять статусы! ✨"
                         
                         send_telegram_message(str(chat_id), help_text)
                     
-                    elif command in ['orders', 'new', 'paid', 'processing', 'shipped', 'delivered']:
+                    elif command in ['orders', 'paid', 'processing', 'shipped', 'delivered']:
                         # Получаем заказы с нужным статусом
                         status_map = {
                             'orders': None,
-                            'new': 'pending',
                             'paid': 'paid',
                             'processing': 'processing',
                             'shipped': 'shipped',
@@ -222,9 +226,43 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                             send_telegram_message(str(chat_id), f'Заказов не найдено')
                         else:
                             for order in orders:
-                                msg = format_order_message(order)
+                                # Получаем items для каждого заказа
+                                cur.execute(
+                                    """
+                                    SELECT product_name, product_price, quantity 
+                                    FROM t_p3876556_cozy_winter_collecti.order_items 
+                                    WHERE order_id = %s
+                                    """,
+                                    (order['id'],)
+                                )
+                                items = cur.fetchall()
+                                msg = format_order_message(order, items)
                                 keyboard = get_order_keyboard(order['id'], order['status'])
                                 send_telegram_message(str(chat_id), msg, keyboard)
+                    
+                    elif command == 'cancel_order':
+                        # Отмена заказа: /cancel_order ORD-20251201-123456
+                        parts = text.split()
+                        if len(parts) < 2:
+                            send_telegram_message(str(chat_id), '❌ Укажи номер заказа: /cancel_order ORD-XXXXXXXX-XXXXXX')
+                        else:
+                            order_number = parts[1]
+                            cur.execute(
+                                """
+                                UPDATE t_p3876556_cozy_winter_collecti.orders 
+                                SET status = 'cancelled', updated_at = NOW() 
+                                WHERE order_number = %s
+                                RETURNING *
+                                """,
+                                (order_number,)
+                            )
+                            conn.commit()
+                            order = cur.fetchone()
+                            
+                            if order:
+                                send_telegram_message(str(chat_id), f'✅ Заказ {order_number} отменён')
+                            else:
+                                send_telegram_message(str(chat_id), f'❌ Заказ {order_number} не найден')
                     
                     else:
                         send_telegram_message(str(chat_id), f'Неизвестная команда: {command}\nИспользуй /help')
@@ -283,8 +321,20 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                                 urllib.request.urlopen(req, timeout=5)
                             except Exception as email_error:
                                 print(f"Failed to send email notification: {email_error}")
+                        
+                        # Получаем items для обновлённого сообщения
+                        cur.execute(
+                            """
+                            SELECT product_name, product_price, quantity 
+                            FROM t_p3876556_cozy_winter_collecti.order_items 
+                            WHERE order_id = %s
+                            """,
+                            (order_id,)
+                        )
+                        items = cur.fetchall()
+                        
                         # Отправляем обновлённое сообщение
-                        msg = format_order_message(order)
+                        msg = format_order_message(order, items)
                         keyboard = get_order_keyboard(order_id, new_status)
                         
                         # Обновляем сообщение
@@ -341,17 +391,28 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                     'body': json.dumps({'error': 'TELEGRAM_ADMIN_CHAT_ID not set'})
                 }
             
-            # Получаем неотправленные заказы
+            # Получаем только оплаченные неотправленные заказы
             cur.execute("""
                 SELECT * FROM t_p3876556_cozy_winter_collecti.orders 
-                WHERE telegram_notified = FALSE 
+                WHERE telegram_notified = FALSE AND status = 'paid'
                 ORDER BY created_at DESC
             """)
             orders = cur.fetchall()
             
             sent_count = 0
             for order in orders:
-                msg = format_order_message(order)
+                # Получаем items для заказа
+                cur.execute(
+                    """
+                    SELECT product_name, product_price, quantity 
+                    FROM t_p3876556_cozy_winter_collecti.order_items 
+                    WHERE order_id = %s
+                    """,
+                    (order['id'],)
+                )
+                items = cur.fetchall()
+                
+                msg = format_order_message(order, items)
                 keyboard = get_order_keyboard(order['id'], order['status'])
                 
                 if send_telegram_message(admin_chat_id, msg, keyboard):
