@@ -150,12 +150,12 @@ export default function ProductDetails({ product, onClose, addToCart, setIsCartO
         }
       }}>
         <DialogContent 
-          className="max-w-7xl w-[95vw] h-[90vh] p-0 overflow-hidden"
+          className="max-w-7xl w-full h-full sm:w-[95vw] sm:h-[90vh] p-0 overflow-hidden"
           onOpenAutoFocus={(e) => e.preventDefault()}
         >
-          <div className="flex flex-col lg:flex-row h-full overflow-y-auto bg-gradient-to-br from-card via-secondary/30 to-card">
+          <div className="flex flex-col lg:flex-row h-full overflow-y-auto bg-gradient-to-br from-card via-secondary/30 to-card pb-24 sm:pb-0">
             {/* Left side - Carousel */}
-            <div className="lg:w-1/2 p-6 lg:p-12 flex items-center justify-center">
+            <div className="lg:w-1/2 p-6 lg:p-12 pt-16 sm:pt-6 flex items-center justify-center">
               <div className="w-full max-w-xl">
                 <div className="relative overflow-hidden rounded-2xl shadow-lg bg-card">
                   <div className="relative w-full aspect-square">
@@ -218,7 +218,7 @@ export default function ProductDetails({ product, onClose, addToCart, setIsCartO
             </div>
             
             {/* Right side - Info */}
-            <div className="lg:w-1/2 p-6 lg:p-12 flex items-start overflow-y-auto">
+            <div className="lg:w-1/2 p-6 lg:p-12 flex items-start">
               <div className="w-full max-w-md space-y-6">
                 <div className="space-y-3">
                   <h1 className="text-2xl font-light text-primary leading-tight">
@@ -379,6 +379,34 @@ export default function ProductDetails({ product, onClose, addToCart, setIsCartO
               </div>
             </div>
           </div>
+          
+          {/* Mobile Button */}
+          {product.badge !== 'soon' && (
+            <div className="sm:hidden fixed bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-card via-card to-transparent z-50">
+              <Button
+                size="lg"
+                className={`w-full px-8 rounded-full text-sm py-4 transition-all shadow-2xl font-light ${
+                  buttonState === 'checkout'
+                    ? '!bg-primary hover:!bg-primary/90 !text-white'
+                    : '!bg-primary hover:!bg-primary/90'
+                }`}
+                onClick={handleButtonClick}
+                disabled={buttonState !== 'checkout' && product.variants && product.variants.length > 0 && !selectedVariant}
+              >
+                {buttonState === 'checkout' ? (
+                  <>
+                    <Icon name="ShoppingCart" size={20} className="mr-2" />
+                    оформить заказ
+                  </>
+                ) : (
+                  <>
+                    <Icon name="ShoppingBag" size={20} className="mr-2" />
+                    добавить в корзину
+                  </>
+                )}
+              </Button>
+            </div>
+          )}
         </DialogContent>
       </Dialog>
     </>
