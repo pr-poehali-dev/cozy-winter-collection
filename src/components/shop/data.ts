@@ -332,5 +332,19 @@ export const products: Product[] = [
       'https://cdn.poehali.dev/files/65112f57-0812-40c7-a01b-0788539bae2c.jpg',
       'https://cdn.poehali.dev/files/a29583c6-557a-4031-9830-bf989cf21377.jpeg'
     ]
+  },
+  {
+    id: 9,
+    name: 'т е с т о в ы й 🧪 :: товар',
+    description: 'тестовый товар для проверки',
+    price: 10,
+    category: 'аксессуары',
+    image: 'https://cdn.poehali.dev/files/59e4fcf5-58c4-4b13-971c-041b7c1d5e85.jpg',
+    storyDescription: 'это тестовый товар за 10 рублей для проверки работы магазина',
+    composition: 'тестовый состав',
+    stock: 999,
+    gallery: [
+      'https://cdn.poehali.dev/files/59e4fcf5-58c4-4b13-971c-041b7c1d5e85.jpg'
+    ]
   }
 ];
