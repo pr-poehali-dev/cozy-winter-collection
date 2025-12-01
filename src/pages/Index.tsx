@@ -138,6 +138,7 @@ export default function Index() {
         cartTotal={cartTotal}
         cartCount={cartCount}
         addToCart={addToCart}
+        onProductClick={setSelectedProduct}
       />
 
       <HeroCarousel />

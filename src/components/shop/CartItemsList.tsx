@@ -10,6 +10,7 @@ interface CartItemsListProps {
   isCheckoutLoading: boolean;
   onCheckout: () => void;
   addToCart: (product: Product) => void;
+  onProductClick: (product: Product) => void;
 }
 
 export default function CartItemsList({
@@ -19,7 +20,8 @@ export default function CartItemsList({
   cartTotal,
   isCheckoutLoading,
   onCheckout,
-  addToCart
+  addToCart,
+  onProductClick
 }: CartItemsListProps) {
   const cartProductIds = cart.map(item => item.id);
   
@@ -35,15 +37,23 @@ export default function CartItemsList({
         {cart.map((item, index) => {
           const variantId = 'selectedVariantId' in item ? item.selectedVariantId : undefined;
           const cartKey = variantId ? `${item.id}-${variantId}` : `${item.id}-${index}`;
+          const originalProduct = products.find(p => p.id === item.id);
+          
           return (
           <div key={cartKey} className="flex gap-4 pb-4 border-b border-border">
             <img 
               src={item.image} 
               alt={item.name}
-              className="w-20 h-20 object-cover rounded-lg"
+              className="w-20 h-20 object-cover rounded-lg cursor-pointer hover:opacity-80 transition-opacity"
+              onClick={() => originalProduct && onProductClick(originalProduct)}
             />
             <div className="flex-1">
-              <h3 className="font-light text-sm text-primary">{item.name}</h3>
+              <h3 
+                className="font-light text-sm text-primary cursor-pointer hover:underline"
+                onClick={() => originalProduct && onProductClick(originalProduct)}
+              >
+                {item.name}
+              </h3>
               <p className="text-sm text-muted-foreground mt-1 font-light">{item.price.toLocaleString('ru-RU')} р.</p>
               <div className="flex items-center gap-2 mt-2">
                 <button 

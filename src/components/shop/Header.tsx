@@ -19,6 +19,7 @@ interface HeaderProps {
   cartTotal: number;
   cartCount: number;
   addToCart: (product: Product) => void;
+  onProductClick: (product: Product) => void;
 }
 
 export default function Header({
@@ -29,7 +30,8 @@ export default function Header({
   removeFromCart,
   cartTotal,
   cartCount,
-  addToCart
+  addToCart,
+  onProductClick
 }: HeaderProps) {
   const navigate = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -309,6 +311,7 @@ export default function Header({
                 isCheckoutLoading={isCheckoutLoading}
                 onCheckout={() => setShowCheckoutForm(true)}
                 addToCart={addToCart}
+                onProductClick={onProductClick}
               />
             )}
             </SheetContent>
