@@ -69,7 +69,7 @@ export default function ProductCatalog({
                 />
               </div>
               <div className="text-center space-y-2">
-                <h3 className="text-sm md:text-base font-light text-primary leading-relaxed px-2 md:px-4 line-clamp-1">
+                <h3 className="text-xs md:text-base font-light text-primary leading-relaxed px-1 md:px-4 line-clamp-2 min-h-[2.5rem] md:min-h-0 md:line-clamp-1">
                   {product.name}
                 </h3>
                 {product.badge === 'soon' && (
@@ -83,20 +83,8 @@ export default function ProductCatalog({
                   </p>
                 )}
                 {product.badge !== 'soon' && (
-                  <div className="flex items-center justify-center gap-3">
-                    <p className="text-sm md:text-base font-light text-primary whitespace-nowrap">{product.price.toLocaleString('ru-RU')} ₽</p>
-                    <button
-                      onClick={(e) => handleAddToCart(e, product)}
-                      className={`px-3 py-1.5 rounded-full flex items-center gap-1 transition-all hover:scale-105 font-light ${
-                        isInCart(product.id)
-                          ? 'bg-primary text-white'
-                          : 'bg-primary/10 hover:bg-primary/20 text-primary'
-                      }`}
-                      aria-label="Добавить в корзину"
-                    >
-                      <Icon name="ShoppingBag" size={14} strokeWidth={1.5} />
-                      <span className="text-sm">+</span>
-                    </button>
+                  <div className="flex items-center justify-center">
+                    <p className="text-xs md:text-base font-light text-primary">{product.price.toLocaleString('ru-RU')} ₽</p>
                   </div>
                 )}
               </div>
