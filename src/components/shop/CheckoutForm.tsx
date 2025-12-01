@@ -261,7 +261,7 @@ export default function CheckoutForm({
           />
         </div>
       </div>
-      <div className="flex-shrink-0 border-t border-border pt-4 mt-4 pb-6">
+      <div className="flex-shrink-0 border-t border-border pt-4 mt-4 pb-6 px-4 md:px-6">
         <div className="space-y-2 mb-4">
           {promoDiscount > 0 && (
             <div className="flex justify-between items-center text-sm">
