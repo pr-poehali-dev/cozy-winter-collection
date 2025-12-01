@@ -280,7 +280,7 @@ export default function CheckoutForm({
           disabled={isCheckoutLoading}
           className="w-full bg-primary text-white py-3 rounded-lg font-light hover:opacity-90 transition-opacity disabled:opacity-50"
         >
-          {isCheckoutLoading ? 'загружаем...' : 'перейти к оплате'}
+          {isCheckoutLoading ? 'колдуем ссылочку на оплату... 🪄' : 'перейти к оплате'}
         </button>
       </div>
     </div>
