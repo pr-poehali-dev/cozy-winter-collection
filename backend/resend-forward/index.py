@@ -47,26 +47,44 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
         body_str = event.get('body', '{}')
         payload = json.loads(body_str)
         
-        # Логируем входящие данные для отладки
-        print(f"DEBUG: Received payload: {json.dumps(payload, ensure_ascii=False)[:500]}")
-        
-        # Resend Inbound Webhook данные (может быть вложенная структура data)
+        # Resend Inbound Webhook данные
         data = payload.get('data', payload)
         
+        email_id = data.get('email_id')
         from_email = data.get('from', 'unknown')
-        to_email = data.get('to', 'orders@azaluk.shop')
+        to_list = data.get('to', [])
+        to_email = to_list[0] if isinstance(to_list, list) and to_list else 'orders@azaluk.shop'
         subject = data.get('subject', 'Без темы')
-        html_content = data.get('html', '')
-        text_content = data.get('text', '')
         
-        print(f"DEBUG: Forwarding email from {from_email} to azali.halimova@gmail.com")
+        print(f"DEBUG: Processing email {email_id} from {from_email}")
+        
+        # Получаем полное содержимое письма через Resend API
+        email_response = requests.get(
+            f'https://api.resend.com/emails/{email_id}',
+            headers={
+                'Authorization': f'Bearer {resend_api_key}'
+            },
+            timeout=10
+        )
+        
+        if email_response.status_code != 200:
+            print(f"ERROR: Failed to fetch email content: {email_response.text}")
+            # Отправляем хотя бы метаданные
+            html_content = f'<p>Не удалось получить содержимое письма. Email ID: {email_id}</p>'
+        else:
+            email_data = email_response.json()
+            html_content = email_data.get('html', '')
+            text_content = email_data.get('text', '')
+            
+            if not html_content and text_content:
+                html_content = text_content.replace('\n', '<br>')
+            elif not html_content and not text_content:
+                html_content = '<p>Пустое письмо</p>'
+        
+        print(f"DEBUG: Forwarding to azali.halimova@gmail.com")
         
         # Формируем письмо для пересылки
         forward_subject = f"[Входящее на {to_email}] {subject}"
-        
-        # Формируем HTML с информацией об отправителе
-        text_as_html = text_content.replace('\n', '<br>') if text_content else ''
-        content_html = html_content if html_content else text_as_html
         
         forward_html = f"""
         <div style="background: #f5f5f5; padding: 15px; margin-bottom: 20px; border-left: 4px solid #4CAF50;">
@@ -77,7 +95,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             </p>
         </div>
         <div>
-            {content_html}
+            {html_content}
         </div>
         """
         
