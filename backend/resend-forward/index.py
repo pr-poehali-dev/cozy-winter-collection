@@ -55,33 +55,29 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
         to_list = data.get('to', [])
         to_email = to_list[0] if isinstance(to_list, list) and to_list else 'orders@azaluk.shop'
         subject = data.get('subject', 'Без темы')
+        message_id = data.get('message_id', '')
         
         print(f"DEBUG: Processing email {email_id} from {from_email}")
         
-        # Получаем полное содержимое письма через Resend API
-        email_response = requests.get(
-            f'https://api.resend.com/emails/{email_id}',
-            headers={
-                'Authorization': f'Bearer {resend_api_key}'
-            },
-            timeout=10
-        )
+        # Формируем содержимое уведомления
+        html_content = f"""
+        <div style="padding: 20px; background: #fff3cd; border-left: 4px solid #ffc107; margin: 20px 0;">
+            <p style="margin: 0 0 10px 0; font-size: 16px; color: #856404;">
+                📧 <strong>Новое письмо на orders@azaluk.shop</strong>
+            </p>
+            <p style="margin: 5px 0; color: #856404;">
+                Чтобы прочитать полное содержимое письма, зайди в 
+                <a href="https://resend.com/emails/receiving" target="_blank" style="color: #0066cc;">
+                    Resend → Emails → Receiving
+                </a>
+            </p>
+            <p style="margin: 5px 0; color: #856404; font-size: 12px;">
+                Email ID: <code>{email_id}</code>
+            </p>
+        </div>
+        """
         
-        if email_response.status_code != 200:
-            print(f"ERROR: Failed to fetch email content: {email_response.text}")
-            # Отправляем хотя бы метаданные
-            html_content = f'<p>Не удалось получить содержимое письма. Email ID: {email_id}</p>'
-        else:
-            email_data = email_response.json()
-            html_content = email_data.get('html', '')
-            text_content = email_data.get('text', '')
-            
-            if not html_content and text_content:
-                html_content = text_content.replace('\n', '<br>')
-            elif not html_content and not text_content:
-                html_content = '<p>Пустое письмо</p>'
-        
-        print(f"DEBUG: Forwarding to azali.halimova@gmail.com")
+        print(f"DEBUG: Forwarding notification to azali.halimova@gmail.com")
         
         # Формируем письмо для пересылки
         forward_subject = f"[Входящее на {to_email}] {subject}"
