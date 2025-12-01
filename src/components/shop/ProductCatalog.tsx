@@ -68,7 +68,7 @@ export default function ProductCatalog({
                   className="w-full h-full object-cover"
                 />
               </div>
-              <div className="text-center space-y-2">
+              <div className="text-center space-y-1">
                 <h3 className="text-xs md:text-base font-light text-primary leading-relaxed px-1 md:px-4 line-clamp-2 min-h-[2.5rem] md:min-h-0 md:line-clamp-1">
                   {product.name}
                 </h3>
