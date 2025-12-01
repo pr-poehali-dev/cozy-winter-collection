@@ -83,9 +83,17 @@ export default function Header({
   }, [showPaymentIframe, orderNumber, navigate, setIsCartOpen]);
 
   const handleCheckout = async () => {
-    if (!cart.length || isCheckoutLoading) return;
+    // Немедленная блокировка перед любыми проверками
+    if (isCheckoutLoading) return;
+    setIsCheckoutLoading(true);
+
+    if (!cart.length) {
+      setIsCheckoutLoading(false);
+      return;
+    }
 
     if (!checkoutData.name || !checkoutData.email || !checkoutData.phone) {
+      setIsCheckoutLoading(false);
       toast({
         title: 'Заполните все поля',
         description: 'Нам нужны ваши данные',
@@ -95,6 +103,7 @@ export default function Header({
     }
 
     if (checkoutData.deliveryType === 'pvz' && !checkoutData.address) {
+      setIsCheckoutLoading(false);
       toast({
         title: 'Выберите пункт выдачи',
         description: 'Укажите адрес ПВЗ Ozon',
@@ -104,6 +113,7 @@ export default function Header({
     }
 
     if (checkoutData.deliveryType === 'pickup' && !checkoutData.telegram) {
+      setIsCheckoutLoading(false);
       toast({
         title: 'Укажите ник в телеграм',
         description: 'Для самовывоза нужен телеграм для связи',
@@ -113,7 +123,6 @@ export default function Header({
     }
 
     try {
-      setIsCheckoutLoading(true);
 
       const totalWithDelivery = Number((cartTotal + deliveryCost - promoDiscount).toFixed(2));
 
