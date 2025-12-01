@@ -26,11 +26,17 @@ export default function ProductDetails({ product, onClose, addToCart, setIsCartO
   // Reset carousel and variant when product changes (not when cart changes)
   useEffect(() => {
     setCurrentImageIndex(0);
-    setSelectedVariant(null);
     setShowAddedNotification(false);
     setIsCompositionOpen(false);
     setIsSizingOpen(false);
     setButtonState('add');
+    
+    // Auto-select first variant if product has variants
+    if (product?.variants && product.variants.length > 0) {
+      setSelectedVariant(product.variants[0].id);
+    } else {
+      setSelectedVariant(null);
+    }
   }, [product?.id]);
   
   // Update button state when variant is selected (but not when cart changes)
