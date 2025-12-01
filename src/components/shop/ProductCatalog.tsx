@@ -1,6 +1,5 @@
-import { Product } from './types';
+import { Product, CartItem } from './types';
 import Icon from '@/components/ui/icon';
-import { useState } from 'react';
 
 interface ProductCatalogProps {
   products: Product[];
@@ -9,6 +8,7 @@ interface ProductCatalogProps {
   setSelectedCategory: (category: string) => void;
   onProductClick: (product: Product) => void;
   addToCart: (product: Product) => void;
+  cart: CartItem[];
 }
 
 export default function ProductCatalog({
@@ -17,13 +17,16 @@ export default function ProductCatalog({
   selectedCategory,
   setSelectedCategory,
   onProductClick,
-  addToCart
+  addToCart,
+  cart
 }: ProductCatalogProps) {
-  const [addedProducts, setAddedProducts] = useState<Set<number>>(new Set());
-  
   const filteredProducts = selectedCategory === 'все' 
     ? products 
     : products.filter(p => p.category === selectedCategory);
+
+  const isInCart = (productId: number) => {
+    return cart.some(item => item.id === productId && !item.selectedVariantId);
+  };
 
   const handleAddToCart = (e: React.MouseEvent, product: Product) => {
     e.stopPropagation();
@@ -34,15 +37,6 @@ export default function ProductCatalog({
     }
     
     addToCart(product);
-    setAddedProducts(prev => new Set(prev).add(product.id));
-    
-    setTimeout(() => {
-      setAddedProducts(prev => {
-        const newSet = new Set(prev);
-        newSet.delete(product.id);
-        return newSet;
-      });
-    }, 2000);
   };
 
   return (
@@ -94,8 +88,8 @@ export default function ProductCatalog({
                     <button
                       onClick={(e) => handleAddToCart(e, product)}
                       className={`px-3 py-1.5 rounded-full flex items-center gap-1 transition-all hover:scale-105 font-light ${
-                        addedProducts.has(product.id)
-                          ? 'bg-[#8B4513] text-white'
+                        isInCart(product.id)
+                          ? 'bg-primary text-white'
                           : 'bg-primary/10 hover:bg-primary/20 text-primary'
                       }`}
                       aria-label="Добавить в корзину"

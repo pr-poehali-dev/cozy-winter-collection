@@ -149,6 +149,7 @@ export default function Index() {
         setSelectedCategory={setSelectedCategory}
         onProductClick={setSelectedProduct}
         addToCart={addToCart}
+        cart={cart}
       />
 
       <Reviews />
