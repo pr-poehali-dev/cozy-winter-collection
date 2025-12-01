@@ -54,7 +54,7 @@ export default function Header({
   const [promoDiscount, setPromoDiscount] = useState(0);
 
   useEffect(() => {
-    if (!showPaymentIframe || !orderNumber) return;
+    if (!orderNumber) return;
 
     const checkPaymentStatus = async () => {
       try {
@@ -68,6 +68,7 @@ export default function Header({
           if (data.status === 'paid') {
             setIsCartOpen(false);
             setShowPaymentIframe(false);
+            setOrderNumber('');
             navigate(`/order-success?order=${orderNumber}`);
           }
         }
@@ -80,7 +81,7 @@ export default function Header({
     checkPaymentStatus();
 
     return () => clearInterval(interval);
-  }, [showPaymentIframe, orderNumber, navigate, setIsCartOpen]);
+  }, [orderNumber, navigate, setIsCartOpen]);
 
   const handleCheckout = async () => {
     // Немедленная блокировка перед любыми проверками
