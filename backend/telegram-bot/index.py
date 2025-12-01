@@ -56,6 +56,17 @@ def send_telegram_message(chat_id: str, text: str, reply_markup: Optional[Dict] 
         print(f"Error sending telegram message: {e}")
         return False
 
+def send_to_all_admins(cur, text: str, reply_markup: Optional[Dict] = None):
+    """Отправка сообщения всем активным администраторам"""
+    cur.execute("""
+        SELECT chat_id FROM t_p3876556_cozy_winter_collecti.bot_admins 
+        WHERE is_active = TRUE
+    """)
+    admins = cur.fetchall()
+    
+    for admin in admins:
+        send_telegram_message(str(admin['chat_id']), text, reply_markup)
+
 def format_order_message(order: Dict, items: list = None) -> str:
     """Форматирование сообщения о заказе"""
     status_emoji = {
@@ -164,19 +175,52 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                 chat_id = message['chat']['id']
                 text = message.get('text', '')
                 
-                admin_chat_id = os.environ.get('TELEGRAM_ADMIN_CHAT_ID')
-                
-                # Проверяем что это админ
-                if str(chat_id) != str(admin_chat_id):
-                    send_telegram_message(str(chat_id), 'Доступ запрещён')
-                    return {
-                        'statusCode': 200,
-                        'body': json.dumps({'ok': True})
-                    }
+                # Проверяем есть ли пользователь в списке админов
+                cur.execute("""
+                    SELECT * FROM t_p3876556_cozy_winter_collecti.bot_admins 
+                    WHERE chat_id = %s AND is_active = TRUE
+                """, (str(chat_id),))
+                is_admin = cur.fetchone()
                 
                 # Обработка команд
                 if text.startswith('/'):
                     command = text.split()[0][1:]  # убираем /
+                    
+                    # Команда /admin_join доступна всем
+                    if command == 'admin_join':
+                        username = message.get('from', {}).get('username', '')
+                        first_name = message.get('from', {}).get('first_name', '')
+                        last_name = message.get('from', {}).get('last_name', '')
+                        
+                        # Добавляем нового админа
+                        cur.execute("""
+                            INSERT INTO t_p3876556_cozy_winter_collecti.bot_admins 
+                            (chat_id, username, first_name, last_name, is_active)
+                            VALUES (%s, %s, %s, %s, TRUE)
+                            ON CONFLICT (chat_id) DO UPDATE 
+                            SET is_active = TRUE, username = %s, first_name = %s, last_name = %s
+                        """, (str(chat_id), username, first_name, last_name, username, first_name, last_name))
+                        conn.commit()
+                        
+                        welcome_msg = f"✅ Добро пожаловать, {first_name}!\n\n"
+                        welcome_msg += "Ты добавлен в список администраторов.\n"
+                        welcome_msg += "Теперь тебе будут приходить уведомления о новых заказах!\n\n"
+                        welcome_msg += "Используй /help чтобы увидеть доступные команды."
+                        
+                        send_telegram_message(str(chat_id), welcome_msg)
+                        
+                        return {
+                            'statusCode': 200,
+                            'body': json.dumps({'ok': True})
+                        }
+                    
+                    # Остальные команды только для админов
+                    if not is_admin:
+                        send_telegram_message(str(chat_id), '❌ Доступ запрещён. Используй /admin_join чтобы присоединиться.')
+                        return {
+                            'statusCode': 200,
+                            'body': json.dumps({'ok': True})
+                        }
                     
                     if command == 'start' or command == 'help':
                         help_text = "🤖 <b>Azaluk Shop Bot</b>\n\n"
@@ -186,10 +230,33 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                         help_text += "/processing - в обработке\n"
                         help_text += "/shipped - отправленные\n"
                         help_text += "/cancel_order ORD-XXX - отменить заказ\n"
+                        help_text += "/admin_list - список администраторов\n"
                         help_text += "/help - эта справка\n\n"
                         help_text += "Нажимай на кнопки под заказами чтобы менять статусы! ✨"
                         
                         send_telegram_message(str(chat_id), help_text)
+                    
+                    elif command == 'admin_list':
+                        cur.execute("""
+                            SELECT chat_id, username, first_name, last_name, joined_at, is_active
+                            FROM t_p3876556_cozy_winter_collecti.bot_admins
+                            ORDER BY joined_at DESC
+                        """)
+                        admins = cur.fetchall()
+                        
+                        if not admins:
+                            send_telegram_message(str(chat_id), 'Администраторов не найдено')
+                        else:
+                            admin_text = "👥 <b>Список администраторов:</b>\n\n"
+                            for idx, admin in enumerate(admins, 1):
+                                status = '✅' if admin['is_active'] else '❌'
+                                name = admin['first_name'] or 'Без имени'
+                                username = f"@{admin['username']}" if admin['username'] else ''
+                                joined = datetime.fromisoformat(str(admin['joined_at']))
+                                admin_text += f"{idx}. {status} {name} {username}\n"
+                                admin_text += f"   Присоединился: {joined.strftime('%d.%m.%Y')}\n\n"
+                            
+                            send_telegram_message(str(chat_id), admin_text)
                     
                     elif command in ['orders', 'paid', 'processing', 'shipped', 'delivered']:
                         # Получаем заказы с нужным статусом
@@ -277,6 +344,19 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                 callback = body['callback_query']
                 data = callback['data']
                 chat_id = callback['message']['chat']['id']
+                
+                # Проверяем что это админ
+                cur.execute("""
+                    SELECT * FROM t_p3876556_cozy_winter_collecti.bot_admins 
+                    WHERE chat_id = %s AND is_active = TRUE
+                """, (str(chat_id),))
+                is_admin = cur.fetchone()
+                
+                if not is_admin:
+                    return {
+                        'statusCode': 200,
+                        'body': json.dumps({'ok': True})
+                    }
                 
                 # Парсим callback_data: status_ORDER_ID_NEW_STATUS
                 if data.startswith('status_'):
@@ -382,14 +462,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
         action = params.get('action', 'list')
         
         if action == 'notify':
-            # Отправляем уведомления о новых заказах
-            admin_chat_id = os.environ.get('TELEGRAM_ADMIN_CHAT_ID')
-            
-            if not admin_chat_id:
-                return {
-                    'statusCode': 400,
-                    'body': json.dumps({'error': 'TELEGRAM_ADMIN_CHAT_ID not set'})
-                }
+            # Отправляем уведомления о новых заказах всем админам
             
             # Получаем только оплаченные неотправленные заказы
             cur.execute("""
@@ -415,16 +488,17 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                 msg = format_order_message(order, items)
                 keyboard = get_order_keyboard(order['id'], order['status'])
                 
-                if send_telegram_message(admin_chat_id, msg, keyboard):
-                    cur.execute(
-                        """
-                        UPDATE t_p3876556_cozy_winter_collecti.orders 
-                        SET telegram_notified = TRUE 
-                        WHERE id = %s
-                        """,
-                        (order['id'],)
-                    )
-                    sent_count += 1
+                send_to_all_admins(cur, msg, keyboard)
+                
+                cur.execute(
+                    """
+                    UPDATE t_p3876556_cozy_winter_collecti.orders 
+                    SET telegram_notified = TRUE 
+                    WHERE id = %s
+                    """,
+                    (order['id'],)
+                )
+                sent_count += 1
             
             conn.commit()
             
