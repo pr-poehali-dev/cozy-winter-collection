@@ -153,7 +153,7 @@ export default function ProductDetails({ product, onClose, addToCart, setIsCartO
           className="max-w-7xl w-full h-full sm:w-[95vw] sm:h-[90vh] p-0 overflow-hidden"
           onOpenAutoFocus={(e) => e.preventDefault()}
         >
-          <div className="flex flex-col lg:flex-row h-full overflow-y-auto bg-gradient-to-br from-card via-secondary/30 to-card pb-24 sm:pb-0">
+          <div className="flex flex-col lg:flex-row h-full overflow-y-auto bg-gradient-to-br from-card via-secondary/30 to-card pb-24 sm:pb-8">
             {/* Left side - Carousel */}
             <div className="lg:w-1/2 p-6 lg:p-12 pt-16 sm:pt-6 flex items-center justify-center">
               <div className="w-full max-w-xl">
