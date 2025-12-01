@@ -1,5 +1,6 @@
 import { Product } from './types';
 import Icon from '@/components/ui/icon';
+import { useState } from 'react';
 
 interface ProductCatalogProps {
   products: Product[];
@@ -18,9 +19,31 @@ export default function ProductCatalog({
   onProductClick,
   addToCart
 }: ProductCatalogProps) {
+  const [addedProducts, setAddedProducts] = useState<Set<number>>(new Set());
+  
   const filteredProducts = selectedCategory === 'все' 
     ? products 
     : products.filter(p => p.category === selectedCategory);
+
+  const handleAddToCart = (e: React.MouseEvent, product: Product) => {
+    e.stopPropagation();
+    
+    if (product.variants && product.variants.length > 0) {
+      onProductClick(product);
+      return;
+    }
+    
+    addToCart(product);
+    setAddedProducts(prev => new Set(prev).add(product.id));
+    
+    setTimeout(() => {
+      setAddedProducts(prev => {
+        const newSet = new Set(prev);
+        newSet.delete(product.id);
+        return newSet;
+      });
+    }, 2000);
+  };
 
   return (
     <section id="catalog" className="py-16 px-6 md:px-8">
@@ -69,11 +92,12 @@ export default function ProductCatalog({
                   <div className="flex items-center justify-center gap-3">
                     <p className="text-sm md:text-base font-light text-primary whitespace-nowrap">{product.price.toLocaleString('ru-RU')} ₽</p>
                     <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        addToCart(product);
-                      }}
-                      className="px-3 py-1.5 rounded-full bg-primary/10 hover:bg-primary/20 flex items-center gap-1 transition-all hover:scale-105 text-primary font-light"
+                      onClick={(e) => handleAddToCart(e, product)}
+                      className={`px-3 py-1.5 rounded-full flex items-center gap-1 transition-all hover:scale-105 font-light ${
+                        addedProducts.has(product.id)
+                          ? 'bg-[#8B4513] text-white'
+                          : 'bg-primary/10 hover:bg-primary/20 text-primary'
+                      }`}
                       aria-label="Добавить в корзину"
                     >
                       <Icon name="ShoppingBag" size={14} strokeWidth={1.5} />
