@@ -54,14 +54,7 @@ export default function Header({
   const [deliveryCost, setDeliveryCost] = useState(0);
   const [promoDiscount, setPromoDiscount] = useState(0);
 
-  useEffect(() => {
-    const pendingOrder = localStorage.getItem('pending_order');
-    if (pendingOrder) {
-      setOrderNumber(pendingOrder);
-      setIsCartOpen(true);
-      setShowPaymentIframe(true);
-    }
-  }, [setIsCartOpen]);
+
 
   useEffect(() => {
     if (!orderNumber) return;
