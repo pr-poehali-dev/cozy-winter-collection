@@ -171,6 +171,16 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
         
         conn.commit()
         cur.close()
+        
+        # Отправляем уведомление в Telegram о новом заказе
+        try:
+            import urllib.request
+            notify_url = 'https://functions.poehali.dev/93787d28-4035-466b-9508-7fbd757f53f8?action=notify'
+            req = urllib.request.Request(notify_url, method='GET')
+            urllib.request.urlopen(req, timeout=5)
+        except Exception as notify_error:
+            # Не прерываем выполнение если уведомление не отправилось
+            print(f"Failed to send telegram notification: {notify_error}")
 
         response_data = {
             'payment_url': payment_url,

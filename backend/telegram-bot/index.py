@@ -149,9 +149,90 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     cur = conn.cursor(cursor_factory=RealDictCursor)
     
     try:
-        # Webhook от Telegram (callback buttons)
+        # Webhook от Telegram (callback buttons и команды)
         if method == 'POST':
             body = json.loads(event.get('body', '{}'))
+            
+            # Обработка текстовых команд
+            if 'message' in body:
+                message = body['message']
+                chat_id = message['chat']['id']
+                text = message.get('text', '')
+                
+                admin_chat_id = os.environ.get('TELEGRAM_ADMIN_CHAT_ID')
+                
+                # Проверяем что это админ
+                if str(chat_id) != str(admin_chat_id):
+                    send_telegram_message(str(chat_id), 'Доступ запрещён')
+                    return {
+                        'statusCode': 200,
+                        'body': json.dumps({'ok': True})
+                    }
+                
+                # Обработка команд
+                if text.startswith('/'):
+                    command = text.split()[0][1:]  # убираем /
+                    
+                    if command == 'start' or command == 'help':
+                        help_text = "🤖 <b>Azaluk Shop Bot</b>\n\n"
+                        help_text += "Доступные команды:\n\n"
+                        help_text += "/orders - все заказы (последние 10)\n"
+                        help_text += "/new - новые заказы (pending)\n"
+                        help_text += "/paid - оплаченные заказы\n"
+                        help_text += "/processing - в обработке\n"
+                        help_text += "/shipped - отправленные\n"
+                        help_text += "/help - эта справка\n\n"
+                        help_text += "Нажимай на кнопки под заказами чтобы менять статусы! ✨"
+                        
+                        send_telegram_message(str(chat_id), help_text)
+                    
+                    elif command in ['orders', 'new', 'paid', 'processing', 'shipped', 'delivered']:
+                        # Получаем заказы с нужным статусом
+                        status_map = {
+                            'orders': None,
+                            'new': 'pending',
+                            'paid': 'paid',
+                            'processing': 'processing',
+                            'shipped': 'shipped',
+                            'delivered': 'delivered'
+                        }
+                        
+                        status_filter = status_map.get(command)
+                        
+                        if status_filter:
+                            cur.execute(
+                                """
+                                SELECT * FROM t_p3876556_cozy_winter_collecti.orders 
+                                WHERE status = %s 
+                                ORDER BY created_at DESC 
+                                LIMIT 10
+                                """,
+                                (status_filter,)
+                            )
+                        else:
+                            cur.execute("""
+                                SELECT * FROM t_p3876556_cozy_winter_collecti.orders 
+                                ORDER BY created_at DESC 
+                                LIMIT 10
+                            """)
+                        
+                        orders = cur.fetchall()
+                        
+                        if not orders:
+                            send_telegram_message(str(chat_id), f'Заказов не найдено')
+                        else:
+                            for order in orders:
+                                msg = format_order_message(order)
+                                keyboard = get_order_keyboard(order['id'], order['status'])
+                                send_telegram_message(str(chat_id), msg, keyboard)
+                    
+                    else:
+                        send_telegram_message(str(chat_id), f'Неизвестная команда: {command}\nИспользуй /help')
+                
+                return {
+                    'statusCode': 200,
+                    'body': json.dumps({'ok': True})
+                }
             
             # Обработка нажатия кнопок
             if 'callback_query' in body:
