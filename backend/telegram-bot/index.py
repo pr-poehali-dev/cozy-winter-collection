@@ -260,7 +260,15 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                     order = cur.fetchone()
                     
                     if order:
-                        if new_status in ['shipped', 'delivered']:
+                        delivery_type = order.get('delivery_type', 'pvz')
+                        
+                        should_send_email = False
+                        if new_status == 'shipped' and delivery_type == 'pvz':
+                            should_send_email = True
+                        elif new_status == 'delivered':
+                            should_send_email = True
+                        
+                        if should_send_email:
                             try:
                                 import urllib.request
                                 from urllib.parse import quote
