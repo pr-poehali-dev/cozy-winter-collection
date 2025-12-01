@@ -47,12 +47,19 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
         body_str = event.get('body', '{}')
         payload = json.loads(body_str)
         
-        # Resend Inbound Webhook данные
-        from_email = payload.get('from', 'unknown')
-        to_email = payload.get('to', 'orders@azaluk.shop')
-        subject = payload.get('subject', 'Без темы')
-        html_content = payload.get('html', '')
-        text_content = payload.get('text', '')
+        # Логируем входящие данные для отладки
+        print(f"DEBUG: Received payload: {json.dumps(payload, ensure_ascii=False)[:500]}")
+        
+        # Resend Inbound Webhook данные (может быть вложенная структура data)
+        data = payload.get('data', payload)
+        
+        from_email = data.get('from', 'unknown')
+        to_email = data.get('to', 'orders@azaluk.shop')
+        subject = data.get('subject', 'Без темы')
+        html_content = data.get('html', '')
+        text_content = data.get('text', '')
+        
+        print(f"DEBUG: Forwarding email from {from_email} to azali.halimova@gmail.com")
         
         # Формируем письмо для пересылки
         forward_subject = f"[Входящее на {to_email}] {subject}"
