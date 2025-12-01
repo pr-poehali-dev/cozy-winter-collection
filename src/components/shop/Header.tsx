@@ -38,7 +38,7 @@ export default function Header({
   const [isCheckoutLoading, setIsCheckoutLoading] = useState(false);
   const [showCheckoutForm, setShowCheckoutForm] = useState(false);
   const [showPaymentIframe, setShowPaymentIframe] = useState(false);
-  const [showMobilePaymentWaiting, setShowMobilePaymentWaiting] = useState(false);
+
   const [paymentUrl, setPaymentUrl] = useState('');
   const [orderNumber, setOrderNumber] = useState('');
   const [checkoutData, setCheckoutData] = useState({
@@ -56,14 +56,10 @@ export default function Header({
 
   useEffect(() => {
     const pendingOrder = localStorage.getItem('pending_order');
-    const pendingPaymentUrl = localStorage.getItem('pending_payment_url');
     if (pendingOrder) {
       setOrderNumber(pendingOrder);
-      if (pendingPaymentUrl) {
-        setPaymentUrl(pendingPaymentUrl);
-      }
       setIsCartOpen(true);
-      setShowMobilePaymentWaiting(true);
+      setShowPaymentIframe(true);
     }
   }, [setIsCartOpen]);
 
@@ -81,10 +77,8 @@ export default function Header({
           
           if (data.status === 'paid') {
             localStorage.removeItem('pending_order');
-            localStorage.removeItem('pending_payment_url');
             setIsCartOpen(false);
             setShowPaymentIframe(false);
-            setShowMobilePaymentWaiting(false);
             setOrderNumber('');
             setPaymentUrl('');
             navigate(`/order-success?order=${orderNumber}`);
@@ -183,18 +177,16 @@ export default function Header({
       const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
       
       if (isMobile) {
+        window.open(result.payment_url, '_blank');
         localStorage.setItem('pending_order', result.order_number);
-        localStorage.setItem('pending_payment_url', result.payment_url);
-        setPaymentUrl(result.payment_url);
         setOrderNumber(result.order_number);
         setShowCheckoutForm(false);
-        setShowMobilePaymentWaiting(true);
+        setShowPaymentIframe(true);
       } else {
         setPaymentUrl(result.payment_url);
         setOrderNumber(result.order_number);
         setShowCheckoutForm(false);
         setShowPaymentIframe(true);
-        setShowMobilePaymentWaiting(false);
       }
     } catch (error) {
       toast({
@@ -290,9 +282,6 @@ export default function Header({
                     if (showPaymentIframe) {
                       setShowPaymentIframe(false);
                       setShowCheckoutForm(true);
-                    } else if (showMobilePaymentWaiting) {
-                      setShowMobilePaymentWaiting(false);
-                      setShowCheckoutForm(true);
                     } else if (showCheckoutForm) {
                       setShowCheckoutForm(false);
                     } else {
@@ -305,14 +294,13 @@ export default function Header({
                   <Icon name="ArrowLeft" size={20} className="text-primary" strokeWidth={1.5} />
                 </button>
                 <SheetTitle className="text-2xl font-light text-primary">
-                  {showPaymentIframe ? 'оплата' : showMobilePaymentWaiting ? 'оплата' : showCheckoutForm ? 'оформление' : 'корзина'}
+                  {showPaymentIframe ? 'оплата' : showCheckoutForm ? 'оформление' : 'корзина'}
                 </SheetTitle>
                 <button 
                   onClick={() => {
                     setIsCartOpen(false);
                     setShowCheckoutForm(false);
                     setShowPaymentIframe(false);
-                    setShowMobilePaymentWaiting(false);
                     setPaymentUrl('');
                     setOrderNumber('');
                   }}
@@ -352,52 +340,6 @@ export default function Header({
                         </button>
                       </div>
                     ))}
-                </div>
-              </div>
-            ) : showMobilePaymentWaiting ? (
-              <div className="flex-1 flex flex-col justify-between px-6 py-12">
-                <div className="flex-1 flex flex-col items-center justify-center">
-                  <div className="text-center space-y-6 max-w-sm">
-                    <div className="w-16 h-16 mx-auto bg-primary/10 rounded-full flex items-center justify-center">
-                      <Icon name="Clock" size={32} className="text-primary animate-pulse" />
-                    </div>
-                    <div className="space-y-2">
-                      <h3 className="text-xl font-light text-primary">ожидаем оплату</h3>
-                      <p className="text-sm text-muted-foreground font-light leading-relaxed">
-                        проверяем статус вашего заказа... после успешной оплаты вы автоматически перейдёте на страницу подтверждения
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div className="space-y-3 flex-shrink-0">
-                  <a
-                    href={paymentUrl || '#'}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full bg-primary text-white py-3 rounded-lg font-light hover:opacity-90 transition-opacity flex items-center justify-center gap-2"
-                    onClick={(e) => {
-                      if (!paymentUrl) {
-                        e.preventDefault();
-                        console.log('Payment URL not available yet');
-                      }
-                    }}
-                  >
-                    <Icon name="ExternalLink" size={18} />
-                    открыть страницу оплаты
-                  </a>
-                  <button
-                    onClick={() => {
-                      localStorage.removeItem('pending_order');
-                      localStorage.removeItem('pending_payment_url');
-                      setShowMobilePaymentWaiting(false);
-                      setOrderNumber('');
-                      setPaymentUrl('');
-                      setIsCartOpen(false);
-                    }}
-                    className="w-full bg-secondary text-primary py-3 rounded-lg font-light hover:bg-secondary/80 transition-colors"
-                  >
-                    отменить заказ
-                  </button>
                 </div>
               </div>
             ) : showPaymentIframe ? (
