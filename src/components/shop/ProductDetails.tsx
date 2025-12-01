@@ -153,17 +153,6 @@ export default function ProductDetails({ product, onClose, addToCart, setIsCartO
           className="max-w-7xl w-[95vw] h-[90vh] p-0 overflow-hidden"
           onOpenAutoFocus={(e) => e.preventDefault()}
         >
-          <button
-            onClick={() => {
-              setSelectedVariant(null);
-              onClose();
-            }}
-            className="absolute top-4 right-4 z-50 p-2 hover:bg-secondary rounded-lg transition-colors"
-            aria-label="Закрыть"
-          >
-            <Icon name="X" size={20} className="text-primary" strokeWidth={1.5} />
-          </button>
-          
           <div className="flex flex-col lg:flex-row h-full overflow-y-auto bg-gradient-to-br from-card via-secondary/30 to-card">
             {/* Left side - Carousel */}
             <div className="lg:w-1/2 p-6 lg:p-12 flex items-center justify-center">
@@ -390,34 +379,6 @@ export default function ProductDetails({ product, onClose, addToCart, setIsCartO
               </div>
             </div>
           </div>
-          
-          {/* Floating Button */}
-          {product.badge !== 'soon' && (
-            <div className="fixed bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-card via-card to-transparent z-40">
-              <Button
-                size="lg"
-                className={`w-full px-8 rounded-full text-sm py-4 transition-all shadow-2xl font-light ${
-                  buttonState === 'checkout'
-                    ? '!bg-darkRed hover:!bg-darkRed/90 !text-white'
-                    : '!bg-primary hover:!bg-primary/90'
-                }`}
-                onClick={handleButtonClick}
-                disabled={buttonState !== 'checkout' && product.variants && product.variants.length > 0 && !selectedVariant}
-              >
-                {buttonState === 'checkout' ? (
-                  <>
-                    <Icon name="ShoppingCart" size={20} className="mr-2" />
-                    оформить заказ
-                  </>
-                ) : (
-                  <>
-                    <Icon name="ShoppingBag" size={20} className="mr-2" />
-                    добавить в корзину
-                  </>
-                )}
-              </Button>
-            </div>
-          )}
         </DialogContent>
       </Dialog>
     </>
