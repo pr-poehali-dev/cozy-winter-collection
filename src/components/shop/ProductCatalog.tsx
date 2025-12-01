@@ -58,7 +58,7 @@ export default function ProductCatalog({
           ))}
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
           {filteredProducts.map((product) => (
             <div key={product.id} className="group cursor-pointer" onClick={() => onProductClick(product)}>
               <div className="relative aspect-square overflow-hidden rounded-2xl mb-4 bg-card shadow-sm border border-border transition-transform group-hover:scale-[1.02]">
