@@ -31,10 +31,17 @@ export default function Index() {
   );
 
   const [selectedCategory, setSelectedCategory] = useState<string>("все");
-  const [cart, setCart] = useState<CartItem[]>([]);
+  const [cart, setCart] = useState<CartItem[]>(() => {
+    const savedCart = localStorage.getItem('azaluk_cart');
+    return savedCart ? JSON.parse(savedCart) : [];
+  });
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+
+  useEffect(() => {
+    localStorage.setItem('azaluk_cart', JSON.stringify(cart));
+  }, [cart]);
 
   useEffect(() => {
     const checkLaunch = () => {
