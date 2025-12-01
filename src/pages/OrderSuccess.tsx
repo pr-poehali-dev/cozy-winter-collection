@@ -141,9 +141,7 @@ export default function OrderSuccess() {
           </div>
         </div>
 
-        <p className="text-center text-sm text-muted-foreground mt-8">
-          мы свяжемся с вами в течение 24 часов для уточнения деталей 💌
-        </p>
+        <p className="text-center text-sm text-muted-foreground mt-8">свяжитесь с нами, если есть вопросы по заказу 💌</p>
       </main>
     </div>
   );
