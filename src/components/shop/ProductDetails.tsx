@@ -218,8 +218,8 @@ export default function ProductDetails({ product, onClose, addToCart, setIsCartO
             </div>
             
             {/* Right side - Info */}
-            <div className="lg:w-1/2 p-6 lg:p-12 flex items-start">
-              <div className="w-full max-w-md space-y-6">
+            <div className="lg:w-1/2 p-6 lg:p-12 pb-12 flex items-start">
+              <div className="w-full max-w-md space-y-6 pb-8">
                 <div className="space-y-3">
                   <h1 className="text-2xl font-light text-primary leading-tight">
                     {product.name}
