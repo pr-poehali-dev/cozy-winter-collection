@@ -1,4 +1,4 @@
-import { Sheet, SheetContent } from '@/components/ui/sheet';
+import { Dialog, DialogContent } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import Icon from '@/components/ui/icon';
@@ -143,15 +143,14 @@ export default function ProductDetails({ product, onClose, addToCart, setIsCartO
         </div>
       )}
       
-      <Sheet open={!!product} onOpenChange={(open) => {
+      <Dialog open={!!product} onOpenChange={(open) => {
         if (!open) {
           setSelectedVariant(null);
           onClose();
         }
       }}>
-        <SheetContent 
-          side="right" 
-          className="w-screen h-screen max-w-none p-0 sm:max-w-none border-0 overflow-y-scroll"
+        <DialogContent 
+          className="max-w-7xl w-[95vw] h-[90vh] p-0 overflow-hidden"
           onOpenAutoFocus={(e) => e.preventDefault()}
         >
           <button
@@ -159,26 +158,15 @@ export default function ProductDetails({ product, onClose, addToCart, setIsCartO
               setSelectedVariant(null);
               onClose();
             }}
-            className="fixed top-6 left-6 z-50 p-2 hover:bg-secondary rounded-lg transition-colors"
+            className="absolute top-4 right-4 z-50 p-2 hover:bg-secondary rounded-lg transition-colors"
             aria-label="Закрыть"
           >
-            <Icon name="ArrowLeft" size={24} className="text-primary" strokeWidth={1.5} />
-          </button>
-
-          <button
-            onClick={() => {
-              setSelectedVariant(null);
-              onClose();
-            }}
-            className="fixed top-6 right-6 z-50 p-2 hover:bg-secondary rounded-lg transition-colors"
-            aria-label="Закрыть"
-          >
-            <Icon name="X" size={24} className="text-primary" strokeWidth={1.5} />
+            <Icon name="X" size={20} className="text-primary" strokeWidth={1.5} />
           </button>
           
-          <div className="flex flex-col lg:flex-row min-h-screen bg-gradient-to-br from-card via-secondary/30 to-card pb-32 lg:pb-0">
+          <div className="flex flex-col lg:flex-row h-full overflow-y-auto bg-gradient-to-br from-card via-secondary/30 to-card">
             {/* Left side - Carousel */}
-            <div className="lg:w-1/2 p-6 lg:p-12 pt-20 lg:pt-12 flex items-center justify-center lg:min-h-screen">
+            <div className="lg:w-1/2 p-6 lg:p-12 flex items-center justify-center">
               <div className="w-full max-w-xl">
                 <div className="relative overflow-hidden rounded-2xl shadow-lg bg-card">
                   <div className="relative w-full aspect-square">
@@ -241,7 +229,7 @@ export default function ProductDetails({ product, onClose, addToCart, setIsCartO
             </div>
             
             {/* Right side - Info */}
-            <div className="lg:w-1/2 p-6 lg:p-12 flex items-center lg:items-start lg:pt-[calc(50vh-200px)]">
+            <div className="lg:w-1/2 p-6 lg:p-12 flex items-start overflow-y-auto">
               <div className="w-full max-w-md space-y-6">
                 <div className="space-y-3">
                   <h1 className="text-2xl font-light text-primary leading-tight">
@@ -403,9 +391,9 @@ export default function ProductDetails({ product, onClose, addToCart, setIsCartO
             </div>
           </div>
           
-          {/* Floating Mobile Button */}
+          {/* Floating Button */}
           {product.badge !== 'soon' && (
-            <div className="sm:hidden fixed bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-card via-card to-transparent z-40">
+            <div className="fixed bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-card via-card to-transparent z-40">
               <Button
                 size="lg"
                 className={`w-full px-8 rounded-full text-sm py-4 transition-all shadow-2xl font-light ${
@@ -430,8 +418,8 @@ export default function ProductDetails({ product, onClose, addToCart, setIsCartO
               </Button>
             </div>
           )}
-        </SheetContent>
-      </Sheet>
+        </DialogContent>
+      </Dialog>
     </>
   );
 }
