@@ -1,0 +1,21 @@
+{
+  "tests": [
+    {
+      "name": "Forward incoming email",
+      "method": "POST",
+      "body": {
+        "from": "customer@example.com",
+        "to": "orders@azaluk.shop",
+        "subject": "Вопрос по заказу",
+        "html": "<p>Здравствуйте, у меня вопрос по заказу #123</p>",
+        "text": "Здравствуйте, у меня вопрос по заказу #123"
+      },
+      "expectedStatus": 200,
+      "expectedBody": {
+        "success": true,
+        "message": "string"
+      },
+      "bodyMatcher": "partial"
+    }
+  ]
+}
