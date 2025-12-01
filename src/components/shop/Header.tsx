@@ -115,6 +115,28 @@ export default function Header({
       return;
     }
 
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(checkoutData.email)) {
+      setIsCheckoutLoading(false);
+      toast({
+        title: 'Неверный формат email',
+        description: 'Проверьте правильность email адреса',
+        variant: 'destructive'
+      });
+      return;
+    }
+
+    const phoneDigits = checkoutData.phone.replace(/\D/g, '');
+    if (phoneDigits.length !== 11) {
+      setIsCheckoutLoading(false);
+      toast({
+        title: 'Неверный формат телефона',
+        description: 'Введите номер в формате +7 (XXX) XXX-XX-XX',
+        variant: 'destructive'
+      });
+      return;
+    }
+
     if (checkoutData.deliveryType === 'pvz' && !checkoutData.address) {
       setIsCheckoutLoading(false);
       toast({

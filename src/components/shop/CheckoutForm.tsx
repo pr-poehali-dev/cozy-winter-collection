@@ -139,6 +139,7 @@ export default function CheckoutForm({
             value={checkoutData.email}
             onChange={(e) => setCheckoutData({ ...checkoutData, email: e.target.value })}
             className="font-light"
+            placeholder="example@mail.ru"
           />
         </div>
         <div className="space-y-2">

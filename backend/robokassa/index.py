@@ -156,6 +156,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             'OutSum': amount_str,
             'InvoiceID': robokassa_inv_id,
             'SignatureValue': signature,
+            'Email': user_email,
             'IsTest': is_test,
             'Culture': 'ru',
             'Description': f'Заказ {order_number}'
