@@ -370,17 +370,21 @@ export default function Header({
                   </div>
                 </div>
                 <div className="space-y-3 flex-shrink-0">
-                  {paymentUrl && (
-                    <a
-                      href={paymentUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-full bg-primary text-white py-3 rounded-lg font-light hover:opacity-90 transition-opacity flex items-center justify-center gap-2"
-                    >
-                      <Icon name="ExternalLink" size={18} />
-                      открыть страницу оплаты
-                    </a>
-                  )}
+                  <a
+                    href={paymentUrl || '#'}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full bg-primary text-white py-3 rounded-lg font-light hover:opacity-90 transition-opacity flex items-center justify-center gap-2"
+                    onClick={(e) => {
+                      if (!paymentUrl) {
+                        e.preventDefault();
+                        console.log('Payment URL not available yet');
+                      }
+                    }}
+                  >
+                    <Icon name="ExternalLink" size={18} />
+                    открыть страницу оплаты
+                  </a>
                   <button
                     onClick={() => {
                       localStorage.removeItem('pending_order');
