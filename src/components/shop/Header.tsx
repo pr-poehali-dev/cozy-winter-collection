@@ -174,9 +174,18 @@ export default function Header({
         cartItems: cart,
       });
 
-      localStorage.setItem('pending_order', result.order_number);
-      setIsCartOpen(false);
-      navigate(`/payment/${result.order_number}`);
+      const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+      
+      if (isMobile) {
+        localStorage.setItem('pending_order', result.order_number);
+        window.location.href = result.payment_url;
+      } else {
+        setPaymentUrl(result.payment_url);
+        setOrderNumber(result.order_number);
+        setShowCheckoutForm(false);
+        setShowPaymentIframe(true);
+        setShowMobilePaymentWaiting(false);
+      }
     } catch (error) {
       toast({
         title: 'Не получилось создать ссылку',
