@@ -146,7 +146,7 @@ export default function OrderSuccess() {
                   }`}>
                     {isCompleted ? '✓' : idx + 1}
                   </div>
-                  <span className="text-[10px] text-muted-foreground mt-2 text-center max-w-[60px] leading-tight">
+                  <span className="text-muted-foreground mt-2 text-center max-w-[60px] leading-tight text-2xl">
                     {statusData[status]?.emoji}
                   </span>
                 </div>
