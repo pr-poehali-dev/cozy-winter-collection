@@ -139,10 +139,19 @@ export default function Header({
         cartItems: cart,
       });
 
-      setPaymentUrl(result.payment_url);
-      setOrderNumber(result.order_number);
-      setShowCheckoutForm(false);
-      setShowPaymentIframe(true);
+      const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+      
+      if (isMobile) {
+        window.open(result.payment_url, '_blank');
+        setOrderNumber(result.order_number);
+        setShowCheckoutForm(false);
+        setShowPaymentIframe(false);
+      } else {
+        setPaymentUrl(result.payment_url);
+        setOrderNumber(result.order_number);
+        setShowCheckoutForm(false);
+        setShowPaymentIframe(true);
+      }
     } catch (error) {
       toast({
         title: 'Не получилось создать ссылку',
