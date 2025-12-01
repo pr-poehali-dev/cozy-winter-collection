@@ -70,14 +70,7 @@ export default function Reviews() {
                       index === 1 ? 'md:min-w-[240px] md:max-w-[280px]' : 'md:min-w-[180px] md:max-w-[200px]'
                     }`}>
                       <p className="text-sm text-primary/80 leading-relaxed font-light mb-3">
-                        {review.text}<a 
-                          href="https://t.me/azalukk/4001" 
-                          target="_blank" 
-                          rel="noopener noreferrer"
-                          className="text-[#C41E3A] hover:text-[#A01628] transition-colors text-xs whitespace-nowrap"
-                        >
-                          ...далее
-                        </a>
+                        {review.text}
                       </p>
                       <div className="flex items-center justify-between">
                         <p className="text-xs text-primary/50 font-light">
@@ -127,7 +120,7 @@ export default function Reviews() {
             className="inline-flex items-center gap-2 text-[#C41E3A] hover:text-[#A01628] underline transition-colors font-light text-sm group"
           >
             <Icon name="Send" size={16} strokeWidth={1.5} className="group-hover:translate-x-1 transition-transform" />
-            <span>читать все отзывы в телеграме</span>
+            <span>оставить отзыв в телеграме</span>
           </a>
         </div>
       </div>
