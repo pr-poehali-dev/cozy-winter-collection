@@ -1,4 +1,5 @@
 {
+  "telegram-bot": "https://functions.poehali.dev/93787d28-4035-466b-9508-7fbd757f53f8",
   "promo-validate": "https://functions.poehali.dev/9fc2ae98-daea-4d40-98de-6d1a45d029cb",
   "order-details": "https://functions.poehali.dev/25f876e5-53fb-4cb1-878a-a7177baa1950",
   "robokassa-webhook": "https://functions.poehali.dev/5420828a-4f2b-45e0-908f-6d59922e7791",
