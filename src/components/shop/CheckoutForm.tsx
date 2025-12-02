@@ -11,7 +11,7 @@ interface CheckoutData {
   address: string;
   comment: string;
   telegram: string;
-  deliveryType: 'pvz' | 'pickup';
+  deliveryType: '' | 'pvz' | 'pickup';
   promoCode: string;
 }
 
@@ -166,7 +166,7 @@ export default function CheckoutForm({
           />
         </div>
         <div className="space-y-3">
-          <Label>Способ доставки</Label>
+          <Label>Способ доставки *</Label>
           <div className="grid grid-cols-2 gap-3">
             <button
               type="button"

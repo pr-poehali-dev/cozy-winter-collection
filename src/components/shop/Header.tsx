@@ -48,10 +48,10 @@ export default function Header({
     address: '',
     comment: '',
     telegram: '',
-    deliveryType: 'pvz' as 'pvz' | 'pickup',
+    deliveryType: '' as '' | 'pvz' | 'pickup',
     promoCode: ''
   });
-  const [deliveryCost, setDeliveryCost] = useState(200);
+  const [deliveryCost, setDeliveryCost] = useState(0);
   const [promoDiscount, setPromoDiscount] = useState(0);
 
 
@@ -125,6 +125,16 @@ export default function Header({
       toast({
         title: 'Неверный формат телефона',
         description: 'Введите номер в формате +7 (XXX) XXX-XX-XX',
+        variant: 'destructive'
+      });
+      return;
+    }
+
+    if (!checkoutData.deliveryType) {
+      setIsCheckoutLoading(false);
+      toast({
+        title: 'Выберите способ доставки',
+        description: 'Укажите ПВЗ Ozon или самовывоз',
         variant: 'destructive'
       });
       return;
