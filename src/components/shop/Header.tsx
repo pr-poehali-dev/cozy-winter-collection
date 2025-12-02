@@ -51,7 +51,7 @@ export default function Header({
     deliveryType: 'pvz' as 'pvz' | 'pickup',
     promoCode: ''
   });
-  const [deliveryCost, setDeliveryCost] = useState(0);
+  const [deliveryCost, setDeliveryCost] = useState(200);
   const [promoDiscount, setPromoDiscount] = useState(0);
 
 
