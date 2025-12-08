@@ -140,9 +140,7 @@ export default function About() {
             <div className="absolute bottom-12 right-[12%] text-2xl">🍵</div>
             
             <div className="max-w-md mx-auto bg-moss/5 rounded-3xl p-8 md:p-10 border border-moss/10 relative z-10">
-              <p className="text-base md:text-lg text-moss/70 leading-relaxed italic">
-                вместе мы делаем вещи, которыми приятно любоваться, их хочется держать в руках и носить с собой
-              </p>
+              <p className="text-base md:text-lg text-moss/70 leading-relaxed italic">мы любим видеть волшебство в повседневности и делаем вещицы для тех, кто чувствует так же 🍄🪄</p>
             </div>
           </div>
         </div>
