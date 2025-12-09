@@ -66,24 +66,16 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                 'price': float(price) if price else 0,
                 'category': category,
                 'image': image,
+                'badge': badge,
+                'gallery': gallery if gallery else [],
+                'storyDescription': story_desc,
+                'composition': composition,
+                'sizing': sizing,
+                'videoUrl': video_url,
+                'videoTitle': video_title,
                 'in_stock': in_stock,
                 'stock': stock
             }
-            
-            if badge:
-                product['badge'] = badge
-            if gallery:
-                product['gallery'] = gallery
-            if story_desc:
-                product['storyDescription'] = story_desc
-            if composition:
-                product['composition'] = composition
-            if sizing:
-                product['sizing'] = sizing
-            if video_url:
-                product['videoUrl'] = video_url
-            if video_title:
-                product['videoTitle'] = video_title
             
             # Получаем варианты товара
             cur.execute("""
