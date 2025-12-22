@@ -50,7 +50,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                 badge, gallery, story_description, composition, 
                 sizing, video_url, video_title, in_stock, stock
             FROM t_p3876556_cozy_winter_collecti.products
-            ORDER BY id
+            ORDER BY display_order, id
         """)
         
         products_rows = cur.fetchall()
