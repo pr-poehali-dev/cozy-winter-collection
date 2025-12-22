@@ -68,16 +68,6 @@ export default function Reviews() {
 
   return (
     <section id="reviews" className="py-10 md:py-16 px-6 md:px-8 relative overflow-hidden bg-primary">
-      {/* Decorative geometric elements */}
-      <div className="absolute top-12 left-16 w-32 h-32 bg-white/5 rounded-full blur-3xl"></div>
-      <div className="absolute top-20 right-24 w-40 h-40 bg-white/5 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-16 left-32 w-24 h-24 bg-white/5 rounded-full blur-2xl"></div>
-      <div className="absolute bottom-20 right-16 w-36 h-36 bg-white/5 rounded-full blur-3xl"></div>
-      
-      {/* Subtle line accents */}
-      <div className="absolute top-0 left-1/4 w-px h-32 bg-gradient-to-b from-white/0 via-white/10 to-white/0"></div>
-      <div className="absolute top-0 right-1/3 w-px h-40 bg-gradient-to-b from-white/0 via-white/10 to-white/0"></div>
-      
       <div className="max-w-7xl mx-auto relative">
         <div className="text-center mb-8 md:mb-12">
           <h2 className="text-3xl md:text-4xl font-light mb-3 text-white">отзывы 💗</h2>
