@@ -35,13 +35,13 @@ export default function HeroCarousel() {
                 магазинчик вещиц ручной работы
               </p>
               <h1 
-                className="md:text-5xl leading-[1.15] px-4 max-w-6xl text-[#fffffffc] text-3xl font-light"
+                className="md:text-5xl leading-[1.15] px-4 max-w-6xl text-3xl font-light text-[#fffbf7f5]"
                 style={{ fontFamily: 'Cormorant, serif', fontWeight: 300, letterSpacing: '0.02em' }}
               >волшебство, которое можно носить</h1>
             </div>
             
             <button
-              className="rounded-full px-10 py-3.5 md:px-14 md:py-4 text-xs md:text-base bg-white/95 text-primary hover:bg-white hover:scale-[1.02] transition-all duration-300 font-light tracking-[0.08em] shadow-2xl backdrop-blur-sm"
+              className="rounded-full px-10 py-3.5 md:px-14 md:py-4 text-xs md:text-base text-primary hover:bg-white hover:scale-[1.02] transition-all duration-300 font-light tracking-[0.08em] shadow-2xl backdrop-blur-sm bg-[#fff8ed]"
               onClick={() => {
                 const catalog = document.getElementById('catalog');
                 if (catalog) {

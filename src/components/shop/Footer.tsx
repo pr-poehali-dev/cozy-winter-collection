@@ -2,7 +2,7 @@ import Icon from '@/components/ui/icon';
 
 export default function Footer() {
   return (
-    <footer className="py-3 md:py-4 px-4 bg-[#ebdccb]">
+    <footer className="py-3 md:py-4 px-4 bg-[#fff3e6]">
       <div className="container mx-auto max-w-6xl">
         <div className="flex flex-col md:flex-row items-center justify-between gap-2 md:gap-4">
           <div className="flex items-center gap-3">
