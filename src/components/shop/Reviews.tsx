@@ -71,7 +71,7 @@ export default function Reviews() {
       <div className="max-w-7xl mx-auto relative">
         <div className="text-center mb-8 md:mb-12">
           <h2 className="text-3xl md:text-4xl font-light mb-3 text-white">отзывы 💗</h2>
-          <p className="text-white/80 font-light text-sm md:text-base max-w-2xl mx-[118px] my-0 py-0 px-0">что говорят те, кто уже хранит наши вещи?</p>
+          <p className="text-white/80 font-light text-sm md:text-base max-w-2xl my-0 py-0 px-0 mx-0">что говорят те, кто уже хранит наши вещи?</p>
         </div>
         
         {/* Horizontal Scroll for All Devices */}
