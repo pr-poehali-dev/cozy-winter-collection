@@ -28,6 +28,33 @@ export default function HeroCarousel() {
         </picture>
         <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60"></div>
         
+        {/* Floating testimonials - mobile only */}
+        <div className="md:hidden absolute inset-0 pointer-events-none">
+          <div className="absolute top-[15%] left-[8%] animate-float-slow">
+            <div className="backdrop-blur-sm bg-white/10 rounded-2xl px-3 py-2 shadow-xl border border-white/20">
+              <p className="text-[10px] text-white/95 font-light italic leading-relaxed">
+                это невероятно<br />красиво...
+              </p>
+            </div>
+          </div>
+          
+          <div className="absolute top-[35%] right-[5%] animate-float-delayed">
+            <div className="backdrop-blur-sm bg-white/10 rounded-2xl px-3 py-2 shadow-xl border border-white/20">
+              <p className="text-[10px] text-white/95 font-light italic leading-relaxed">
+                не встречала<br />ничего похожего!
+              </p>
+            </div>
+          </div>
+          
+          <div className="absolute top-[55%] left-[10%] animate-float">
+            <div className="backdrop-blur-sm bg-white/10 rounded-2xl px-3 py-2 shadow-xl border border-white/20">
+              <p className="text-[10px] text-white/95 font-light italic leading-relaxed">
+                все спрашивают,<br />где заказывала ✨
+              </p>
+            </div>
+          </div>
+        </div>
+        
         <div className="absolute inset-0 flex flex-col items-center justify-end text-center px-6 md:pb-20 z-10 py-[29px]">
           <div className="max-w-5xl space-y-6 md:space-y-12">
             <div className="space-y-4 md:space-y-6">
