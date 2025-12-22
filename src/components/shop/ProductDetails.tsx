@@ -220,26 +220,28 @@ export default function ProductDetails({ product, onClose, addToCart, setIsCartO
                 </div>
                 
                 {/* Thumbnail Gallery */}
-                <div ref={thumbnailContainerRef} className="flex gap-3 mt-4 justify-start overflow-x-auto pb-2">
-                  {images.map((img, index) => (
-                    <button
-                      key={index}
-                      onClick={() => setCurrentImageIndex(index)}
-                      className={`flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden border-2 transition-all ${
-                        index === currentImageIndex 
-                          ? 'border-primary' 
-                          : 'border-border/30 opacity-60 hover:opacity-100 hover:border-border'
-                      }`}
-                      aria-label={`Фото ${index + 1}`}
-                    >
-                      <img 
-                        src={img} 
-                        alt={`${product.name} ${index + 1}`} 
-                        className="w-full h-full object-cover"
-                      />
-                    </button>
-                  ))}
-                </div>
+                {!isGiftCertificate && (
+                  <div ref={thumbnailContainerRef} className="flex gap-3 mt-4 justify-start overflow-x-auto pb-2">
+                    {images.map((img, index) => (
+                      <button
+                        key={index}
+                        onClick={() => setCurrentImageIndex(index)}
+                        className={`flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden border-2 transition-all ${
+                          index === currentImageIndex 
+                            ? 'border-primary' 
+                            : 'border-border/30 opacity-60 hover:opacity-100 hover:border-border'
+                        }`}
+                        aria-label={`Фото ${index + 1}`}
+                      >
+                        <img 
+                          src={img} 
+                          alt={`${product.name} ${index + 1}`} 
+                          className="w-full h-full object-cover"
+                        />
+                      </button>
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
             
