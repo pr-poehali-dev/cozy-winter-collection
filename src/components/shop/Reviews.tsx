@@ -67,16 +67,16 @@ export default function Reviews() {
   };
 
   return (
-    <section id="reviews" className="py-12 md:py-20 px-6 md:px-8 relative overflow-hidden bg-primary">
-      <div className="absolute top-6 left-8 text-2xl opacity-10 animate-pulse">✨</div>
-      <div className="absolute top-10 right-12 text-xl opacity-10">💫</div>
-      <div className="absolute bottom-8 left-16 text-xl opacity-10">🤍</div>
-      <div className="absolute bottom-6 right-8 text-2xl opacity-10 animate-pulse">💗</div>
+    <section id="reviews" className="py-10 md:py-16 px-6 md:px-8 relative overflow-hidden bg-primary">
+      <div className="absolute top-6 left-8 text-2xl opacity-20 animate-pulse">✨</div>
+      <div className="absolute top-10 right-12 text-xl opacity-20">💫</div>
+      <div className="absolute bottom-8 left-16 text-xl opacity-20">🤍</div>
+      <div className="absolute bottom-6 right-8 text-2xl opacity-20 animate-pulse">💗</div>
       
       <div className="max-w-7xl mx-auto relative">
-        <div className="text-center mb-12 md:mb-16">
-          <h2 className="text-3xl md:text-5xl font-light text-white mb-4">отзывы 💗</h2>
-          <p className="text-white/70 font-light text-base md:text-lg max-w-2xl mx-auto">
+        <div className="text-center mb-8 md:mb-12">
+          <h2 className="text-3xl md:text-4xl font-light text-white mb-3">отзывы 💗</h2>
+          <p className="text-white/80 font-light text-sm md:text-base max-w-2xl mx-auto">
             что говорят те, кто уже хранит наши вещи
           </p>
         </div>
@@ -87,60 +87,60 @@ export default function Reviews() {
           {canScrollLeft && (
             <button
               onClick={() => scroll('left')}
-              className="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-5 z-10 w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full shadow-lg items-center justify-center hover:bg-white transition-all opacity-0 group-hover/carousel:opacity-100"
+              className="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-5 z-10 w-11 h-11 bg-white rounded-full shadow-xl items-center justify-center hover:scale-105 transition-all opacity-0 group-hover/carousel:opacity-100"
               aria-label="Предыдущий отзыв"
             >
-              <Icon name="ChevronLeft" size={24} className="text-primary" />
+              <Icon name="ChevronLeft" size={22} className="text-primary" strokeWidth={2} />
             </button>
           )}
           
           {canScrollRight && (
             <button
               onClick={() => scroll('right')}
-              className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-5 z-10 w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full shadow-lg items-center justify-center hover:bg-white transition-all opacity-0 group-hover/carousel:opacity-100"
+              className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-5 z-10 w-11 h-11 bg-white rounded-full shadow-xl items-center justify-center hover:scale-105 transition-all opacity-0 group-hover/carousel:opacity-100"
               aria-label="Следующий отзыв"
             >
-              <Icon name="ChevronRight" size={24} className="text-primary" />
+              <Icon name="ChevronRight" size={22} className="text-primary" strokeWidth={2} />
             </button>
           )}
 
           <div 
             ref={scrollContainerRef}
-            className="flex gap-3 md:gap-5 overflow-x-auto scrollbar-hide snap-x snap-mandatory pb-6"
+            className="flex gap-3 md:gap-5 overflow-x-auto scrollbar-hide snap-x snap-mandatory pb-4"
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
             {reviews.map((review) => (
               <div 
                 key={review.id} 
-                className="flex-shrink-0 snap-start w-[260px] md:w-[380px]"
+                className="flex-shrink-0 snap-start w-[260px] md:w-[360px]"
               >
                 {review.type === 'image' ? (
                   <button
                     onClick={() => setExpandedImage(review.id)}
-                    className="relative group/img overflow-hidden rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300"
+                    className="relative group/img overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300"
                   >
                     <img 
                       src={review.image} 
                       alt={review.author}
-                      className="w-[260px] md:w-[380px] h-[320px] md:h-[420px] object-cover group-hover:scale-[1.02] transition-transform duration-500"
+                      className="w-[260px] md:w-[360px] h-[320px] md:h-[380px] object-cover group-hover:scale-[1.02] transition-transform duration-500"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                     <div className="absolute bottom-4 left-4 right-4 text-white opacity-0 group-hover:opacity-100 transition-opacity">
-                      <p className="text-sm font-light">— {review.author}</p>
+                      <p className="text-sm font-light drop-shadow-md">— {review.author}</p>
                     </div>
                   </button>
                 ) : (
-                  <div className="bg-white rounded-2xl p-5 md:p-7 shadow-sm hover:shadow-lg transition-all duration-300 h-[320px] md:h-[420px] w-[260px] md:w-[380px] flex flex-col">
-                    <div className="mb-3 md:mb-4">
-                      <Icon name="Quote" size={24} className="text-primary/20" />
+                  <div className="bg-white rounded-2xl p-5 md:p-6 shadow-lg hover:shadow-2xl transition-all duration-300 h-[320px] md:h-[380px] w-[260px] md:w-[360px] flex flex-col">
+                    <div className="mb-3">
+                      <Icon name="Quote" size={22} className="text-primary/25" strokeWidth={1.5} />
                     </div>
-                    <div className="flex-1 overflow-y-auto mb-3 md:mb-5 scrollbar-hide">
-                      <p className="text-sm md:text-[15px] leading-relaxed text-primary/75 font-light">
+                    <div className="flex-1 overflow-y-auto mb-4 scrollbar-hide">
+                      <p className="text-sm md:text-[15px] leading-relaxed text-primary/80 font-light">
                         {review.text}
                       </p>
                     </div>
-                    <div className="pt-2 md:pt-4 border-t border-primary/5 md:border-primary/10">
-                      <p className="text-xs md:text-sm text-primary/50 font-light">— {review.author}</p>
+                    <div className="pt-3 border-t border-primary/15">
+                      <p className="text-xs md:text-sm text-primary/60 font-light">— {review.author}</p>
                     </div>
                   </div>
                 )}
@@ -150,7 +150,7 @@ export default function Reviews() {
           
           {/* Scroll Progress Indicators */}
           {reviews.length > 1 && (
-            <div className="flex justify-center gap-1.5 mt-4">
+            <div className="flex justify-center gap-2 mt-6">
               {reviews.map((_, index) => {
                 const itemProgress = (100 / reviews.length) * index;
                 const nextItemProgress = (100 / reviews.length) * (index + 1);
@@ -162,8 +162,8 @@ export default function Reviews() {
                     key={index}
                     className={`h-1 rounded-full transition-all duration-300 ${
                       isActive || isLast
-                        ? 'w-6 bg-primary/60'
-                        : 'w-1.5 bg-primary/20'
+                        ? 'w-8 bg-white'
+                        : 'w-1.5 bg-white/30'
                     }`}
                   />
                 );
@@ -196,14 +196,14 @@ export default function Reviews() {
         )}
         
         {/* CTA to Telegram */}
-        <div className="text-center mt-12 md:mt-16">
+        <div className="text-center mt-8 md:mt-10">
           <a 
             href="https://t.me/azalukk/4001" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2.5 px-6 py-3 bg-white hover:bg-white/90 text-primary rounded-full shadow-md hover:shadow-lg transition-all duration-300 font-light text-sm md:text-base group"
+            className="inline-flex items-center gap-2.5 px-7 py-3.5 bg-white hover:bg-white/95 text-primary rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 font-light text-sm md:text-base group"
           >
-            <Icon name="Send" size={18} strokeWidth={1.5} className="group-hover:translate-x-1 transition-transform" />
+            <Icon name="Send" size={18} strokeWidth={2} className="group-hover:translate-x-1 transition-transform" />
             <span>оставить отзыв</span>
           </a>
         </div>
