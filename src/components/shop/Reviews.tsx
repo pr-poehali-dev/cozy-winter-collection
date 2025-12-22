@@ -14,6 +14,8 @@ export default function Reviews() {
   const [expandedImage, setExpandedImage] = useState<number | null>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(false);
 
   useEffect(() => {
     const loadReviews = async () => {
@@ -38,6 +40,8 @@ export default function Reviews() {
         const maxScroll = scrollWidth - clientWidth;
         const progress = maxScroll > 0 ? (scrollLeft / maxScroll) * 100 : 0;
         setScrollProgress(progress);
+        setCanScrollLeft(scrollLeft > 10);
+        setCanScrollRight(scrollLeft < maxScroll - 10);
       }
     };
 
@@ -51,6 +55,16 @@ export default function Reviews() {
       window.removeEventListener('resize', updateScrollProgress);
     };
   }, [reviews]);
+
+  const scroll = (direction: 'left' | 'right') => {
+    if (scrollContainerRef.current) {
+      const scrollAmount = 400;
+      scrollContainerRef.current.scrollBy({
+        left: direction === 'left' ? -scrollAmount : scrollAmount,
+        behavior: 'smooth'
+      });
+    }
+  };
 
   return (
     <section id="reviews" className="py-12 md:py-20 px-6 md:px-8 relative overflow-hidden bg-gradient-to-b from-background to-background/50">
@@ -68,7 +82,28 @@ export default function Reviews() {
         </div>
         
         {/* Horizontal Scroll for All Devices */}
-        <div className="relative">
+        <div className="relative group/carousel">
+          {/* Navigation Arrows - Desktop Only */}
+          {canScrollLeft && (
+            <button
+              onClick={() => scroll('left')}
+              className="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-5 z-10 w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full shadow-lg items-center justify-center hover:bg-white transition-all opacity-0 group-hover/carousel:opacity-100"
+              aria-label="Предыдущий отзыв"
+            >
+              <Icon name="ChevronLeft" size={24} className="text-primary" />
+            </button>
+          )}
+          
+          {canScrollRight && (
+            <button
+              onClick={() => scroll('right')}
+              className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-5 z-10 w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full shadow-lg items-center justify-center hover:bg-white transition-all opacity-0 group-hover/carousel:opacity-100"
+              aria-label="Следующий отзыв"
+            >
+              <Icon name="ChevronRight" size={24} className="text-primary" />
+            </button>
+          )}
+
           <div 
             ref={scrollContainerRef}
             className="flex gap-3 md:gap-5 overflow-x-auto scrollbar-hide snap-x snap-mandatory pb-6"
@@ -166,7 +201,7 @@ export default function Reviews() {
             href="https://t.me/azalukk/4001" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2.5 px-6 py-3 bg-white hover:bg-[#C41E3A] text-[#C41E3A] hover:text-white rounded-full shadow-md hover:shadow-lg transition-all duration-300 font-light text-sm md:text-base group border border-[#C41E3A]/20"
+            className="inline-flex items-center gap-2.5 px-6 py-3 bg-primary hover:bg-primary/90 text-white rounded-full shadow-md hover:shadow-lg transition-all duration-300 font-light text-sm md:text-base group"
           >
             <Icon name="Send" size={18} strokeWidth={1.5} className="group-hover:translate-x-1 transition-transform" />
             <span>оставить отзыв</span>
