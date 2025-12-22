@@ -33,25 +33,25 @@ export default function HeroCarousel() {
           {/* Mobile layout */}
           <div className="md:hidden">
             <div className="absolute top-[15%] left-[8%] animate-float-slow">
-              <div className="backdrop-blur-md bg-white/25 rounded-2xl px-3.5 py-2.5 shadow-2xl border-2 border-white/40 animate-pulse-glow">
-                <p className="text-[11px] text-white font-light italic leading-relaxed drop-shadow-lg">
-                  ✨ это невероятно<br />красиво...
+              <div className="backdrop-blur-sm bg-white/10 rounded-2xl px-3 py-2 shadow-xl border border-white/20">
+                <p className="text-[10px] text-white/95 font-light italic leading-relaxed">
+                  это невероятно<br />красиво...
                 </p>
               </div>
             </div>
             
             <div className="absolute top-[35%] right-[5%] animate-float-delayed">
-              <div className="backdrop-blur-md bg-white/25 rounded-2xl px-3.5 py-2.5 shadow-2xl border-2 border-white/40 animate-pulse-glow" style={{ animationDelay: '1s' }}>
-                <p className="text-[11px] text-white font-light italic leading-relaxed drop-shadow-lg">
-                  💫 не встречала<br />ничего похожего!
+              <div className="backdrop-blur-sm bg-white/10 rounded-2xl px-3 py-2 shadow-xl border border-white/20">
+                <p className="text-[10px] text-white/95 font-light italic leading-relaxed">
+                  не встречала<br />ничего похожего!
                 </p>
               </div>
             </div>
             
             <div className="absolute top-[48%] left-[10%] animate-float">
-              <div className="backdrop-blur-md bg-white/25 rounded-2xl px-3.5 py-2.5 shadow-2xl border-2 border-white/40 animate-pulse-glow" style={{ animationDelay: '2s' }}>
-                <p className="text-[11px] text-white font-light italic leading-relaxed drop-shadow-lg">
-                  🌟 все спрашивают,<br />где заказывала
+              <div className="backdrop-blur-sm bg-white/10 rounded-2xl px-3 py-2 shadow-xl border border-white/20">
+                <p className="text-[10px] text-white/95 font-light italic leading-relaxed">
+                  все спрашивают,<br />где заказывала ✨
                 </p>
               </div>
             </div>
@@ -60,25 +60,25 @@ export default function HeroCarousel() {
           {/* Desktop layout */}
           <div className="hidden md:block">
             <div className="absolute top-[15%] left-[8%] animate-float-slow">
-              <div className="backdrop-blur-md bg-white/25 rounded-2xl px-5 py-3.5 shadow-2xl border-2 border-white/40 animate-pulse-glow">
-                <p className="text-base text-white font-light italic leading-relaxed drop-shadow-lg">
-                  ✨ это невероятно<br />красиво...
+              <div className="backdrop-blur-sm bg-white/10 rounded-2xl px-4 py-3 shadow-xl border border-white/20">
+                <p className="text-sm text-white/95 font-light italic leading-relaxed">
+                  это невероятно<br />красиво...
                 </p>
               </div>
             </div>
             
             <div className="absolute top-[25%] right-[12%] animate-float-delayed">
-              <div className="backdrop-blur-md bg-white/25 rounded-2xl px-5 py-3.5 shadow-2xl border-2 border-white/40 animate-pulse-glow" style={{ animationDelay: '1s' }}>
-                <p className="text-base text-white font-light italic leading-relaxed drop-shadow-lg">
-                  💫 не встречала<br />ничего похожего!
+              <div className="backdrop-blur-sm bg-white/10 rounded-2xl px-4 py-3 shadow-xl border border-white/20">
+                <p className="text-sm text-white/95 font-light italic leading-relaxed">
+                  не встречала<br />ничего похожего!
                 </p>
               </div>
             </div>
             
             <div className="absolute top-[45%] left-[15%] animate-float">
-              <div className="backdrop-blur-md bg-white/25 rounded-2xl px-5 py-3.5 shadow-2xl border-2 border-white/40 animate-pulse-glow" style={{ animationDelay: '2s' }}>
-                <p className="text-base text-white font-light italic leading-relaxed drop-shadow-lg">
-                  🌟 все спрашивают,<br />где заказывала
+              <div className="backdrop-blur-sm bg-white/10 rounded-2xl px-4 py-3 shadow-xl border border-white/20">
+                <p className="text-sm text-white/95 font-light italic leading-relaxed">
+                  все спрашивают,<br />где заказывала ✨
                 </p>
               </div>
             </div>
