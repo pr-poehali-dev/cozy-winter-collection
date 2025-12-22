@@ -90,7 +90,7 @@ export default function ProductCatalog({
                     осталось {product.stock} шт<span style={{ color: '#8B0000' }} className="ml-2">limited</span>
                   </p>
                 )}
-                {product.badge !== 'soon' && (
+                {product.badge !== 'soon' && product.id !== 1000 && (
                   <div className="flex items-center justify-center">
                     <p className="text-xs md:text-base font-light text-primary">{product.price.toLocaleString('ru-RU')} ₽</p>
                   </div>

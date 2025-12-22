@@ -321,9 +321,11 @@ export default function ProductDetails({ product, onClose, addToCart, setIsCartO
                   </div>
                 )}
                 
-                <div className="text-xl font-light text-primary whitespace-nowrap">
-                  {displayPrice.toLocaleString('ru-RU')} ₽
-                </div>
+                {!isGiftCertificate && (
+                  <div className="text-xl font-light text-primary whitespace-nowrap">
+                    {displayPrice.toLocaleString('ru-RU')} ₽
+                  </div>
+                )}
                 
                 {product.badge !== 'soon' && (
                   <div className="space-y-3">
