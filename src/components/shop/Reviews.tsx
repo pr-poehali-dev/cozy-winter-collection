@@ -70,8 +70,7 @@ export default function Reviews() {
     <section id="reviews" className="py-10 md:py-16 px-6 md:px-8 relative overflow-hidden bg-primary">
       <div className="max-w-7xl mx-auto relative">
         <div className="text-center mb-8 md:mb-12">
-          <h2 className="text-3xl md:text-4xl font-light mb-3 text-orange-100">🪄 отзывы</h2>
-          <p className="text-white/80 font-light text-sm md:text-base max-w-2xl py-0 my-0 mx-0 px-0">что говорят те, кто уже хранит наши вещицы?</p>
+          <p className="text-white/80 font-light text-sm md:text-base max-w-2xl py-0 my-0 mx-auto px-0">что говорят те, кто уже хранит наши вещицы?</p>
         </div>
         
         {/* Horizontal Scroll for All Devices */}
