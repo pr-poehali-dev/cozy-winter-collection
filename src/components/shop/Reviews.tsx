@@ -75,7 +75,7 @@ export default function Reviews() {
       
       <div className="max-w-7xl mx-auto relative">
         <div className="text-center mb-8 md:mb-12">
-          <h2 className="text-3xl md:text-4xl font-light text-white mb-3">отзывы 💗</h2>
+          <h2 className="text-3xl md:text-4xl font-light mb-3 text-[#f6f6f6]"> 🪄отзывы </h2>
           <p className="text-white/80 font-light text-sm md:text-base max-w-2xl mx-auto">
             что говорят те, кто уже хранит наши вещи
           </p>
