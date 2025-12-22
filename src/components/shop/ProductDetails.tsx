@@ -249,7 +249,7 @@ export default function ProductDetails({ product, onClose, addToCart, setIsCartO
             <div className="lg:w-1/2 p-6 lg:p-12 pb-12 flex items-start">
               <div className="w-full max-w-md space-y-6 pb-8">
                 <div className="space-y-3">
-                  <h1 className="text-2xl font-light text-primary leading-tight">
+                  <h1 className="text-2xl font-light text-primary leading-tight whitespace-pre-line">
                     {product.name}
                   </h1>
                   <div className="h-px w-16 bg-primary/20"></div>
