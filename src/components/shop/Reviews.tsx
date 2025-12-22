@@ -122,7 +122,7 @@ export default function Reviews() {
                     </div>
                   </button>
                 ) : (
-                  <div className="bg-white rounded-2xl p-5 md:p-6 shadow-lg hover:shadow-2xl transition-all duration-300 h-[320px] md:h-[380px] w-[260px] md:w-[360px] flex flex-col">
+                  <div className="rounded-2xl p-5 md:p-6 shadow-lg hover:shadow-2xl transition-all duration-300 h-[320px] md:h-[380px] w-[260px] md:w-[360px] flex flex-col bg-[#fff3e2]">
                     <div className="mb-3">
                       <Icon name="Quote" size={22} className="text-primary/25" strokeWidth={1.5} />
                     </div>
