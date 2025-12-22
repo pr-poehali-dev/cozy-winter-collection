@@ -199,24 +199,28 @@ export default function ProductDetails({ product, onClose, addToCart, setIsCartO
                       ))}
                     </div>
                   </div>
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
-                    }}
-                    className="absolute left-4 top-1/2 -translate-y-1/2 bg-card/90 hover:bg-card rounded-full p-2 shadow-lg transition-all"
-                  >
-                    <Icon name="ChevronLeft" size={20} className="text-primary" />
-                  </button>
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setCurrentImageIndex((prev) => (prev + 1) % images.length);
-                    }}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 bg-card/90 hover:bg-card rounded-full p-2 shadow-lg transition-all"
-                  >
-                    <Icon name="ChevronRight" size={20} className="text-primary" />
-                  </button>
+                  {!isGiftCertificate && (
+                    <>
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
+                        }}
+                        className="absolute left-4 top-1/2 -translate-y-1/2 bg-card/90 hover:bg-card rounded-full p-2 shadow-lg transition-all"
+                      >
+                        <Icon name="ChevronLeft" size={20} className="text-primary" />
+                      </button>
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setCurrentImageIndex((prev) => (prev + 1) % images.length);
+                        }}
+                        className="absolute right-4 top-1/2 -translate-y-1/2 bg-card/90 hover:bg-card rounded-full p-2 shadow-lg transition-all"
+                      >
+                        <Icon name="ChevronRight" size={20} className="text-primary" />
+                      </button>
+                    </>
+                  )}
                 </div>
                 
                 {/* Thumbnail Gallery */}
