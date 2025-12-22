@@ -193,7 +193,7 @@ export default function Reviews() {
             href="https://t.me/azalukk/4001" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2.5 px-7 py-3.5 bg-white hover:bg-white/95 text-primary rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 font-light text-sm md:text-base group"
+            className="inline-flex items-center gap-2.5 px-7 py-3.5 bg-[#f7f3ed] hover:bg-[#f0ebe3] text-primary rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 font-light text-sm md:text-base group"
           >
             <Icon name="Send" size={18} strokeWidth={2} className="group-hover:translate-x-1 transition-transform" />
             <span>оставить отзыв</span>
