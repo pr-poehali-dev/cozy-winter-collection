@@ -7,7 +7,6 @@ interface Review {
   text?: string;
   image?: string;
   author: string;
-  time: string;
 }
 
 export default function Reviews() {
@@ -123,17 +122,11 @@ export default function Reviews() {
                 key={review.id} 
                 className="flex-shrink-0 snap-start w-[280px] md:w-auto"
               >
-                <div className="relative h-full">
-                  {/* Tail at bottom left */}
-                  <div className={`absolute -left-2 bottom-4 w-0 h-0 border-t-[8px] border-t-transparent border-r-[12px] border-b-[8px] border-b-transparent ${
-                    review.type === 'image' ? 'border-r-[#8B7355]' : 'border-r-white'
-                  }`}></div>
-                  
-                  {/* Bubble */}
+                <div className="h-full">
                   {review.type === 'image' ? (
                     <button
                       onClick={() => setExpandedImage(review.id)}
-                      className="relative group/img overflow-hidden rounded-2xl rounded-bl-sm shadow-sm h-full"
+                      className="relative group/img overflow-hidden rounded-2xl shadow-sm h-full"
                     >
                       <img 
                         src={review.image} 
@@ -143,7 +136,7 @@ export default function Reviews() {
                       <div className="absolute inset-0 bg-black/0 group-hover/img:bg-black/10 transition-colors" />
                     </button>
                   ) : (
-                    <div className="bg-white rounded-2xl rounded-bl-sm p-5 shadow-sm h-[320px] md:h-[380px] w-[280px] md:min-w-[240px] md:max-w-[320px] flex flex-col">
+                    <div className="bg-white rounded-2xl p-5 shadow-sm h-[320px] md:h-[380px] w-[280px] md:min-w-[240px] md:max-w-[320px] flex flex-col">
                       <div className={`flex-1 overflow-y-auto mb-3 ${expandedTexts.has(review.id) ? '' : 'line-clamp-[14]'}`}>
                         <p className="text-sm text-primary/80 leading-relaxed font-light">
                           {review.text}
@@ -159,12 +152,9 @@ export default function Reviews() {
                         </button>
                       )}
                       
-                      <div className="flex items-center justify-between pt-2 border-t border-primary/5">
+                      <div className="pt-2 border-t border-primary/5">
                         <p className="text-xs text-primary/50 font-light">
                           {review.author}
-                        </p>
-                        <p className="text-xs text-primary/30 font-light">
-                          {review.time}
                         </p>
                       </div>
                     </div>
