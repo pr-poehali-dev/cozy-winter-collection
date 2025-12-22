@@ -1,5 +1,6 @@
 import { Product, CartItem } from './types';
 import Icon from '@/components/ui/icon';
+import { useNavigate } from 'react-router-dom';
 
 interface ProductCatalogProps {
   products: Product[];
@@ -20,12 +21,19 @@ export default function ProductCatalog({
   addToCart,
   cart
 }: ProductCatalogProps) {
+  const navigate = useNavigate();
+  
   const filteredProducts = selectedCategory === 'все' 
     ? products 
     : products.filter(p => p.category === selectedCategory);
 
   const isInCart = (productId: number) => {
     return cart.some(item => item.id === productId && !item.selectedVariantId);
+  };
+
+  const handleProductClick = (product: Product) => {
+    navigate(`/product/${product.id}`);
+    onProductClick(product);
   };
 
   const handleAddToCart = (e: React.MouseEvent, product: Product) => {
@@ -60,7 +68,7 @@ export default function ProductCatalog({
 
         <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
           {filteredProducts.map((product) => (
-            <div key={product.id} className="group cursor-pointer" onClick={() => onProductClick(product)}>
+            <div key={product.id} className="group cursor-pointer" onClick={() => handleProductClick(product)}>
               <div className="relative aspect-square overflow-hidden rounded-2xl mb-4 bg-card shadow-sm border border-border transition-transform group-hover:scale-[1.02]">
                 <img 
                   src={product.image} 

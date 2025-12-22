@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useParams, useNavigate } from "react-router-dom";
 import { Product, CartItem } from "@/components/shop/types";
 import { heroSlides, products as fallbackProducts } from "@/components/shop/data";
 import Header from "@/components/shop/Header";
@@ -14,6 +14,8 @@ const DEV_MODE = false;
 
 export default function Index() {
   const [searchParams] = useSearchParams();
+  const { productId } = useParams();
+  const navigate = useNavigate();
   const launchDate = new Date("2025-12-01T12:00:00+03:00");
   const isPreviewMode = searchParams.has("preview");
   const secretKeyValue = searchParams.get("key");
@@ -63,6 +65,15 @@ export default function Index() {
 
     loadProducts();
   }, []);
+
+  useEffect(() => {
+    if (productId && products.length > 0) {
+      const product = products.find(p => p.id === parseInt(productId));
+      if (product) {
+        setSelectedProduct(product);
+      }
+    }
+  }, [productId, products]);
 
   useEffect(() => {
     const checkLaunch = () => {
@@ -185,7 +196,10 @@ export default function Index() {
 
       <ProductDetails
         product={selectedProduct}
-        onClose={() => setSelectedProduct(null)}
+        onClose={() => {
+          setSelectedProduct(null);
+          navigate('/');
+        }}
         addToCart={addToCart}
         setIsCartOpen={setIsCartOpen}
         cart={cart}
