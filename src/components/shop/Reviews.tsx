@@ -67,7 +67,7 @@ export default function Reviews() {
   };
 
   return (
-    <section id="reviews" className="py-10 md:py-16 px-6 md:px-8 relative overflow-hidden bg-primary">
+    <section id="reviews" className="py-10 md:py-16 px-6 md:px-8 relative overflow-hidden bg-[#443a2e]">
       <div className="max-w-7xl mx-auto relative">
         <div className="text-center mb-8 md:mb-12">
           <p className="text-white/80 font-light text-sm md:text-base max-w-2xl py-0 my-0 mx-auto px-0">что говорят те, кто уже хранит наши вещицы?</p>
