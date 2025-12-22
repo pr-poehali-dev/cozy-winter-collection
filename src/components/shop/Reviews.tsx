@@ -67,7 +67,7 @@ export default function Reviews() {
   };
 
   return (
-    <section id="reviews" className="py-12 md:py-20 px-6 md:px-8 relative overflow-hidden bg-gradient-to-b from-background to-background/50">
+    <section id="reviews" className="py-12 md:py-20 px-6 md:px-8 relative overflow-hidden bg-primary">
       <div className="absolute top-6 left-8 text-2xl opacity-10 animate-pulse">✨</div>
       <div className="absolute top-10 right-12 text-xl opacity-10">💫</div>
       <div className="absolute bottom-8 left-16 text-xl opacity-10">🤍</div>
@@ -75,8 +75,8 @@ export default function Reviews() {
       
       <div className="max-w-7xl mx-auto relative">
         <div className="text-center mb-12 md:mb-16">
-          <h2 className="text-3xl md:text-5xl font-light text-primary mb-4">отзывы 💗</h2>
-          <p className="text-muted-foreground font-light text-base md:text-lg max-w-2xl mx-auto">
+          <h2 className="text-3xl md:text-5xl font-light text-white mb-4">отзывы 💗</h2>
+          <p className="text-white/70 font-light text-base md:text-lg max-w-2xl mx-auto">
             что говорят те, кто уже хранит наши вещи
           </p>
         </div>
@@ -201,7 +201,7 @@ export default function Reviews() {
             href="https://t.me/azalukk/4001" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2.5 px-6 py-3 bg-primary hover:bg-primary/90 text-white rounded-full shadow-md hover:shadow-lg transition-all duration-300 font-light text-sm md:text-base group"
+            className="inline-flex items-center gap-2.5 px-6 py-3 bg-white hover:bg-white/90 text-primary rounded-full shadow-md hover:shadow-lg transition-all duration-300 font-light text-sm md:text-base group"
           >
             <Icon name="Send" size={18} strokeWidth={1.5} className="group-hover:translate-x-1 transition-transform" />
             <span>оставить отзыв</span>
