@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Icon from '@/components/ui/icon';
 
 interface Review {
@@ -12,7 +12,11 @@ interface Review {
 
 export default function Reviews() {
   const [reviews, setReviews] = useState<Review[]>([]);
-  const [expandedImage, setExpandedImage] = useState(false);
+  const [expandedImage, setExpandedImage] = useState<number | null>(null);
+  const [expandedTexts, setExpandedTexts] = useState<Set<number>>(new Set());
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(false);
 
   useEffect(() => {
     const loadReviews = async () => {
@@ -30,6 +34,48 @@ export default function Reviews() {
     loadReviews();
   }, []);
 
+  useEffect(() => {
+    const checkScroll = () => {
+      if (scrollContainerRef.current) {
+        const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
+        setCanScrollLeft(scrollLeft > 0);
+        setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10);
+      }
+    };
+
+    checkScroll();
+    const container = scrollContainerRef.current;
+    container?.addEventListener('scroll', checkScroll);
+    window.addEventListener('resize', checkScroll);
+
+    return () => {
+      container?.removeEventListener('scroll', checkScroll);
+      window.removeEventListener('resize', checkScroll);
+    };
+  }, [reviews]);
+
+  const scroll = (direction: 'left' | 'right') => {
+    if (scrollContainerRef.current) {
+      const scrollAmount = 300;
+      scrollContainerRef.current.scrollBy({
+        left: direction === 'left' ? -scrollAmount : scrollAmount,
+        behavior: 'smooth'
+      });
+    }
+  };
+
+  const toggleTextExpanded = (id: number) => {
+    setExpandedTexts(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(id)) {
+        newSet.delete(id);
+      } else {
+        newSet.add(id);
+      }
+      return newSet;
+    });
+  };
+
   return (
     <section id="reviews" className="py-12 md:py-16 px-6 md:px-8 relative overflow-hidden">
       <div className="absolute top-6 left-8 text-2xl opacity-10 animate-pulse">✨</div>
@@ -43,13 +89,41 @@ export default function Reviews() {
           что говорят те, кто уже хранит наши вещи
         </p>
         
-        {/* Chat Messages */}
-        <div className="flex flex-col md:flex-row md:items-start md:gap-6 md:justify-center space-y-1 md:space-y-0 mb-6 md:mb-8">
-          {reviews.map((review, index) => (
-            <div key={review.id} className="animate-in fade-in slide-in-from-left duration-500">
-              {/* Message Bubble */}
-              <div className="max-w-md md:max-w-none">
-                <div className="relative">
+        {/* Reviews Carousel Container */}
+        <div className="relative group">
+          {/* Navigation Arrows - Desktop Only */}
+          {canScrollLeft && (
+            <button
+              onClick={() => scroll('left')}
+              className="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 w-10 h-10 bg-white rounded-full shadow-lg items-center justify-center hover:bg-gray-100 transition-all opacity-0 group-hover:opacity-100"
+              aria-label="Предыдущий отзыв"
+            >
+              <Icon name="ChevronLeft" size={24} />
+            </button>
+          )}
+          
+          {canScrollRight && (
+            <button
+              onClick={() => scroll('right')}
+              className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 w-10 h-10 bg-white rounded-full shadow-lg items-center justify-center hover:bg-gray-100 transition-all opacity-0 group-hover:opacity-100"
+              aria-label="Следующий отзыв"
+            >
+              <Icon name="ChevronRight" size={24} />
+            </button>
+          )}
+
+          {/* Scrollable Reviews Container */}
+          <div 
+            ref={scrollContainerRef}
+            className="flex gap-4 md:gap-6 overflow-x-auto scrollbar-hide snap-x snap-mandatory pb-4"
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          >
+            {reviews.map((review) => (
+              <div 
+                key={review.id} 
+                className="flex-shrink-0 snap-start w-[280px] md:w-auto"
+              >
+                <div className="relative h-full">
                   {/* Tail at bottom left */}
                   <div className={`absolute -left-2 bottom-4 w-0 h-0 border-t-[8px] border-t-transparent border-r-[12px] border-b-[8px] border-b-transparent ${
                     review.type === 'image' ? 'border-r-[#8B7355]' : 'border-r-white'
@@ -58,23 +132,34 @@ export default function Reviews() {
                   {/* Bubble */}
                   {review.type === 'image' ? (
                     <button
-                      onClick={() => setExpandedImage(!expandedImage)}
-                      className="relative group overflow-hidden rounded-2xl shadow-sm"
+                      onClick={() => setExpandedImage(review.id)}
+                      className="relative group/img overflow-hidden rounded-2xl rounded-bl-sm shadow-sm h-full"
                     >
                       <img 
                         src={review.image} 
                         alt={review.author}
-                        className="w-full max-w-[200px] md:max-w-[240px] object-cover rounded-2xl rounded-bl-sm"
+                        className="w-full h-[320px] md:h-[380px] object-cover"
                       />
+                      <div className="absolute inset-0 bg-black/0 group-hover/img:bg-black/10 transition-colors" />
                     </button>
                   ) : (
-                    <div className={`bg-white rounded-2xl rounded-bl-sm p-4 md:p-5 shadow-sm md:h-[320px] md:w-fit flex flex-col justify-end ${
-                      index === 1 ? 'md:min-w-[240px] md:max-w-[280px]' : 'md:min-w-[180px] md:max-w-[200px]'
-                    }`}>
-                      <p className="text-sm text-primary/80 leading-relaxed font-light mb-3">
-                        {review.text}
-                      </p>
-                      <div className="flex items-center justify-between">
+                    <div className="bg-white rounded-2xl rounded-bl-sm p-5 shadow-sm h-[320px] md:h-[380px] w-[280px] md:min-w-[240px] md:max-w-[320px] flex flex-col">
+                      <div className={`flex-1 overflow-y-auto mb-3 ${expandedTexts.has(review.id) ? '' : 'line-clamp-[14]'}`}>
+                        <p className="text-sm text-primary/80 leading-relaxed font-light">
+                          {review.text}
+                        </p>
+                      </div>
+                      
+                      {review.text && review.text.length > 200 && (
+                        <button
+                          onClick={() => toggleTextExpanded(review.id)}
+                          className="text-xs text-primary/40 hover:text-primary/60 transition-colors mb-2 self-start"
+                        >
+                          {expandedTexts.has(review.id) ? 'свернуть' : 'читать полностью'}
+                        </button>
+                      )}
+                      
+                      <div className="flex items-center justify-between pt-2 border-t border-primary/5">
                         <p className="text-xs text-primary/50 font-light">
                           {review.author}
                         </p>
@@ -86,25 +171,25 @@ export default function Reviews() {
                   )}
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
         
         {/* Fullscreen Image */}
-        {expandedImage && (
+        {expandedImage !== null && (
           <div 
             className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4"
-            onClick={() => setExpandedImage(false)}
+            onClick={() => setExpandedImage(null)}
           >
             <div className="relative max-w-2xl w-full">
               <img 
-                src={reviews[0].image} 
-                alt={reviews[0].author}
+                src={reviews.find(r => r.id === expandedImage)?.image} 
+                alt={reviews.find(r => r.id === expandedImage)?.author}
                 className="w-full h-auto rounded-2xl"
                 onClick={(e) => e.stopPropagation()}
               />
               <button
-                onClick={() => setExpandedImage(false)}
+                onClick={() => setExpandedImage(null)}
                 className="absolute -top-4 -right-4 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-100"
               >
                 <Icon name="X" size={20} />
