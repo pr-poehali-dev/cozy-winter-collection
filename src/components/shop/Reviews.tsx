@@ -134,51 +134,45 @@ export default function Reviews() {
           )}
         </div>
 
-        {/* Desktop: Masonry Grid */}
-        <div className="hidden md:grid md:grid-cols-3 lg:grid-cols-4 gap-5 auto-rows-[180px]">
-          {reviews.map((review, index) => {
-            // Varied heights for masonry effect
-            const heights = ['row-span-2', 'row-span-2', 'row-span-3', 'row-span-2', 'row-span-3', 'row-span-2'];
-            const heightClass = heights[index % heights.length];
-            
-            return (
-              <div 
-                key={review.id}
-                className={`${heightClass} group`}
-              >
-                {review.type === 'image' ? (
-                  <button
-                    onClick={() => setExpandedImage(review.id)}
-                    className="relative w-full h-full overflow-hidden rounded-2xl shadow-md hover:shadow-xl transition-all duration-300"
-                  >
-                    <img 
-                      src={review.image} 
-                      alt={review.author}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                    <div className="absolute bottom-3 left-3 right-3 text-white opacity-0 group-hover:opacity-100 transition-opacity">
-                      <p className="text-sm font-light">{review.author}</p>
-                    </div>
-                  </button>
-                ) : (
-                  <div className="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-all duration-300 h-full flex flex-col group-hover:scale-[1.02]">
-                    <div className="mb-3">
-                      <Icon name="Quote" size={20} className="text-primary/20" />
-                    </div>
-                    <div className="flex-1 overflow-y-auto mb-4">
-                      <p className="text-sm leading-relaxed text-primary/80 font-light">
-                        {review.text}
-                      </p>
-                    </div>
-                    <div className="pt-3 border-t border-primary/10">
-                      <p className="text-sm text-primary/60 font-light">— {review.author}</p>
-                    </div>
+        {/* Desktop: Clean Grid */}
+        <div className="hidden md:grid md:grid-cols-3 gap-6">
+          {reviews.map((review) => (
+            <div 
+              key={review.id}
+              className="group"
+            >
+              {review.type === 'image' ? (
+                <button
+                  onClick={() => setExpandedImage(review.id)}
+                  className="relative w-full overflow-hidden rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300"
+                >
+                  <img 
+                    src={review.image} 
+                    alt={review.author}
+                    className="w-full h-[400px] object-cover group-hover:scale-[1.02] transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <div className="absolute bottom-4 left-4 right-4 text-white opacity-0 group-hover:opacity-100 transition-opacity">
+                    <p className="text-sm font-light">— {review.author}</p>
                   </div>
-                )}
-              </div>
-            );
-          })}
+                </button>
+              ) : (
+                <div className="bg-white rounded-2xl p-7 shadow-sm hover:shadow-lg transition-all duration-300 h-[400px] flex flex-col">
+                  <div className="mb-4">
+                    <Icon name="Quote" size={24} className="text-primary/20" />
+                  </div>
+                  <div className="flex-1 overflow-y-auto mb-5 scrollbar-hide">
+                    <p className="text-[15px] leading-relaxed text-primary/75 font-light">
+                      {review.text}
+                    </p>
+                  </div>
+                  <div className="pt-4 border-t border-primary/10">
+                    <p className="text-sm text-primary/50 font-light">— {review.author}</p>
+                  </div>
+                </div>
+              )}
+            </div>
+          ))}
         </div>
         
         {/* Fullscreen Image */}
