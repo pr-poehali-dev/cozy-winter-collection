@@ -12,7 +12,7 @@ export default function Footer() {
                 href="https://www.youtube.com/@azaluk" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-[#F5F1E8] hover:text-[#F5F1E8]/70 transition-colors"
+                className="text-[#5f5847] hover:text-[#5f5847]/70 transition-colors"
               >
                 <Icon name="Youtube" size={16} strokeWidth={1.5} />
               </a>
@@ -20,26 +20,26 @@ export default function Footer() {
                 href="https://t.me/azalukk" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-[#F5F1E8] hover:text-[#F5F1E8]/70 transition-colors"
+                className="text-[#5f5847] hover:text-[#5f5847]/70 transition-colors"
               >
                 <Icon name="Send" size={16} strokeWidth={1.5} />
               </a>
             </div>
           </div>
           
-          <div className="flex items-center gap-3 md:gap-6 text-[10px] md:text-xs font-light text-[#F5F1E8]/80">
-            <a href="/privacy" className="hover:text-[#F5F1E8] transition-colors">
+          <div className="flex items-center gap-3 md:gap-6 text-[10px] md:text-xs font-light text-[#5f5847]/80">
+            <a href="/privacy" className="hover:text-[#5f5847] transition-colors">
               Конфиденциальность
             </a>
-            <a href="/offer" className="hover:text-[#F5F1E8] transition-colors">
+            <a href="/offer" className="hover:text-[#5f5847] transition-colors">
               Оферта
             </a>
-            <a href="/personal" className="hover:text-[#F5F1E8] transition-colors">
+            <a href="/personal" className="hover:text-[#5f5847] transition-colors">
               Обработка ПД
             </a>
           </div>
           
-          <div className="text-[10px] md:text-xs font-light text-[#F5F1E8]/70 text-center md:text-right">
+          <div className="text-[10px] md:text-xs font-light text-[#5f5847]/70 text-center md:text-right">
             <p>яроцкая азалия наильевна</p>
             <p>инн 022504012700</p>
           </div>
