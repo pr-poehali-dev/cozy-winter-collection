@@ -12,10 +12,8 @@ interface Review {
 export default function Reviews() {
   const [reviews, setReviews] = useState<Review[]>([]);
   const [expandedImage, setExpandedImage] = useState<number | null>(null);
-  const [expandedTexts, setExpandedTexts] = useState<Set<number>>(new Set());
   const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const [canScrollLeft, setCanScrollLeft] = useState(false);
-  const [canScrollRight, setCanScrollRight] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
     const loadReviews = async () => {
@@ -34,46 +32,25 @@ export default function Reviews() {
   }, []);
 
   useEffect(() => {
-    const checkScroll = () => {
+    const updateScrollProgress = () => {
       if (scrollContainerRef.current) {
         const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
-        setCanScrollLeft(scrollLeft > 0);
-        setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10);
+        const maxScroll = scrollWidth - clientWidth;
+        const progress = maxScroll > 0 ? (scrollLeft / maxScroll) * 100 : 0;
+        setScrollProgress(progress);
       }
     };
 
-    checkScroll();
+    updateScrollProgress();
     const container = scrollContainerRef.current;
-    container?.addEventListener('scroll', checkScroll);
-    window.addEventListener('resize', checkScroll);
+    container?.addEventListener('scroll', updateScrollProgress);
+    window.addEventListener('resize', updateScrollProgress);
 
     return () => {
-      container?.removeEventListener('scroll', checkScroll);
-      window.removeEventListener('resize', checkScroll);
+      container?.removeEventListener('scroll', updateScrollProgress);
+      window.removeEventListener('resize', updateScrollProgress);
     };
   }, [reviews]);
-
-  const scroll = (direction: 'left' | 'right') => {
-    if (scrollContainerRef.current) {
-      const scrollAmount = 300;
-      scrollContainerRef.current.scrollBy({
-        left: direction === 'left' ? -scrollAmount : scrollAmount,
-        behavior: 'smooth'
-      });
-    }
-  };
-
-  const toggleTextExpanded = (id: number) => {
-    setExpandedTexts(prev => {
-      const newSet = new Set(prev);
-      if (newSet.has(id)) {
-        newSet.delete(id);
-      } else {
-        newSet.add(id);
-      }
-      return newSet;
-    });
-  };
 
   return (
     <section id="reviews" className="py-12 md:py-16 px-6 md:px-8 relative overflow-hidden">
@@ -88,81 +65,71 @@ export default function Reviews() {
           что говорят те, кто уже хранит наши вещи
         </p>
         
-        {/* Reviews Carousel Container */}
-        <div className="relative group">
-          {/* Navigation Arrows - Desktop Only */}
-          {canScrollLeft && (
-            <button
-              onClick={() => scroll('left')}
-              className="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 w-10 h-10 bg-white rounded-full shadow-lg items-center justify-center hover:bg-gray-100 transition-all opacity-0 group-hover:opacity-100"
-              aria-label="Предыдущий отзыв"
-            >
-              <Icon name="ChevronLeft" size={24} />
-            </button>
-          )}
-          
-          {canScrollRight && (
-            <button
-              onClick={() => scroll('right')}
-              className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 w-10 h-10 bg-white rounded-full shadow-lg items-center justify-center hover:bg-gray-100 transition-all opacity-0 group-hover:opacity-100"
-              aria-label="Следующий отзыв"
-            >
-              <Icon name="ChevronRight" size={24} />
-            </button>
-          )}
-
-          {/* Scrollable Reviews Container */}
+        {/* Scrollable Reviews Container */}
+        <div className="relative">
           <div 
             ref={scrollContainerRef}
-            className="flex gap-4 md:gap-6 overflow-x-auto scrollbar-hide snap-x snap-mandatory pb-4"
+            className="flex gap-3 md:gap-6 overflow-x-auto scrollbar-hide snap-x snap-mandatory pb-6"
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
             {reviews.map((review) => (
               <div 
                 key={review.id} 
-                className="flex-shrink-0 snap-start w-[280px] md:w-auto"
+                className="flex-shrink-0 snap-start w-[260px] md:w-auto"
               >
-                <div className="h-full">
-                  {review.type === 'image' ? (
-                    <button
-                      onClick={() => setExpandedImage(review.id)}
-                      className="relative group/img overflow-hidden rounded-2xl shadow-sm h-full"
-                    >
-                      <img 
-                        src={review.image} 
-                        alt={review.author}
-                        className="w-full h-[320px] md:h-[380px] object-cover"
-                      />
-                      <div className="absolute inset-0 bg-black/0 group-hover/img:bg-black/10 transition-colors" />
-                    </button>
-                  ) : (
-                    <div className="bg-white rounded-2xl p-5 shadow-sm h-[320px] md:h-[380px] w-[280px] md:min-w-[240px] md:max-w-[320px] flex flex-col">
-                      <div className={`flex-1 overflow-y-auto mb-3 ${expandedTexts.has(review.id) ? '' : 'line-clamp-[14]'}`}>
-                        <p className="text-sm text-primary/80 leading-relaxed font-light">
-                          {review.text}
-                        </p>
-                      </div>
-                      
-                      {review.text && review.text.length > 200 && (
-                        <button
-                          onClick={() => toggleTextExpanded(review.id)}
-                          className="text-xs text-primary/40 hover:text-primary/60 transition-colors mb-2 self-start"
-                        >
-                          {expandedTexts.has(review.id) ? 'свернуть' : 'читать полностью'}
-                        </button>
-                      )}
-                      
-                      <div className="pt-2 border-t border-primary/5">
-                        <p className="text-xs text-primary/50 font-light">
-                          {review.author}
-                        </p>
-                      </div>
+                {review.type === 'image' ? (
+                  <button
+                    onClick={() => setExpandedImage(review.id)}
+                    className="relative group/img overflow-hidden rounded-2xl shadow-sm"
+                  >
+                    <img 
+                      src={review.image} 
+                      alt={review.author}
+                      className="w-[260px] md:w-[280px] h-[320px] md:h-[380px] object-cover"
+                    />
+                    <div className="absolute inset-0 bg-black/0 group-hover/img:bg-black/10 transition-colors" />
+                  </button>
+                ) : (
+                  <div className="bg-white rounded-2xl p-5 shadow-sm h-[320px] md:h-[380px] w-[260px] md:w-[220px] flex flex-col">
+                    <div className="flex-1 overflow-y-auto mb-3">
+                      <p className="text-sm text-primary/80 leading-relaxed font-light">
+                        {review.text}
+                      </p>
                     </div>
-                  )}
-                </div>
+                    
+                    <div className="pt-2 border-t border-primary/5">
+                      <p className="text-xs text-primary/50 font-light">
+                        {review.author}
+                      </p>
+                    </div>
+                  </div>
+                )}
               </div>
             ))}
           </div>
+          
+          {/* Scroll Progress Indicator - Mobile Only */}
+          {reviews.length > 0 && (
+            <div className="flex md:hidden justify-center gap-1.5 mt-4">
+              {reviews.map((_, index) => {
+                const itemProgress = (100 / reviews.length) * index;
+                const nextItemProgress = (100 / reviews.length) * (index + 1);
+                const isActive = scrollProgress >= itemProgress && scrollProgress < nextItemProgress;
+                const isLast = index === reviews.length - 1 && scrollProgress >= itemProgress;
+                
+                return (
+                  <div
+                    key={index}
+                    className={`h-1 rounded-full transition-all duration-300 ${
+                      isActive || isLast
+                        ? 'w-6 bg-primary/60'
+                        : 'w-1.5 bg-primary/20'
+                    }`}
+                  />
+                );
+              })}
+            </div>
+          )}
         </div>
         
         {/* Fullscreen Image */}
