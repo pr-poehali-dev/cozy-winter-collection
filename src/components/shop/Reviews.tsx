@@ -67,42 +67,45 @@ export default function Reviews() {
           </p>
         </div>
         
-        {/* Mobile: Horizontal Scroll */}
-        <div className="md:hidden relative">
+        {/* Horizontal Scroll for All Devices */}
+        <div className="relative">
           <div 
             ref={scrollContainerRef}
-            className="flex gap-3 overflow-x-auto scrollbar-hide snap-x snap-mandatory pb-6"
+            className="flex gap-3 md:gap-5 overflow-x-auto scrollbar-hide snap-x snap-mandatory pb-6"
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
             {reviews.map((review) => (
               <div 
                 key={review.id} 
-                className="flex-shrink-0 snap-start w-[260px]"
+                className="flex-shrink-0 snap-start w-[260px] md:w-[380px]"
               >
                 {review.type === 'image' ? (
                   <button
                     onClick={() => setExpandedImage(review.id)}
-                    className="relative group/img overflow-hidden rounded-2xl shadow-sm"
+                    className="relative group/img overflow-hidden rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300"
                   >
                     <img 
                       src={review.image} 
                       alt={review.author}
-                      className="w-[260px] h-[320px] object-cover"
+                      className="w-[260px] md:w-[380px] h-[320px] md:h-[420px] object-cover group-hover:scale-[1.02] transition-transform duration-500"
                     />
-                    <div className="absolute inset-0 bg-black/0 group-hover/img:bg-black/10 transition-colors" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <div className="absolute bottom-4 left-4 right-4 text-white opacity-0 group-hover:opacity-100 transition-opacity">
+                      <p className="text-sm font-light">— {review.author}</p>
+                    </div>
                   </button>
                 ) : (
-                  <div className="bg-white rounded-2xl p-5 shadow-sm h-[320px] w-[260px] flex flex-col">
-                    <div className="flex-1 overflow-y-auto mb-3">
-                      <p className="text-sm text-primary/80 leading-relaxed font-light">
+                  <div className="bg-white rounded-2xl p-5 md:p-7 shadow-sm hover:shadow-lg transition-all duration-300 h-[320px] md:h-[420px] w-[260px] md:w-[380px] flex flex-col">
+                    <div className="mb-3 md:mb-4">
+                      <Icon name="Quote" size={24} className="text-primary/20" />
+                    </div>
+                    <div className="flex-1 overflow-y-auto mb-3 md:mb-5 scrollbar-hide">
+                      <p className="text-sm md:text-[15px] leading-relaxed text-primary/75 font-light">
                         {review.text}
                       </p>
                     </div>
-                    
-                    <div className="pt-2 border-t border-primary/5">
-                      <p className="text-xs text-primary/50 font-light">
-                        {review.author}
-                      </p>
+                    <div className="pt-2 md:pt-4 border-t border-primary/5 md:border-primary/10">
+                      <p className="text-xs md:text-sm text-primary/50 font-light">— {review.author}</p>
                     </div>
                   </div>
                 )}
@@ -110,8 +113,8 @@ export default function Reviews() {
             ))}
           </div>
           
-          {/* Scroll Progress Indicator - Mobile Only */}
-          {reviews.length > 0 && (
+          {/* Scroll Progress Indicators */}
+          {reviews.length > 1 && (
             <div className="flex justify-center gap-1.5 mt-4">
               {reviews.map((_, index) => {
                 const itemProgress = (100 / reviews.length) * index;
@@ -132,47 +135,6 @@ export default function Reviews() {
               })}
             </div>
           )}
-        </div>
-
-        {/* Desktop: Clean Grid - Show only first 3 reviews */}
-        <div className="hidden md:grid md:grid-cols-3 gap-6">
-          {reviews.slice(0, 3).map((review) => (
-            <div 
-              key={review.id}
-              className="group"
-            >
-              {review.type === 'image' ? (
-                <button
-                  onClick={() => setExpandedImage(review.id)}
-                  className="relative w-full overflow-hidden rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300"
-                >
-                  <img 
-                    src={review.image} 
-                    alt={review.author}
-                    className="w-full h-[420px] object-cover group-hover:scale-[1.02] transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                  <div className="absolute bottom-4 left-4 right-4 text-white opacity-0 group-hover:opacity-100 transition-opacity">
-                    <p className="text-sm font-light">— {review.author}</p>
-                  </div>
-                </button>
-              ) : (
-                <div className="bg-white rounded-2xl p-7 shadow-sm hover:shadow-lg transition-all duration-300 h-[420px] flex flex-col">
-                  <div className="mb-4">
-                    <Icon name="Quote" size={24} className="text-primary/20" />
-                  </div>
-                  <div className="flex-1 overflow-y-auto mb-5 scrollbar-hide">
-                    <p className="text-[15px] leading-relaxed text-primary/75 font-light">
-                      {review.text}
-                    </p>
-                  </div>
-                  <div className="pt-4 border-t border-primary/10">
-                    <p className="text-sm text-primary/50 font-light">— {review.author}</p>
-                  </div>
-                </div>
-              )}
-            </div>
-          ))}
         </div>
         
         {/* Fullscreen Image */}
