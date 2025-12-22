@@ -25,6 +25,8 @@ export interface Product {
   videoUrl?: string;
   videoTitle?: string;
   sizing?: string;
+  isGiftCertificate?: boolean;
+  customPrice?: number;
 }
 
 export interface CartItem extends Product {

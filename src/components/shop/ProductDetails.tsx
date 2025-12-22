@@ -22,7 +22,10 @@ export default function ProductDetails({ product, onClose, addToCart, setIsCartO
   const [buttonState, setButtonState] = useState<'add' | 'added' | 'checkout'>('add');
   const [isCompositionOpen, setIsCompositionOpen] = useState(false);
   const [isSizingOpen, setIsSizingOpen] = useState(false);
+  const [customAmount, setCustomAmount] = useState<string>('1000');
   const thumbnailContainerRef = useRef<HTMLDivElement>(null);
+  
+  const isGiftCertificate = product?.id === 1000;
   
   // Reset carousel and variant when product changes (not when cart changes)
   useEffect(() => {
@@ -32,6 +35,7 @@ export default function ProductDetails({ product, onClose, addToCart, setIsCartO
     setIsSizingOpen(false);
     setButtonState('add');
     setIsManualSelection(false);
+    setCustomAmount('1000');
     
     // Auto-select first variant if product has variants
     if (product?.variants && product.variants.length > 0) {
@@ -70,7 +74,7 @@ export default function ProductDetails({ product, onClose, addToCart, setIsCartO
   const storyText = product.storyDescription || product.description;
   
   const currentVariant = product.variants?.find(v => v.id === selectedVariant);
-  const displayPrice = currentVariant?.price || product.price;
+  const displayPrice = isGiftCertificate ? parseFloat(customAmount) || 1000 : (currentVariant?.price || product.price);
   
   const handleButtonClick = () => {
     if (buttonState === 'checkout') {
@@ -79,12 +83,26 @@ export default function ProductDetails({ product, onClose, addToCart, setIsCartO
       onClose();
     } else {
       // Add to cart
-      const productToAdd = currentVariant ? {
-        ...product,
-        price: currentVariant.price,
-        name: `${product.name} (${currentVariant.name})`,
-        selectedVariantId: currentVariant.id
-      } : product;
+      let productToAdd;
+      
+      if (isGiftCertificate) {
+        const amount = parseFloat(customAmount) || 1000;
+        productToAdd = {
+          ...product,
+          price: amount,
+          name: `${product.name} — ${amount.toLocaleString('ru-RU')} ₽`,
+          customPrice: amount
+        };
+      } else if (currentVariant) {
+        productToAdd = {
+          ...product,
+          price: currentVariant.price,
+          name: `${product.name} (${currentVariant.name})`,
+          selectedVariantId: currentVariant.id
+        };
+      } else {
+        productToAdd = product;
+      }
       
       // Show notification immediately before state updates
       setShowAddedNotification(true);
@@ -278,6 +296,28 @@ export default function ProductDetails({ product, onClose, addToCart, setIsCartO
                         </button>
                       ))}
                     </div>
+                  </div>
+                )}
+                
+                {isGiftCertificate && (
+                  <div className="space-y-3 p-4 rounded-xl border-2 border-primary/20 bg-primary/5">
+                    <label className="block">
+                      <span className="text-sm font-normal text-primary mb-2 block">укажите сумму сертификата</span>
+                      <div className="relative">
+                        <input
+                          type="number"
+                          min="500"
+                          max="1000000"
+                          step="100"
+                          value={customAmount}
+                          onChange={(e) => setCustomAmount(e.target.value)}
+                          className="w-full px-4 py-3 rounded-lg border-2 border-border/50 focus:border-primary focus:outline-none text-base font-light"
+                          placeholder="1000"
+                        />
+                        <span className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground">₽</span>
+                      </div>
+                      <p className="text-xs text-muted-foreground mt-2">от 500₽ до 1 000 000₽</p>
+                    </label>
                   </div>
                 )}
                 
