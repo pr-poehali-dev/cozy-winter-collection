@@ -134,9 +134,9 @@ export default function Reviews() {
           )}
         </div>
 
-        {/* Desktop: Clean Grid */}
+        {/* Desktop: Clean Grid - Show only first 3 reviews */}
         <div className="hidden md:grid md:grid-cols-3 gap-6">
-          {reviews.map((review) => (
+          {reviews.slice(0, 3).map((review) => (
             <div 
               key={review.id}
               className="group"
@@ -149,7 +149,7 @@ export default function Reviews() {
                   <img 
                     src={review.image} 
                     alt={review.author}
-                    className="w-full h-[400px] object-cover group-hover:scale-[1.02] transition-transform duration-500"
+                    className="w-full h-[420px] object-cover group-hover:scale-[1.02] transition-transform duration-500"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                   <div className="absolute bottom-4 left-4 right-4 text-white opacity-0 group-hover:opacity-100 transition-opacity">
@@ -157,7 +157,7 @@ export default function Reviews() {
                   </div>
                 </button>
               ) : (
-                <div className="bg-white rounded-2xl p-7 shadow-sm hover:shadow-lg transition-all duration-300 h-[400px] flex flex-col">
+                <div className="bg-white rounded-2xl p-7 shadow-sm hover:shadow-lg transition-all duration-300 h-[420px] flex flex-col">
                   <div className="mb-4">
                     <Icon name="Quote" size={24} className="text-primary/20" />
                   </div>
