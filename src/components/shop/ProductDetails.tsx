@@ -356,7 +356,7 @@ export default function ProductDetails({ product, onClose, addToCart, setIsCartO
                 )}
                 
                 <div className="space-y-6 pt-2">
-                  <p className="text-sm text-moss/70 leading-relaxed font-light">
+                  <p className="text-sm text-moss/70 leading-relaxed font-light whitespace-pre-line">
                     {storyText}
                   </p>
                   
