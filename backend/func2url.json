@@ -1,4 +1,5 @@
 {
+  "get-reviews": "https://functions.poehali.dev/26151c17-6f4f-46a6-8375-4dd63a78a196",
   "get-products": "https://functions.poehali.dev/4cfc9ed0-ca29-40ae-8316-56d0225fb703",
   "resend-forward": "https://functions.poehali.dev/31cdb1b0-2ce2-4efb-ae70-7e56e1e153ff",
   "send-email": "https://functions.poehali.dev/76b36dee-db70-4316-b6a8-fed039d8df8c",

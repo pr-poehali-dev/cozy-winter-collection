@@ -1,32 +1,34 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Icon from '@/components/ui/icon';
 
-const reviews = [
-  {
-    id: 1,
-    type: "image",
-    image: "https://cdn.poehali.dev/files/73260439-3326-4728-bed2-076f231d3fdc.jpg",
-    author: "Анастасия",
-    time: "14:23"
-  },
-  {
-    id: 2,
-    type: "text",
-    text: "Спасибо большое!!! Это лучшее приобретение этой осени. Ношу его не снимая. Очень тепло и уютно ❤️ Наконец-то решена проблема с укладкой и челкой 😍 Все у меня спрашивают, где я заказывала, только и успеваю отбиваться 😂 Качество превосходное, очень мягкая и приятная ткань. Сидит идеально, не сползает.",
-    author: "Виктория",
-    time: "14:24"
-  },
-  {
-    id: 3,
-    type: "text",
-    text: "Косынка пришла в самой красивой упаковке, которую я когда-либо видела. Носить её — как обнять что-то тёплое и родное 🤍 Очень довольна покупкой!",
-    author: "Мария",
-    time: "11:45"
-  }
-];
+interface Review {
+  id: number;
+  type: 'text' | 'image';
+  text?: string;
+  image?: string;
+  author: string;
+  time: string;
+}
 
 export default function Reviews() {
+  const [reviews, setReviews] = useState<Review[]>([]);
   const [expandedImage, setExpandedImage] = useState(false);
+
+  useEffect(() => {
+    const loadReviews = async () => {
+      try {
+        const response = await fetch('https://functions.poehali.dev/26151c17-6f4f-46a6-8375-4dd63a78a196');
+        if (response.ok) {
+          const data = await response.json();
+          setReviews(data);
+        }
+      } catch (error) {
+        console.error('Ошибка загрузки отзывов:', error);
+      }
+    };
+
+    loadReviews();
+  }, []);
 
   return (
     <section id="reviews" className="py-12 md:py-16 px-6 md:px-8 relative overflow-hidden">
