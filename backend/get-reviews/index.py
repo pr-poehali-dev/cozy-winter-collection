@@ -44,7 +44,8 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
         cur = conn.cursor()
         
         cur.execute("""
-            SELECT id, type, text, image, author, time
+            SELECT id, type, text, image, author, 
+                   COALESCE(TO_CHAR(created_at, 'DD.MM.YY'), '—') as time
             FROM t_p3876556_cozy_winter_collecti.reviews
             WHERE is_visible = true
             ORDER BY display_order, id
@@ -54,13 +55,13 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
         reviews = []
         
         for row in rows:
-            review_id, review_type, text, image, author, time = row
+            review_id, review_type, text, image, author, time_str = row
             
             review = {
                 'id': review_id,
                 'type': review_type,
                 'author': author,
-                'time': time
+                'time': time_str
             }
             
             if text:
