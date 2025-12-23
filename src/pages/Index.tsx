@@ -66,14 +66,23 @@ export default function Index() {
   }, []);
 
   useEffect(() => {
+    // Clear selected product while loading to prevent showing wrong item
+    if (isLoadingProducts && productId) {
+      setSelectedProduct(null);
+      return;
+    }
+    
     // Wait for products to load from server before opening product modal
     if (productId && products.length > 0 && !isLoadingProducts) {
       const product = products.find(p => p.id === parseInt(productId));
       if (product) {
         setSelectedProduct(product);
+      } else {
+        // Product not found, redirect to home
+        navigate('/');
       }
     }
-  }, [productId, products, isLoadingProducts]);
+  }, [productId, products, isLoadingProducts, navigate]);
 
   useEffect(() => {
     const checkLaunch = () => {
