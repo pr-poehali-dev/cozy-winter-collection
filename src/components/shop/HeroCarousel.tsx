@@ -32,7 +32,7 @@ export default function HeroCarousel() {
         <div className="absolute inset-0 pointer-events-none">
           {/* Mobile layout */}
           <div className="md:hidden">
-            <div className="absolute top-[15%] left-[8%] animate-float-slow">
+            <div className="absolute top-[12%] left-[8%] animate-float-slow">
               <div className="backdrop-blur-md bg-white/25 rounded-2xl px-3 py-2 shadow-xl border-2 border-white/40 animate-pulse-glow">
                 <p className="text-[11px] text-white font-light italic leading-relaxed">
                   ✨ это невероятно<br />красиво...
@@ -40,7 +40,7 @@ export default function HeroCarousel() {
               </div>
             </div>
             
-            <div className="absolute top-[35%] right-[5%] animate-float-delayed">
+            <div className="absolute top-[32%] right-[5%] animate-float-delayed">
               <div className="backdrop-blur-md bg-white/25 rounded-2xl px-3 py-2 shadow-xl border-2 border-white/40 animate-pulse-glow">
                 <p className="text-[11px] text-white font-light italic leading-relaxed">
                   не встречала<br />ничего похожего!
@@ -48,7 +48,7 @@ export default function HeroCarousel() {
               </div>
             </div>
             
-            <div className="absolute top-[48%] left-[10%] animate-float">
+            <div className="absolute top-[20%] left-[52%] animate-float">
               <div className="backdrop-blur-md bg-white/25 rounded-2xl px-3 py-2 shadow-xl border-2 border-white/40 animate-pulse-glow">
                 <p className="text-[11px] text-white font-light italic leading-relaxed">
                   🌟 все спрашивают,<br />где заказывала
