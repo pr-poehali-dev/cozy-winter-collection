@@ -66,8 +66,16 @@ export default function ProductCatalog({
           ))}
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
-          {filteredProducts.map((product) => (
+        {products.length === 0 ? (
+          <div className="flex items-center justify-center py-20">
+            <div className="relative">
+              <div className="w-16 h-16 border-4 border-primary/20 border-t-primary rounded-full animate-spin"></div>
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 border-4 border-transparent border-t-primary/40 rounded-full animate-spin" style={{ animationDirection: 'reverse', animationDuration: '0.8s' }}></div>
+            </div>
+          </div>
+        ) : (
+          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
+            {filteredProducts.map((product) => (
             <div key={product.id} className="group cursor-pointer" onClick={() => handleProductClick(product)}>
               <div className="relative aspect-square overflow-hidden rounded-2xl mb-4 bg-card shadow-sm border border-border transition-transform group-hover:scale-[1.02]">
                 <img 
@@ -98,7 +106,8 @@ export default function ProductCatalog({
               </div>
             </div>
           ))}
-        </div>
+          </div>
+        )}
       </div>
     </section>
   );

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useSearchParams, useParams, useNavigate } from "react-router-dom";
 import { Product, CartItem } from "@/components/shop/types";
-import { heroSlides, products as fallbackProducts } from "@/components/shop/data";
+import { heroSlides } from "@/components/shop/data";
 import Header from "@/components/shop/Header";
 import HeroCarousel from "@/components/shop/HeroCarousel";
 import ProductCatalog from "@/components/shop/ProductCatalog";
@@ -40,8 +40,8 @@ export default function Index() {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
-  const [products, setProducts] = useState<Product[]>(fallbackProducts);
-  const [isLoadingProducts, setIsLoadingProducts] = useState(false);
+  const [products, setProducts] = useState<Product[]>([]);
+  const [isLoadingProducts, setIsLoadingProducts] = useState(true);
 
   useEffect(() => {
     localStorage.setItem('azaluk_cart', JSON.stringify(cart));
@@ -49,7 +49,6 @@ export default function Index() {
 
   useEffect(() => {
     const loadProducts = async () => {
-      setIsLoadingProducts(true);
       try {
         const response = await fetch('https://functions.poehali.dev/4cfc9ed0-ca29-40ae-8316-56d0225fb703');
         if (response.ok) {
