@@ -203,16 +203,18 @@ export default function Index() {
 
       <Reviews />
 
-      <ProductDetails
-        product={selectedProduct}
-        onClose={() => {
-          setSelectedProduct(null);
-          navigate('/');
-        }}
-        addToCart={addToCart}
-        setIsCartOpen={setIsCartOpen}
-        cart={cart}
-      />
+      {!isLoadingProducts && (
+        <ProductDetails
+          product={selectedProduct}
+          onClose={() => {
+            setSelectedProduct(null);
+            navigate('/');
+          }}
+          addToCart={addToCart}
+          setIsCartOpen={setIsCartOpen}
+          cart={cart}
+        />
+      )}
 
       <Footer />
     </div>
