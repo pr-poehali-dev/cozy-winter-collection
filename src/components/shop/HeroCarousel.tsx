@@ -43,7 +43,7 @@ export default function HeroCarousel() {
             <div className="absolute top-[35%] right-[5%] animate-float-delayed">
               <div className="backdrop-blur-md bg-white/25 rounded-2xl px-3 py-2 shadow-xl border-2 border-white/40 animate-pulse-glow">
                 <p className="text-[11px] text-white font-light italic leading-relaxed">
-                  💫 не встречала<br />ничего похожего!
+                  не встречала<br />ничего похожего!
                 </p>
               </div>
             </div>
@@ -70,7 +70,7 @@ export default function HeroCarousel() {
             <div className="absolute top-[25%] right-[12%] animate-float-delayed">
               <div className="backdrop-blur-md bg-white/25 rounded-2xl px-5 py-3.5 shadow-xl border-2 border-white/40 animate-pulse-glow">
                 <p className="text-[15px] text-white font-light italic leading-relaxed">
-                  💫 не встречала<br />ничего похожего!
+                  не встречала<br />ничего похожего!
                 </p>
               </div>
             </div>
