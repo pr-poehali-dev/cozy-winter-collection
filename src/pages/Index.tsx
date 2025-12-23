@@ -67,13 +67,14 @@ export default function Index() {
   }, []);
 
   useEffect(() => {
-    if (productId && products.length > 0) {
+    // Wait for products to load from server before opening product modal
+    if (productId && products.length > 0 && !isLoadingProducts) {
       const product = products.find(p => p.id === parseInt(productId));
       if (product) {
         setSelectedProduct(product);
       }
     }
-  }, [productId, products]);
+  }, [productId, products, isLoadingProducts]);
 
   useEffect(() => {
     const checkLaunch = () => {
