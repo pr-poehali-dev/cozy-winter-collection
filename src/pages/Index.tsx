@@ -49,15 +49,19 @@ export default function Index() {
 
   useEffect(() => {
     const loadProducts = async () => {
+      console.log('📦 Starting products load...');
       try {
         const response = await fetch('https://functions.poehali.dev/4cfc9ed0-ca29-40ae-8316-56d0225fb703');
         if (response.ok) {
           const data = await response.json();
-          setProducts(data.filter((p: Product) => p.in_stock !== false));
+          const filtered = data.filter((p: Product) => p.in_stock !== false);
+          console.log('✅ Products loaded:', filtered.map((p: Product) => ({ id: p.id, name: p.name })));
+          setProducts(filtered);
         }
       } catch (error) {
         console.error('Ошибка загрузки товаров:', error);
       } finally {
+        console.log('🏁 Products loading finished');
         setIsLoadingProducts(false);
       }
     };
@@ -66,8 +70,17 @@ export default function Index() {
   }, []);
 
   useEffect(() => {
+    console.log('🔍 ProductID effect:', { 
+      productId, 
+      isLoadingProducts, 
+      productsCount: products.length,
+      selectedProductId: selectedProduct?.id,
+      selectedProductName: selectedProduct?.name
+    });
+    
     // Clear selected product while loading to prevent showing wrong item
     if (isLoadingProducts && productId) {
+      console.log('🧹 Clearing selected product during load');
       setSelectedProduct(null);
       return;
     }
@@ -75,10 +88,16 @@ export default function Index() {
     // Wait for products to load from server before opening product modal
     if (productId && products.length > 0 && !isLoadingProducts) {
       const product = products.find(p => p.id === parseInt(productId));
+      console.log('🎯 Found product:', { 
+        searchId: parseInt(productId), 
+        foundId: product?.id,
+        foundName: product?.name 
+      });
       if (product) {
         setSelectedProduct(product);
       } else {
         // Product not found, redirect to home
+        console.log('❌ Product not found, redirecting');
         navigate('/');
       }
     }
