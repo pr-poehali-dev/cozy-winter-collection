@@ -3,7 +3,7 @@ import { Product, HeroSlide } from './types';
 export const heroSlides: HeroSlide[] = [
   {
     id: 1,
-    image: 'https://cdn.poehali.dev/files/397b9aee-473f-429e-8cab-e129e962c93f.png',
+    image: 'https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/bucket/3bf04731-6950-4913-bdd3-0928610b40ac.jpg',
     title: 'волшебство, которое можно носить',
     subtitle: 'МАГАЗИНЧИК ВЕЩИЦ РУЧНОЙ РАБОТЫ',
     buttonText: 'посмотреть коллекцию',
