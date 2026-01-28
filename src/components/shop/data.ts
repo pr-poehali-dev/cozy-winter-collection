@@ -3,7 +3,7 @@ import { Product, HeroSlide } from './types';
 export const heroSlides: HeroSlide[] = [
   {
     id: 1,
-    image: 'https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/bucket/68f023bd-6dc2-4a83-84a8-6441f579aff4.jpg',
+    image: 'https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/bucket/e17ba464-5927-496a-a5a4-54d357cd7afb.jpg',
     title: 'разорви меня 💌',
     subtitle: "valentine's drop 2026",
     buttonText: 'открыть коллекцию',
