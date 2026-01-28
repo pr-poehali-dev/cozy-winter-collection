@@ -10,7 +10,6 @@ import Reviews from "@/components/shop/Reviews";
 import Footer from "@/components/shop/Footer";
 import ComingSoon from "@/components/ComingSoon";
 import SurpriseBlock from "@/components/shop/SurpriseBlock";
-import DeadlineBlock from "@/components/shop/DeadlineBlock";
 
 const DEV_MODE = false;
 
@@ -223,8 +222,6 @@ export default function Index() {
       />
 
       <SurpriseBlock />
-
-      <DeadlineBlock />
 
       <Reviews />
 
