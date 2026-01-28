@@ -60,10 +60,10 @@ export default function ProductCatalog({
                 className={`px-4 py-1.5 md:px-8 md:py-2.5 rounded-full text-xs md:text-sm font-light transition-all ${
                   selectedCategory === category
                     ? isValentines
-                      ? 'bg-red-500 text-white'
+                      ? 'bg-[#6b1515] text-white'
                       : 'bg-primary text-white'
                     : isValentines
-                    ? 'bg-white text-red-500 hover:bg-red-50 border-2 border-red-300'
+                    ? 'bg-white text-[#6b1515] hover:bg-red-50/50 border-2 border-[#6b1515]/30'
                     : 'bg-white text-primary hover:bg-secondary border border-border'
                 }`}
               >
