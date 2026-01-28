@@ -85,19 +85,24 @@ export default function HeroCarousel() {
             <div className="absolute inset-0 z-20 pointer-events-none">
               {currentSlideData.floatingQuotes.map((quote, index) => {
                 const positionClasses = {
-                  'top-left': 'top-[12%] left-[8%] md:top-[15%] md:left-[10%]',
-                  'top-right': 'top-[18%] right-[8%] md:top-[20%] md:right-[12%]',
-                  'bottom-left': 'bottom-[25%] left-[10%] md:bottom-[28%] md:left-[15%]',
-                  'bottom-right': 'bottom-[20%] right-[6%] md:bottom-[22%] md:right-[10%]'
+                  'top-left': 'top-[8%] left-[8%] md:top-[12%] md:left-[10%]',
+                  'top-right': 'top-[10%] right-[8%] md:top-[14%] md:right-[10%]',
+                  'bottom-left': 'bottom-[28%] left-[8%] md:bottom-[32%] md:left-[12%]'
                 };
+                
+                const animationClasses = [
+                  'animate-float',
+                  'animate-float-slow',
+                  'animate-float-delayed'
+                ];
                 
                 return (
                   <div
                     key={index}
-                    className={`absolute ${positionClasses[quote.position]}`}
+                    className={`absolute ${positionClasses[quote.position]} ${animationClasses[index]}`}
                   >
-                    <div className="bg-white/40 backdrop-blur-sm px-3 py-2 md:px-4 md:py-2.5 rounded-2xl shadow-lg border border-white/30 max-w-[160px] md:max-w-[220px]">
-                      <p className="text-[10px] md:text-sm font-light text-gray-800 leading-relaxed">
+                    <div className="bg-black/40 backdrop-blur-sm px-4 py-2.5 md:px-5 md:py-3 rounded-2xl shadow-2xl border border-white/20 max-w-[180px] md:max-w-[240px] animate-pulse-glow">
+                      <p className="text-xs md:text-sm font-light text-white/95 leading-relaxed italic">
                         {quote.text}
                       </p>
                     </div>

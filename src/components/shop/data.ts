@@ -10,9 +10,8 @@ export const heroSlides: HeroSlide[] = [
     buttonAction: 'catalog',
     floatingQuotes: [
       { text: '✨ это невероятно красиво...', position: 'top-left' },
-      { text: '💛 все спрашивают, где заказывала', position: 'top-right' },
-      { text: '🤍 хочу носить вечно', position: 'bottom-left' },
-      { text: '🧡 самый милый подарок', position: 'bottom-right' }
+      { text: '💛 все спрашивают, где заказывала', position: 'bottom-left' },
+      { text: '💎 не встречала ничего похожего!', position: 'top-right' }
     ]
   },
   {
