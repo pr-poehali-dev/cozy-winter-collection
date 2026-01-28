@@ -38,30 +38,7 @@ export const heroSlides: HeroSlide[] = [
     buttonText: 'посмотреть коллекцию',
     buttonAction: 'valentines'
   },
-  {
-    id: 5,
-    image: 'https://cdn.poehali.dev/files/f9fe8956-e4b2-4d08-b2fc-0195aa240b23.png',
-    title: 'вещи с душой и теплом',
-    subtitle: 'каждая создана вручную, чтобы стать частью твоей истории',
-    buttonText: 'посмотреть коллекцию',
-    buttonAction: 'catalog'
-  },
-  {
-    id: 6,
-    image: 'https://cdn.poehali.dev/files/031f61f1-ffb6-48da-889e-8ff29b154541.png',
-    title: 'упаковываем с любовью',
-    subtitle: 'каждый заказ — маленькое волшебство в крафтовой коробке',
-    buttonText: 'доставка и оплата',
-    buttonAction: 'delivery'
-  },
-  {
-    id: 7,
-    image: 'https://cdn.poehali.dev/files/d036e4b3-8f61-430e-8dbd-ced3ec4b5dee.png',
-    title: 'спасибо за ваши отзывы 💗',
-    subtitle: 'они вдохновляют создавать ещё больше уютных вещей',
-    buttonText: 'оставить отзыв',
-    buttonAction: 'reviews'
-  }
+
 ];
 
 export const products: Product[] = [
