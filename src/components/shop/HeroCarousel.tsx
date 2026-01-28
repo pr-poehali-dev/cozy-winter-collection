@@ -72,13 +72,17 @@ export default function HeroCarousel() {
         )}
 
         <div className="relative">
-          <img
-            key={currentSlide}
-            src={currentSlideData.image}
-            alt={currentSlideData.title}
-            className={`w-full h-[50vh] md:h-[85vh] object-cover transition-opacity duration-700 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
-            onLoad={() => setImageLoaded(true)}
-          />
+          <picture>
+            <source media="(min-width: 768px)" srcSet={currentSlideData.image} />
+            <source media="(max-width: 767px)" srcSet={currentSlideData.imageMobile || currentSlideData.image} />
+            <img
+              key={currentSlide}
+              src={currentSlideData.image}
+              alt={currentSlideData.title}
+              className={`w-full h-[50vh] md:h-[85vh] object-cover transition-opacity duration-700 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
+              onLoad={() => setImageLoaded(true)}
+            />
+          </picture>
           <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60"></div>
           
           {currentSlideData.floatingQuotes && imageLoaded && (

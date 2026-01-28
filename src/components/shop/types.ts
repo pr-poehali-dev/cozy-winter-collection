@@ -42,6 +42,7 @@ export interface FloatingQuote {
 export interface HeroSlide {
   id: number;
   image: string;
+  imageMobile?: string;
   title: string;
   subtitle: string;
   buttonText: string;
