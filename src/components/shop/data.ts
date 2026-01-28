@@ -3,7 +3,7 @@ import { Product, HeroSlide } from './types';
 export const heroSlides: HeroSlide[] = [
   {
     id: 1,
-    image: 'https://cdn.poehali.dev/files/8c113fd7-d233-4c48-8700-5ac48aae9c40.jpg',
+    image: 'https://cdn.poehali.dev/files/6cedfa45-1314-4dfd-bb01-0b0c94f5bccc.jpeg',
     title: 'разорви меня 💌',
     subtitle: "valentine's drop 2026",
     buttonText: 'открыть коллекцию',
@@ -11,7 +11,7 @@ export const heroSlides: HeroSlide[] = [
   },
   {
     id: 2,
-    image: 'https://cdn.poehali.dev/files/961ea4f2-3e21-4e62-9659-3f954b147d50.jpg',
+    image: 'https://cdn.poehali.dev/files/dbf312ea-8397-44a9-a4c6-a7d547e10dfd.jpeg',
     title: 'заказы до 10 февраля 💔',
     subtitle: 'чтобы успеть к 14 февраля',
     buttonText: 'посмотреть коллекцию',
@@ -19,7 +19,7 @@ export const heroSlides: HeroSlide[] = [
   },
   {
     id: 3,
-    image: 'https://cdn.poehali.dev/files/d535eed4-a23c-4eec-a2e3-85a5c7550569.jpg',
+    image: 'https://cdn.poehali.dev/files/3a3dfd5f-4b52-42ca-a539-737f72fd1e9b.jpeg',
     title: 'отправь сюрприз близкому ✨',
     subtitle: 'укажи адрес — мы доставим напрямую',
     buttonText: 'как это работает',
@@ -27,7 +27,7 @@ export const heroSlides: HeroSlide[] = [
   },
   {
     id: 4,
-    image: 'https://cdn.poehali.dev/files/c61aec5c-9cf3-4355-aef6-575ebac598e9.jpg',
+    image: 'https://cdn.poehali.dev/files/8b8df529-5105-423c-adf4-89cd0cc8c06d.jpeg',
     title: 'просто для примерки',
     subtitle: 'новая коллекция аксессуаров',
     buttonText: 'посмотреть коллекцию',
@@ -35,7 +35,7 @@ export const heroSlides: HeroSlide[] = [
   },
   {
     id: 5,
-    image: 'https://cdn.poehali.dev/files/7dbf04fd-181c-4f13-a186-dda452138a53.jpg',
+    image: 'https://cdn.poehali.dev/files/102701bf-703a-4106-a14e-ce09863deb25.jpeg',
     title: 'волшебство, которое можно носить',
     subtitle: 'МАГАЗИНЧИК ВЕЩИЦ РУЧНОЙ РАБОТЫ',
     buttonText: 'посмотреть коллекцию',
