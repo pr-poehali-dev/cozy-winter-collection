@@ -84,60 +84,6 @@ export default function HeroCarousel() {
             />
           </picture>
           <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60"></div>
-          
-          {currentSlideData.floatingQuotes && imageLoaded && (
-            <div className="absolute inset-0 z-20 pointer-events-none">
-              {currentSlideData.floatingQuotes.map((quote, index) => {
-                const configs = {
-                  'top-left': {
-                    position: 'top-[6%] left-[6%] md:top-[10%] md:left-[8%]',
-                    bokeh: [
-                      { size: 'w-20 h-20 md:w-32 md:h-32', pos: 'top-2 right-4 md:top-4 md:right-8', opacity: 'opacity-40' },
-                      { size: 'w-12 h-12 md:w-20 md:h-20', pos: 'bottom-6 left-8 md:bottom-8 md:left-12', opacity: 'opacity-30' }
-                    ]
-                  },
-                  'top-right': {
-                    position: 'top-[8%] right-[6%] md:top-[12%] md:right-[8%]',
-                    bokeh: [
-                      { size: 'w-24 h-24 md:w-36 md:h-36', pos: 'top-0 left-6 md:top-2 md:left-10', opacity: 'opacity-50' },
-                      { size: 'w-14 h-14 md:w-24 md:h-24', pos: 'bottom-4 right-2 md:bottom-6 md:right-4', opacity: 'opacity-35' }
-                    ]
-                  },
-                  'bottom-left': {
-                    position: 'bottom-[30%] left-[6%] md:bottom-[34%] md:left-[10%]',
-                    bokeh: [
-                      { size: 'w-16 h-16 md:w-28 md:h-28', pos: '-top-4 right-4 md:-top-6 md:right-8', opacity: 'opacity-45' },
-                      { size: 'w-10 h-10 md:w-16 md:h-16', pos: 'bottom-2 left-6 md:bottom-4 md:left-10', opacity: 'opacity-25' }
-                    ]
-                  }
-                };
-                
-                const config = configs[quote.position];
-                const animationClasses = ['animate-float', 'animate-float-slow', 'animate-float-delayed'];
-                
-                return (
-                  <div
-                    key={index}
-                    className={`absolute ${config.position} ${animationClasses[index]}`}
-                  >
-                    <div className="relative">
-                      {config.bokeh.map((bokeh, i) => (
-                        <div
-                          key={i}
-                          className={`absolute ${bokeh.pos} ${bokeh.size} ${bokeh.opacity} bg-gradient-radial from-amber-200/60 via-amber-100/40 to-transparent rounded-full blur-xl -z-10`}
-                        />
-                      ))}
-                      <div className="relative bg-black/40 backdrop-blur-sm px-4 py-2.5 md:px-5 md:py-3 rounded-2xl shadow-2xl border border-white/20 max-w-[170px] md:max-w-[230px]">
-                        <p className="text-xs md:text-sm font-light text-white/95 leading-relaxed italic">
-                          {quote.text}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          )}
         </div>
 
         <button
