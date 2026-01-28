@@ -15,30 +15,30 @@ export default function SurpriseBlock() {
             </p>
           </div>
 
-          <div className="flex justify-center items-center gap-3 md:gap-8 mb-5 md:mb-7">
-            <div className="flex flex-col items-center space-y-1.5 md:space-y-2.5 text-center flex-1 max-w-[90px] md:max-w-none">
-              <div className="w-11 h-11 md:w-14 md:h-14 rounded-full bg-[#6b1515]/8 flex items-center justify-center transition-transform hover:scale-105">
-                <span className="text-xl md:text-2xl">💝</span>
+          <div className="flex justify-center items-center gap-2 md:gap-8 mb-5 md:mb-7">
+            <div className="flex flex-col items-center space-y-2 md:space-y-3 text-center flex-1 max-w-[100px] md:max-w-none">
+              <div className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-[#6b1515]/8 flex items-center justify-center transition-transform hover:scale-105">
+                <span className="text-2xl md:text-3xl">💝</span>
               </div>
-              <p className="text-[11px] md:text-sm font-light text-primary leading-tight">выбери изделие</p>
+              <p className="text-xs md:text-sm font-light text-primary leading-snug">выбери изделие</p>
             </div>
 
-            <div className="text-[#8b7355]/30 text-lg md:text-2xl self-start mt-4 md:mt-5">→</div>
+            <div className="text-[#8b7355]/30 text-xl md:text-2xl self-start mt-5 md:mt-6">→</div>
 
-            <div className="flex flex-col items-center space-y-1.5 md:space-y-2.5 text-center flex-1 max-w-[90px] md:max-w-none">
-              <div className="w-11 h-11 md:w-14 md:h-14 rounded-full bg-[#6b1515]/8 flex items-center justify-center transition-transform hover:scale-105">
-                <span className="text-xl md:text-2xl">✍️</span>
+            <div className="flex flex-col items-center space-y-2 md:space-y-3 text-center flex-1 max-w-[100px] md:max-w-none">
+              <div className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-[#6b1515]/8 flex items-center justify-center transition-transform hover:scale-105">
+                <span className="text-2xl md:text-3xl">✍️</span>
               </div>
-              <p className="text-[11px] md:text-sm font-light text-primary leading-tight">напиши послание</p>
+              <p className="text-xs md:text-sm font-light text-primary leading-snug">напиши послание</p>
             </div>
 
-            <div className="text-[#8b7355]/30 text-lg md:text-2xl self-start mt-4 md:mt-5">→</div>
+            <div className="text-[#8b7355]/30 text-xl md:text-2xl self-start mt-5 md:mt-6">→</div>
 
-            <div className="flex flex-col items-center space-y-1.5 md:space-y-2.5 text-center flex-1 max-w-[90px] md:max-w-none">
-              <div className="w-11 h-11 md:w-14 md:h-14 rounded-full bg-[#6b1515]/8 flex items-center justify-center transition-transform hover:scale-105">
-                <span className="text-xl md:text-2xl">📍</span>
+            <div className="flex flex-col items-center space-y-2 md:space-y-3 text-center flex-1 max-w-[100px] md:max-w-none">
+              <div className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-[#6b1515]/8 flex items-center justify-center transition-transform hover:scale-105">
+                <span className="text-2xl md:text-3xl">📍</span>
               </div>
-              <p className="text-[11px] md:text-sm font-light text-primary leading-tight">укажи адрес</p>
+              <p className="text-xs md:text-sm font-light text-primary leading-snug">укажи адрес</p>
             </div>
           </div>
 
