@@ -3,6 +3,20 @@ import { Product, HeroSlide } from './types';
 export const heroSlides: HeroSlide[] = [
   {
     id: 1,
+    image: 'https://cdn.poehali.dev/files/397b9aee-473f-429e-8cab-e129e962c93f.png',
+    title: 'волшебство, которое можно носить',
+    subtitle: 'МАГАЗИНЧИК ВЕЩИЦ РУЧНОЙ РАБОТЫ',
+    buttonText: 'посмотреть коллекцию',
+    buttonAction: 'catalog',
+    floatingQuotes: [
+      { text: '✨ это невероятно красиво...', position: 'top-left' },
+      { text: '💛 все спрашивают, где заказывала', position: 'top-right' },
+      { text: '🤍 хочу носить вечно', position: 'bottom-left' },
+      { text: '🧡 самый милый подарок', position: 'bottom-right' }
+    ]
+  },
+  {
+    id: 2,
     image: 'https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/bucket/e17ba464-5927-496a-a5a4-54d357cd7afb.jpg',
     title: 'разорви меня 💌',
     subtitle: "valentine's drop 2026",
@@ -10,7 +24,7 @@ export const heroSlides: HeroSlide[] = [
     buttonAction: 'valentines'
   },
   {
-    id: 2,
+    id: 3,
     image: 'https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/bucket/8dffdcee-2a11-40b4-a6e1-919850108d3f.jpg',
     title: 'отправь сюрприз близкому ✨',
     subtitle: 'укажи адрес — мы доставим напрямую',
@@ -18,7 +32,7 @@ export const heroSlides: HeroSlide[] = [
     buttonAction: 'surprise'
   },
   {
-    id: 3,
+    id: 4,
     image: 'https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/bucket/60ef531e-7c8f-4d01-a9f8-5fabb6942b63.jpg',
     title: 'заказы до 10 февраля 💔',
     subtitle: 'чтобы успеть к 14 февраля',
@@ -26,7 +40,7 @@ export const heroSlides: HeroSlide[] = [
     buttonAction: 'valentines'
   },
   {
-    id: 4,
+    id: 5,
     image: 'https://cdn.poehali.dev/files/f9fe8956-e4b2-4d08-b2fc-0195aa240b23.png',
     title: 'вещи с душой и теплом',
     subtitle: 'каждая создана вручную, чтобы стать частью твоей истории',
@@ -34,7 +48,7 @@ export const heroSlides: HeroSlide[] = [
     buttonAction: 'catalog'
   },
   {
-    id: 5,
+    id: 6,
     image: 'https://cdn.poehali.dev/files/031f61f1-ffb6-48da-889e-8ff29b154541.png',
     title: 'упаковываем с любовью',
     subtitle: 'каждый заказ — маленькое волшебство в крафтовой коробке',
@@ -42,7 +56,7 @@ export const heroSlides: HeroSlide[] = [
     buttonAction: 'delivery'
   },
   {
-    id: 6,
+    id: 7,
     image: 'https://cdn.poehali.dev/files/d036e4b3-8f61-430e-8dbd-ced3ec4b5dee.png',
     title: 'спасибо за ваши отзывы 💗',
     subtitle: 'они вдохновляют создавать ещё больше уютных вещей',

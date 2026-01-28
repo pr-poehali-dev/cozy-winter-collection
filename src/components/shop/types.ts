@@ -34,11 +34,17 @@ export interface CartItem extends Product {
   selectedVariantId?: string;
 }
 
+export interface FloatingQuote {
+  text: string;
+  position: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
+}
+
 export interface HeroSlide {
   id: number;
   image: string;
   title: string;
   subtitle: string;
   buttonText: string;
-  buttonAction: 'catalog' | 'delivery' | 'reviews';
+  buttonAction: 'catalog' | 'delivery' | 'reviews' | 'valentines' | 'surprise';
+  floatingQuotes?: FloatingQuote[];
 }

@@ -80,6 +80,36 @@ export default function HeroCarousel() {
             onLoad={() => setImageLoaded(true)}
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60"></div>
+          
+          {currentSlideData.floatingQuotes && imageLoaded && (
+            <div className="absolute inset-0 z-20 pointer-events-none">
+              {currentSlideData.floatingQuotes.map((quote, index) => {
+                const positionClasses = {
+                  'top-left': 'top-[12%] left-[8%] md:top-[15%] md:left-[10%]',
+                  'top-right': 'top-[18%] right-[8%] md:top-[20%] md:right-[12%]',
+                  'bottom-left': 'bottom-[25%] left-[10%] md:bottom-[28%] md:left-[15%]',
+                  'bottom-right': 'bottom-[20%] right-[6%] md:bottom-[22%] md:right-[10%]'
+                };
+                
+                return (
+                  <div
+                    key={index}
+                    className={`absolute ${positionClasses[quote.position]} animate-fade-in opacity-0`}
+                    style={{ 
+                      animationDelay: `${0.3 + index * 0.15}s`,
+                      animationFillMode: 'forwards'
+                    }}
+                  >
+                    <div className="bg-white/90 backdrop-blur-sm px-3 py-2 md:px-4 md:py-2.5 rounded-2xl shadow-lg border border-white/50 max-w-[160px] md:max-w-[220px]">
+                      <p className="text-[10px] md:text-sm font-light text-gray-800 leading-relaxed">
+                        {quote.text}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
         </div>
 
         <button
