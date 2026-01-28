@@ -76,7 +76,7 @@ export default function HeroCarousel() {
             key={currentSlide}
             src={currentSlideData.image}
             alt={currentSlideData.title}
-            className={`w-full h-[70vh] md:h-[85vh] object-cover transition-opacity duration-700 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
+            className={`w-full h-[60vh] md:h-[85vh] object-cover transition-opacity duration-700 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
             onLoad={() => setImageLoaded(true)}
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60"></div>
@@ -167,14 +167,14 @@ export default function HeroCarousel() {
           ))}
         </div>
 
-        <div className="absolute inset-0 flex flex-col items-center justify-end text-center px-6 md:pb-20 z-10 py-[29px]">
-          <div className="max-w-5xl space-y-6 md:space-y-12">
-            <div className="space-y-4 md:space-y-6">
-              <p className="text-[10px] md:text-sm text-white/90 uppercase tracking-[0.3em] md:tracking-[0.35em] font-light">
+        <div className="absolute inset-0 flex flex-col items-center justify-end text-center px-4 pb-8 md:px-6 md:pb-20 z-10">
+          <div className="max-w-5xl w-full space-y-3 md:space-y-12">
+            <div className="space-y-2 md:space-y-6">
+              <p className="text-[9px] md:text-sm text-white/90 uppercase tracking-[0.25em] md:tracking-[0.35em] font-light">
                 {currentSlideData.subtitle}
               </p>
               <h1 
-                className="md:text-5xl leading-[1.15] px-4 max-w-6xl text-3xl font-light text-[#fffbf7f5]"
+                className="text-2xl md:text-5xl leading-[1.2] px-2 max-w-6xl font-light text-[#fffbf7f5]"
                 style={{ fontFamily: 'Cormorant, serif', fontWeight: 300, letterSpacing: '0.02em' }}
               >
                 {currentSlideData.title}
@@ -182,7 +182,7 @@ export default function HeroCarousel() {
             </div>
             
             <button
-              className="rounded-full px-10 py-3.5 md:px-14 md:py-4 text-xs md:text-base text-primary hover:bg-white hover:scale-[1.02] transition-all duration-300 font-light tracking-[0.08em] shadow-2xl backdrop-blur-sm bg-[#fff8ed]"
+              className="rounded-full px-8 py-2.5 md:px-14 md:py-4 text-[11px] md:text-base text-primary hover:bg-white hover:scale-[1.02] transition-all duration-300 font-light tracking-[0.08em] shadow-2xl backdrop-blur-sm bg-[#fff8ed]"
               onClick={handleButtonClick}
             >
               {currentSlideData.buttonText}
