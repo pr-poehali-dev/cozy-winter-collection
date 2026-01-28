@@ -76,7 +76,7 @@ export default function HeroCarousel() {
             key={currentSlide}
             src={currentSlideData.image}
             alt={currentSlideData.title}
-            className={`w-full h-[60vh] md:h-[85vh] object-cover transition-opacity duration-700 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
+            className={`w-full h-[50vh] md:h-[85vh] object-cover transition-opacity duration-700 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
             onLoad={() => setImageLoaded(true)}
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60"></div>
@@ -167,7 +167,7 @@ export default function HeroCarousel() {
           ))}
         </div>
 
-        <div className="absolute inset-0 flex flex-col items-center justify-end text-center px-4 pb-8 md:px-6 md:pb-20 z-10">
+        <div className="absolute inset-0 flex flex-col items-center justify-end text-center px-4 pb-12 md:px-6 md:pb-20 z-10">
           <div className="max-w-5xl w-full space-y-3 md:space-y-12">
             <div className="space-y-2 md:space-y-6">
               <p className="text-[9px] md:text-sm text-white/90 uppercase tracking-[0.25em] md:tracking-[0.35em] font-light">
