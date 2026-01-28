@@ -48,9 +48,9 @@ export default function ProductCatalog({
   };
 
   return (
-    <section id="catalog" className="py-16 px-6 md:px-8">
+    <section id="catalog" className="md:px-8 mx-0.5 px-[3px] py-0">
       <div className="max-w-7xl mx-auto">
-        <div className="flex flex-wrap gap-2 justify-center mb-12">
+        <div className="flex flex-wrap gap-2 justify-center my-[23px]">
           {categories.map(category => {
             const isValentines = category === '💌 valentines';
             return (

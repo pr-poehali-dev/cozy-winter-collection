@@ -1,8 +1,8 @@
 export default function SurpriseBlock() {
   return (
-    <section id="surprise-section" className="py-8 md:py-16 px-4 md:px-8">
+    <section id="surprise-section" className="md:py-16 md:px-8 px-4 py-11">
       <div className="max-w-4xl mx-auto">
-        <div className="border border-[#8b7355]/20 rounded-3xl px-5 py-6 md:px-10 md:py-10 bg-gradient-to-b from-white/40 to-transparent">
+        <div className="border border-[#8b7355]/20 rounded-3xl md:px-10 md:py-10 bg-gradient-to-b from-white/40 to-transparent py-4 px-0">
           <div className="text-center mb-6 md:mb-8">
             <h2 
               className="text-xl md:text-3xl font-light mb-1.5 md:mb-2 text-[#6b1515]"
