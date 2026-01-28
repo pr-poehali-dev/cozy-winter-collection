@@ -3,7 +3,39 @@ import { Product, HeroSlide } from './types';
 export const heroSlides: HeroSlide[] = [
   {
     id: 1,
-    image: 'https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/bucket/3bf04731-6950-4913-bdd3-0928610b40ac.jpg',
+    image: 'https://cdn.poehali.dev/files/8c113fd7-d233-4c48-8700-5ac48aae9c40.jpg',
+    title: 'разорви меня 💌',
+    subtitle: "valentine's drop 2026",
+    buttonText: 'открыть коллекцию',
+    buttonAction: 'valentines'
+  },
+  {
+    id: 2,
+    image: 'https://cdn.poehali.dev/files/961ea4f2-3e21-4e62-9659-3f954b147d50.jpg',
+    title: 'заказы до 10 февраля 💔',
+    subtitle: 'чтобы успеть к 14 февраля',
+    buttonText: 'посмотреть коллекцию',
+    buttonAction: 'valentines'
+  },
+  {
+    id: 3,
+    image: 'https://cdn.poehali.dev/files/d535eed4-a23c-4eec-a2e3-85a5c7550569.jpg',
+    title: 'отправь сюрприз близкому ✨',
+    subtitle: 'укажи адрес — мы доставим напрямую',
+    buttonText: 'как это работает',
+    buttonAction: 'surprise'
+  },
+  {
+    id: 4,
+    image: 'https://cdn.poehali.dev/files/c61aec5c-9cf3-4355-aef6-575ebac598e9.jpg',
+    title: 'просто для примерки',
+    subtitle: 'новая коллекция аксессуаров',
+    buttonText: 'посмотреть коллекцию',
+    buttonAction: 'catalog'
+  },
+  {
+    id: 5,
+    image: 'https://cdn.poehali.dev/files/7dbf04fd-181c-4f13-a186-dda452138a53.jpg',
     title: 'волшебство, которое можно носить',
     subtitle: 'МАГАЗИНЧИК ВЕЩИЦ РУЧНОЙ РАБОТЫ',
     buttonText: 'посмотреть коллекцию',
@@ -13,30 +45,6 @@ export const heroSlides: HeroSlide[] = [
       { text: '💛 все спрашивают, где заказывала', position: 'bottom-left' },
       { text: '💎 не встречала ничего похожего!', position: 'top-right' }
     ]
-  },
-  {
-    id: 2,
-    image: 'https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/bucket/e17ba464-5927-496a-a5a4-54d357cd7afb.jpg',
-    title: 'разорви меня 💌',
-    subtitle: "valentine's drop 2026",
-    buttonText: 'открыть коллекцию',
-    buttonAction: 'valentines'
-  },
-  {
-    id: 3,
-    image: 'https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/bucket/8dffdcee-2a11-40b4-a6e1-919850108d3f.jpg',
-    title: 'отправь сюрприз близкому ✨',
-    subtitle: 'укажи адрес — мы доставим напрямую',
-    buttonText: 'как это работает',
-    buttonAction: 'surprise'
-  },
-  {
-    id: 4,
-    image: 'https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/bucket/60ef531e-7c8f-4d01-a9f8-5fabb6942b63.jpg',
-    title: 'заказы до 10 февраля 💔',
-    subtitle: 'чтобы успеть к 14 февраля',
-    buttonText: 'посмотреть коллекцию',
-    buttonAction: 'valentines'
   },
 
 ];
