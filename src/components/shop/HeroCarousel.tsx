@@ -94,13 +94,9 @@ export default function HeroCarousel() {
                 return (
                   <div
                     key={index}
-                    className={`absolute ${positionClasses[quote.position]} animate-fade-in opacity-0`}
-                    style={{ 
-                      animationDelay: `${0.3 + index * 0.15}s`,
-                      animationFillMode: 'forwards'
-                    }}
+                    className={`absolute ${positionClasses[quote.position]}`}
                   >
-                    <div className="bg-white/90 backdrop-blur-sm px-3 py-2 md:px-4 md:py-2.5 rounded-2xl shadow-lg border border-white/50 max-w-[160px] md:max-w-[220px]">
+                    <div className="bg-white/40 backdrop-blur-sm px-3 py-2 md:px-4 md:py-2.5 rounded-2xl shadow-lg border border-white/30 max-w-[160px] md:max-w-[220px]">
                       <p className="text-[10px] md:text-sm font-light text-gray-800 leading-relaxed">
                         {quote.text}
                       </p>
