@@ -51,19 +51,26 @@ export default function ProductCatalog({
     <section id="catalog" className="py-16 px-6 md:px-8">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-wrap gap-2 justify-center mb-12">
-          {categories.map(category => (
-            <button
-              key={category}
-              onClick={() => setSelectedCategory(category)}
-              className={`px-4 py-1.5 md:px-8 md:py-2.5 rounded-full text-xs md:text-sm font-light transition-all ${
-                selectedCategory === category
-                  ? 'bg-primary text-white'
-                  : 'bg-white text-primary hover:bg-secondary border border-border'
-              }`}
-            >
-              {category}
-            </button>
-          ))}
+          {categories.map(category => {
+            const isValentines = category === '💌 valentines';
+            return (
+              <button
+                key={category}
+                onClick={() => setSelectedCategory(category)}
+                className={`px-4 py-1.5 md:px-8 md:py-2.5 rounded-full text-xs md:text-sm font-light transition-all ${
+                  selectedCategory === category
+                    ? isValentines
+                      ? 'bg-red-500 text-white'
+                      : 'bg-primary text-white'
+                    : isValentines
+                    ? 'bg-white text-red-500 hover:bg-red-50 border-2 border-red-300'
+                    : 'bg-white text-primary hover:bg-secondary border border-border'
+                }`}
+              >
+                {category}
+              </button>
+            );
+          })}
         </div>
 
         {products.length === 0 ? (

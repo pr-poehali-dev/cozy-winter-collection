@@ -9,6 +9,8 @@ import ProductDetails from "@/components/shop/ProductDetails";
 import Reviews from "@/components/shop/Reviews";
 import Footer from "@/components/shop/Footer";
 import ComingSoon from "@/components/ComingSoon";
+import SurpriseBlock from "@/components/shop/SurpriseBlock";
+import DeadlineBlock from "@/components/shop/DeadlineBlock";
 
 const DEV_MODE = false;
 
@@ -122,7 +124,7 @@ export default function Index() {
     };
   }, [isPreviewMode, hasSecretKey]);
 
-  const categories = ["все", "для дома", "для зимней прогулки", "аксессуары"];
+  const categories = ["все", "💌 valentines", "для дома", "для зимней прогулки", "аксессуары"];
 
   const addToCart = (product: Product) => {
     setCart((prev) => {
@@ -219,6 +221,10 @@ export default function Index() {
         addToCart={addToCart}
         cart={cart}
       />
+
+      <SurpriseBlock />
+
+      <DeadlineBlock />
 
       <Reviews />
 
