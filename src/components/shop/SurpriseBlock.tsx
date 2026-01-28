@@ -10,7 +10,7 @@ export default function SurpriseBlock() {
             >
               💌 отправь валентинку напрямую
             </h2>
-            <p className="text-xs md:text-base text-muted-foreground/80 italic">
+            <p className="text-xs md:text-base text-muted-foreground/80">
               как в школе, только теперь — в любой город
             </p>
           </div>
