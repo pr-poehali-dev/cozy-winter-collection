@@ -282,7 +282,7 @@ export default function CheckoutForm({
                 placeholder="например: с любовью, анна"
               />
               <p className="text-xs text-muted-foreground font-light">
-                {checkoutData.giftMessage.length}/50 символов
+                {(checkoutData.giftMessage || '').length}/50 символов
               </p>
             </div>
           </>
