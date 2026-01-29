@@ -210,6 +210,24 @@ export default function CheckoutForm({
                 на него придет qr-код для получения посылки
               </p>
             </div>
+            {!checkoutData.dontKnowAddress && (
+              <div className="space-y-2">
+                <Label htmlFor="recipientAddress">адрес пвз получателя</Label>
+                <Input
+                  id="recipientAddress"
+                  type="text"
+                  value={checkoutData.recipientAddress}
+                  onChange={(e) => setCheckoutData({ ...checkoutData, recipientAddress: e.target.value })}
+                  className="font-light"
+                  placeholder="город, улица, дом"
+                />
+                <p className="text-xs text-muted-foreground font-light">
+                  <a href="https://www.ozon.ru/geo/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
+                    найти пункт выдачи на карте ozon →
+                  </a>
+                </p>
+              </div>
+            )}
             <div className="space-y-3">
               <div className="flex items-center space-x-2 p-3 rounded-lg border border-border">
                 <input
@@ -241,24 +259,6 @@ export default function CheckoutForm({
                 </Label>
               </div>
             </div>
-            {!checkoutData.dontKnowAddress && (
-              <div className="space-y-2">
-                <Label htmlFor="recipientAddress">адрес пвз получателя</Label>
-                <Input
-                  id="recipientAddress"
-                  type="text"
-                  value={checkoutData.recipientAddress}
-                  onChange={(e) => setCheckoutData({ ...checkoutData, recipientAddress: e.target.value })}
-                  className="font-light"
-                  placeholder="город, улица, дом"
-                />
-                <p className="text-xs text-muted-foreground font-light">
-                  <a href="https://www.ozon.ru/geo/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
-                    найти пункт выдачи на карте ozon →
-                  </a>
-                </p>
-              </div>
-            )}
             <div className="space-y-2">
               <Label htmlFor="giftMessage">текст для открытки (необязательно)</Label>
               <Input
