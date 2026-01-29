@@ -1,6 +1,5 @@
 import Icon from '@/components/ui/icon';
 import { CartItem, Product } from './types';
-import { products } from './data';
 
 interface CartItemsListProps {
   cart: CartItem[];
@@ -11,6 +10,7 @@ interface CartItemsListProps {
   onCheckout: () => void;
   addToCart: (product: Product) => void;
   onProductClick: (product: Product) => void;
+  products: Product[];
 }
 
 export default function CartItemsList({
@@ -21,7 +21,8 @@ export default function CartItemsList({
   isCheckoutLoading,
   onCheckout,
   addToCart,
-  onProductClick
+  onProductClick,
+  products
 }: CartItemsListProps) {
   const cartProductIds = cart.map(item => item.id);
   

@@ -8,7 +8,6 @@ import { toast } from '@/hooks/use-toast';
 import CartItemsList from './CartItemsList';
 import CheckoutForm from './CheckoutForm';
 import PaymentIframe from './PaymentIframe';
-import { products } from './data';
 
 interface HeaderProps {
   cart: CartItem[];
@@ -20,6 +19,7 @@ interface HeaderProps {
   cartCount: number;
   addToCart: (product: Product) => void;
   onProductClick: (product: Product) => void;
+  products: Product[];
 }
 
 export default function Header({
@@ -31,7 +31,8 @@ export default function Header({
   cartTotal,
   cartCount,
   addToCart,
-  onProductClick
+  onProductClick,
+  products
 }: HeaderProps) {
   const navigate = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -401,6 +402,7 @@ export default function Header({
                 onCheckout={() => setShowCheckoutForm(true)}
                 addToCart={addToCart}
                 onProductClick={onProductClick}
+                products={products}
               />
             )}
             </SheetContent>
