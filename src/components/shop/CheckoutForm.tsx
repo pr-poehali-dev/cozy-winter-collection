@@ -197,24 +197,7 @@ export default function CheckoutForm({
         {checkoutData.isGift && (
           <>
             <div className="space-y-2">
-              <Label htmlFor="recipientAddress">адрес пвз получателя</Label>
-              <Input
-                id="recipientAddress"
-                type="text"
-                value={checkoutData.recipientAddress}
-                onChange={(e) => setCheckoutData({ ...checkoutData, recipientAddress: e.target.value })}
-                className="font-light"
-                placeholder="город, улица, дом"
-                disabled={checkoutData.dontKnowAddress}
-              />
-              <p className="text-xs text-muted-foreground font-light">
-                <a href="https://www.ozon.ru/geo/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
-                  найти пункт выдачи на карте ozon →
-                </a>
-              </p>
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="recipientPhone">телефон получателя</Label>
+              <Label htmlFor="recipientPhone" className="text-[#6b1515]">телефон получателя</Label>
               <Input
                 id="recipientPhone"
                 type="tel"
@@ -236,9 +219,14 @@ export default function CheckoutForm({
                   onChange={(e) => setCheckoutData({ ...checkoutData, dontKnowAddress: e.target.checked, recipientAddress: e.target.checked ? '' : checkoutData.recipientAddress })}
                   className="w-4 h-4 rounded border-gray-300"
                 />
-                <Label htmlFor="dontKnowAddress" className="cursor-pointer font-light text-sm">
-                  я не знаю адрес пвз (мы свяжемся с покупателем для согласования способа доставки по указанному вами номеру)
-                </Label>
+                <div className="flex-1">
+                  <Label htmlFor="dontKnowAddress" className="cursor-pointer font-light text-sm block">
+                    я не знаю адрес пвз
+                  </Label>
+                  <p className="text-xs text-muted-foreground font-light mt-1">
+                    мы свяжемся с покупателем для согласования способа доставки по указанному вами номеру
+                  </p>
+                </div>
               </div>
               <div className="flex items-center space-x-2 p-3 rounded-lg border border-border">
                 <input
@@ -253,6 +241,24 @@ export default function CheckoutForm({
                 </Label>
               </div>
             </div>
+            {!checkoutData.dontKnowAddress && (
+              <div className="space-y-2">
+                <Label htmlFor="recipientAddress">адрес пвз получателя</Label>
+                <Input
+                  id="recipientAddress"
+                  type="text"
+                  value={checkoutData.recipientAddress}
+                  onChange={(e) => setCheckoutData({ ...checkoutData, recipientAddress: e.target.value })}
+                  className="font-light"
+                  placeholder="город, улица, дом"
+                />
+                <p className="text-xs text-muted-foreground font-light">
+                  <a href="https://www.ozon.ru/geo/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
+                    найти пункт выдачи на карте ozon →
+                  </a>
+                </p>
+              </div>
+            )}
             <div className="space-y-2">
               <Label htmlFor="giftMessage">текст для открытки (необязательно)</Label>
               <Input
