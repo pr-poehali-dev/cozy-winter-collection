@@ -49,7 +49,12 @@ export default function Header({
     comment: '',
     telegram: '',
     deliveryType: '' as '' | 'pvz' | 'pickup',
-    promoCode: ''
+    promoCode: '',
+    giftType: 'myself' as 'myself' | 'gift-know' | 'gift-ask' | 'pickup-myself',
+    recipientPhone: '',
+    recipientTelegram: '',
+    recipientEmail: '',
+    valentineSignature: ''
   });
   const [deliveryCost, setDeliveryCost] = useState(0);
   const [promoDiscount, setPromoDiscount] = useState(0);

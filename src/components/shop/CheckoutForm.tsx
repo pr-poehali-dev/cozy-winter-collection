@@ -13,11 +13,11 @@ interface CheckoutData {
   telegram: string;
   deliveryType: '' | 'pvz' | 'pickup';
   promoCode: string;
-  isGift: boolean;
-  recipientKnowsAddress: boolean;
+  giftType: 'myself' | 'gift-know' | 'gift-ask' | 'pickup-myself';
   recipientPhone: string;
   recipientTelegram: string;
-  anonymousDelivery: boolean;
+  recipientEmail: string;
+  valentineSignature: string;
 }
 
 interface CheckoutFormProps {
@@ -118,8 +118,60 @@ export default function CheckoutForm({
   return (
     <div className="flex-1 flex flex-col mt-8 overflow-hidden">
       <div className="space-y-4 flex-1 overflow-y-auto pb-4 px-4 md:px-6">
+        <div className="space-y-3">
+          <Label>Это подарок?</Label>
+          <div className="grid grid-cols-1 gap-3">
+            <button
+              type="button"
+              onClick={() => setCheckoutData({ ...checkoutData, giftType: 'myself', deliveryType: '', address: '' })}
+              className={`p-4 rounded-lg border-2 text-left transition-all ${
+                checkoutData.giftType === 'myself'
+                  ? 'border-primary bg-primary/5'
+                  : 'border-border hover:border-primary/50'
+              }`}
+            >
+              <div className="font-semibold text-sm">Заказываю себе</div>
+            </button>
+            <button
+              type="button"
+              onClick={() => setCheckoutData({ ...checkoutData, giftType: 'gift-know', deliveryType: 'pvz', address: '' })}
+              className={`p-4 rounded-lg border-2 text-left transition-all ${
+                checkoutData.giftType === 'gift-know'
+                  ? 'border-primary bg-primary/5'
+                  : 'border-border hover:border-primary/50'
+              }`}
+            >
+              <div className="font-semibold text-sm mb-1">В подарок — я знаю адрес ПВЗ</div>
+              <div className="text-xs text-muted-foreground font-light">укажу адрес пункта выдачи</div>
+            </button>
+            <button
+              type="button"
+              onClick={() => setCheckoutData({ ...checkoutData, giftType: 'gift-ask', deliveryType: 'pvz', address: '' })}
+              className={`p-4 rounded-lg border-2 text-left transition-all ${
+                checkoutData.giftType === 'gift-ask'
+                  ? 'border-primary bg-primary/5'
+                  : 'border-border hover:border-primary/50'
+              }`}
+            >
+              <div className="font-semibold text-sm mb-1">В подарок — нужно уточнить</div>
+              <div className="text-xs text-muted-foreground font-light">мы свяжемся с получателем</div>
+            </button>
+            <button
+              type="button"
+              onClick={() => setCheckoutData({ ...checkoutData, giftType: 'pickup-myself', deliveryType: '', address: '' })}
+              className={`p-4 rounded-lg border-2 text-left transition-all ${
+                checkoutData.giftType === 'pickup-myself'
+                  ? 'border-primary bg-primary/5'
+                  : 'border-border hover:border-primary/50'
+              }`}
+            >
+              <div className="font-semibold text-sm mb-1">Заберу лично</div>
+              <div className="text-xs text-muted-foreground font-light">хочу передать сам</div>
+            </button>
+          </div>
+        </div>
         <div className="space-y-2">
-          <Label htmlFor="name">Имя</Label>
+          <Label htmlFor="name">Ваше имя</Label>
           <Input
             id="name"
             type="text"
@@ -133,7 +185,7 @@ export default function CheckoutForm({
           />
         </div>
         <div className="space-y-2">
-          <Label htmlFor="email">Email</Label>
+          <Label htmlFor="email">Ваш Email</Label>
           <Input
             id="email"
             type="email"
@@ -148,7 +200,7 @@ export default function CheckoutForm({
           />
         </div>
         <div className="space-y-2">
-          <Label htmlFor="phone">Телефон</Label>
+          <Label htmlFor="phone">Ваш телефон</Label>
           <Input
             id="phone"
             type="tel"
@@ -159,7 +211,7 @@ export default function CheckoutForm({
         </div>
         <div className="space-y-2">
           <Label htmlFor="telegram">
-            Ник в телеграм
+            Ваш ник в телеграм
           </Label>
           <Input
             id="telegram"
@@ -169,193 +221,158 @@ export default function CheckoutForm({
             className="font-light"
           />
         </div>
-        <div className="space-y-3">
-          <Label>Способ доставки *</Label>
-          <div className="grid grid-cols-2 gap-3">
-            <button
-              type="button"
-              onClick={() => {
-                setCheckoutData({ ...checkoutData, deliveryType: 'pvz', address: '' });
-                setDeliveryCost(200);
-              }}
-              className={`p-4 rounded-lg border-2 text-left transition-all ${
-                checkoutData.deliveryType === 'pvz'
-                  ? 'border-primary bg-primary/5'
-                  : 'border-border hover:border-primary/50'
-              }`}
-            >
-              <div className="font-semibold text-sm mb-1">ПВЗ Ozon</div>
-              <div className="text-xs text-muted-foreground font-light">200 ₽</div>
-            </button>
-            <button
-              type="button"
-              onClick={() => {
-                setCheckoutData({ ...checkoutData, deliveryType: 'pickup', address: 'Москва, м. Тульская' });
-                setDeliveryCost(0);
-              }}
-              className={`p-4 rounded-lg border-2 text-left transition-all ${
-                checkoutData.deliveryType === 'pickup'
-                  ? 'border-primary bg-primary/5'
-                  : 'border-border hover:border-primary/50'
-              }`}
-            >
-              <div className="font-semibold text-sm mb-1">Самовывоз</div>
-              <div className="text-xs text-muted-foreground font-light">Бесплатно</div>
-            </button>
-          </div>
-        </div>
-        {checkoutData.deliveryType === 'pickup' && (
-          <div className="space-y-2">
-            <Label>Адрес самовывоза</Label>
-            <div className="p-3 rounded-lg bg-secondary/50 border border-border">
-              <p className="text-sm font-light">Москва, м. Тульская</p>
-            </div>
-            <p className="text-xs text-muted-foreground font-light mt-2">
-              свяжемся для согласования времени встречи
-            </p>
-          </div>
-        )}
-        <div className="space-y-3">
-          <Label>Это подарок?</Label>
-          <div className="grid grid-cols-2 gap-3">
-            <button
-              type="button"
-              onClick={() => setCheckoutData({ ...checkoutData, isGift: false, recipientKnowsAddress: true })}
-              className={`p-4 rounded-lg border-2 text-left transition-all ${
-                !checkoutData.isGift
-                  ? 'border-primary bg-primary/5'
-                  : 'border-border hover:border-primary/50'
-              }`}
-            >
-              <div className="font-semibold text-sm">Заказываю себе</div>
-            </button>
-            <button
-              type="button"
-              onClick={() => setCheckoutData({ ...checkoutData, isGift: true })}
-              className={`p-4 rounded-lg border-2 text-left transition-all ${
-                checkoutData.isGift
-                  ? 'border-primary bg-primary/5'
-                  : 'border-border hover:border-primary/50'
-              }`}
-            >
-              <div className="font-semibold text-sm">В подарок 💌</div>
-            </button>
-          </div>
-        </div>
-        {checkoutData.isGift && (
+        {checkoutData.giftType === 'gift-ask' && (
           <>
-            <div className="space-y-3">
-              <Label>Адрес ПВЗ получателя</Label>
-              <div className="grid grid-cols-1 gap-3">
-                <button
-                  type="button"
-                  onClick={() => setCheckoutData({ ...checkoutData, recipientKnowsAddress: true, recipientPhone: '', recipientTelegram: '' })}
-                  className={`p-4 rounded-lg border-2 text-left transition-all ${
-                    checkoutData.recipientKnowsAddress
-                      ? 'border-primary bg-primary/5'
-                      : 'border-border hover:border-primary/50'
-                  }`}
-                >
-                  <div className="font-semibold text-sm mb-1">☑ Я знаю адрес ПВЗ получателя</div>
-                  <div className="text-xs text-muted-foreground font-light">укажу адрес ниже</div>
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setCheckoutData({ ...checkoutData, recipientKnowsAddress: false })}
-                  className={`p-4 rounded-lg border-2 text-left transition-all ${
-                    !checkoutData.recipientKnowsAddress
-                      ? 'border-primary bg-primary/5'
-                      : 'border-border hover:border-primary/50'
-                  }`}
-                >
-                  <div className="font-semibold text-sm mb-1">☐ Нужно уточнить у получателя</div>
-                  <div className="text-xs text-muted-foreground font-light">укажу контакты, вы напишете</div>
-                </button>
-              </div>
+            <div className="space-y-2">
+              <Label htmlFor="recipientPhone">Телефон получателя</Label>
+              <Input
+                id="recipientPhone"
+                type="tel"
+                value={checkoutData.recipientPhone}
+                onChange={(e) => setCheckoutData({ ...checkoutData, recipientPhone: e.target.value })}
+                className="font-light"
+                placeholder="+7 (999) 123-45-67"
+              />
             </div>
-            {!checkoutData.recipientKnowsAddress && (
-              <>
-                <div className="space-y-2">
-                  <Label htmlFor="recipientPhone">Телефон получателя</Label>
-                  <Input
-                    id="recipientPhone"
-                    type="tel"
-                    value={checkoutData.recipientPhone}
-                    onChange={(e) => setCheckoutData({ ...checkoutData, recipientPhone: e.target.value })}
-                    className="font-light"
-                    placeholder="+7 (999) 123-45-67"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="recipientTelegram">Телеграм получателя (необязательно)</Label>
-                  <Input
-                    id="recipientTelegram"
-                    type="text"
-                    value={checkoutData.recipientTelegram}
-                    onChange={(e) => setCheckoutData({ ...checkoutData, recipientTelegram: e.target.value })}
-                    className="font-light"
-                    placeholder="@username"
-                  />
-                </div>
-                <div className="space-y-3">
-                  <Label>Как написать получателю?</Label>
-                  <div className="grid grid-cols-1 gap-2">
-                    <button
-                      type="button"
-                      onClick={() => setCheckoutData({ ...checkoutData, anonymousDelivery: false })}
-                      className={`p-3 rounded-lg border-2 text-left transition-all text-sm ${
-                        !checkoutData.anonymousDelivery
-                          ? 'border-primary bg-primary/5'
-                          : 'border-border hover:border-primary/50'
-                      }`}
-                    >
-                      <span className="font-light">От моего имени ({checkoutData.name || 'ваше имя'})</span>
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setCheckoutData({ ...checkoutData, anonymousDelivery: true })}
-                      className={`p-3 rounded-lg border-2 text-left transition-all text-sm ${
-                        checkoutData.anonymousDelivery
-                          ? 'border-primary bg-primary/5'
-                          : 'border-border hover:border-primary/50'
-                      }`}
-                    >
-                      <span className="font-light">Анонимно (сюрприз 💌)</span>
-                    </button>
-                  </div>
-                </div>
-              </>
-            )}
+            <div className="space-y-2">
+              <Label htmlFor="recipientTelegram">Телеграм получателя (необязательно)</Label>
+              <Input
+                id="recipientTelegram"
+                type="text"
+                value={checkoutData.recipientTelegram}
+                onChange={(e) => setCheckoutData({ ...checkoutData, recipientTelegram: e.target.value })}
+                className="font-light"
+                placeholder="@username"
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="recipientEmail">Email получателя (необязательно)</Label>
+              <Input
+                id="recipientEmail"
+                type="email"
+                value={checkoutData.recipientEmail}
+                onChange={(e) => setCheckoutData({ ...checkoutData, recipientEmail: e.target.value })}
+                className="font-light"
+                placeholder="example@mail.ru"
+              />
+            </div>
           </>
         )}
-        {(checkoutData.deliveryType === 'pvz' && (!checkoutData.isGift || checkoutData.recipientKnowsAddress)) && (
+        {checkoutData.giftType === 'gift-know' && (
           <div className="space-y-2">
-            <Label htmlFor="address">Адрес ПВЗ Ozon</Label>
+            <Label htmlFor="address">Адрес ПВЗ получателя</Label>
             <Input
               id="address"
               type="text"
               value={checkoutData.address}
               onChange={(e) => setCheckoutData({ ...checkoutData, address: e.target.value })}
               className="font-light"
+              placeholder="город, улица, дом"
             />
             <p className="text-xs text-muted-foreground font-light">
               <a href="https://www.ozon.ru/geo/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
-                Найти ближайший пункт выдачи на карте Ozon →
+                Найти пункт выдачи на карте Ozon →
               </a>
             </p>
           </div>
         )}
+        {(checkoutData.giftType === 'myself' || checkoutData.giftType === 'pickup-myself') && (
+          <>
+            <div className="space-y-3">
+              <Label>Способ доставки</Label>
+              <div className="grid grid-cols-2 gap-3">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setCheckoutData({ ...checkoutData, deliveryType: 'pvz', address: '' });
+                    setDeliveryCost(200);
+                  }}
+                  className={`p-4 rounded-lg border-2 text-left transition-all ${
+                    checkoutData.deliveryType === 'pvz'
+                      ? 'border-primary bg-primary/5'
+                      : 'border-border hover:border-primary/50'
+                  }`}
+                >
+                  <div className="font-semibold text-sm mb-1">ПВЗ Ozon</div>
+                  <div className="text-xs text-muted-foreground font-light">200 ₽</div>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setCheckoutData({ ...checkoutData, deliveryType: 'pickup', address: 'Москва, м. Тульская' });
+                    setDeliveryCost(0);
+                  }}
+                  className={`p-4 rounded-lg border-2 text-left transition-all ${
+                    checkoutData.deliveryType === 'pickup'
+                      ? 'border-primary bg-primary/5'
+                      : 'border-border hover:border-primary/50'
+                  }`}
+                >
+                  <div className="font-semibold text-sm mb-1">Самовывоз</div>
+                  <div className="text-xs text-muted-foreground font-light">Бесплатно</div>
+                </button>
+              </div>
+            </div>
+            {checkoutData.deliveryType === 'pvz' && (
+              <div className="space-y-2">
+                <Label htmlFor="address">Адрес ПВЗ Ozon</Label>
+                <Input
+                  id="address"
+                  type="text"
+                  value={checkoutData.address}
+                  onChange={(e) => setCheckoutData({ ...checkoutData, address: e.target.value })}
+                  className="font-light"
+                />
+                <p className="text-xs text-muted-foreground font-light">
+                  <a href="https://www.ozon.ru/geo/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
+                    Найти ближайший пункт выдачи на карте Ozon →
+                  </a>
+                </p>
+              </div>
+            )}
+            {checkoutData.deliveryType === 'pickup' && (
+              <div className="space-y-2">
+                <Label>Адрес самовывоза</Label>
+                <div className="p-3 rounded-lg bg-secondary/50 border border-border">
+                  <p className="text-sm font-light">Москва, м. Тульская</p>
+                </div>
+                <p className="text-xs text-muted-foreground font-light mt-2">
+                  свяжемся для согласования времени встречи
+                </p>
+              </div>
+            )}
+          </>
+        )}
+        {checkoutData.giftType !== 'myself' && (
+          <div className="space-y-2">
+            <Label htmlFor="valentineSignature">Добавить подпись на валентинке? (необязательно)</Label>
+            <Input
+              id="valentineSignature"
+              type="text"
+              maxLength={50}
+              value={checkoutData.valentineSignature}
+              onChange={(e) => setCheckoutData({ ...checkoutData, valentineSignature: e.target.value })}
+              className="font-light"
+              placeholder="например: с любовью, Анна"
+            />
+            <p className="text-xs text-muted-foreground font-light">
+              {checkoutData.valentineSignature.length}/50 символов
+            </p>
+          </div>
+        )}
 
-        <div className="space-y-2">
-          <Label htmlFor="comment">Комментарий к заказу</Label>
-          <Textarea
-            id="comment"
-            value={checkoutData.comment}
-            onChange={(e) => setCheckoutData({ ...checkoutData, comment: e.target.value })}
-            className="font-light resize-none"
-            rows={3}
-          />
-        </div>
+        {(checkoutData.giftType === 'myself' || checkoutData.giftType === 'pickup-myself') && (
+          <div className="space-y-2">
+            <Label htmlFor="comment">Комментарий к заказу</Label>
+            <Textarea
+              id="comment"
+              value={checkoutData.comment}
+              onChange={(e) => setCheckoutData({ ...checkoutData, comment: e.target.value })}
+              className="font-light resize-none"
+              rows={3}
+            />
+          </div>
+        )}
       </div>
       <div className="flex-shrink-0 border-t border-border pt-4 mt-4 pb-6 px-4 md:px-6">
         <div className="space-y-2 mb-4">
