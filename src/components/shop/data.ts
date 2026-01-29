@@ -12,15 +12,6 @@ export const heroSlides: HeroSlide[] = [
   },
   {
     id: 2,
-    image: 'https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/bucket/60ef531e-7c8f-4d01-a9f8-5fabb6942b63.jpg',
-    imageMobile: 'https://cdn.poehali.dev/files/dbf312ea-8397-44a9-a4c6-a7d547e10dfd.jpeg',
-    title: 'можно отправить валентинку анонимно',
-    subtitle: 'прямо как в школе',
-    buttonText: 'посмотреть коллекцию',
-    buttonAction: 'valentines'
-  },
-  {
-    id: 3,
     image: 'https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/bucket/8dffdcee-2a11-40b4-a6e1-919850108d3f.jpg',
     imageMobile: 'https://cdn.poehali.dev/files/3a3dfd5f-4b52-42ca-a539-737f72fd1e9b.jpeg',
     title: 'отправь сюрприз близкому ✨',
@@ -29,14 +20,15 @@ export const heroSlides: HeroSlide[] = [
     buttonAction: 'surprise'
   },
   {
-    id: 4,
+    id: 3,
     image: 'https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/bucket/60ef531e-7c8f-4d01-a9f8-5fabb6942b63.jpg',
-    imageMobile: 'https://cdn.poehali.dev/files/8b8df529-5105-423c-adf4-89cd0cc8c06d.jpeg',
-    title: 'кладем тематические подарки в каждый заказ',
-    subtitle: 'просто для примерки',
+    imageMobile: 'https://cdn.poehali.dev/files/dbf312ea-8397-44a9-a4c6-a7d547e10dfd.jpeg',
+    title: 'можно отправить валентинку анонимно',
+    subtitle: 'прямо как в школе',
     buttonText: 'посмотреть коллекцию',
-    buttonAction: 'catalog'
+    buttonAction: 'valentines'
   },
+
   {
     id: 5,
     image: 'https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/bucket/3bf04731-6950-4913-bdd3-0928610b40ac.jpg',
