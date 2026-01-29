@@ -206,9 +206,7 @@ export default function CheckoutForm({
                 className="font-light"
                 placeholder="+7 (999) 123-45-67"
               />
-              <p className="text-xs text-muted-foreground font-light">
-                на него придет qr-код для получения посылки
-              </p>
+              <p className="text-xs text-muted-foreground font-light">на него в приложении ozon придет код для получения посылки</p>
             </div>
             {!checkoutData.dontKnowAddress && (
               <div className="space-y-2">
