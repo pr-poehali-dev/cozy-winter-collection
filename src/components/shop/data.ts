@@ -14,7 +14,7 @@ export const heroSlides: HeroSlide[] = [
     id: 2,
     image: 'https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/bucket/60ef531e-7c8f-4d01-a9f8-5fabb6942b63.jpg',
     imageMobile: 'https://cdn.poehali.dev/files/dbf312ea-8397-44a9-a4c6-a7d547e10dfd.jpeg',
-    title: 'заказы до 10 февраля 💔',
+    title: 'закажи до 10 февраля 💔',
     subtitle: 'чтобы успеть к 14 февраля',
     buttonText: 'посмотреть коллекцию',
     buttonAction: 'valentines'
