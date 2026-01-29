@@ -51,8 +51,9 @@ export default function Header({
     deliveryType: '' as '' | 'pvz' | 'pickup',
     promoCode: '',
     isGift: false,
-    giftKnowAddress: true,
     recipientPhone: '',
+    recipientAddress: '',
+    dontKnowAddress: false,
     isAnonymous: false,
     giftMessage: ''
   });

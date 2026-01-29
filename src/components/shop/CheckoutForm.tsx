@@ -14,8 +14,9 @@ interface CheckoutData {
   deliveryType: '' | 'pvz' | 'pickup';
   promoCode: string;
   isGift: boolean;
-  giftKnowAddress: boolean;
   recipientPhone: string;
+  recipientAddress: string;
+  dontKnowAddress: boolean;
   isAnonymous: boolean;
   giftMessage: string;
 }
@@ -118,32 +119,29 @@ export default function CheckoutForm({
   return (
     <div className="flex-1 flex flex-col mt-8 overflow-hidden">
       <div className="space-y-4 flex-1 overflow-y-auto pb-4 px-4 md:px-6">
-        <div className="space-y-3">
-          <Label>это подарок?</Label>
-          <div className="grid grid-cols-2 gap-3">
-            <button
-              type="button"
-              onClick={() => setCheckoutData({ ...checkoutData, isGift: false, deliveryType: '', address: '', recipientPhone: '' })}
-              className={`p-4 rounded-lg border-2 text-left transition-all ${
-                !checkoutData.isGift
-                  ? 'border-primary bg-primary/5'
-                  : 'border-border hover:border-primary/50'
-              }`}
-            >
-              <div className="font-semibold text-sm">заказываю себе</div>
-            </button>
-            <button
-              type="button"
-              onClick={() => setCheckoutData({ ...checkoutData, isGift: true, deliveryType: 'pvz', address: '' })}
-              className={`p-4 rounded-lg border-2 text-left transition-all ${
-                checkoutData.isGift
-                  ? 'border-primary bg-primary/5'
-                  : 'border-border hover:border-primary/50'
-              }`}
-            >
-              <div className="font-semibold text-sm">в подарок</div>
-            </button>
-          </div>
+        <div className="grid grid-cols-2 gap-3">
+          <button
+            type="button"
+            onClick={() => setCheckoutData({ ...checkoutData, isGift: false, deliveryType: '', address: '', recipientPhone: '', recipientAddress: '', dontKnowAddress: false })}
+            className={`p-4 rounded-lg border-2 text-left transition-all ${
+              !checkoutData.isGift
+                ? 'border-primary bg-primary/5'
+                : 'border-border hover:border-primary/50'
+            }`}
+          >
+            <div className="font-semibold text-sm">заказываю себе</div>
+          </button>
+          <button
+            type="button"
+            onClick={() => setCheckoutData({ ...checkoutData, isGift: true, deliveryType: 'pvz', address: '' })}
+            className={`p-4 rounded-lg border-2 text-left transition-all ${
+              checkoutData.isGift
+                ? 'border-primary bg-primary/5'
+                : 'border-border hover:border-primary/50'
+            }`}
+          >
+            <div className="font-semibold text-sm">отправить в подарок</div>
+          </button>
         </div>
         <div className="space-y-2">
           <Label htmlFor="name">ваше имя</Label>
@@ -198,52 +196,23 @@ export default function CheckoutForm({
         </div>
         {checkoutData.isGift && (
           <>
-            <div className="space-y-3">
-              <Label>адрес пвз</Label>
-              <div className="grid grid-cols-1 gap-3">
-                <button
-                  type="button"
-                  onClick={() => setCheckoutData({ ...checkoutData, giftKnowAddress: true })}
-                  className={`p-4 rounded-lg border-2 text-left transition-all ${
-                    checkoutData.giftKnowAddress
-                      ? 'border-primary bg-primary/5'
-                      : 'border-border hover:border-primary/50'
-                  }`}
-                >
-                  <div className="font-semibold text-sm">я знаю адрес пвз</div>
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setCheckoutData({ ...checkoutData, giftKnowAddress: false })}
-                  className={`p-4 rounded-lg border-2 text-left transition-all ${
-                    !checkoutData.giftKnowAddress
-                      ? 'border-primary bg-primary/5'
-                      : 'border-border hover:border-primary/50'
-                  }`}
-                >
-                  <div className="font-semibold text-sm mb-1">нужно уточнить</div>
-                  <div className="text-xs text-muted-foreground font-light">мы свяжемся с получателем</div>
-                </button>
-              </div>
+            <div className="space-y-2">
+              <Label htmlFor="recipientAddress">адрес пвз получателя</Label>
+              <Input
+                id="recipientAddress"
+                type="text"
+                value={checkoutData.recipientAddress}
+                onChange={(e) => setCheckoutData({ ...checkoutData, recipientAddress: e.target.value })}
+                className="font-light"
+                placeholder="город, улица, дом"
+                disabled={checkoutData.dontKnowAddress}
+              />
+              <p className="text-xs text-muted-foreground font-light">
+                <a href="https://www.ozon.ru/geo/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
+                  найти пункт выдачи на карте ozon →
+                </a>
+              </p>
             </div>
-            {checkoutData.giftKnowAddress ? (
-              <div className="space-y-2">
-                <Label htmlFor="address">адрес пвз получателя</Label>
-                <Input
-                  id="address"
-                  type="text"
-                  value={checkoutData.address}
-                  onChange={(e) => setCheckoutData({ ...checkoutData, address: e.target.value })}
-                  className="font-light"
-                  placeholder="город, улица, дом"
-                />
-                <p className="text-xs text-muted-foreground font-light">
-                  <a href="https://www.ozon.ru/geo/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
-                    найти пункт выдачи на карте ozon →
-                  </a>
-                </p>
-              </div>
-            ) : null}
             <div className="space-y-2">
               <Label htmlFor="recipientPhone">телефон получателя</Label>
               <Input
@@ -258,17 +227,31 @@ export default function CheckoutForm({
                 на него придет qr-код для получения посылки
               </p>
             </div>
-            <div className="flex items-center space-x-2 p-3 rounded-lg border border-border">
-              <input
-                type="checkbox"
-                id="isAnonymous"
-                checked={checkoutData.isAnonymous}
-                onChange={(e) => setCheckoutData({ ...checkoutData, isAnonymous: e.target.checked })}
-                className="w-4 h-4 rounded border-gray-300"
-              />
-              <Label htmlFor="isAnonymous" className="cursor-pointer font-light">
-                отправить анонимно
-              </Label>
+            <div className="space-y-3">
+              <div className="flex items-center space-x-2 p-3 rounded-lg border border-border">
+                <input
+                  type="checkbox"
+                  id="dontKnowAddress"
+                  checked={checkoutData.dontKnowAddress}
+                  onChange={(e) => setCheckoutData({ ...checkoutData, dontKnowAddress: e.target.checked, recipientAddress: e.target.checked ? '' : checkoutData.recipientAddress })}
+                  className="w-4 h-4 rounded border-gray-300"
+                />
+                <Label htmlFor="dontKnowAddress" className="cursor-pointer font-light text-sm">
+                  я не знаю адрес пвз (мы свяжемся с покупателем для согласования способа доставки по указанному вами номеру)
+                </Label>
+              </div>
+              <div className="flex items-center space-x-2 p-3 rounded-lg border border-border">
+                <input
+                  type="checkbox"
+                  id="isAnonymous"
+                  checked={checkoutData.isAnonymous}
+                  onChange={(e) => setCheckoutData({ ...checkoutData, isAnonymous: e.target.checked })}
+                  className="w-4 h-4 rounded border-gray-300"
+                />
+                <Label htmlFor="isAnonymous" className="cursor-pointer font-light">
+                  отправить анонимно
+                </Label>
+              </div>
             </div>
             <div className="space-y-2">
               <Label htmlFor="giftMessage">текст для открытки (необязательно)</Label>
