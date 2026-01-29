@@ -25,9 +25,9 @@ export default function CartItemsList({
 }: CartItemsListProps) {
   const cartProductIds = cart.map(item => item.id);
   
-  // Показываем только новые товары (id 1001-1005)
+  // Показываем валентиновские + новые товары (id 1001-1005)
   const recommendations = products
-    .filter(p => p.id >= 1001 && p.id <= 1005)
+    .filter(p => p.category === "valentine's drop 2026" || (p.id >= 1001 && p.id <= 1005))
     .filter(p => !cartProductIds.includes(p.id))
     .filter(p => p.badge !== 'soon')
     .slice(0, 3);
