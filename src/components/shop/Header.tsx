@@ -50,11 +50,11 @@ export default function Header({
     telegram: '',
     deliveryType: '' as '' | 'pvz' | 'pickup',
     promoCode: '',
-    giftType: 'myself' as 'myself' | 'gift-know' | 'gift-ask' | 'pickup-myself',
+    isGift: false,
+    giftKnowAddress: true,
     recipientPhone: '',
-    recipientTelegram: '',
-    recipientEmail: '',
-    valentineSignature: ''
+    isAnonymous: false,
+    giftMessage: ''
   });
   const [deliveryCost, setDeliveryCost] = useState(0);
   const [promoDiscount, setPromoDiscount] = useState(0);
