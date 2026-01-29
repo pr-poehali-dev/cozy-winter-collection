@@ -25,20 +25,11 @@ export default function CartItemsList({
 }: CartItemsListProps) {
   const cartProductIds = cart.map(item => item.id);
   
-  // Сначала валентиновые товары, потом старые
-  const sortedProducts = [...products].sort((a, b) => {
-    const aIsValentine = a.category === "valentine's drop 2026";
-    const bIsValentine = b.category === "valentine's drop 2026";
-    
-    if (aIsValentine && !bIsValentine) return -1;
-    if (!aIsValentine && bIsValentine) return 1;
-    return 0;
-  });
-  
-  const recommendations = sortedProducts
+  // Показываем только новые товары (id 1001-1005)
+  const recommendations = products
+    .filter(p => p.id >= 1001 && p.id <= 1005)
     .filter(p => !cartProductIds.includes(p.id))
     .filter(p => p.badge !== 'soon')
-    .filter(p => p.price <= 1500)
     .slice(0, 3);
 
   return (
