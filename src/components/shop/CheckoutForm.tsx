@@ -13,6 +13,11 @@ interface CheckoutData {
   telegram: string;
   deliveryType: '' | 'pvz' | 'pickup';
   promoCode: string;
+  isGift: boolean;
+  recipientKnowsAddress: boolean;
+  recipientPhone: string;
+  recipientTelegram: string;
+  anonymousDelivery: boolean;
 }
 
 interface CheckoutFormProps {
@@ -39,7 +44,6 @@ export default function CheckoutForm({
   onCheckout
 }: CheckoutFormProps) {
   const [hasGift, setHasGift] = useState(false);
-  const giftEmojis = ['❄️', '🔮', '✨'];
 
   useEffect(() => {
     const savedData = localStorage.getItem('checkoutUserData');
@@ -200,7 +204,131 @@ export default function CheckoutForm({
             </button>
           </div>
         </div>
-        {checkoutData.deliveryType === 'pvz' ? (
+        {checkoutData.deliveryType === 'pickup' && (
+          <div className="space-y-2">
+            <Label>Адрес самовывоза</Label>
+            <div className="p-3 rounded-lg bg-secondary/50 border border-border">
+              <p className="text-sm font-light">Москва, м. Тульская</p>
+            </div>
+            <p className="text-xs text-muted-foreground font-light mt-2">
+              свяжемся для согласования времени встречи
+            </p>
+          </div>
+        )}
+        <div className="space-y-3">
+          <Label>Это подарок?</Label>
+          <div className="grid grid-cols-2 gap-3">
+            <button
+              type="button"
+              onClick={() => setCheckoutData({ ...checkoutData, isGift: false, recipientKnowsAddress: true })}
+              className={`p-4 rounded-lg border-2 text-left transition-all ${
+                !checkoutData.isGift
+                  ? 'border-primary bg-primary/5'
+                  : 'border-border hover:border-primary/50'
+              }`}
+            >
+              <div className="font-semibold text-sm">Заказываю себе</div>
+            </button>
+            <button
+              type="button"
+              onClick={() => setCheckoutData({ ...checkoutData, isGift: true })}
+              className={`p-4 rounded-lg border-2 text-left transition-all ${
+                checkoutData.isGift
+                  ? 'border-primary bg-primary/5'
+                  : 'border-border hover:border-primary/50'
+              }`}
+            >
+              <div className="font-semibold text-sm">В подарок 💌</div>
+            </button>
+          </div>
+        </div>
+        {checkoutData.isGift && (
+          <>
+            <div className="space-y-3">
+              <Label>Адрес ПВЗ получателя</Label>
+              <div className="grid grid-cols-1 gap-3">
+                <button
+                  type="button"
+                  onClick={() => setCheckoutData({ ...checkoutData, recipientKnowsAddress: true, recipientPhone: '', recipientTelegram: '' })}
+                  className={`p-4 rounded-lg border-2 text-left transition-all ${
+                    checkoutData.recipientKnowsAddress
+                      ? 'border-primary bg-primary/5'
+                      : 'border-border hover:border-primary/50'
+                  }`}
+                >
+                  <div className="font-semibold text-sm mb-1">☑ Я знаю адрес ПВЗ получателя</div>
+                  <div className="text-xs text-muted-foreground font-light">укажу адрес ниже</div>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setCheckoutData({ ...checkoutData, recipientKnowsAddress: false })}
+                  className={`p-4 rounded-lg border-2 text-left transition-all ${
+                    !checkoutData.recipientKnowsAddress
+                      ? 'border-primary bg-primary/5'
+                      : 'border-border hover:border-primary/50'
+                  }`}
+                >
+                  <div className="font-semibold text-sm mb-1">☐ Нужно уточнить у получателя</div>
+                  <div className="text-xs text-muted-foreground font-light">укажу контакты, вы напишете</div>
+                </button>
+              </div>
+            </div>
+            {!checkoutData.recipientKnowsAddress && (
+              <>
+                <div className="space-y-2">
+                  <Label htmlFor="recipientPhone">Телефон получателя</Label>
+                  <Input
+                    id="recipientPhone"
+                    type="tel"
+                    value={checkoutData.recipientPhone}
+                    onChange={(e) => setCheckoutData({ ...checkoutData, recipientPhone: e.target.value })}
+                    className="font-light"
+                    placeholder="+7 (999) 123-45-67"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="recipientTelegram">Телеграм получателя (необязательно)</Label>
+                  <Input
+                    id="recipientTelegram"
+                    type="text"
+                    value={checkoutData.recipientTelegram}
+                    onChange={(e) => setCheckoutData({ ...checkoutData, recipientTelegram: e.target.value })}
+                    className="font-light"
+                    placeholder="@username"
+                  />
+                </div>
+                <div className="space-y-3">
+                  <Label>Как написать получателю?</Label>
+                  <div className="grid grid-cols-1 gap-2">
+                    <button
+                      type="button"
+                      onClick={() => setCheckoutData({ ...checkoutData, anonymousDelivery: false })}
+                      className={`p-3 rounded-lg border-2 text-left transition-all text-sm ${
+                        !checkoutData.anonymousDelivery
+                          ? 'border-primary bg-primary/5'
+                          : 'border-border hover:border-primary/50'
+                      }`}
+                    >
+                      <span className="font-light">От моего имени ({checkoutData.name || 'ваше имя'})</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setCheckoutData({ ...checkoutData, anonymousDelivery: true })}
+                      className={`p-3 rounded-lg border-2 text-left transition-all text-sm ${
+                        checkoutData.anonymousDelivery
+                          ? 'border-primary bg-primary/5'
+                          : 'border-border hover:border-primary/50'
+                      }`}
+                    >
+                      <span className="font-light">Анонимно (сюрприз 💌)</span>
+                    </button>
+                  </div>
+                </div>
+              </>
+            )}
+          </>
+        )}
+        {(checkoutData.deliveryType === 'pvz' && (!checkoutData.isGift || checkoutData.recipientKnowsAddress)) && (
           <div className="space-y-2">
             <Label htmlFor="address">Адрес ПВЗ Ozon</Label>
             <Input
@@ -216,75 +344,8 @@ export default function CheckoutForm({
               </a>
             </p>
           </div>
-        ) : (
-          <div className="space-y-2">
-            <Label>Адрес самовывоза</Label>
-            <div className="p-3 rounded-lg bg-secondary/50 border border-border">
-              <p className="text-sm font-light">Москва, м. Тульская</p>
-            </div>
-            <p className="text-xs text-muted-foreground font-light mt-2">
-              свяжемся для согласования времени встречи
-            </p>
-          </div>
         )}
-        <div className="space-y-2">
-          <Label htmlFor="promoCode">Промокод</Label>
-          <div className="flex gap-2">
-            <Input
-              id="promoCode"
-              type="text"
-              value={checkoutData.promoCode}
-              onChange={(e) => setCheckoutData({ ...checkoutData, promoCode: e.target.value.toUpperCase() })}
-              className="font-light uppercase"
-            />
-            <button
-              type="button"
-              onClick={async () => {
-                const code = checkoutData.promoCode.trim();
-                if (!code) return;
-                
-                if (giftEmojis.includes(code)) {
-                  setHasGift(true);
-                  setPromoDiscount(0);
-                  toast({ title: 'подарочек к заказу добавлен! ✨', description: 'сюрприз ждёт вас в посылке' });
-                  return;
-                }
-                
-                try {
-                  const response = await fetch(`https://functions.poehali.dev/9fc2ae98-daea-4d40-98de-6d1a45d029cb?code=${code}`);
-                  
-                  if (response.ok) {
-                    const data = await response.json();
-                    setPromoDiscount(cartTotal * (data.discount_percent / 100));
-                    setHasGift(false);
-                    toast({ title: 'Промокод применён!', description: `Скидка ${data.discount_percent}%` });
-                  } else {
-                    toast({ title: 'Неверный промокод', variant: 'destructive' });
-                    setPromoDiscount(0);
-                    setHasGift(false);
-                  }
-                } catch (error) {
-                  toast({ title: 'Ошибка', description: 'Не удалось проверить промокод', variant: 'destructive' });
-                  setPromoDiscount(0);
-                  setHasGift(false);
-                }
-              }}
-              className="px-4 py-2 bg-primary text-white rounded-lg hover:opacity-90 transition-opacity text-sm font-light whitespace-nowrap"
-            >
-              применить
-            </button>
-          </div>
-          {promoDiscount > 0 && (
-            <p className="text-xs text-green-600 font-light">
-              ✓ Скидка -{promoDiscount.toLocaleString('ru-RU')} ₽
-            </p>
-          )}
-          {hasGift && (
-            <p className="text-xs text-green-600 font-light">
-              ✓ подарочек к заказу добавлен! ✨
-            </p>
-          )}
-        </div>
+
         <div className="space-y-2">
           <Label htmlFor="comment">Комментарий к заказу</Label>
           <Textarea
