@@ -354,7 +354,7 @@ export default function Header({
 посмотри, что у нас есть 👇🏻✨</p>
                 </div>
                 <div className="space-y-4">
-                  {products
+                  {(products || [])
                     .filter(p => p.badge !== 'soon')
                     .slice(0, 6)
                     .map(product => (
