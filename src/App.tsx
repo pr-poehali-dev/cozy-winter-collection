@@ -21,7 +21,10 @@ function ScrollToTop() {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    // Don't scroll to top when opening product modal
+    if (pathname === '/' || (!pathname.startsWith('/product/'))) {
+      window.scrollTo(0, 0);
+    }
   }, [pathname]);
 
   return null;
