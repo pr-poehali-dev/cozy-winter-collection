@@ -43,6 +43,7 @@ export default function Index() {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [products, setProducts] = useState<Product[]>([]);
   const [isLoadingProducts, setIsLoadingProducts] = useState(true);
+  const [savedScrollPosition, setSavedScrollPosition] = useState<number>(0);
 
   useEffect(() => {
     localStorage.setItem('azaluk_cart', JSON.stringify(cart));
@@ -95,6 +96,8 @@ export default function Index() {
         foundName: product?.name 
       });
       if (product) {
+        // Save scroll position before opening modal
+        setSavedScrollPosition(window.scrollY);
         setSelectedProduct(product);
       } else {
         // Product not found, redirect to home
@@ -104,8 +107,12 @@ export default function Index() {
     } else if (!productId && selectedProduct) {
       // Close product modal when URL changes back to home
       setSelectedProduct(null);
+      // Restore scroll position after modal closes
+      setTimeout(() => {
+        window.scrollTo(0, savedScrollPosition);
+      }, 0);
     }
-  }, [productId, products, isLoadingProducts, navigate]);
+  }, [productId, products, isLoadingProducts, navigate, savedScrollPosition]);
 
   useEffect(() => {
     const checkLaunch = () => {
@@ -237,6 +244,10 @@ export default function Index() {
               navigate('/', { replace: true });
             } else {
               setSelectedProduct(null);
+              // Restore scroll position
+              setTimeout(() => {
+                window.scrollTo(0, savedScrollPosition);
+              }, 0);
             }
           }}
           addToCart={addToCart}

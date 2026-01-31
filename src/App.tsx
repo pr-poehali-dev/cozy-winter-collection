@@ -21,15 +21,9 @@ function ScrollToTop() {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    // Don't scroll when transitioning between product modal and home
-    if (!pathname.startsWith('/product/')) {
-      // Small delay to prevent scroll on modal close
-      const timer = setTimeout(() => {
-        if (window.location.pathname === pathname) {
-          window.scrollTo(0, 0);
-        }
-      }, 50);
-      return () => clearTimeout(timer);
+    // Only scroll to top on actual page navigation, not product modal
+    if (pathname !== '/' && !pathname.startsWith('/product/')) {
+      window.scrollTo(0, 0);
     }
   }, [pathname]);
 
