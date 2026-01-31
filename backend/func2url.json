@@ -4,9 +4,7 @@
   "resend-forward": "https://functions.poehali.dev/31cdb1b0-2ce2-4efb-ae70-7e56e1e153ff",
   "send-email": "https://functions.poehali.dev/76b36dee-db70-4316-b6a8-fed039d8df8c",
   "telegram-bot-setup": "https://functions.poehali.dev/aa1ac8a7-52d8-4fd3-b9f3-54fae1e02751",
-  "telegram-bot": "https://functions.poehali.dev/93787d28-4035-466b-9508-7fbd757f53f8",
   "promo-validate": "https://functions.poehali.dev/9fc2ae98-daea-4d40-98de-6d1a45d029cb",
   "order-details": "https://functions.poehali.dev/25f876e5-53fb-4cb1-878a-a7177baa1950",
-  "robokassa-webhook": "https://functions.poehali.dev/5420828a-4f2b-45e0-908f-6d59922e7791",
-  "robokassa": "https://functions.poehali.dev/eca02619-6f06-4c87-9840-7fcced969a38"
+  "robokassa-webhook": "https://functions.poehali.dev/5420828a-4f2b-45e0-908f-6d59922e7791"
 }

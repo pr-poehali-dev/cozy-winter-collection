@@ -97,19 +97,34 @@ def format_order_message(order: Dict, items: list = None) -> str:
             msg += f"   • {item['product_name']} x{item['quantity']} — {float(item['product_price']):.0f} ₽\n"
         msg += "\n"
     
+    # Флаги заказа
+    is_anonymous = order.get('is_anonymous', False)
+    is_gift = order.get('is_gift', False)
+    
+    if is_anonymous:
+        msg += f"🎭 <b>АНОНИМНЫЙ ЗАКАЗ</b> (без имени на упаковке)\n\n"
+    
+    if is_gift:
+        msg += f"🎁 <b>ЭТО ПОДАРОК</b>\n\n"
+    
     msg += f"👤 <b>Клиент:</b>\n"
     msg += f"   • {order['user_name']}\n"
     msg += f"   • {order['user_email']}\n"
     msg += f"   • {order['user_phone']}\n"
     
-    if order.get('user_telegram'):
-        msg += f"   • TG: {order['user_telegram']}\n"
+    # Если подарок - показываем контакты получателя
+    if is_gift:
+        msg += f"\n🎁 <b>Получатель подарка:</b>\n"
+        if order.get('recipient_phone'):
+            msg += f"   • {order['recipient_phone']}\n"
+        if order.get('recipient_address'):
+            msg += f"   • {order['recipient_address']}\n"
     
     msg += f"\n{delivery_emoji.get(delivery_type, '📦')} <b>Доставка:</b>\n"
     delivery_name = 'ПВЗ Ozon' if delivery_type == 'pvz' else 'Самовывоз'
     msg += f"   • {delivery_name}\n"
     
-    if order.get('delivery_address'):
+    if order.get('delivery_address') and not is_gift:
         msg += f"   • {order['delivery_address']}\n"
     
     if order.get('order_comment'):

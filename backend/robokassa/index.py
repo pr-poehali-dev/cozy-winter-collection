@@ -83,6 +83,12 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
         delivery_cost = float(payload.get('delivery_cost', 0))
         is_test = int(payload.get('is_test', 0))
         cart_items = payload.get('cart_items', [])
+        
+        # Новые поля для анонимных заказов и подарков
+        is_anonymous = bool(payload.get('is_anonymous', False))
+        is_gift = bool(payload.get('is_gift', False))
+        recipient_phone = str(payload.get('recipient_phone', ''))
+        recipient_address = str(payload.get('recipient_address', ''))
 
         if amount <= 0:
             raise ValueError('Amount must be greater than 0')
@@ -128,10 +134,10 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
         
         cur.execute("""
             INSERT INTO orders 
-            (order_number, user_name, user_email, user_phone, amount, robokassa_inv_id, status, delivery_address, order_comment, user_telegram, delivery_type, delivery_cost)
-            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+            (order_number, user_name, user_email, user_phone, amount, robokassa_inv_id, status, delivery_address, order_comment, user_telegram, delivery_type, delivery_cost, is_anonymous, is_gift, recipient_phone, recipient_address)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
             RETURNING id
-        """, (order_number, user_name, user_email, user_phone, amount_decimal, robokassa_inv_id, 'pending', user_address, order_comment, user_telegram, delivery_type, delivery_cost))
+        """, (order_number, user_name, user_email, user_phone, amount_decimal, robokassa_inv_id, 'pending', user_address, order_comment, user_telegram, delivery_type, delivery_cost, is_anonymous, is_gift, recipient_phone, recipient_address))
         
         order_id = cur.fetchone()[0]
         

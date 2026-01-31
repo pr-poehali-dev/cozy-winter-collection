@@ -208,6 +208,10 @@ export default function Header({
         deliveryType: checkoutData.deliveryType,
         deliveryCost: deliveryCost,
         cartItems: cart,
+        isAnonymous: checkoutData.isAnonymous,
+        isGift: checkoutData.isGift,
+        recipientPhone: checkoutData.recipientPhone,
+        recipientAddress: checkoutData.recipientAddress,
       });
 
       const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
