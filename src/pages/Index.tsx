@@ -102,10 +102,10 @@ export default function Index() {
         navigate('/', { replace: true });
       }
     } else if (!productId && selectedProduct) {
-      // Close product modal when navigating back to home
+      // Close product modal when URL changes back to home
       setSelectedProduct(null);
     }
-  }, [productId, products, isLoadingProducts, navigate, selectedProduct]);
+  }, [productId, products, isLoadingProducts, navigate]);
 
   useEffect(() => {
     const checkLaunch = () => {
@@ -233,9 +233,10 @@ export default function Index() {
         <ProductDetails
           product={selectedProduct}
           onClose={() => {
-            setSelectedProduct(null);
             if (productId) {
-              window.history.pushState({}, '', '/');
+              navigate('/', { replace: true });
+            } else {
+              setSelectedProduct(null);
             }
           }}
           addToCart={addToCart}
