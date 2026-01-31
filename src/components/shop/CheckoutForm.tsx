@@ -182,18 +182,7 @@ export default function CheckoutForm({
             className="font-light"
           />
         </div>
-        <div className="space-y-2">
-          <Label htmlFor="telegram">
-            ваш ник в телеграм
-          </Label>
-          <Input
-            id="telegram"
-            type="text"
-            value={checkoutData.telegram || '@'}
-            onChange={handleTelegramChange}
-            className="font-light"
-          />
-        </div>
+
         {checkoutData.isGift && (
           <>
             <div className="space-y-2">
