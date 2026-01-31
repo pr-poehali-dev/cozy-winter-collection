@@ -234,7 +234,9 @@ export default function Index() {
           product={selectedProduct}
           onClose={() => {
             setSelectedProduct(null);
-            navigate('/', { replace: true });
+            if (productId) {
+              window.history.pushState({}, '', '/');
+            }
           }}
           addToCart={addToCart}
           setIsCartOpen={setIsCartOpen}
