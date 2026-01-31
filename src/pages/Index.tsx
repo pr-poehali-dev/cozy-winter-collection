@@ -99,10 +99,13 @@ export default function Index() {
       } else {
         // Product not found, redirect to home
         console.log('❌ Product not found, redirecting');
-        navigate('/');
+        navigate('/', { replace: true });
       }
+    } else if (!productId && selectedProduct) {
+      // Close product modal when navigating back to home
+      setSelectedProduct(null);
     }
-  }, [productId, products, isLoadingProducts, navigate]);
+  }, [productId, products, isLoadingProducts, navigate, selectedProduct]);
 
   useEffect(() => {
     const checkLaunch = () => {
@@ -231,7 +234,7 @@ export default function Index() {
           product={selectedProduct}
           onClose={() => {
             setSelectedProduct(null);
-            navigate('/');
+            navigate('/', { replace: true });
           }}
           addToCart={addToCart}
           setIsCartOpen={setIsCartOpen}
