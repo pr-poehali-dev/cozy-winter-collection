@@ -143,6 +143,17 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                 VALUES (%s, %s, %s, %s, %s)
             """, (order_id, item.get('id'), item.get('name'), item.get('price'), item.get('quantity')))
         
+        # Обновляем products_summary
+        cur.execute("""
+            UPDATE t_p3876556_cozy_winter_collecti.orders 
+            SET products_summary = (
+                SELECT string_agg(oi.product_name || ' x' || oi.quantity, ', ' ORDER BY oi.id)
+                FROM t_p3876556_cozy_winter_collecti.order_items oi 
+                WHERE oi.order_id = %s
+            )
+            WHERE id = %s
+        """, (order_id, order_id))
+        
         amount_str = f"{amount:.2f}"
         
         signature = calculate_signature(
