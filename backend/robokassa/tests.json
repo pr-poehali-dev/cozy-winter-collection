@@ -11,7 +11,11 @@
         "user_phone": "+79991234567",
         "user_address": "Москва, ул. Тестовая, д. 1",
         "cart_items": [{"id": 1, "name": "Test Product", "price": 1990, "quantity": 1}],
-        "is_test": 1
+        "is_test": 1,
+        "is_anonymous": false,
+        "is_gift": false,
+        "recipient_phone": "",
+        "recipient_address": ""
       },
       "expectedStatus": 200,
       "expectedBody": {

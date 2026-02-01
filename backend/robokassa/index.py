@@ -35,9 +35,7 @@ ROBOKASSA_URL = 'https://auth.robokassa.ru/Merchant/Index.aspx'
 
 def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     '''
-    Business: Создание заказа и генерация ссылки на оплату в Robokassa
-    Args: event с httpMethod, body (amount, user_name, user_email, user_phone, is_test)
-    Returns: payment_url для редиректа пользователя, order_id
+    Создание заказа и генерация ссылки на оплату в Robokassa с поддержкой подарков и анонимных заказов
     '''
     method = event.get('httpMethod', 'GET').upper()
 
@@ -96,8 +94,8 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             raise ValueError('User name is required')
         if not user_email:
             raise ValueError('User email is required')
-        if not user_address:
-            raise ValueError('User address is required')
+        if not user_address and not recipient_address:
+            raise ValueError('User address or recipient address is required')
         if not cart_items:
             raise ValueError('Cart items are required')
 
@@ -120,7 +118,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
         for _ in range(max_attempts):
             robokassa_inv_id = random.randint(100000, 2147483647)
             
-            cur.execute("SELECT COUNT(*) FROM orders WHERE robokassa_inv_id = %s", (robokassa_inv_id,))
+            cur.execute("SELECT COUNT(*) FROM t_p3876556_cozy_winter_collecti.orders WHERE robokassa_inv_id = %s", (robokassa_inv_id,))
             exists = cur.fetchone()[0]
             
             if exists == 0:
@@ -133,7 +131,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
         amount_decimal = round(amount, 2)
         
         cur.execute("""
-            INSERT INTO orders 
+            INSERT INTO t_p3876556_cozy_winter_collecti.orders 
             (order_number, user_name, user_email, user_phone, amount, robokassa_inv_id, status, delivery_address, order_comment, user_telegram, delivery_type, delivery_cost, is_anonymous, is_gift, recipient_phone, recipient_address)
             VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
             RETURNING id
@@ -143,7 +141,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
         
         for item in cart_items:
             cur.execute("""
-                INSERT INTO order_items 
+                INSERT INTO t_p3876556_cozy_winter_collecti.order_items 
                 (order_id, product_id, product_name, product_price, quantity)
                 VALUES (%s, %s, %s, %s, %s)
             """, (order_id, item.get('id'), item.get('name'), item.get('price'), item.get('quantity')))
@@ -171,7 +169,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
         payment_url = f"{ROBOKASSA_URL}?{urlencode(query_params)}"
         
         cur.execute("""
-            UPDATE orders 
+            UPDATE t_p3876556_cozy_winter_collecti.orders 
             SET payment_url = %s, updated_at = CURRENT_TIMESTAMP
             WHERE id = %s
         """, (payment_url, order_id))

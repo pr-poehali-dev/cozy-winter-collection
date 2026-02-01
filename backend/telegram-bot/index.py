@@ -68,7 +68,7 @@ def send_to_all_admins(cur, text: str, reply_markup: Optional[Dict] = None):
         send_telegram_message(str(admin['chat_id']), text, reply_markup)
 
 def format_order_message(order: Dict, items: list = None) -> str:
-    """Форматирование сообщения о заказе"""
+    """Форматирование сообщения о заказе с поддержкой анонимных заказов и подарков"""
     status_emoji = {
         'pending': '⏳',
         'paid': '✅',
