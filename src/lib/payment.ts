@@ -49,6 +49,8 @@ export const createRobokassaPaymentLink = async (
   };
 
   console.log('[DEBUG] Sending payment request:', requestBody);
+  console.log('[DEBUG] IS_ANONYMOUS VALUE:', payload.isAnonymous, 'TYPE:', typeof payload.isAnonymous);
+  console.log('[DEBUG] REQUEST BODY IS_ANONYMOUS:', requestBody.is_anonymous, 'TYPE:', typeof requestBody.is_anonymous);
 
   const response = await fetch(ROBOKASSA_ENDPOINT, {
     method: "POST",

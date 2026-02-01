@@ -157,6 +157,13 @@ export default function Header({
 
       const totalWithDelivery = Number((cartTotal + deliveryCost - promoDiscount).toFixed(2));
 
+      console.log('[CHECKOUT] Данные формы перед отправкой:', {
+        isAnonymous: checkoutData.isAnonymous,
+        isAnonymousType: typeof checkoutData.isAnonymous,
+        giftMessage: checkoutData.giftMessage,
+        fullCheckoutData: checkoutData
+      });
+
       const result = await createRobokassaPaymentLink({
         amount: totalWithDelivery,
         userName: checkoutData.name,
