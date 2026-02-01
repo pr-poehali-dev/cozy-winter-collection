@@ -52,7 +52,6 @@ export default function Header({
     deliveryType: '' as '' | 'pvz' | 'pickup',
     promoCode: '',
     isAnonymous: false,
-    giftMessage: '',
     recipientName: '',
     recipientPhone: '',
     isSelfRecipient: false
@@ -206,17 +205,12 @@ export default function Header({
         fullComment += `📦 Заказ для себя\n`;
       }
       
-      // Добавляем текст для открытки
-      if (checkoutData.giftMessage) {
-        fullComment += `\n✉️ Текст для открытки:\n${checkoutData.giftMessage}\n`;
-      }
-      
       // Добавляем анонимность
       if (checkoutData.isAnonymous) {
         fullComment += `\n🎭 АНОНИМНО (без имени отправителя на упаковке)\n`;
       }
       
-      // Добавляем дополнительный комментарий
+      // Добавляем комментарий покупателя
       if (checkoutData.comment) {
         fullComment += `\n📝 Комментарий:\n${checkoutData.comment}`;
       }

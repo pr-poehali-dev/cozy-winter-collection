@@ -14,7 +14,6 @@ interface CheckoutData {
   deliveryType: '' | 'pvz' | 'pickup';
   promoCode: string;
   isAnonymous: boolean;
-  giftMessage: string;
   recipientName: string;
   recipientPhone: string;
   isSelfRecipient: boolean;
@@ -306,25 +305,17 @@ export default function CheckoutForm({
         )}
 
         <div className="border-t border-border pt-4 mt-2">
-          <div className="mb-4">
-            <h3 className="text-sm font-semibold text-primary mb-1">✉️ детали подарка</h3>
-          </div>
-          
           <div className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="giftMessage">текст для открытки (необязательно)</Label>
+              <Label htmlFor="comment">комментарий к заказу</Label>
               <Textarea
-                id="giftMessage"
-                value={checkoutData.giftMessage}
-                onChange={(e) => setCheckoutData({ ...checkoutData, giftMessage: e.target.value })}
+                id="comment"
+                value={checkoutData.comment}
+                onChange={(e) => setCheckoutData({ ...checkoutData, comment: e.target.value })}
                 className="font-light resize-none"
-                rows={2}
-                maxLength={100}
-                placeholder="например: с любовью, анна"
+                rows={3}
+                placeholder="послание получателю или ваши пожелания по заказу"
               />
-              <p className="text-xs text-muted-foreground font-light">
-                {(checkoutData.giftMessage || '').length}/100 символов
-              </p>
             </div>
 
             <div className="flex items-center space-x-2 p-3 rounded-lg bg-secondary/30">
@@ -338,18 +329,6 @@ export default function CheckoutForm({
               <Label htmlFor="isAnonymous" className="cursor-pointer font-light">
                 отправить анонимно (без моего имени на упаковке)
               </Label>
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="comment">дополнительный комментарий (необязательно)</Label>
-              <Textarea
-                id="comment"
-                value={checkoutData.comment}
-                onChange={(e) => setCheckoutData({ ...checkoutData, comment: e.target.value })}
-                className="font-light resize-none"
-                rows={2}
-                placeholder="особые пожелания по заказу"
-              />
             </div>
           </div>
         </div>
