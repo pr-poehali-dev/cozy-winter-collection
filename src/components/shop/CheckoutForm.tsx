@@ -196,7 +196,6 @@ export default function CheckoutForm({
         <div className="border-t border-border pt-4 mt-2">
           <div className="mb-4">
             <h3 className="text-sm font-semibold text-primary mb-2">💌 данные получателя подарка</h3>
-            <p className="text-xs text-muted-foreground font-light">код для получения посылки придёт на телефон получателя в приложении ozon</p>
           </div>
           
           <div className="flex items-center space-x-2 mb-4 p-3 rounded-lg bg-secondary/30">
@@ -288,6 +287,9 @@ export default function CheckoutForm({
               <a href="https://www.ozon.ru/geo/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
                 найти ближайший пункт выдачи на карте ozon →
               </a>
+            </p>
+            <p className="text-xs text-muted-foreground font-light mt-2">
+              код для получения посылки придёт на телефон получателя в приложении ozon
             </p>
           </div>
         )}
