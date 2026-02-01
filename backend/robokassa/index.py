@@ -35,7 +35,7 @@ ROBOKASSA_URL = 'https://auth.robokassa.ru/Merchant/Index.aspx'
 
 def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     '''
-    Создание заказа и генерация ссылки на оплату в Robokassa с поддержкой подарков и анонимных заказов
+    Создание заказа и генерация ссылки на оплату в Robokassa с поддержкой анонимных заказов
     '''
     method = event.get('httpMethod', 'GET').upper()
 
