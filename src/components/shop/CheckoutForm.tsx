@@ -15,6 +15,9 @@ interface CheckoutData {
   promoCode: string;
   isAnonymous: boolean;
   giftMessage: string;
+  recipientName: string;
+  recipientPhone: string;
+  isSelfRecipient: boolean;
 }
 
 interface CheckoutFormProps {
@@ -40,7 +43,23 @@ export default function CheckoutForm({
   isCheckoutLoading,
   onCheckout
 }: CheckoutFormProps) {
-  const [hasGift, setHasGift] = useState(false);
+  const handleSelfRecipientChange = (checked: boolean) => {
+    if (checked) {
+      setCheckoutData({
+        ...checkoutData,
+        isSelfRecipient: true,
+        recipientName: checkoutData.name,
+        recipientPhone: checkoutData.phone
+      });
+    } else {
+      setCheckoutData({
+        ...checkoutData,
+        isSelfRecipient: false,
+        recipientName: '',
+        recipientPhone: ''
+      });
+    }
+  };
 
   useEffect(() => {
     const savedData = localStorage.getItem('checkoutUserData');
@@ -100,6 +119,16 @@ export default function CheckoutForm({
     }
   };
 
+  const handleRecipientPhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    const cleaned = value.replace(/\D/g, '');
+    
+    if (cleaned.length <= 11) {
+      const formatted = formatPhoneNumber(cleaned.startsWith('7') ? cleaned : '7' + cleaned);
+      setCheckoutData({ ...checkoutData, recipientPhone: formatted });
+    }
+  };
+
   const handleTelegramChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let value = e.target.value;
     
@@ -155,7 +184,7 @@ export default function CheckoutForm({
           />
         </div>
         <div className="space-y-2">
-          <Label htmlFor="phone">телефон получателя</Label>
+          <Label htmlFor="phone">ваш телефон</Label>
           <Input
             id="phone"
             type="tel"
@@ -163,9 +192,51 @@ export default function CheckoutForm({
             onChange={handlePhoneChange}
             className="font-light"
           />
-          <p className="text-xs text-muted-foreground font-light">
-            код для получения посылки придёт в приложении ozon
-          </p>
+        </div>
+
+        <div className="border-t border-border pt-4 mt-2">
+          <div className="mb-4">
+            <h3 className="text-sm font-semibold text-primary mb-2">💌 данные получателя подарка</h3>
+            <p className="text-xs text-muted-foreground font-light">код для получения посылки придёт на телефон получателя в приложении ozon</p>
+          </div>
+          
+          <div className="flex items-center space-x-2 mb-4 p-3 rounded-lg bg-secondary/30">
+            <input
+              type="checkbox"
+              id="isSelfRecipient"
+              checked={checkoutData.isSelfRecipient}
+              onChange={(e) => handleSelfRecipientChange(e.target.checked)}
+              className="w-4 h-4 rounded border-gray-300"
+            />
+            <Label htmlFor="isSelfRecipient" className="cursor-pointer font-light">
+              я сам получатель (заказываю себе)
+            </Label>
+          </div>
+
+          <div className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="recipientName">имя получателя</Label>
+              <Input
+                id="recipientName"
+                type="text"
+                value={checkoutData.recipientName}
+                onChange={(e) => setCheckoutData({ ...checkoutData, recipientName: e.target.value })}
+                className="font-light"
+                disabled={checkoutData.isSelfRecipient}
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="recipientPhone">телефон получателя</Label>
+              <Input
+                id="recipientPhone"
+                type="tel"
+                value={checkoutData.recipientPhone || '+7'}
+                onChange={handleRecipientPhoneChange}
+                className="font-light"
+                disabled={checkoutData.isSelfRecipient}
+              />
+            </div>
+          </div>
         </div>
 
         <div className="space-y-3">
@@ -234,44 +305,53 @@ export default function CheckoutForm({
           </div>
         )}
 
-        <div className="space-y-2">
-          <Label htmlFor="comment">комментарий к заказу</Label>
-          <Textarea
-            id="comment"
-            value={checkoutData.comment}
-            onChange={(e) => setCheckoutData({ ...checkoutData, comment: e.target.value })}
-            className="font-light resize-none"
-            rows={3}
-          />
-        </div>
+        <div className="border-t border-border pt-4 mt-2">
+          <div className="mb-4">
+            <h3 className="text-sm font-semibold text-primary mb-1">✉️ детали подарка</h3>
+          </div>
+          
+          <div className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="giftMessage">текст для открытки (необязательно)</Label>
+              <Textarea
+                id="giftMessage"
+                value={checkoutData.giftMessage}
+                onChange={(e) => setCheckoutData({ ...checkoutData, giftMessage: e.target.value })}
+                className="font-light resize-none"
+                rows={2}
+                maxLength={100}
+                placeholder="например: с любовью, анна"
+              />
+              <p className="text-xs text-muted-foreground font-light">
+                {(checkoutData.giftMessage || '').length}/100 символов
+              </p>
+            </div>
 
-        <div className="space-y-2">
-          <Label htmlFor="giftMessage">текст для открытки (необязательно)</Label>
-          <Input
-            id="giftMessage"
-            type="text"
-            maxLength={50}
-            value={checkoutData.giftMessage}
-            onChange={(e) => setCheckoutData({ ...checkoutData, giftMessage: e.target.value })}
-            className="font-light"
-            placeholder="например: с любовью, анна"
-          />
-          <p className="text-xs text-muted-foreground font-light">
-            {(checkoutData.giftMessage || '').length}/50 символов
-          </p>
-        </div>
+            <div className="flex items-center space-x-2 p-3 rounded-lg bg-secondary/30">
+              <input
+                type="checkbox"
+                id="isAnonymous"
+                checked={checkoutData.isAnonymous}
+                onChange={(e) => setCheckoutData({ ...checkoutData, isAnonymous: e.target.checked })}
+                className="w-4 h-4 rounded border-gray-300"
+              />
+              <Label htmlFor="isAnonymous" className="cursor-pointer font-light">
+                отправить анонимно (без моего имени на упаковке)
+              </Label>
+            </div>
 
-        <div className="flex items-center space-x-2 p-3 rounded-lg border border-border">
-          <input
-            type="checkbox"
-            id="isAnonymous"
-            checked={checkoutData.isAnonymous}
-            onChange={(e) => setCheckoutData({ ...checkoutData, isAnonymous: e.target.checked })}
-            className="w-4 h-4 rounded border-gray-300"
-          />
-          <Label htmlFor="isAnonymous" className="cursor-pointer font-light">
-            отправить анонимно (без моего имени на упаковке)
-          </Label>
+            <div className="space-y-2">
+              <Label htmlFor="comment">дополнительный комментарий (необязательно)</Label>
+              <Textarea
+                id="comment"
+                value={checkoutData.comment}
+                onChange={(e) => setCheckoutData({ ...checkoutData, comment: e.target.value })}
+                className="font-light resize-none"
+                rows={2}
+                placeholder="особые пожелания по заказу"
+              />
+            </div>
+          </div>
         </div>
       </div>
 

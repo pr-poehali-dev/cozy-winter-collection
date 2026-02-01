@@ -52,7 +52,10 @@ export default function Header({
     deliveryType: '' as '' | 'pvz' | 'pickup',
     promoCode: '',
     isAnonymous: false,
-    giftMessage: ''
+    giftMessage: '',
+    recipientName: '',
+    recipientPhone: '',
+    isSelfRecipient: false
   });
   const [deliveryCost, setDeliveryCost] = useState(0);
   const [promoDiscount, setPromoDiscount] = useState(0);
@@ -153,16 +156,72 @@ export default function Header({
       return;
     }
 
+    // Валидация данных получателя
+    if (!checkoutData.isSelfRecipient) {
+      if (!checkoutData.recipientName) {
+        setIsCheckoutLoading(false);
+        toast({
+          title: 'Укажите имя получателя',
+          description: 'Имя получателя обязательно для подарка',
+          variant: 'destructive'
+        });
+        return;
+      }
+
+      if (!checkoutData.recipientPhone) {
+        setIsCheckoutLoading(false);
+        toast({
+          title: 'Укажите телефон получателя',
+          description: 'Телефон получателя нужен для доставки',
+          variant: 'destructive'
+        });
+        return;
+      }
+
+      const recipientPhoneDigits = checkoutData.recipientPhone.replace(/\D/g, '');
+      if (recipientPhoneDigits.length !== 11) {
+        setIsCheckoutLoading(false);
+        toast({
+          title: 'Неверный формат телефона получателя',
+          description: 'Введите полный номер телефона',
+          variant: 'destructive'
+        });
+        return;
+      }
+    }
+
     try {
 
       const totalWithDelivery = Number((cartTotal + deliveryCost - promoDiscount).toFixed(2));
 
-      console.log('[CHECKOUT] Данные формы перед отправкой:', {
-        isAnonymous: checkoutData.isAnonymous,
-        isAnonymousType: typeof checkoutData.isAnonymous,
-        giftMessage: checkoutData.giftMessage,
-        fullCheckoutData: checkoutData
-      });
+      // Формируем полный комментарий с данными получателя и подарка
+      let fullComment = '';
+      
+      // Добавляем данные получателя
+      if (!checkoutData.isSelfRecipient && checkoutData.recipientName) {
+        fullComment += `💌 ПОДАРОК:\n`;
+        fullComment += `Получатель: ${checkoutData.recipientName}\n`;
+        fullComment += `Телефон получателя: ${checkoutData.recipientPhone}\n`;
+      } else if (checkoutData.isSelfRecipient) {
+        fullComment += `📦 Заказ для себя\n`;
+      }
+      
+      // Добавляем текст для открытки
+      if (checkoutData.giftMessage) {
+        fullComment += `\n✉️ Текст для открытки:\n${checkoutData.giftMessage}\n`;
+      }
+      
+      // Добавляем анонимность
+      if (checkoutData.isAnonymous) {
+        fullComment += `\n🎭 АНОНИМНО (без имени отправителя на упаковке)\n`;
+      }
+      
+      // Добавляем дополнительный комментарий
+      if (checkoutData.comment) {
+        fullComment += `\n📝 Комментарий:\n${checkoutData.comment}`;
+      }
+
+      console.log('[CHECKOUT] Сформированный комментарий:', fullComment);
 
       const result = await createRobokassaPaymentLink({
         amount: totalWithDelivery,
@@ -170,7 +229,7 @@ export default function Header({
         userEmail: checkoutData.email,
         userPhone: checkoutData.phone,
         userAddress: checkoutData.address,
-        orderComment: checkoutData.comment + (checkoutData.giftMessage ? `\n\nТекст для открытки: ${checkoutData.giftMessage}` : ''),
+        orderComment: fullComment,
         userTelegram: checkoutData.telegram,
         deliveryType: checkoutData.deliveryType,
         deliveryCost: deliveryCost,
