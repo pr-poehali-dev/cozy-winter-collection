@@ -145,7 +145,17 @@ export default function CheckoutForm({
           />
         </div>
         <div className="space-y-2">
-          <Label htmlFor="phone">ваш телефон</Label>
+          <Label htmlFor="telegram">ваш telegram</Label>
+          <Input
+            id="telegram"
+            type="text"
+            value={checkoutData.telegram || '@'}
+            onChange={handleTelegramChange}
+            className="font-light"
+          />
+        </div>
+        <div className="space-y-2">
+          <Label htmlFor="phone">телефон получателя</Label>
           <Input
             id="phone"
             type="tel"
@@ -153,6 +163,9 @@ export default function CheckoutForm({
             onChange={handlePhoneChange}
             className="font-light"
           />
+          <p className="text-xs text-muted-foreground font-light">
+            код для получения посылки придёт в приложении ozon
+          </p>
         </div>
 
         <div className="space-y-3">
@@ -229,7 +242,6 @@ export default function CheckoutForm({
             onChange={(e) => setCheckoutData({ ...checkoutData, comment: e.target.value })}
             className="font-light resize-none"
             rows={3}
-            placeholder="пожелания по заказу или послание получателю"
           />
         </div>
 
