@@ -87,6 +87,8 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
         is_gift = bool(payload.get('is_gift', False))
         recipient_phone = str(payload.get('recipient_phone', ''))
         recipient_address = str(payload.get('recipient_address', ''))
+        
+        print(f"[DEBUG] Gift data: is_gift={is_gift}, is_anonymous={is_anonymous}, recipient_phone={recipient_phone}")
 
         if amount <= 0:
             raise ValueError('Amount must be greater than 0')
