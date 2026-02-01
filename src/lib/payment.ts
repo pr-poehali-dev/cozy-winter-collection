@@ -20,9 +20,6 @@ interface PaymentPayload {
   cartItems: CartItem[];
   isTest?: number;
   isAnonymous?: boolean;
-  isGift?: boolean;
-  recipientPhone?: string;
-  recipientAddress?: string;
 }
 
 interface PaymentResponse {
@@ -49,9 +46,6 @@ export const createRobokassaPaymentLink = async (
     cart_items: payload.cartItems,
     is_test: 0,
     is_anonymous: payload.isAnonymous || false,
-    is_gift: payload.isGift || false,
-    recipient_phone: payload.recipientPhone || '',
-    recipient_address: payload.recipientAddress || '',
   };
 
   console.log('[DEBUG] Sending payment request:', requestBody);

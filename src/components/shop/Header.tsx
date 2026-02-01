@@ -51,10 +51,6 @@ export default function Header({
     telegram: '',
     deliveryType: '' as '' | 'pvz' | 'pickup',
     promoCode: '',
-    isGift: false,
-    recipientPhone: '',
-    recipientAddress: '',
-    dontKnowAddress: false,
     isAnonymous: false,
     giftMessage: ''
   });
@@ -137,57 +133,21 @@ export default function Header({
       return;
     }
 
-    // Валидация для подарков
-    if (checkoutData.isGift) {
-      if (!checkoutData.recipientPhone) {
-        setIsCheckoutLoading(false);
-        toast({
-          title: 'Укажите телефон получателя',
-          description: 'На него придет QR-код для получения посылки',
-          variant: 'destructive'
-        });
-        return;
-      }
-      
-      if (!checkoutData.dontKnowAddress && !checkoutData.recipientAddress) {
-        setIsCheckoutLoading(false);
-        toast({
-          title: 'Укажите адрес ПВЗ',
-          description: 'Или отметьте "я не знаю адрес пвз"',
-          variant: 'destructive'
-        });
-        return;
-      }
-    }
-
-    // Валидация для обычных заказов (не подарков)
-    if (!checkoutData.isGift) {
-      if (!checkoutData.deliveryType) {
-        setIsCheckoutLoading(false);
-        toast({
-          title: 'Выберите способ доставки',
-          description: 'Укажите ПВЗ Ozon или самовывоз',
-          variant: 'destructive'
-        });
-        return;
-      }
-
-      if (checkoutData.deliveryType === 'pvz' && !checkoutData.address) {
-        setIsCheckoutLoading(false);
-        toast({
-          title: 'Выберите пункт выдачи',
-          description: 'Укажите адрес ПВЗ Ozon',
-          variant: 'destructive'
-        });
-        return;
-      }
-    }
-
-    if (checkoutData.deliveryType === 'pickup' && !checkoutData.telegram) {
+    if (!checkoutData.deliveryType) {
       setIsCheckoutLoading(false);
       toast({
-        title: 'Укажите ник в телеграм',
-        description: 'Для самовывоза нужен телеграм для связи',
+        title: 'Выберите способ доставки',
+        description: 'Укажите ПВЗ Ozon или самовывоз',
+        variant: 'destructive'
+      });
+      return;
+    }
+
+    if (checkoutData.deliveryType === 'pvz' && !checkoutData.address) {
+      setIsCheckoutLoading(false);
+      toast({
+        title: 'Выберите пункт выдачи',
+        description: 'Укажите адрес ПВЗ Ozon',
         variant: 'destructive'
       });
       return;
@@ -202,16 +162,13 @@ export default function Header({
         userName: checkoutData.name,
         userEmail: checkoutData.email,
         userPhone: checkoutData.phone,
-        userAddress: checkoutData.isGift ? checkoutData.recipientAddress : checkoutData.address,
-        orderComment: checkoutData.comment,
+        userAddress: checkoutData.address,
+        orderComment: checkoutData.comment + (checkoutData.giftMessage ? `\n\nТекст для открытки: ${checkoutData.giftMessage}` : ''),
         userTelegram: checkoutData.telegram,
-        deliveryType: checkoutData.isGift ? 'pvz' : checkoutData.deliveryType,
+        deliveryType: checkoutData.deliveryType,
         deliveryCost: deliveryCost,
         cartItems: cart,
         isAnonymous: checkoutData.isAnonymous,
-        isGift: checkoutData.isGift,
-        recipientPhone: checkoutData.recipientPhone,
-        recipientAddress: checkoutData.recipientAddress,
       });
 
       const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);

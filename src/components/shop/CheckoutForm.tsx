@@ -13,10 +13,6 @@ interface CheckoutData {
   telegram: string;
   deliveryType: '' | 'pvz' | 'pickup';
   promoCode: string;
-  isGift: boolean;
-  recipientPhone: string;
-  recipientAddress: string;
-  dontKnowAddress: boolean;
   isAnonymous: boolean;
   giftMessage: string;
 }
@@ -119,30 +115,6 @@ export default function CheckoutForm({
   return (
     <div className="flex-1 flex flex-col mt-8 overflow-hidden">
       <div className="space-y-4 flex-1 overflow-y-auto pb-4 px-4 md:px-6">
-        <div className="grid grid-cols-2 gap-3">
-          <button
-            type="button"
-            onClick={() => setCheckoutData({ ...checkoutData, isGift: false, deliveryType: '', address: '', recipientPhone: '', recipientAddress: '', dontKnowAddress: false })}
-            className={`p-4 rounded-lg border-2 text-left transition-all ${
-              !checkoutData.isGift
-                ? 'border-primary bg-primary/5'
-                : 'border-border hover:border-primary/50'
-            }`}
-          >
-            <div className="font-semibold text-sm">заказываю себе</div>
-          </button>
-          <button
-            type="button"
-            onClick={() => setCheckoutData({ ...checkoutData, isGift: true, deliveryType: 'pvz', address: '' })}
-            className={`p-4 rounded-lg border-2 text-left transition-all ${
-              checkoutData.isGift
-                ? 'border-primary bg-primary/5'
-                : 'border-border hover:border-primary/50'
-            }`}
-          >
-            <div className="font-semibold text-sm">отправить в подарок</div>
-          </button>
-        </div>
         <div className="space-y-2">
           <Label htmlFor="name">ваше имя</Label>
           <Input
@@ -183,167 +155,114 @@ export default function CheckoutForm({
           />
         </div>
 
-        {checkoutData.isGift && (
-          <>
-            <div className="space-y-2">
-              <Label htmlFor="recipientPhone" className="text-[#6b1515]">телефон получателя</Label>
-              <Input
-                id="recipientPhone"
-                type="tel"
-                value={checkoutData.recipientPhone}
-                onChange={(e) => setCheckoutData({ ...checkoutData, recipientPhone: e.target.value })}
-                className="font-light"
-                placeholder="+7 (999) 123-45-67"
-              />
-              <p className="text-xs text-muted-foreground font-light">код для получения посылки придет в приложении ozon </p>
-            </div>
-            {!checkoutData.dontKnowAddress && (
-              <div className="space-y-2">
-                <Label htmlFor="recipientAddress">адрес пвз получателя</Label>
-                <Input
-                  id="recipientAddress"
-                  type="text"
-                  value={checkoutData.recipientAddress}
-                  onChange={(e) => setCheckoutData({ ...checkoutData, recipientAddress: e.target.value })}
-                  className="font-light"
-                  placeholder="город, улица, дом"
-                />
-                <p className="text-xs text-muted-foreground font-light">
-                  <a href="https://www.ozon.ru/geo/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
-                    найти пункт выдачи на карте ozon →
-                  </a>
-                </p>
-              </div>
-            )}
-            <div className="space-y-3">
-              <div className="flex items-center space-x-2 p-3 rounded-lg border border-border">
-                <input
-                  type="checkbox"
-                  id="dontKnowAddress"
-                  checked={checkoutData.dontKnowAddress}
-                  onChange={(e) => setCheckoutData({ ...checkoutData, dontKnowAddress: e.target.checked, recipientAddress: e.target.checked ? '' : checkoutData.recipientAddress })}
-                  className="w-4 h-4 rounded border-gray-300"
-                />
-                <div className="flex-1">
-                  <Label htmlFor="dontKnowAddress" className="cursor-pointer font-light text-sm block">
-                    я не знаю адрес пвз
-                  </Label>
-                  <p className="text-xs text-muted-foreground font-light mt-1">
-                    мы свяжемся с покупателем для согласования способа доставки по указанному вами номеру
-                  </p>
-                </div>
-              </div>
-              <div className="flex items-center space-x-2 p-3 rounded-lg border border-border">
-                <input
-                  type="checkbox"
-                  id="isAnonymous"
-                  checked={checkoutData.isAnonymous}
-                  onChange={(e) => setCheckoutData({ ...checkoutData, isAnonymous: e.target.checked })}
-                  className="w-4 h-4 rounded border-gray-300"
-                />
-                <Label htmlFor="isAnonymous" className="cursor-pointer font-light">
-                  отправить анонимно
-                </Label>
-              </div>
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="giftMessage">текст для открытки (необязательно)</Label>
-              <Input
-                id="giftMessage"
-                type="text"
-                maxLength={50}
-                value={checkoutData.giftMessage}
-                onChange={(e) => setCheckoutData({ ...checkoutData, giftMessage: e.target.value })}
-                className="font-light"
-                placeholder="например: с любовью, анна"
-              />
-              <p className="text-xs text-muted-foreground font-light">
-                {(checkoutData.giftMessage || '').length}/50 символов
-              </p>
-            </div>
-          </>
-        )}
-        {!checkoutData.isGift && (
-          <>
-            <div className="space-y-3">
-              <Label>способ доставки</Label>
-              <div className="grid grid-cols-2 gap-3">
-                <button
-                  type="button"
-                  onClick={() => {
-                    setCheckoutData({ ...checkoutData, deliveryType: 'pvz', address: '' });
-                    setDeliveryCost(200);
-                  }}
-                  className={`p-4 rounded-lg border-2 text-left transition-all ${
-                    checkoutData.deliveryType === 'pvz'
-                      ? 'border-primary bg-primary/5'
-                      : 'border-border hover:border-primary/50'
-                  }`}
-                >
-                  <div className="font-semibold text-sm mb-1">пвз ozon</div>
-                  <div className="text-xs text-muted-foreground font-light">200 ₽</div>
-                </button>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setCheckoutData({ ...checkoutData, deliveryType: 'pickup', address: 'Москва, м. Тульская' });
-                    setDeliveryCost(0);
-                  }}
-                  className={`p-4 rounded-lg border-2 text-left transition-all ${
-                    checkoutData.deliveryType === 'pickup'
-                      ? 'border-primary bg-primary/5'
-                      : 'border-border hover:border-primary/50'
-                  }`}
-                >
-                  <div className="font-semibold text-sm mb-1">самовывоз</div>
-                  <div className="text-xs text-muted-foreground font-light">бесплатно</div>
-                </button>
-              </div>
-            </div>
-            {checkoutData.deliveryType === 'pvz' && (
-              <div className="space-y-2">
-                <Label htmlFor="address">адрес пвз ozon</Label>
-                <Input
-                  id="address"
-                  type="text"
-                  value={checkoutData.address}
-                  onChange={(e) => setCheckoutData({ ...checkoutData, address: e.target.value })}
-                  className="font-light"
-                />
-                <p className="text-xs text-muted-foreground font-light">
-                  <a href="https://www.ozon.ru/geo/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
-                    найти ближайший пункт выдачи на карте ozon →
-                  </a>
-                </p>
-              </div>
-            )}
-            {checkoutData.deliveryType === 'pickup' && (
-              <div className="space-y-2">
-                <Label>адрес самовывоза</Label>
-                <div className="p-3 rounded-lg bg-secondary/50 border border-border">
-                  <p className="text-sm font-light">москва, м. тульская</p>
-                </div>
-                <p className="text-xs text-muted-foreground font-light mt-2">
-                  свяжемся для согласования времени встречи
-                </p>
-              </div>
-            )}
-          </>
-        )}
+        <div className="space-y-3">
+          <Label>способ доставки</Label>
+          <div className="grid grid-cols-2 gap-3">
+            <button
+              type="button"
+              onClick={() => {
+                setCheckoutData({ ...checkoutData, deliveryType: 'pvz', address: '' });
+                setDeliveryCost(200);
+              }}
+              className={`p-4 rounded-lg border-2 text-left transition-all ${
+                checkoutData.deliveryType === 'pvz'
+                  ? 'border-primary bg-primary/5'
+                  : 'border-border hover:border-primary/50'
+              }`}
+            >
+              <div className="font-semibold text-sm mb-1">пвз ozon</div>
+              <div className="text-xs text-muted-foreground font-light">200 ₽</div>
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setCheckoutData({ ...checkoutData, deliveryType: 'pickup', address: 'Москва, м. Тульская' });
+                setDeliveryCost(0);
+              }}
+              className={`p-4 rounded-lg border-2 text-left transition-all ${
+                checkoutData.deliveryType === 'pickup'
+                  ? 'border-primary bg-primary/5'
+                  : 'border-border hover:border-primary/50'
+              }`}
+            >
+              <div className="font-semibold text-sm mb-1">самовывоз</div>
+              <div className="text-xs text-muted-foreground font-light">бесплатно</div>
+            </button>
+          </div>
+        </div>
 
-        {!checkoutData.isGift && (
+        {checkoutData.deliveryType === 'pvz' && (
           <div className="space-y-2">
-            <Label htmlFor="comment">комментарий к заказу</Label>
-            <Textarea
-              id="comment"
-              value={checkoutData.comment}
-              onChange={(e) => setCheckoutData({ ...checkoutData, comment: e.target.value })}
-              className="font-light resize-none"
-              rows={3}
+            <Label htmlFor="address">адрес пвз ozon</Label>
+            <Input
+              id="address"
+              type="text"
+              value={checkoutData.address}
+              onChange={(e) => setCheckoutData({ ...checkoutData, address: e.target.value })}
+              className="font-light"
             />
+            <p className="text-xs text-muted-foreground font-light">
+              <a href="https://www.ozon.ru/geo/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
+                найти ближайший пункт выдачи на карте ozon →
+              </a>
+            </p>
           </div>
         )}
+
+        {checkoutData.deliveryType === 'pickup' && (
+          <div className="space-y-2">
+            <Label>адрес самовывоза</Label>
+            <div className="p-3 rounded-lg bg-secondary/50 border border-border">
+              <p className="text-sm font-light">москва, м. тульская</p>
+            </div>
+            <p className="text-xs text-muted-foreground font-light mt-2">
+              свяжемся для согласования времени встречи
+            </p>
+          </div>
+        )}
+
+        <div className="space-y-2">
+          <Label htmlFor="comment">комментарий к заказу</Label>
+          <Textarea
+            id="comment"
+            value={checkoutData.comment}
+            onChange={(e) => setCheckoutData({ ...checkoutData, comment: e.target.value })}
+            className="font-light resize-none"
+            rows={3}
+            placeholder="пожелания по заказу или послание получателю"
+          />
+        </div>
+
+        <div className="space-y-2">
+          <Label htmlFor="giftMessage">текст для открытки (необязательно)</Label>
+          <Input
+            id="giftMessage"
+            type="text"
+            maxLength={50}
+            value={checkoutData.giftMessage}
+            onChange={(e) => setCheckoutData({ ...checkoutData, giftMessage: e.target.value })}
+            className="font-light"
+            placeholder="например: с любовью, анна"
+          />
+          <p className="text-xs text-muted-foreground font-light">
+            {(checkoutData.giftMessage || '').length}/50 символов
+          </p>
+        </div>
+
+        <div className="flex items-center space-x-2 p-3 rounded-lg border border-border">
+          <input
+            type="checkbox"
+            id="isAnonymous"
+            checked={checkoutData.isAnonymous}
+            onChange={(e) => setCheckoutData({ ...checkoutData, isAnonymous: e.target.checked })}
+            className="w-4 h-4 rounded border-gray-300"
+          />
+          <Label htmlFor="isAnonymous" className="cursor-pointer font-light">
+            отправить анонимно (без моего имени на упаковке)
+          </Label>
+        </div>
       </div>
+
       <div className="flex-shrink-0 border-t border-border pt-4 mt-4 pb-6 px-4 md:px-6">
         <div className="space-y-2 mb-4">
           {promoDiscount > 0 && (
@@ -362,7 +281,7 @@ export default function CheckoutForm({
           disabled={isCheckoutLoading}
           className="w-full bg-primary text-white py-3 rounded-lg font-light hover:opacity-90 transition-opacity disabled:opacity-50"
         >
-          {isCheckoutLoading ? 'колдуем ссылочку на оплату... 🪄' : 'перейти к оплате'}
+          {isCheckoutLoading ? 'оформляем...' : 'перейти к оплате'}
         </button>
       </div>
     </div>

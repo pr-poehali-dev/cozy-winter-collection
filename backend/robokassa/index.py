@@ -82,13 +82,8 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
         is_test = int(payload.get('is_test', 0))
         cart_items = payload.get('cart_items', [])
         
-        # Новые поля для анонимных заказов и подарков
+        # Анонимность заказа
         is_anonymous = bool(payload.get('is_anonymous', False))
-        is_gift = bool(payload.get('is_gift', False))
-        recipient_phone = str(payload.get('recipient_phone', ''))
-        recipient_address = str(payload.get('recipient_address', ''))
-        
-        print(f"[DEBUG] Gift data: is_gift={is_gift}, is_anonymous={is_anonymous}, recipient_phone={recipient_phone}")
 
         if amount <= 0:
             raise ValueError('Amount must be greater than 0')
@@ -96,8 +91,8 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             raise ValueError('User name is required')
         if not user_email:
             raise ValueError('User email is required')
-        if not user_address and not recipient_address:
-            raise ValueError('User address or recipient address is required')
+        if not user_address:
+            raise ValueError('User address is required')
         if not cart_items:
             raise ValueError('Cart items are required')
 
@@ -134,10 +129,10 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
         
         cur.execute("""
             INSERT INTO t_p3876556_cozy_winter_collecti.orders 
-            (order_number, user_name, user_email, user_phone, amount, robokassa_inv_id, status, delivery_address, order_comment, user_telegram, delivery_type, delivery_cost, is_anonymous, is_gift, recipient_phone, recipient_address)
-            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+            (order_number, user_name, user_email, user_phone, amount, robokassa_inv_id, status, delivery_address, order_comment, user_telegram, delivery_type, delivery_cost, is_anonymous)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
             RETURNING id
-        """, (order_number, user_name, user_email, user_phone, amount_decimal, robokassa_inv_id, 'pending', user_address, order_comment, user_telegram, delivery_type, delivery_cost, is_anonymous, is_gift, recipient_phone, recipient_address))
+        """, (order_number, user_name, user_email, user_phone, amount_decimal, robokassa_inv_id, 'pending', user_address, order_comment, user_telegram, delivery_type, delivery_cost, is_anonymous))
         
         order_id = cur.fetchone()[0]
         
