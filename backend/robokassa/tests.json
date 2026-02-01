@@ -1,21 +1,36 @@
 {
   "tests": [
     {
-      "name": "create payment link",
+      "name": "Test OPTIONS request",
+      "method": "OPTIONS",
+      "path": "/",
+      "expectedStatus": 200,
+      "bodyMatcher": "exact"
+    },
+    {
+      "name": "Test POST payment creation",
       "method": "POST",
       "path": "/",
       "body": {
-        "amount": 1990,
+        "amount": 1000,
         "user_name": "Test User",
         "user_email": "test@example.com",
-        "user_phone": "+79991234567",
-        "user_address": "Москва, ул. Тестовая, д. 1",
-        "cart_items": [{"id": 1, "name": "Test Product", "price": 1990, "quantity": 1}],
+        "user_phone": "+7 (999) 123-45-67",
+        "user_address": "Test Address",
+        "order_comment": "Test comment",
+        "user_telegram": "@testuser",
+        "delivery_type": "pvz",
+        "delivery_cost": 200,
         "is_test": 1,
-        "is_anonymous": false,
-        "is_gift": false,
-        "recipient_phone": "",
-        "recipient_address": ""
+        "is_anonymous": true,
+        "cart_items": [
+          {
+            "id": 1,
+            "name": "Test Product",
+            "price": 800,
+            "quantity": 1
+          }
+        ]
       },
       "expectedStatus": 200,
       "expectedBody": {
