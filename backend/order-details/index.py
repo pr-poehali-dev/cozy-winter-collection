@@ -57,7 +57,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             cur.execute("""
                 SELECT id, order_number, user_name, user_email, user_phone, amount, status, 
                        delivery_service, delivery_phone, delivery_address
-                FROM orders 
+                FROM t_p3876556_cozy_winter_collecti.orders 
                 WHERE order_number = %s
             """, (order_number,))
             
@@ -76,7 +76,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             
             cur.execute("""
                 SELECT product_id, product_name, product_price, quantity
-                FROM order_items
+                FROM t_p3876556_cozy_winter_collecti.order_items
                 WHERE order_id = %s
             """, (order_id,))
             
@@ -154,7 +154,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             cur = conn.cursor()
             
             cur.execute("""
-                UPDATE orders 
+                UPDATE t_p3876556_cozy_winter_collecti.orders 
                 SET delivery_service = %s, 
                     delivery_phone = %s, 
                     delivery_address = %s,

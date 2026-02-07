@@ -6,5 +6,6 @@
   "get-reviews": "https://functions.poehali.dev/26151c17-6f4f-46a6-8375-4dd63a78a196",
   "get-products": "https://functions.poehali.dev/4cfc9ed0-ca29-40ae-8316-56d0225fb703",
   "telegram-bot-setup": "https://functions.poehali.dev/aa1ac8a7-52d8-4fd3-b9f3-54fae1e02751",
+  "order-details": "https://functions.poehali.dev/25f876e5-53fb-4cb1-878a-a7177baa1950",
   "robokassa-webhook": "https://functions.poehali.dev/5420828a-4f2b-45e0-908f-6d59922e7791"
 }

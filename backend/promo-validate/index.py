@@ -55,7 +55,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     
     # Query promo code
     cur.execute(
-        "SELECT discount_percent, description FROM promo_codes WHERE code = %s AND active = true",
+        "SELECT discount_percent, description FROM t_p3876556_cozy_winter_collecti.promo_codes WHERE code = %s AND active = true",
         (code,)
     )
     result = cur.fetchone()
