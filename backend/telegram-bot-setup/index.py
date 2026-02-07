@@ -46,7 +46,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     try:
         if action == 'setup_webhook':
             # Устанавливаем webhook на функцию telegram-bot
-            webhook_url = 'https://functions.poehali.dev/93787d28-4035-466b-9508-7fbd757f53f8'
+            webhook_url = 'https://functions.poehali.dev/f90640b5-f2de-4bec-94e5-67480422875a'
             
             result = call_telegram_api('setWebhook', {
                 'url': webhook_url,

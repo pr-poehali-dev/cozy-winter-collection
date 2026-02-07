@@ -103,7 +103,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
         cur = conn.cursor()
         
         cur.execute("""
-            UPDATE orders 
+            UPDATE t_p3876556_cozy_winter_collecti.orders 
             SET status = %s, paid_at = CURRENT_TIMESTAMP, updated_at = CURRENT_TIMESTAMP
             WHERE robokassa_inv_id = %s AND status = %s
             RETURNING id, order_number, user_email, user_name
@@ -113,7 +113,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
         
         if not result:
             cur.execute("""
-                SELECT status FROM orders WHERE robokassa_inv_id = %s
+                SELECT status FROM t_p3876556_cozy_winter_collecti.orders WHERE robokassa_inv_id = %s
             """, (int(inv_id),))
             existing = cur.fetchone()
             
@@ -146,12 +146,12 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             from urllib.parse import quote
             
             # Отправка уведомления в Telegram
-            notify_url = f'https://functions.poehali.dev/93787d28-4035-466b-9508-7fbd757f53f8?action=notify&order_number={quote(order_number)}'
+            notify_url = f'https://functions.poehali.dev/f90640b5-f2de-4bec-94e5-67480422875a?action=notify&order_number={quote(order_number)}'
             req = urllib.request.Request(notify_url, method='GET')
             urllib.request.urlopen(req, timeout=5)
             
             # Отправка email клиенту
-            email_url = f'https://functions.poehali.dev/76b36dee-db70-4316-b6a8-fed039d8df8c?action=paid&order_number={quote(order_number)}'
+            email_url = f'https://functions.poehali.dev/088b269d-8f1d-43b7-b1a5-21fc5808f30a?action=paid&order_number={quote(order_number)}'
             req = urllib.request.Request(email_url, method='GET')
             urllib.request.urlopen(req, timeout=5)
         except Exception as notify_error:
