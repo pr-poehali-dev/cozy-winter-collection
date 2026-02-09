@@ -8,7 +8,7 @@ from urllib.parse import parse_qs
 def calculate_signature(*args) -> str:
     """Создание MD5 подписи по документации Robokassa"""
     joined = ':'.join(str(arg) for arg in args)
-    return hashlib.md5(joined.encode()).hexdigest().upper()
+    return hashlib.md5(joined.encode()).hexdigest()
 
 
 def get_db_connection():
@@ -61,19 +61,12 @@ def handler(event: dict, context) -> dict:
     inv_id = params.get('InvId', params.get('inv_id', ''))
     signature_value = params.get('SignatureValue', params.get('crc', '')).upper()
 
-    print(f"[WEBHOOK] Params: OutSum={out_sum}, InvId={inv_id}, Signature={signature_value}")
-
     if not out_sum or not inv_id or not signature_value:
         return {'statusCode': 400, 'headers': HEADERS, 'body': 'Missing required parameters', 'isBase64Encoded': False}
 
-    # ПРИВОДИМ К ЦЕЛОМУ ЧИСЛУ для проверки подписи
-    out_sum_int = str(int(round(float(out_sum))))
-    print(f"[WEBHOOK] Проверка подписи: {out_sum_int}:{inv_id}:***")
-    expected_signature = calculate_signature(out_sum_int, inv_id, password_2)
-    print(f"[WEBHOOK] Expected={expected_signature}, Received={signature_value}")
+    expected_signature = calculate_signature(out_sum, inv_id, password_2)
     
-    if signature_value != expected_signature:
-        print(f"[WEBHOOK] ERROR: Invalid signature!")
+    if signature_value.lower() != expected_signature.lower():
         return {'statusCode': 400, 'headers': HEADERS, 'body': 'Invalid signature', 'isBase64Encoded': False}
 
     # Обновление статуса заказа

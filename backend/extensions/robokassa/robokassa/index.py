@@ -10,7 +10,7 @@ from datetime import datetime
 def calculate_signature(*args) -> str:
     """Создание MD5 подписи по документации Robokassa"""
     joined = ':'.join(str(arg) for arg in args)
-    return hashlib.md5(joined.encode()).hexdigest().upper()
+    return hashlib.md5(joined.encode()).hexdigest()
 
 
 def get_db_connection():
@@ -97,26 +97,21 @@ def handler(event: dict, context) -> dict:
                 VALUES (%s, %s, %s, %s, %s)
             """, (order_id, item.get('id'), item.get('name'), item.get('price'), item.get('quantity')))
 
-        # Формирование ссылки на оплату - используем целое число БЕЗ ДРОБНОЙ ЧАСТИ
-        amount_int = int(round(amount))
-        print(f"[CREATE] Amount: {amount} -> {amount_int}")
-        print(f"[CREATE] Signature formula: {merchant_login}:{amount_int}:{robokassa_inv_id}:***")
+        # Формирование ссылки на оплату
+        amount_str = f"{amount:.2f}"
 
         # Подпись с учётом SuccessUrl2/FailUrl2 если переданы
         if success_url or fail_url:
-            # MerchantLogin:OutSum:InvId:SuccessUrl2:SuccessUrl2Method:FailUrl2:FailUrl2Method:Password#1
             signature = calculate_signature(
-                merchant_login, amount_int, robokassa_inv_id,
+                merchant_login, amount_str, robokassa_inv_id,
                 success_url, 'GET', fail_url, 'GET', password_1
             )
         else:
-            signature = calculate_signature(merchant_login, amount_int, robokassa_inv_id, password_1)
-        
-        print(f"[CREATE] Signature created: {signature}")
+            signature = calculate_signature(merchant_login, amount_str, robokassa_inv_id, password_1)
 
         query_params = {
             'MerchantLogin': merchant_login,
-            'OutSum': str(amount_int),
+            'OutSum': amount_str,
             'InvoiceID': robokassa_inv_id,
             'SignatureValue': signature,
             'Email': user_email,
