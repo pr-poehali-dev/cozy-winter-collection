@@ -10,7 +10,7 @@ from datetime import datetime
 def calculate_signature(*args) -> str:
     """Создание MD5 подписи по документации Robokassa"""
     joined = ':'.join(str(arg) for arg in args)
-    return hashlib.md5(joined.encode()).hexdigest()
+    return hashlib.md5(joined.encode()).hexdigest().upper()
 
 
 def get_db_connection():
@@ -101,31 +101,34 @@ def handler(event: dict, context) -> dict:
             """, (order_id, item.get('id'), item.get('name'), item.get('price'), item.get('quantity')))
 
         # Формирование ссылки на оплату
-        amount_str = f"{amount:.2f}"
+        # Пробуем OutSum как целое число (без .00)
+        amount_int = int(amount)
+        amount_for_signature = str(amount_int)  # "400" вместо "400.00"
         
-        print(f"[CREATE] Order #{order_id}: amount={amount_str}, inv_id={robokassa_inv_id}")
+        print(f"[CREATE] Order #{order_id}: amount={amount}, amount_int={amount_int}")
+        print(f"[CREATE] inv_id={robokassa_inv_id}, type={type(robokassa_inv_id)}")
         print(f"[CREATE] Merchant: {merchant_login}")
         print(f"[CREATE] Password1 present: {bool(password_1)}, length: {len(password_1) if password_1 else 0}")
 
         # Подпись с учётом SuccessUrl2/FailUrl2 если переданы
         if success_url or fail_url:
             # MerchantLogin:OutSum:InvId:SuccessUrl2:SuccessUrl2Method:FailUrl2:FailUrl2Method:Password#1
-            print(f"[CREATE] Signature formula WITH urls: {merchant_login}:{amount_str}:{robokassa_inv_id}:{success_url}:GET:{fail_url}:GET:***")
+            print(f"[CREATE] Signature formula WITH urls: {merchant_login}:{amount_for_signature}:{robokassa_inv_id}:{success_url}:GET:{fail_url}:GET:***")
             signature = calculate_signature(
-                merchant_login, amount_str, robokassa_inv_id,
+                merchant_login, amount_for_signature, robokassa_inv_id,
                 success_url, 'GET', fail_url, 'GET', password_1
             )
         else:
-            print(f"[CREATE] Signature formula: {merchant_login}:{amount_str}:{robokassa_inv_id}:***")
-            signature = calculate_signature(merchant_login, amount_str, robokassa_inv_id, password_1)
+            print(f"[CREATE] Signature formula: {merchant_login}:{amount_for_signature}:{robokassa_inv_id}:***")
+            signature = calculate_signature(merchant_login, amount_for_signature, robokassa_inv_id, password_1)
         
-        print(f"[CREATE] Signature created: {signature}")
+        print(f"[CREATE] Signature created (UPPER): {signature}")
 
         query_params = {
             'MerchantLogin': merchant_login,
-            'OutSum': amount_str,
+            'OutSum': amount_for_signature,  # Целое число
             'InvoiceID': robokassa_inv_id,
-            'SignatureValue': signature,
+            'SignatureValue': signature,  # Теперь UPPER
             'Email': user_email,
             'Culture': 'ru',
             'Description': f'Заказ {order_number}'
