@@ -62,6 +62,9 @@ def handler(event: dict, context) -> dict:
         user_phone = str(payload.get('user_phone', ''))
         user_address = str(payload.get('user_address', ''))
         order_comment = str(payload.get('order_comment', ''))
+        user_telegram = str(payload.get('user_telegram', ''))
+        delivery_type = str(payload.get('delivery_type', ''))
+        delivery_cost = float(payload.get('delivery_cost', 0))
         cart_items = payload.get('cart_items', [])
         success_url = str(payload.get('success_url', ''))
         fail_url = str(payload.get('fail_url', ''))
@@ -84,10 +87,10 @@ def handler(event: dict, context) -> dict:
         order_number = f"ORD-{datetime.now().strftime('%Y%m%d')}-{robokassa_inv_id}"
 
         cur.execute("""
-            INSERT INTO orders (order_number, user_name, user_email, user_phone, amount, robokassa_inv_id, status, delivery_address, order_comment)
-            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+            INSERT INTO orders (order_number, user_name, user_email, user_phone, amount, robokassa_inv_id, status, delivery_address, order_comment, user_telegram, delivery_type, delivery_cost)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
             RETURNING id
-        """, (order_number, user_name, user_email, user_phone, round(amount, 2), robokassa_inv_id, 'pending', user_address, order_comment))
+        """, (order_number, user_name, user_email, user_phone, round(amount, 2), robokassa_inv_id, 'pending', user_address, order_comment, user_telegram, delivery_type, delivery_cost))
 
         order_id = cur.fetchone()[0]
 
@@ -116,7 +119,6 @@ def handler(event: dict, context) -> dict:
             'InvoiceID': robokassa_inv_id,
             'SignatureValue': signature,
             'Email': user_email,
-            'IsTest': '1',
             'Culture': 'ru',
             'Description': f'Заказ {order_number}'
         }
