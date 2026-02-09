@@ -63,8 +63,11 @@ def handler(event: dict, context) -> dict:
     if not out_sum or not inv_id or not signature_value:
         return {'statusCode': 400, 'headers': HEADERS, 'body': 'Missing required parameters', 'isBase64Encoded': False}
 
+    # Преобразуем сумму в целое число для проверки подписи
+    out_sum_int = str(int(round(float(out_sum))))
+
     # Проверка подписи
-    expected_signature = calculate_signature(out_sum, inv_id, password_2)
+    expected_signature = calculate_signature(out_sum_int, inv_id, password_2)
     if signature_value != expected_signature:
         return {'statusCode': 400, 'headers': HEADERS, 'body': 'Invalid signature', 'isBase64Encoded': False}
 

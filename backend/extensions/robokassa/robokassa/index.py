@@ -97,22 +97,22 @@ def handler(event: dict, context) -> dict:
                 VALUES (%s, %s, %s, %s, %s)
             """, (order_id, item.get('id'), item.get('name'), item.get('price'), item.get('quantity')))
 
-        # Формирование ссылки на оплату
-        amount_str = f"{amount:.2f}"
+        # Формирование ссылки на оплату - используем целое число
+        amount_int = int(round(amount))
 
         # Подпись с учётом SuccessUrl2/FailUrl2 если переданы
         if success_url or fail_url:
             # MerchantLogin:OutSum:InvId:SuccessUrl2:SuccessUrl2Method:FailUrl2:FailUrl2Method:Password#1
             signature = calculate_signature(
-                merchant_login, amount_str, robokassa_inv_id,
+                merchant_login, amount_int, robokassa_inv_id,
                 success_url, 'GET', fail_url, 'GET', password_1
             )
         else:
-            signature = calculate_signature(merchant_login, amount_str, robokassa_inv_id, password_1)
+            signature = calculate_signature(merchant_login, amount_int, robokassa_inv_id, password_1)
 
         query_params = {
             'MerchantLogin': merchant_login,
-            'OutSum': amount_str,
+            'OutSum': str(amount_int),
             'InvoiceID': robokassa_inv_id,
             'SignatureValue': signature,
             'Email': user_email,
