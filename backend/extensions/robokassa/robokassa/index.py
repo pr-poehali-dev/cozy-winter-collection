@@ -116,6 +116,7 @@ def handler(event: dict, context) -> dict:
             'InvoiceID': robokassa_inv_id,
             'SignatureValue': signature,
             'Email': user_email,
+            'IsTest': '1',
             'Culture': 'ru',
             'Description': f'Заказ {order_number}'
         }
