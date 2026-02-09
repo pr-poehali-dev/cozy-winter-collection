@@ -106,100 +106,111 @@ export default function Header({
 
     const errors = new Set<string>();
     
-    if (!checkoutData.name) errors.add('name');
-    if (!checkoutData.email) errors.add('email');
-    if (!checkoutData.phone) errors.add('phone');
+    // Проверка обязательных полей
+    if (!checkoutData.name || checkoutData.name.trim() === '') {
+      errors.add('name');
+    }
+    
+    if (!checkoutData.email || checkoutData.email.trim() === '') {
+      errors.add('email');
+    } else {
+      // Проверка формата email
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(checkoutData.email)) {
+        errors.add('email');
+      }
+    }
+    
+    const phoneDigits = checkoutData.phone.replace(/\D/g, '');
+    if (!checkoutData.phone || phoneDigits.length < 11) {
+      errors.add('phone');
+    }
     
     if (errors.size > 0) {
       setValidationErrors(errors);
       setIsCheckoutLoading(false);
+      
+      // Определяем текст ошибки
+      let errorTitle = 'Пожалуйста, заполните обязательные поля';
+      let errorDescription = 'Они отмечены звёздочкой *';
+      
+      if (errors.has('email') && checkoutData.email && checkoutData.email.trim() !== '') {
+        errorTitle = 'Неверный формат email';
+        errorDescription = 'Проверьте правильность email адреса';
+      } else if (errors.has('phone') && checkoutData.phone && phoneDigits.length > 0 && phoneDigits.length < 11) {
+        errorTitle = 'Неверный формат телефона';
+        errorDescription = 'Введите номер в формате +7 (XXX) XXX-XX-XX';
+      }
+      
       toast({
-        title: 'Пожалуйста, заполните обязательные поля',
-        description: 'Они отмечены звёздочкой *',
+        title: errorTitle,
+        description: errorDescription,
         variant: 'destructive'
       });
       return;
     }
     
-    setValidationErrors(new Set());
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(checkoutData.email)) {
-      setValidationErrors(new Set(['email']));
-      setIsCheckoutLoading(false);
-      toast({
-        title: 'Неверный формат email',
-        description: 'Проверьте правильность email адреса',
-        variant: 'destructive'
-      });
-      return;
-    }
-
-    const phoneDigits = checkoutData.phone.replace(/\D/g, '');
-    if (phoneDigits.length !== 11) {
-      setValidationErrors(new Set(['phone']));
-      setIsCheckoutLoading(false);
-      toast({
-        title: 'Неверный формат телефона',
-        description: 'Введите номер в формате +7 (XXX) XXX-XX-XX',
-        variant: 'destructive'
-      });
-      return;
-    }
-
+    // Проверка способа доставки
     if (!checkoutData.deliveryType) {
-      setValidationErrors(new Set(['deliveryType']));
+      errors.add('deliveryType');
+    }
+    
+    // Проверка адреса ПВЗ
+    if (checkoutData.deliveryType === 'pvz' && (!checkoutData.address || checkoutData.address.trim() === '')) {
+      errors.add('address');
+    }
+    
+    // Если есть ошибки доставки, показываем их
+    if (errors.size > 0) {
+      setValidationErrors(errors);
       setIsCheckoutLoading(false);
+      
+      let errorTitle = 'Пожалуйста, заполните обязательные поля';
+      let errorDescription = 'Они отмечены звёздочкой *';
+      
+      if (errors.has('deliveryType')) {
+        errorTitle = 'Выберите способ доставки';
+        errorDescription = 'Укажите ПВЗ Ozon или самовывоз';
+      } else if (errors.has('address')) {
+        errorTitle = 'Выберите пункт выдачи';
+        errorDescription = 'Укажите адрес ПВЗ Ozon';
+      }
+      
       toast({
-        title: 'Выберите способ доставки',
-        description: 'Укажите ПВЗ Ozon или самовывоз',
+        title: errorTitle,
+        description: errorDescription,
         variant: 'destructive'
       });
       return;
     }
-
-    if (checkoutData.deliveryType === 'pvz' && !checkoutData.address) {
-      setValidationErrors(new Set(['address']));
-      setIsCheckoutLoading(false);
-      toast({
-        title: 'Выберите пункт выдачи',
-        description: 'Укажите адрес ПВЗ Ozon',
-        variant: 'destructive'
-      });
-      return;
-    }
-
-    // Валидация данных получателя
+    
+    // Валидация данных получателя (только если это подарок)
     if (!checkoutData.isSelfRecipient) {
-      if (!checkoutData.recipientName) {
-        setValidationErrors(new Set(['recipientName']));
-        setIsCheckoutLoading(false);
-        toast({
-          title: 'Укажите имя получателя',
-          description: 'Имя получателя обязательно для подарка',
-          variant: 'destructive'
-        });
-        return;
+      if (!checkoutData.recipientName || checkoutData.recipientName.trim() === '') {
+        errors.add('recipientName');
       }
-
-      if (!checkoutData.recipientPhone) {
-        setValidationErrors(new Set(['recipientPhone']));
-        setIsCheckoutLoading(false);
-        toast({
-          title: 'Укажите телефон получателя',
-          description: 'Телефон получателя нужен для доставки',
-          variant: 'destructive'
-        });
-        return;
-      }
-
+      
       const recipientPhoneDigits = checkoutData.recipientPhone.replace(/\D/g, '');
-      if (recipientPhoneDigits.length !== 11) {
-        setValidationErrors(new Set(['recipientPhone']));
+      if (!checkoutData.recipientPhone || recipientPhoneDigits.length < 11) {
+        errors.add('recipientPhone');
+      }
+      
+      // Если есть ошибки получателя, показываем их
+      if (errors.size > 0) {
+        setValidationErrors(errors);
         setIsCheckoutLoading(false);
+        
+        let errorTitle = 'Пожалуйста, заполните данные получателя';
+        let errorDescription = 'Они нужны для доставки подарка';
+        
+        if (errors.has('recipientPhone') && checkoutData.recipientPhone && recipientPhoneDigits.length > 0 && recipientPhoneDigits.length < 11) {
+          errorTitle = 'Неверный формат телефона получателя';
+          errorDescription = 'Введите полный номер телефона';
+        }
+        
         toast({
-          title: 'Неверный формат телефона получателя',
-          description: 'Введите полный номер телефона',
+          title: errorTitle,
+          description: errorDescription,
           variant: 'destructive'
         });
         return;
