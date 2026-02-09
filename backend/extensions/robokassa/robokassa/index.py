@@ -102,16 +102,24 @@ def handler(event: dict, context) -> dict:
 
         # Формирование ссылки на оплату
         amount_str = f"{amount:.2f}"
+        
+        print(f"[CREATE] Order #{order_id}: amount={amount_str}, inv_id={robokassa_inv_id}")
+        print(f"[CREATE] Merchant: {merchant_login}")
+        print(f"[CREATE] Password1 present: {bool(password_1)}, length: {len(password_1) if password_1 else 0}")
 
         # Подпись с учётом SuccessUrl2/FailUrl2 если переданы
         if success_url or fail_url:
             # MerchantLogin:OutSum:InvId:SuccessUrl2:SuccessUrl2Method:FailUrl2:FailUrl2Method:Password#1
+            print(f"[CREATE] Signature formula WITH urls: {merchant_login}:{amount_str}:{robokassa_inv_id}:{success_url}:GET:{fail_url}:GET:***")
             signature = calculate_signature(
                 merchant_login, amount_str, robokassa_inv_id,
                 success_url, 'GET', fail_url, 'GET', password_1
             )
         else:
+            print(f"[CREATE] Signature formula: {merchant_login}:{amount_str}:{robokassa_inv_id}:***")
             signature = calculate_signature(merchant_login, amount_str, robokassa_inv_id, password_1)
+        
+        print(f"[CREATE] Signature created: {signature}")
 
         query_params = {
             'MerchantLogin': merchant_login,
@@ -131,11 +139,16 @@ def handler(event: dict, context) -> dict:
             query_params['FailUrl2Method'] = 'GET'
 
         payment_url = f"{ROBOKASSA_URL}?{urlencode(query_params)}"
+        
+        print(f"[CREATE] Payment URL generated: {payment_url[:150]}...")
+        print(f"[CREATE] Full query params: {query_params}")
 
         cur.execute("UPDATE orders SET payment_url = %s WHERE id = %s", (payment_url, order_id))
         conn.commit()
         cur.close()
         conn.close()
+
+        print(f"[CREATE] SUCCESS: Order {order_number} created, payment URL saved")
 
         return {
             'statusCode': 200,
