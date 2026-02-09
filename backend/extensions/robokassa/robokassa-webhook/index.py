@@ -66,9 +66,10 @@ def handler(event: dict, context) -> dict:
     if not out_sum or not inv_id or not signature_value:
         return {'statusCode': 400, 'headers': HEADERS, 'body': 'Missing required parameters', 'isBase64Encoded': False}
 
-    # Robokassa Result URL: OutSum:InvId:Password2 (используем как есть, без форматирования)
-    print(f"[WEBHOOK] Проверка подписи: {out_sum}:{inv_id}:***")
-    expected_signature = calculate_signature(out_sum, inv_id, password_2)
+    # ПРИВОДИМ К ЦЕЛОМУ ЧИСЛУ для проверки подписи
+    out_sum_int = str(int(round(float(out_sum))))
+    print(f"[WEBHOOK] Проверка подписи: {out_sum_int}:{inv_id}:***")
+    expected_signature = calculate_signature(out_sum_int, inv_id, password_2)
     print(f"[WEBHOOK] Expected={expected_signature}, Received={signature_value}")
     
     if signature_value != expected_signature:
