@@ -63,20 +63,21 @@ def handler(event: dict, context) -> dict:
     if not out_sum or not inv_id or not signature_value:
         return {'statusCode': 400, 'headers': HEADERS, 'body': 'Missing required parameters', 'isBase64Encoded': False}
 
-    # Преобразуем сумму в целое число для проверки подписи
-    out_sum_int = str(int(round(float(out_sum))))
+    # Форматируем сумму как строку с 2 знаками после точки (формат Robokassa)
+    out_sum_formatted = f"{float(out_sum):.2f}"
 
     # Проверка подписи
-    expected_signature = calculate_signature(out_sum_int, inv_id, password_2)
+    expected_signature = calculate_signature(out_sum_formatted, inv_id, password_2)
     if signature_value != expected_signature:
         return {'statusCode': 400, 'headers': HEADERS, 'body': 'Invalid signature', 'isBase64Encoded': False}
 
     # Обновление статуса заказа
+    schema = os.environ.get('MAIN_DB_SCHEMA', 'public')
     conn = get_db_connection()
     cur = conn.cursor()
 
-    cur.execute("""
-        UPDATE orders
+    cur.execute(f"""
+        UPDATE {schema}.orders
         SET status = 'paid', paid_at = CURRENT_TIMESTAMP, updated_at = CURRENT_TIMESTAMP
         WHERE robokassa_inv_id = %s AND status = 'pending'
         RETURNING id, order_number, user_email
@@ -86,7 +87,7 @@ def handler(event: dict, context) -> dict:
 
     if not result:
         # Проверяем, может уже оплачен
-        cur.execute("SELECT status FROM orders WHERE robokassa_inv_id = %s", (int(inv_id),))
+        cur.execute(f"SELECT status FROM {schema}.orders WHERE robokassa_inv_id = %s", (int(inv_id),))
         existing = cur.fetchone()
         conn.close()
 
