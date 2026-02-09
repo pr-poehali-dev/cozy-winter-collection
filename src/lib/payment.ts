@@ -1,4 +1,4 @@
-const ROBOKASSA_ENDPOINT = "https://functions.poehali.dev/eca02619-6f06-4c87-9840-7fcced969a38";
+const ROBOKASSA_ENDPOINT = "https://functions.poehali.dev/b607a8e7-633b-4a9d-9068-3d6acdbc3dad";
 
 interface CartItem {
   id: number;
