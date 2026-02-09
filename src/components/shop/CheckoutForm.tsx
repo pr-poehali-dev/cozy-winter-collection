@@ -29,6 +29,7 @@ interface CheckoutFormProps {
   cartTotal: number;
   isCheckoutLoading: boolean;
   onCheckout: () => void;
+  validationErrors?: Set<string>;
 }
 
 export default function CheckoutForm({
@@ -40,7 +41,8 @@ export default function CheckoutForm({
   setPromoDiscount,
   cartTotal,
   isCheckoutLoading,
-  onCheckout
+  onCheckout,
+  validationErrors = new Set()
 }: CheckoutFormProps) {
   const handleSelfRecipientChange = (checked: boolean) => {
     if (checked) {
@@ -144,7 +146,9 @@ export default function CheckoutForm({
     <div className="flex-1 flex flex-col mt-8 overflow-hidden">
       <div className="space-y-4 flex-1 overflow-y-auto pb-4 px-4 md:px-6">
         <div className="space-y-2">
-          <Label htmlFor="name">ваше имя</Label>
+          <Label htmlFor="name" className="flex items-center gap-1">
+            ваше имя <span className="text-destructive">*</span>
+          </Label>
           <Input
             id="name"
             type="text"
@@ -154,11 +158,13 @@ export default function CheckoutForm({
               setCheckoutData(newData);
               saveUserData(newData);
             }}
-            className="font-light"
+            className={`font-light ${validationErrors.has('name') ? 'border-destructive focus-visible:ring-destructive' : ''}`}
           />
         </div>
         <div className="space-y-2">
-          <Label htmlFor="email">ваш email</Label>
+          <Label htmlFor="email" className="flex items-center gap-1">
+            ваш email <span className="text-destructive">*</span>
+          </Label>
           <Input
             id="email"
             type="email"
@@ -168,7 +174,7 @@ export default function CheckoutForm({
               setCheckoutData(newData);
               saveUserData(newData);
             }}
-            className="font-light"
+            className={`font-light ${validationErrors.has('email') ? 'border-destructive focus-visible:ring-destructive' : ''}`}
             placeholder="example@mail.ru"
           />
         </div>
@@ -183,13 +189,15 @@ export default function CheckoutForm({
           />
         </div>
         <div className="space-y-2">
-          <Label htmlFor="phone">ваш телефон</Label>
+          <Label htmlFor="phone" className="flex items-center gap-1">
+            ваш телефон <span className="text-destructive">*</span>
+          </Label>
           <Input
             id="phone"
             type="tel"
             value={checkoutData.phone || '+7'}
             onChange={handlePhoneChange}
-            className="font-light"
+            className={`font-light ${validationErrors.has('phone') ? 'border-destructive focus-visible:ring-destructive' : ''}`}
           />
         </div>
 
@@ -213,24 +221,28 @@ export default function CheckoutForm({
 
           <div className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="recipientName">имя получателя</Label>
+              <Label htmlFor="recipientName" className="flex items-center gap-1">
+                имя получателя {!checkoutData.isSelfRecipient && <span className="text-destructive">*</span>}
+              </Label>
               <Input
                 id="recipientName"
                 type="text"
                 value={checkoutData.recipientName}
                 onChange={(e) => setCheckoutData({ ...checkoutData, recipientName: e.target.value })}
-                className="font-light"
+                className={`font-light ${validationErrors.has('recipientName') ? 'border-destructive focus-visible:ring-destructive' : ''}`}
                 disabled={checkoutData.isSelfRecipient}
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="recipientPhone">телефон получателя</Label>
+              <Label htmlFor="recipientPhone" className="flex items-center gap-1">
+                телефон получателя {!checkoutData.isSelfRecipient && <span className="text-destructive">*</span>}
+              </Label>
               <Input
                 id="recipientPhone"
                 type="tel"
                 value={checkoutData.recipientPhone || '+7'}
                 onChange={handleRecipientPhoneChange}
-                className="font-light"
+                className={`font-light ${validationErrors.has('recipientPhone') ? 'border-destructive focus-visible:ring-destructive' : ''}`}
                 disabled={checkoutData.isSelfRecipient}
               />
             </div>
@@ -238,7 +250,9 @@ export default function CheckoutForm({
         </div>
 
         <div className="space-y-3">
-          <Label>способ доставки</Label>
+          <Label className="flex items-center gap-1">
+            способ доставки <span className="text-destructive">*</span>
+          </Label>
           <div className="grid grid-cols-2 gap-3">
             <button
               type="button"
@@ -249,6 +263,8 @@ export default function CheckoutForm({
               className={`p-4 rounded-lg border-2 text-left transition-all ${
                 checkoutData.deliveryType === 'pvz'
                   ? 'border-primary bg-primary/5'
+                  : validationErrors.has('deliveryType')
+                  ? 'border-destructive'
                   : 'border-border hover:border-primary/50'
               }`}
             >
@@ -264,6 +280,8 @@ export default function CheckoutForm({
               className={`p-4 rounded-lg border-2 text-left transition-all ${
                 checkoutData.deliveryType === 'pickup'
                   ? 'border-primary bg-primary/5'
+                  : validationErrors.has('deliveryType')
+                  ? 'border-destructive'
                   : 'border-border hover:border-primary/50'
               }`}
             >
@@ -275,13 +293,15 @@ export default function CheckoutForm({
 
         {checkoutData.deliveryType === 'pvz' && (
           <div className="space-y-2">
-            <Label htmlFor="address">адрес пвз ozon</Label>
+            <Label htmlFor="address" className="flex items-center gap-1">
+              адрес пвз ozon <span className="text-destructive">*</span>
+            </Label>
             <Input
               id="address"
               type="text"
               value={checkoutData.address}
               onChange={(e) => setCheckoutData({ ...checkoutData, address: e.target.value })}
-              className="font-light"
+              className={`font-light ${validationErrors.has('address') ? 'border-destructive focus-visible:ring-destructive' : ''}`}
             />
             <p className="text-xs text-muted-foreground font-light">
               <a href="https://www.ozon.ru/geo/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">

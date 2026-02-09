@@ -58,6 +58,7 @@ export default function Header({
   });
   const [deliveryCost, setDeliveryCost] = useState(0);
   const [promoDiscount, setPromoDiscount] = useState(0);
+  const [validationErrors, setValidationErrors] = useState<Set<string>>(new Set());
 
 
 
@@ -103,18 +104,28 @@ export default function Header({
       return;
     }
 
-    if (!checkoutData.name || !checkoutData.email || !checkoutData.phone) {
+    const errors = new Set<string>();
+    
+    if (!checkoutData.name) errors.add('name');
+    if (!checkoutData.email) errors.add('email');
+    if (!checkoutData.phone) errors.add('phone');
+    
+    if (errors.size > 0) {
+      setValidationErrors(errors);
       setIsCheckoutLoading(false);
       toast({
-        title: 'Заполните все поля',
-        description: 'Нам нужны ваши данные',
+        title: 'Пожалуйста, заполните обязательные поля',
+        description: 'Они отмечены звёздочкой *',
         variant: 'destructive'
       });
       return;
     }
+    
+    setValidationErrors(new Set());
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(checkoutData.email)) {
+      setValidationErrors(new Set(['email']));
       setIsCheckoutLoading(false);
       toast({
         title: 'Неверный формат email',
@@ -126,6 +137,7 @@ export default function Header({
 
     const phoneDigits = checkoutData.phone.replace(/\D/g, '');
     if (phoneDigits.length !== 11) {
+      setValidationErrors(new Set(['phone']));
       setIsCheckoutLoading(false);
       toast({
         title: 'Неверный формат телефона',
@@ -136,6 +148,7 @@ export default function Header({
     }
 
     if (!checkoutData.deliveryType) {
+      setValidationErrors(new Set(['deliveryType']));
       setIsCheckoutLoading(false);
       toast({
         title: 'Выберите способ доставки',
@@ -146,6 +159,7 @@ export default function Header({
     }
 
     if (checkoutData.deliveryType === 'pvz' && !checkoutData.address) {
+      setValidationErrors(new Set(['address']));
       setIsCheckoutLoading(false);
       toast({
         title: 'Выберите пункт выдачи',
@@ -158,6 +172,7 @@ export default function Header({
     // Валидация данных получателя
     if (!checkoutData.isSelfRecipient) {
       if (!checkoutData.recipientName) {
+        setValidationErrors(new Set(['recipientName']));
         setIsCheckoutLoading(false);
         toast({
           title: 'Укажите имя получателя',
@@ -168,6 +183,7 @@ export default function Header({
       }
 
       if (!checkoutData.recipientPhone) {
+        setValidationErrors(new Set(['recipientPhone']));
         setIsCheckoutLoading(false);
         toast({
           title: 'Укажите телефон получателя',
@@ -179,6 +195,7 @@ export default function Header({
 
       const recipientPhoneDigits = checkoutData.recipientPhone.replace(/\D/g, '');
       if (recipientPhoneDigits.length !== 11) {
+        setValidationErrors(new Set(['recipientPhone']));
         setIsCheckoutLoading(false);
         toast({
           title: 'Неверный формат телефона получателя',
@@ -188,6 +205,9 @@ export default function Header({
         return;
       }
     }
+
+    // Сброс ошибок валидации перед отправкой
+    setValidationErrors(new Set());
 
     try {
 
@@ -412,6 +432,7 @@ export default function Header({
                 cartTotal={cartTotal}
                 isCheckoutLoading={isCheckoutLoading}
                 onCheckout={handleCheckout}
+                validationErrors={validationErrors}
               />
             ) : (
               <CartItemsList
