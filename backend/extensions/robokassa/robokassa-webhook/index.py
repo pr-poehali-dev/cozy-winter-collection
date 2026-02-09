@@ -33,6 +33,7 @@ def handler(event: dict, context) -> dict:
     Robokassa отправляет: OutSum, InvId, SignatureValue
     Returns: OK{InvId} если подпись верна и заказ обновлён
     '''
+    print(f"[WEBHOOK] Получен запрос")
     method = event.get('httpMethod', 'GET').upper()
 
     if method == 'OPTIONS':
@@ -60,15 +61,18 @@ def handler(event: dict, context) -> dict:
     inv_id = params.get('InvId', params.get('inv_id', ''))
     signature_value = params.get('SignatureValue', params.get('crc', '')).upper()
 
+    print(f"[WEBHOOK] Params: OutSum={out_sum}, InvId={inv_id}, Signature={signature_value}")
+
     if not out_sum or not inv_id or not signature_value:
         return {'statusCode': 400, 'headers': HEADERS, 'body': 'Missing required parameters', 'isBase64Encoded': False}
 
-    # Форматируем сумму как строку с 2 знаками после точки (формат Robokassa)
-    out_sum_formatted = f"{float(out_sum):.2f}"
-
-    # Проверка подписи
-    expected_signature = calculate_signature(out_sum_formatted, inv_id, password_2)
+    # Robokassa Result URL: OutSum:InvId:Password2 (используем как есть, без форматирования)
+    print(f"[WEBHOOK] Проверка подписи: {out_sum}:{inv_id}:***")
+    expected_signature = calculate_signature(out_sum, inv_id, password_2)
+    print(f"[WEBHOOK] Expected={expected_signature}, Received={signature_value}")
+    
     if signature_value != expected_signature:
+        print(f"[WEBHOOK] ERROR: Invalid signature!")
         return {'statusCode': 400, 'headers': HEADERS, 'body': 'Invalid signature', 'isBase64Encoded': False}
 
     # Обновление статуса заказа
