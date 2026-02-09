@@ -387,7 +387,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                         should_send_email = False
                         email_action = None
                         
-                        if new_status == 'shipped' and delivery_type == 'pvz':
+                        if new_status == 'shipped':
                             should_send_email = True
                             email_action = 'shipped'
                         elif new_status == 'delivered':
@@ -399,11 +399,13 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                                 import urllib.request
                                 from urllib.parse import quote
                                 
-                                email_url = f'https://functions.poehali.dev/76b36dee-db70-4316-b6a8-fed039d8df8c?action={email_action}&order_number={quote(order["order_number"])}'
+                                email_url = f'https://functions.poehali.dev/088b269d-8f1d-43b7-b1a5-21fc5808f30a?action={email_action}&order_number={quote(order["order_number"])}'
+                                print(f"[EMAIL] Sending {email_action} notification for order {order['order_number']}")
                                 req = urllib.request.Request(email_url, method='GET')
                                 urllib.request.urlopen(req, timeout=5)
+                                print(f"[EMAIL] Successfully sent {email_action} email")
                             except Exception as email_error:
-                                print(f"Failed to send email notification: {email_error}")
+                                print(f"[EMAIL] Failed to send email notification: {email_error}")
                         
                         # Получаем items для обновлённого сообщения
                         cur.execute(
