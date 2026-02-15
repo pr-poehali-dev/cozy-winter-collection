@@ -67,7 +67,7 @@ export default function HeroCarousel() {
   };
 
   const handleButtonClick = (slide: typeof heroSlides[0]) => {
-    if (slide.buttonAction === 'catalog' || slide.buttonAction === 'valentines') {
+    if (slide.buttonAction === 'catalog') {
       const catalog = document.getElementById('catalog');
       if (catalog) {
         const yOffset = -100;

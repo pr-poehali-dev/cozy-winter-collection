@@ -2,15 +2,6 @@ import { Product, HeroSlide } from './types';
 
 export const heroSlides: HeroSlide[] = [
   {
-    id: 1,
-    image: 'https://cdn.poehali.dev/files/34368e3a-14e8-4b1d-807e-416d58c27631.jpg',
-    imageMobile: 'https://cdn.poehali.dev/files/6cedfa45-1314-4dfd-bb01-0b0c94f5bccc.jpeg',
-    title: "valentine's drop 2026",
-    subtitle: 'разорви меня 💌',
-    buttonText: 'открыть коллекцию',
-    buttonAction: 'valentines'
-  },
-  {
     id: 2,
     image: 'https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/bucket/8dffdcee-2a11-40b4-a6e1-919850108d3f.jpg',
     imageMobile: 'https://cdn.poehali.dev/files/3a3dfd5f-4b52-42ca-a539-737f72fd1e9b.jpeg',
@@ -19,16 +10,6 @@ export const heroSlides: HeroSlide[] = [
     buttonText: 'как это работает',
     buttonAction: 'surprise'
   },
-  {
-    id: 3,
-    image: 'https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/bucket/60ef531e-7c8f-4d01-a9f8-5fabb6942b63.jpg',
-    imageMobile: 'https://cdn.poehali.dev/files/dbf312ea-8397-44a9-a4c6-a7d547e10dfd.jpeg',
-    title: 'можно отправить валентинку анонимно',
-    subtitle: 'прямо как в школе',
-    buttonText: 'посмотреть коллекцию',
-    buttonAction: 'valentines'
-  },
-
   {
     id: 5,
     image: 'https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/bucket/3bf04731-6950-4913-bdd3-0928610b40ac.jpg',
@@ -47,21 +28,6 @@ export const heroSlides: HeroSlide[] = [
 ];
 
 export const products: Product[] = [
-  {
-    id: 10,
-    name: 'г и р л я н д а 💌 :: красные сердечки',
-    description: 'бумажная гирлянда с сердечками для валентинок',
-    price: 450,
-    category: "valentine's drop 2026",
-    image: 'https://cdn.poehali.dev/files/c436fa20-f29f-4cdb-891e-bfd47c2f8fc4.jpg',
-    storyDescription: 'нежная гирлянда из красных сердечек 💌 создаёт атмосферу любви и праздника. идеальна для украшения комнаты к 14 февраля, фотозоны или романтического вечера ✨',
-    composition: 'длина: 2 метра\nбумага плотная, крафтовая\nручная работа',
-    stock: 10,
-    badge: 'valentine',
-    gallery: [
-      'https://cdn.poehali.dev/files/c436fa20-f29f-4cdb-891e-bfd47c2f8fc4.jpg'
-    ]
-  },
   {
     id: 1,
     name: 'ч е п ч и к 🍷 :: брусника',

@@ -46,6 +46,6 @@ export interface HeroSlide {
   title: string;
   subtitle: string;
   buttonText: string;
-  buttonAction: 'catalog' | 'delivery' | 'reviews' | 'valentines' | 'surprise';
+  buttonAction: 'catalog' | 'delivery' | 'reviews' | 'surprise';
   floatingQuotes?: FloatingQuote[];
 }
