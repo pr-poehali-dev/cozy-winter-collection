@@ -51,7 +51,7 @@ export default function ProductCatalog({
     <section id="catalog" className="md:px-8 mx-0.5 px-[3px] py-0">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-wrap gap-2 justify-center my-[23px]">
-          {categories.filter(c => c !== 'для дома').map(category => (
+          {categories.map(category => (
               <button
                 key={category}
                 onClick={() => setSelectedCategory(category)}

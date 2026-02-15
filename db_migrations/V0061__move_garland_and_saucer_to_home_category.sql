@@ -1,0 +1,1 @@
+UPDATE products SET category = 'для дома' WHERE id IN (6, 7);

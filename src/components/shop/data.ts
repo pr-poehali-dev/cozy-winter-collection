@@ -2,15 +2,6 @@ import { Product, HeroSlide } from './types';
 
 export const heroSlides: HeroSlide[] = [
   {
-    id: 2,
-    image: 'https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/bucket/8dffdcee-2a11-40b4-a6e1-919850108d3f.jpg',
-    imageMobile: 'https://cdn.poehali.dev/files/3a3dfd5f-4b52-42ca-a539-737f72fd1e9b.jpeg',
-    title: 'отправь сюрприз близкому ✨',
-    subtitle: 'укажи адрес — мы доставим напрямую',
-    buttonText: 'как это работает',
-    buttonAction: 'surprise'
-  },
-  {
     id: 5,
     image: 'https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/bucket/3bf04731-6950-4913-bdd3-0928610b40ac.jpg',
     imageMobile: 'https://cdn.poehali.dev/files/102701bf-703a-4106-a14e-ce09863deb25.jpeg',
@@ -24,7 +15,15 @@ export const heroSlides: HeroSlide[] = [
       { text: '💎 не встречала ничего похожего!', position: 'top-right' }
     ]
   },
-
+  {
+    id: 2,
+    image: 'https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/bucket/8dffdcee-2a11-40b4-a6e1-919850108d3f.jpg',
+    imageMobile: 'https://cdn.poehali.dev/files/3a3dfd5f-4b52-42ca-a539-737f72fd1e9b.jpeg',
+    title: 'отправь сюрприз близкому ✨',
+    subtitle: 'укажи адрес — мы доставим напрямую',
+    buttonText: 'посмотреть коллекцию',
+    buttonAction: 'catalog'
+  },
 ];
 
 export const products: Product[] = [
