@@ -44,13 +44,16 @@ export default function CheckoutForm({
   onCheckout,
   validationErrors = new Set()
 }: CheckoutFormProps) {
-  const handleSelfRecipientChange = (checked: boolean) => {
-    if (checked) {
+  const [isGift, setIsGift] = useState(false);
+
+  const handleGiftChange = (checked: boolean) => {
+    setIsGift(checked);
+    if (!checked) {
       setCheckoutData({
         ...checkoutData,
         isSelfRecipient: true,
-        recipientName: checkoutData.name,
-        recipientPhone: checkoutData.phone
+        recipientName: '',
+        recipientPhone: ''
       });
     } else {
       setCheckoutData({
@@ -202,27 +205,25 @@ export default function CheckoutForm({
         </div>
 
         <div className="border-t border-border pt-4 mt-2">
-          <div className="mb-4">
-            <h3 className="text-sm font-semibold text-primary mb-2">💌 данные получателя подарка</h3>
-          </div>
-          
           <div className="flex items-center space-x-2 mb-4 p-3 rounded-lg bg-secondary/30">
             <input
               type="checkbox"
-              id="isSelfRecipient"
-              checked={checkoutData.isSelfRecipient}
-              onChange={(e) => handleSelfRecipientChange(e.target.checked)}
+              id="isGift"
+              checked={isGift}
+              onChange={(e) => handleGiftChange(e.target.checked)}
               className="w-4 h-4 rounded border-gray-300"
             />
-            <Label htmlFor="isSelfRecipient" className="cursor-pointer font-light">
-              я сам получатель (заказываю себе)
+            <Label htmlFor="isGift" className="cursor-pointer font-light">
+              🎁 отправить в подарок
             </Label>
           </div>
 
+          {isGift && (
           <div className="space-y-4">
+            <h3 className="text-sm font-semibold text-primary">данные получателя подарка</h3>
             <div className="space-y-2">
               <Label htmlFor="recipientName" className="flex items-center gap-1">
-                имя получателя {!checkoutData.isSelfRecipient && <span className="text-destructive">*</span>}
+                имя получателя <span className="text-destructive">*</span>
               </Label>
               <Input
                 id="recipientName"
@@ -230,12 +231,11 @@ export default function CheckoutForm({
                 value={checkoutData.recipientName}
                 onChange={(e) => setCheckoutData({ ...checkoutData, recipientName: e.target.value })}
                 className={`font-light ${validationErrors.has('recipientName') ? 'border-destructive focus-visible:ring-destructive' : ''}`}
-                disabled={checkoutData.isSelfRecipient}
               />
             </div>
             <div className="space-y-2">
               <Label htmlFor="recipientPhone" className="flex items-center gap-1">
-                телефон получателя {!checkoutData.isSelfRecipient && <span className="text-destructive">*</span>}
+                телефон получателя <span className="text-destructive">*</span>
               </Label>
               <Input
                 id="recipientPhone"
@@ -243,10 +243,10 @@ export default function CheckoutForm({
                 value={checkoutData.recipientPhone || '+7'}
                 onChange={handleRecipientPhoneChange}
                 className={`font-light ${validationErrors.has('recipientPhone') ? 'border-destructive focus-visible:ring-destructive' : ''}`}
-                disabled={checkoutData.isSelfRecipient}
               />
             </div>
           </div>
+          )}
         </div>
 
         <div className="space-y-3">
