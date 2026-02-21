@@ -432,6 +432,20 @@ export default function ProductDetails({ product, onClose, addToCart, setIsCartO
                       )}
                     </div>
                   )}
+                  {!isGiftCertificate && (
+                    <p className="text-xs text-darkRed/80 font-light pt-4 leading-relaxed">
+                      хочешь изменить цвет, размер или что-то ещё?{' '}
+                      <a
+                        href="https://t.me/azalukk"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="underline underline-offset-2 hover:opacity-70 transition-opacity"
+                      >
+                        напиши нам
+                      </a>{' '}
+                      — сделаем под тебя 🤍
+                    </p>
+                  )}
                 </div>
               </div>
             </div>
