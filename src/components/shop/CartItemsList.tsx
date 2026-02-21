@@ -29,6 +29,11 @@ export default function CartItemsList({
   const recommendations = products
     .filter(p => !cartProductIds.includes(p.id))
     .filter(p => p.badge !== 'soon')
+    .sort((a, b) => {
+      const aIsMushroom = a.name.includes('мухомор') || (a.name.includes('п о д в е с') && a.name.includes('🍄'));
+      const bIsMushroom = b.name.includes('мухомор') || (b.name.includes('п о д в е с') && b.name.includes('🍄'));
+      return Number(bIsMushroom) - Number(aIsMushroom);
+    })
     .slice(0, 3);
 
   return (
