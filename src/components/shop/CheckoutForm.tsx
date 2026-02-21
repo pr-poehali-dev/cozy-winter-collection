@@ -340,18 +340,6 @@ export default function CheckoutForm({
               />
             </div>
 
-            <div className="flex items-center space-x-2 p-3 rounded-lg bg-secondary/30">
-              <input
-                type="checkbox"
-                id="isAnonymous"
-                checked={checkoutData.isAnonymous}
-                onChange={(e) => setCheckoutData({ ...checkoutData, isAnonymous: e.target.checked })}
-                className="w-4 h-4 rounded border-gray-300"
-              />
-              <Label htmlFor="isAnonymous" className="cursor-pointer font-light">
-                отправить анонимно (без моего имени на упаковке)
-              </Label>
-            </div>
           </div>
         </div>
       </div>
