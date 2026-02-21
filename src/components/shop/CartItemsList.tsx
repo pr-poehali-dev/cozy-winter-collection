@@ -26,9 +26,7 @@ export default function CartItemsList({
 }: CartItemsListProps) {
   const cartProductIds = cart.map(item => item.id);
   
-  // Показываем валентиновские товары (из БД)
   const recommendations = products
-    .filter(p => p.category?.includes('valentine'))
     .filter(p => !cartProductIds.includes(p.id))
     .filter(p => p.badge !== 'soon')
     .slice(0, 3);
