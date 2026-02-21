@@ -54,7 +54,7 @@ export default function Header({
     isAnonymous: false,
     recipientName: '',
     recipientPhone: '',
-    isSelfRecipient: false
+    isSelfRecipient: true
   });
   const [deliveryCost, setDeliveryCost] = useState(0);
   const [promoDiscount, setPromoDiscount] = useState(0);
