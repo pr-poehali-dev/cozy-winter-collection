@@ -133,7 +133,7 @@ export default function Index() {
     };
   }, [isPreviewMode, hasSecretKey]);
 
-  const categories = ["все", "для дома", "для зимней прогулки", "аксессуары"];
+  const categories = ["все", "одежда", "для дома", "для зимней прогулки", "аксессуары"];
 
   const addToCart = (product: Product) => {
     setCart((prev) => {
