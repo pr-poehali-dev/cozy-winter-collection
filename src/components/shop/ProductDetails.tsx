@@ -434,7 +434,7 @@ export default function ProductDetails({ product, onClose, addToCart, setIsCartO
                   )}
                   {!isGiftCertificate && (
                     <p className="text-xs text-muted-foreground font-light pt-4 leading-relaxed">
-                      хочешь изменить цвет, размер или что-то ещё?{' '}
+                      хочешь изменить цвет, форму или что-то ещё?{' '}
                       <a
                         href="https://t.me/azaluk_care"
                         target="_blank"
