@@ -436,10 +436,10 @@ export default function ProductDetails({ product, onClose, addToCart, setIsCartO
                     <p className="text-xs text-darkRed/80 font-light pt-4 leading-relaxed">
                       хочешь изменить цвет, размер или что-то ещё?{' '}
                       <a
-                        href="https://t.me/azalukk"
+                        href="https://t.me/azaluk_care"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="underline underline-offset-2 hover:opacity-70 transition-opacity"
+                        className="text-darkRed underline underline-offset-2 hover:opacity-70 transition-opacity"
                       >
                         напиши нам
                       </a>{' '}
