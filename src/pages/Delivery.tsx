@@ -81,7 +81,7 @@ export default function DeliveryPage() {
                 </div>
 
                 <div className="text-sm text-muted-foreground font-light space-y-2 pt-2">
-                  <p>📱 <span className="text-primary font-light">ozon:</span> при оформлении заказа укажите номер телефона вашего личного кабинета — заказ появится в приложении в течение суток</p>
+                  <p>📱 <span className="text-primary font-light">ozon:</span> укажите удобный пункт выдачи и контакт (телефон или телеграм) — пришлём код для получения, когда заказ доедет</p>
                   <p>💬 <span className="text-primary font-light">самовывоз:</span> свяжемся с вами в телеграм для согласования времени</p>
                 </div>
               </div>
