@@ -1,0 +1,1 @@
+UPDATE t_p3876556_cozy_winter_collecti.products SET story_description = NULL WHERE id = 8;
