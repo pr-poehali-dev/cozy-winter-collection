@@ -50,6 +50,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                 badge, gallery, story_description, composition, 
                 sizing, video_url, video_title, in_stock, stock
             FROM t_p3876556_cozy_winter_collecti.products
+            WHERE category != 'для дома'
             ORDER BY display_order, id
         """)
         

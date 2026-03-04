@@ -1,0 +1,1 @@
+UPDATE products SET category = 'паутинки' WHERE category = 'одежда';
