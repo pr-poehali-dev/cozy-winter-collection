@@ -210,7 +210,7 @@ def handler(event: dict, context) -> dict:
     cur.close()
     conn.close()
     
-    print(f"[WEBHOOK] Order #{order['order_number']} paid, sending Telegram notification")
+    print(f"[WEBHOOK] Order #{order['order_number']} paid, sending notifications")
     
     # Отправляем уведомление в Telegram
     admin_chat_id = os.environ.get('TELEGRAM_ADMIN_CHAT_ID')
@@ -220,5 +220,18 @@ def handler(event: dict, context) -> dict:
         send_telegram_message(admin_chat_id, message, keyboard)
     else:
         print('[WEBHOOK] TELEGRAM_ADMIN_CHAT_ID not set, skipping notification')
+
+    # Отправляем email покупателю
+    try:
+        import requests as req
+        send_email_url = 'https://functions.poehali.dev/088b269d-8f1d-43b7-b1a5-21fc5808f30a'
+        email_resp = req.get(
+            send_email_url,
+            params={'action': 'paid', 'order_number': order['order_number']},
+            timeout=10
+        )
+        print(f"[WEBHOOK] Email sent, status: {email_resp.status_code}, body: {email_resp.text}")
+    except Exception as e:
+        print(f"[WEBHOOK] Email sending failed: {e}")
 
     return {'statusCode': 200, 'headers': HEADERS, 'body': f'OK{inv_id}', 'isBase64Encoded': False}

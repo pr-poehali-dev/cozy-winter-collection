@@ -108,22 +108,29 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
 
     order_url = f'https://azaluk.shop/order-success?order={order_number}'
     
+    delivery_type = order.get('delivery_type', '')
+
+    if action == 'shipped' and delivery_type == 'pickup':
+        return {
+            'statusCode': 200,
+            'headers': HEADERS,
+            'body': json.dumps({'success': True, 'email_sent': False, 'reason': 'pickup — email skipped'}),
+            'isBase64Encoded': False
+        }
+
     email_templates = {
         'paid': {
             'subject': 'Подтверждение заказа',
-            'html': f'''Привет! На связи azaluk.shop, ваш заказ успешно оплачен, и мы уже начали собирать его ☁️ 🍄 ❄️
-
-Детали заказа и отслеживание доступны на сайте:
-{order_url}
+            'html': f'''Привет! На связи azaluk.shop, ваш заказ успешно оплачен, и мы уже начали собирать его ☁️ 🍄 🌱
 
 💌  Связаться с поддержкой вы всегда можете тут: https://t.me/azaluk_care'''
         },
         'shipped': {
             'subject': 'Заказ отправлен',
-            'html': f'''Привет! На связи azaluk.shop, ваш заказ упакован и отправлен! 🎠✨
+            'html': f'''Привет! На связи azaluk.shop, ваш заказ упакован и отправлен! 🍵✨
 
 Адрес доставки: {order['delivery_address']}.
-Отследить доставку и забрать её вы сможете в мобильном приложении Ozon.
+По готовности, мы отправим вам qr-код для получения заказа в телеграм.
 
 💌  Контакт нашей поддержки на случай вопросов: https://t.me/azaluk_care'''
         },
@@ -131,12 +138,12 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             'subject': 'Теплая весточка',
             'html': f'''Привет! На связи azaluk.shop!
 
-Надеемся, наши вещицы принесут вам радость и тепло! ☁️🍄🕊️
+Надеемся, наши вещицы принесут вам радость и тепло! 🌳🌱🍵
 
-Будем очень рады вашему отзыву — поделитесь, как наши вещицы обжились в вашем мире? 💕
-Оставить отзыв можно тут: https://t.me/azalukk/4001
+Будем очень рады вашему отзыву и обратной связи!
+Оставить весточку можно тут: https://t.me/azalukk/4001
 
-Тёплой вам зимы и до новых встреч! 🍵🧦'''
+До новых встреч!'''
         }
     }
 
