@@ -355,7 +355,7 @@ export default function ProductDetails({ product, onClose, addToCart, setIsCartO
                         ) : (
                           <>
                             <Icon name="ShoppingBag" size={18} className="mr-2" />
-                            добавить в корзину
+                            заказать
                           </>
                         )}
                       </Button>
@@ -472,7 +472,7 @@ export default function ProductDetails({ product, onClose, addToCart, setIsCartO
                 ) : (
                   <>
                     <Icon name="ShoppingBag" size={20} className="mr-2" />
-                    добавить в корзину
+                    заказать
                   </>
                 )}
               </Button>
