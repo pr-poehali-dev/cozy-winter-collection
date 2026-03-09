@@ -2,6 +2,15 @@ import { Product, HeroSlide } from './types';
 
 export const heroSlides: HeroSlide[] = [
   {
+    id: 10,
+    image: 'https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/bucket/19f0fad8-f49d-4b2c-a537-7801cf965870.jpeg',
+    imageMobile: 'https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/bucket/46f0c29d-180e-496d-9ad2-ca82bff91df8.jpeg',
+    title: 'МОХОВАЯ КОЛЛЕКЦИЯ',
+    subtitle: 'паутинки · ожерелья · кольца',
+    buttonText: 'за покупочками!',
+    buttonAction: 'catalog'
+  },
+  {
     id: 5,
     image: 'https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/bucket/3bf04731-6950-4913-bdd3-0928610b40ac.jpg',
     imageMobile: 'https://cdn.poehali.dev/files/102701bf-703a-4106-a14e-ce09863deb25.jpeg',
