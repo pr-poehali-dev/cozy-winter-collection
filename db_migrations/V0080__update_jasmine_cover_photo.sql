@@ -1,0 +1,4 @@
+UPDATE t_p3876556_cozy_winter_collecti.products
+SET image = 'https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/bucket/0089b828-afd3-410d-8017-fccd87549a38.jpg',
+    gallery = ARRAY['https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/bucket/0089b828-afd3-410d-8017-fccd87549a38.jpg','https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/bucket/89534939-94e1-42ff-a420-f9f14502c87c.jpg','https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/bucket/ed238db7-e4cc-4a8d-932f-69fed5544e24.jpg','https://cdn.poehali.dev/projects/a129e1cc-3cd9-4834-888d-cf7eed2f1b72/bucket/fe387737-a9d9-4658-b75d-c7acb4d58995.jpg']
+WHERE id = 1018;
