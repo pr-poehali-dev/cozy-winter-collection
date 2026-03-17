@@ -13,7 +13,7 @@ interface ProductCatalogProps {
   cart: CartItem[];
 }
 
-const COLLECTIONS = ['все', 'моховая', 'городская', 'особенные'];
+const COLLECTIONS = ['все', 'лесные', 'городские', 'волшебные'];
 
 export default function ProductCatalog({
   products,
