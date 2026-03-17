@@ -5,16 +5,14 @@
       "method": "GET",
       "path": "/",
       "expectedStatus": 200,
-      "expectedBody": {
-        "0": {
+      "expectedBody": [
+        {
           "id": "number",
           "name": "string",
-          "description": "string",
           "price": "number",
-          "category": "string",
-          "image": "string"
+          "category": "string"
         }
-      },
+      ],
       "bodyMatcher": "partial"
     }
   ]

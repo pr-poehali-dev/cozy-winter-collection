@@ -27,6 +27,7 @@ export interface Product {
   sizing?: string;
   isGiftCertificate?: boolean;
   customPrice?: number;
+  collection?: string;
 }
 
 export interface CartItem extends Product {

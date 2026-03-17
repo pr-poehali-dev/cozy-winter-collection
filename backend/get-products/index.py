@@ -48,7 +48,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             SELECT 
                 id, name, description, price, category, image, 
                 badge, gallery, story_description, composition, 
-                sizing, video_url, video_title, in_stock, stock
+                sizing, video_url, video_title, in_stock, stock, collection
             FROM t_p3876556_cozy_winter_collecti.products
             WHERE category != 'для дома'
             ORDER BY display_order, id
@@ -58,7 +58,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
         products = []
         
         for row in products_rows:
-            product_id, name, description, price, category, image, badge, gallery, story_desc, composition, sizing, video_url, video_title, in_stock, stock = row
+            product_id, name, description, price, category, image, badge, gallery, story_desc, composition, sizing, video_url, video_title, in_stock, stock, collection = row
             
             product = {
                 'id': product_id,
@@ -75,7 +75,8 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                 'videoUrl': video_url,
                 'videoTitle': video_title,
                 'in_stock': in_stock,
-                'stock': stock
+                'stock': stock,
+                'collection': collection
             }
             
             # Получаем варианты товара

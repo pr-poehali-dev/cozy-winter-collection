@@ -1,6 +1,7 @@
 import { Product, CartItem } from './types';
 import Icon from '@/components/ui/icon';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 interface ProductCatalogProps {
   products: Product[];
@@ -12,6 +13,8 @@ interface ProductCatalogProps {
   cart: CartItem[];
 }
 
+const COLLECTIONS = ['все', 'моховая', 'городская', 'особенные'];
+
 export default function ProductCatalog({
   products,
   categories,
@@ -22,10 +25,15 @@ export default function ProductCatalog({
   cart
 }: ProductCatalogProps) {
   const navigate = useNavigate();
-  
-  const filteredProducts = selectedCategory === 'все' 
-    ? products 
+  const [selectedCollection, setSelectedCollection] = useState<string>('все');
+
+  const categoryProducts = selectedCategory === 'все'
+    ? products
     : products.filter(p => p.category === selectedCategory);
+
+  const filteredProducts = selectedCategory === 'аксессуары' && selectedCollection !== 'все'
+    ? categoryProducts.filter(p => p.collection === selectedCollection)
+    : categoryProducts;
 
   const isInCart = (productId: number) => {
     return cart.some(item => item.id === productId && !item.selectedVariantId);
@@ -54,7 +62,7 @@ export default function ProductCatalog({
           {categories.map(category => (
               <button
                 key={category}
-                onClick={() => setSelectedCategory(category)}
+                onClick={() => { setSelectedCategory(category); setSelectedCollection('все'); }}
                 className={`px-4 py-1.5 md:px-8 md:py-2.5 rounded-full text-xs md:text-sm font-light transition-all ${
                   selectedCategory === category
                     ? 'bg-primary text-white'
@@ -65,6 +73,24 @@ export default function ProductCatalog({
               </button>
           ))}
         </div>
+
+        {selectedCategory === 'аксессуары' && (
+          <div className="flex flex-wrap gap-2 justify-center mb-6">
+            {COLLECTIONS.map(col => (
+              <button
+                key={col}
+                onClick={() => setSelectedCollection(col)}
+                className={`px-3 py-1 md:px-5 md:py-1.5 rounded-full text-xs font-light transition-all ${
+                  selectedCollection === col
+                    ? 'bg-primary/20 text-primary border border-primary/40'
+                    : 'bg-transparent text-primary/50 hover:text-primary border border-primary/20'
+                }`}
+              >
+                {col}
+              </button>
+            ))}
+          </div>
+        )}
 
         {products.length === 0 ? (
           <div className="flex items-center justify-center py-20">
